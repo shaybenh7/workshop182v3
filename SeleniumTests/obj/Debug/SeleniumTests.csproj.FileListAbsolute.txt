@@ -1,0 +1,98 @@
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\SeleniumTests.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\SeleniumTests.pdb
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\WebDriver.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\bin\Debug\WebDriver.xml
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\obj\Debug\SeleniumTests.csprojResolveAssemblyReference.cache
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\obj\Debug\SeleniumTests.csproj.CoreCompileInputs.cache
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\obj\Debug\SeleniumTests.csproj.CopyComplete
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\obj\Debug\SeleniumTests.dll
+C:\Users\NivBenShabat\source\repos\wsep182\SeleniumTests\obj\Debug\SeleniumTests.pdb
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\SeleniumTests.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\SeleniumTests.pdb
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\WebDriver.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\WebDriver.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csprojResolveAssemblyReference.cache
+C:\Programing\c#\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csproj.CoreCompileInputs.cache
+C:\Programing\c#\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csproj.CopyComplete
+C:\Programing\c#\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.pdb
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\ApplicationInsights.config
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\WebServices.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Optimization.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Mvc.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Net.Http.Formatting.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Newtonsoft.Json.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.WebHost.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Razor.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\WebServices.pdb
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\WebServices.dll.config
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Optimization.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Mvc.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Net.Http.Formatting.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\Newtonsoft.Json.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.WebHost.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.Razor.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.xml
+C:\Programing\c#\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\ApplicationInsights.config
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\SeleniumTests.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\SeleniumTests.pdb
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\WebDriver.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\WebServices.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Optimization.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Mvc.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Razor.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\WebServices.pdb
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\WebServices.dll.config
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\WebDriver.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Optimization.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Mvc.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.Razor.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csprojResolveAssemblyReference.cache
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csproj.CoreCompileInputs.cache
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csproj.CopyComplete
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.dll
+C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.pdb
