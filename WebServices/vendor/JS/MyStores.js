@@ -1,117 +1,178 @@
 ﻿var lastClickedStoreId;
 var productsInStore;
 
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function viewOfAdmin() {
+    var mainDiv = document.getElementById('allStoresComponent');
+    jQuery.ajax({
+        type: "GET",
+        url: baseUrl + "/api/store/getAllStores",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+
+            for (i = 0; i < response.length; i++) {
+                store = response[i];
+                var storeName = store["name"];
+                var storeId = store["storeId"];
+                var disabledLinksInitial = "";
+                var actionInitial = "modalLinkListener(event);";
+                var string = "";
+
+                string += "<div class=\"p-t-50\" style=\"padding-left:50px\">";
+                string += "<h4 id=\"storeNameHeader" + i + "\" class=\"mtext-112 cl2 p-b-27\">" + storeName + "</h4>";
+                string += "<div class=\"flex-w m-r--5\">";
+                string += "<a href=\"#\" id=\"addProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Product</a>";
+                string += "<a href=\"#\" id=\"editProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Edit Product</a>";
+                string += "<a href=\"#\" id=\"viewProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewProducts(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Product</a>";
+                string += "<a href=\"#\" id=\"removeProductFromStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Product</a>";
+                string += "<a href=\"#\" id=\"addStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Manager</a>";
+                string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
+                string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
+                string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
+                string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
+                string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
+                string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
+                string += "<a href=\"#\" id=\"editSale" + i + "\" data-id=\"" + storeId + "\" onclick=\"editSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Edit Sale</a>";
+                string += "<a href=\"#\" id=\"removeSaleFromStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Sale</a>";
+                string += "<a href=\"#\" id=\"addDiscount" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddDiscount(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Discount</a>";
+                string += "<a href=\"#\" id=\"addNewCoupon" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewCopun(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Coupon</a>";
+                string += "<a href=\"#\" id=\"viewPurchasesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View History</a>";
+                string += "<a href=\"#\" id=\"viewAddPolicy" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddPolicy(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add policy</a>";
+                string += "</div>";
+                string += "</div>";
+                mainDiv.innerHTML += string;
+
+            }
+        },
+        error:  function (response) {
+            console.log(response);
+            window.location.href = baseUrl + "/error";
+        }
+    });
+}
 
 $(document).ready(function () {
     var mainDiv = document.getElementById('allStoresComponent');
 
-    jQuery.ajax({
-        type: "GET",
-        url: baseUrl+"/api/user/getAllStoresUnderUser",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            console.log(response);
-            var i;
-            for (i = 0; i < response.length; i++) {
-                storeRole = response[i];
-                if (storeRole["store"]["isActive"] === 1 && (storeRole["type"] === "Manager" || storeRole["type"] === "Owner")) {
-                    var storeName = storeRole["store"]["name"];
-                    var storeId = storeRole["store"]["storeId"];
-                    var disabledLinksInitial = "disabledLink";
-                    var actionInitial = "";
-                    if (storeRole["type"] === "Owner") {
-                        disabledLinksInitial = "";
-                        actionInitial = "modalLinkListener(event);";
-                    }
-                    var string = "";
+    if (getCookie('username') == 'admin') {
+        viewOfAdmin();
 
-                    string += "<div class=\"p-t-50\" style=\"padding-left:50px\">";
-                    string += "<h4 id=\"storeNameHeader" + i +"\" class=\"mtext-112 cl2 p-b-27\">" + storeName + "</h4>";
-                    string += "<div class=\"flex-w m-r--5\">";
-                    string += "<a href=\"#\" id=\"addProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Product</a>";
-                    string += "<a href=\"#\" id=\"editProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Edit Product</a>";
-                    string += "<a href=\"#\" id=\"viewProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewProducts(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Product</a>";
-                    string += "<a href=\"#\" id=\"removeProductFromStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Product</a>";
-                    string += "<a href=\"#\" id=\"addStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Manager</a>";
-                    string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
-                    string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
-                    string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
-                    string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
-                    string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
-                    string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
-                    string += "<a href=\"#\" id=\"editSale" + i + "\" data-id=\"" + storeId + "\" onclick=\"editSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Edit Sale</a>";
-                    string += "<a href=\"#\" id=\"removeSaleFromStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Sale</a>";
-                    string += "<a href=\"#\" id=\"addDiscount" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddDiscount(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Discount</a>";
-                    string += "<a href=\"#\" id=\"addNewCoupon" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewCopun(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Coupon</a>";
-                    string += "<a href=\"#\" id=\"viewPurchasesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View History</a>";
-                    string += "<a href=\"#\" id=\"viewAddPolicy" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddPolicy(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add policy</a>";
-                    string += "</div>";
-                    string += "</div>";
-                    mainDiv.innerHTML += string;
+    }
+    else {
+        jQuery.ajax({
+            type: "GET",
+            url: baseUrl + "/api/user/getAllStoresUnderUser",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                var i;
+                for (i = 0; i < response.length; i++) {
+                    storeRole = response[i];
+                    if (storeRole["store"]["isActive"] === 1 && (storeRole["type"] === "Manager" || storeRole["type"] === "Owner")) {
+                        var storeName = storeRole["store"]["name"];
+                        var storeId = storeRole["store"]["storeId"];
+                        var disabledLinksInitial = "disabledLink";
+                        var actionInitial = "";
+                        if (storeRole["type"] === "Owner") {
+                            disabledLinksInitial = "";
+                            actionInitial = "modalLinkListener(event);";
+                        }
+                        var string = "";
+
+                        string += "<div class=\"p-t-50\" style=\"padding-left:50px\">";
+                        string += "<h4 id=\"storeNameHeader" + i + "\" class=\"mtext-112 cl2 p-b-27\">" + storeName + "</h4>";
+                        string += "<div class=\"flex-w m-r--5\">";
+                        string += "<a href=\"#\" id=\"addProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Product</a>";
+                        string += "<a href=\"#\" id=\"editProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Edit Product</a>";
+                        string += "<a href=\"#\" id=\"viewProductInStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewProducts(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Product</a>";
+                        string += "<a href=\"#\" id=\"removeProductFromStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Product</a>";
+                        string += "<a href=\"#\" id=\"addStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Manager</a>";
+                        string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
+                        string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
+                        string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
+                        string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
+                        string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
+                        string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
+                        string += "<a href=\"#\" id=\"editSale" + i + "\" data-id=\"" + storeId + "\" onclick=\"editSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Edit Sale</a>";
+                        string += "<a href=\"#\" id=\"removeSaleFromStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Sale</a>";
+                        string += "<a href=\"#\" id=\"addDiscount" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddDiscount(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Discount</a>";
+                        string += "<a href=\"#\" id=\"addNewCoupon" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewCopun(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Coupon</a>";
+                        string += "<a href=\"#\" id=\"viewPurchasesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View History</a>";
+                        string += "<a href=\"#\" id=\"viewAddPolicy" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddPolicy(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add policy</a>";
+                        string += "</div>";
+                        string += "</div>";
+                        mainDiv.innerHTML += string;
 
 
-                    if (storeRole["type"] === "Manager") {
-                        (function (i, storeId) {
-                            jQuery.ajax({
-                                type: "GET",
-                                url: baseUrl+"/api/user/getPremissionsOfAManager?storeId=" + storeId,
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (response) { //iterate through premissions and enable links
-                                    response = response["privileges"];
-                                    if (response.addProductInStore != true)
-                                        $("#addProductInStore"+i).css('display', 'none');
-                                    if (response.editProductInStore != true)
-                                        $("#editProductInStore" + i).css('display', 'none');
-                                    if (response.viewProductInStore != true)
-                                        $("#viewProductInStore" + i).css('display', 'none');
-                                    if (response.removeProductFromStore != true)
-                                        $("#removeProductFromStore" + i).css('display', 'none');
-                                    if (response.addStoreManager != true)
-                                        $("#addStoreManager" + i).css('display', 'none');
-                                    if (response.removeStoreManager != true)
-                                        $("#removeStoreManager" + i).css('display', 'none');
-                                    if (response.addStoreOwner != true)
-                                        $("#addStoreOwner" + i).css('display', 'none');
-                                    if (response.removeStoreOwner != true)
-                                        $("#removeStoreOwner" + i).css('display', 'none');
-                                    if (response.addManagerPermission != true)
-                                        $("#addManagerPermission" + i).css('display', 'none');
-                                    if (response.removeManagerPermission != true)
-                                        $("#removeManagerPermission" + i).css('display', 'none');
-                                    if (response.addSaleToStore != true)
-                                        $("#addSaleToStore" + i).css('display', 'none');
-                                    if (response.editSale != true)
-                                        $("#editSale" + i).css('display', 'none');
-                                    if (response.removeSaleFromStore != true)
-                                        $("#removeSaleFromStore" + i).css('display', 'none');
-                                    if (response.addDiscount != true)
-                                        $("#addDiscount" + i).css('display', 'none');
-                                    if (response.addNewCoupon != true)
-                                        $("#addNewCoupon" + i).css('display', 'none');
-                                    if (response.viewPurchasesHistory != true)
-                                        $("#viewPurchasesHistory" + i).css('display', 'none');
-                                    if (response.viewAddPolicy != true)
-                                        $("#viewAddPolicy" + i).css('display', 'none');
-                                },
-                                error: function (response) {
-                                    console.log(response);
-                                }
-                            });
+                        if (storeRole["type"] === "Manager") {
+                            (function (i, storeId) {
+                                jQuery.ajax({
+                                    type: "GET",
+                                    url: baseUrl + "/api/user/getPremissionsOfAManager?storeId=" + storeId,
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (response) { //iterate through premissions and enable links
+                                        response = response["privileges"];
+                                        if (response.addProductInStore != true)
+                                            $("#addProductInStore" + i).css('display', 'none');
+                                        if (response.editProductInStore != true)
+                                            $("#editProductInStore" + i).css('display', 'none');
+                                        if (response.viewProductInStore != true)
+                                            $("#viewProductInStore" + i).css('display', 'none');
+                                        if (response.removeProductFromStore != true)
+                                            $("#removeProductFromStore" + i).css('display', 'none');
+                                        if (response.addStoreManager != true)
+                                            $("#addStoreManager" + i).css('display', 'none');
+                                        if (response.removeStoreManager != true)
+                                            $("#removeStoreManager" + i).css('display', 'none');
+                                        if (response.addStoreOwner != true)
+                                            $("#addStoreOwner" + i).css('display', 'none');
+                                        if (response.removeStoreOwner != true)
+                                            $("#removeStoreOwner" + i).css('display', 'none');
+                                        if (response.addManagerPermission != true)
+                                            $("#addManagerPermission" + i).css('display', 'none');
+                                        if (response.removeManagerPermission != true)
+                                            $("#removeManagerPermission" + i).css('display', 'none');
+                                        if (response.addSaleToStore != true)
+                                            $("#addSaleToStore" + i).css('display', 'none');
+                                        if (response.editSale != true)
+                                            $("#editSale" + i).css('display', 'none');
+                                        if (response.removeSaleFromStore != true)
+                                            $("#removeSaleFromStore" + i).css('display', 'none');
+                                        if (response.addDiscount != true)
+                                            $("#addDiscount" + i).css('display', 'none');
+                                        if (response.addNewCoupon != true)
+                                            $("#addNewCoupon" + i).css('display', 'none');
+                                        if (response.viewPurchasesHistory != true)
+                                            $("#viewPurchasesHistory" + i).css('display', 'none');
+                                        if (response.viewAddPolicy != true)
+                                            $("#viewAddPolicy" + i).css('display', 'none');
+                                    },
+                                    error: function (response) {
+                                        console.log(response);
+                                    }
+                                });
 
-                        })(i, storeId);
+                            })(i, storeId);
+                        }
+
                     }
 
                 }
-
+            },
+            error: function (response) {
+                console.log(response);
+                window.location.href = baseUrl + "/error";
             }
-        },
-        error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl+"/error";
-        }
-    });
+        });
+    }
 
 });
 
