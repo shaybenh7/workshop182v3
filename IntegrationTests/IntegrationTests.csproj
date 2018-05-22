@@ -54,6 +54,7 @@
     <Compile Include="StorePremissionsArchiveTests.cs" />
     <Compile Include="StoreRoleTest.cs" />
     <Compile Include="storeTest.cs" />
+    <Compile Include="PayingSystemTest.cs" />
     <Compile Include="UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

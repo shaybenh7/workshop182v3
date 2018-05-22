@@ -432,7 +432,8 @@ namespace wsep182.Domain
                 {
                     if (PaymentSystem.getInstance().payForProduct(creditCard, session, product))
                     {
-                        ShippingSystem.getInstance().sendShippingRequest();
+                        if (!ShippingSystem.getInstance().sendShippingRequest(session, country, adress, creditCard))
+                            return -9;
                         ProductInStore p = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
                         int productId = p.getProduct().getProductId();
                         int storeId = p.getStore().getStoreId();

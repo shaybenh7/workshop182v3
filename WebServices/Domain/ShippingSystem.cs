@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wsep182.Domain
 {
-    class ShippingSystem
+    public class ShippingSystem
     {
         private static ShippingSystem instance;
 
@@ -18,9 +18,15 @@ namespace wsep182.Domain
                 instance = new ShippingSystem();
             return instance;
         }
-        public Boolean sendShippingRequest(params Object[] args)
+        public Boolean sendShippingRequest()
         {
             return false;
+        }
+        public Boolean sendShippingRequest(User session, string country, string adress, string creditCard)
+        {
+            if (session == null || country == null || adress == null || creditCard == null || country == "" || adress == "" || creditCard == "")
+                return false;
+            return true;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wsep182.Domain
 {
-    class PaymentSystem
+    public class PaymentSystem
     {
         private static PaymentSystem instance;
 
@@ -18,8 +18,10 @@ namespace wsep182.Domain
                 instance = new PaymentSystem();
             return instance;
         }
-        public Boolean payForProduct(params Object[] args)
+        public Boolean payForProduct(string creditCard,User session,UserCart product)
         {
+            if (creditCard==null||creditCard == "" || session == null || product == null)
+                return false;
             return true;
         }
 
