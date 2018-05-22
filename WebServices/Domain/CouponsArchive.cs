@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class CouponsArchive
     {
-        private LinkedList<Coupon> coupons;
         private static CouponsArchive instance;
         System.Timers.Timer couponCollector;
 
         private CouponsArchive()
         {
-            coupons = new LinkedList<Coupon>();
             couponCollector = new System.Timers.Timer();
             couponCollector.Elapsed += new ElapsedEventHandler(CheckFinishedcoupon);
             couponCollector.Interval = 60 * 60 * 1000; // interval of one hour
@@ -34,7 +33,8 @@ namespace wsep182.Domain
 
         private void CheckFinishedcoupon(object source, ElapsedEventArgs e)
         {
-            LinkedList<Coupon> CouponToRemove = new LinkedList<Coupon>();
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
+            LinkedList <Coupon> CouponToRemove = new LinkedList<Coupon>();
             foreach (Coupon c in coupons)
             {
                 if (DateTime.Now.CompareTo(DateTime.Parse(c.DueDate)) > 0)
@@ -44,7 +44,7 @@ namespace wsep182.Domain
             }
             foreach (Coupon c in CouponToRemove)
             {
-                coupons.Remove(c);
+                couponDB.getInstance().RemoveCoupon(c);
             }
         }
 
@@ -63,22 +63,24 @@ namespace wsep182.Domain
             if (DateTime.Compare(dueDateTime, DateTime.Now) < 0)
                 return false;
             Coupon toAdd = new Coupon(couponId, productInStoreId, percentage, dueDate);
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                     return false;
             }
-            coupons.AddLast(toAdd);
+            couponDB.getInstance().addCoupon(toAdd);
             return true;
         }
 
         public Boolean removeCouponForSpecificProduct(String couponId, int productInStoreId)
         {
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                 {
-                    coupons.Remove(coupon);
+                    couponDB.getInstance().RemoveCoupon(coupon);
                     return true;
                 }
             }
@@ -89,6 +91,7 @@ namespace wsep182.Domain
         {
             Boolean found = false;
             LinkedList<int> indexes = new LinkedList<int>();
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             for (int i = 0; i < coupons.Count; i++)
             {
                 if (coupons.ElementAt(i).CouponId.Equals(couponId))
@@ -101,7 +104,7 @@ namespace wsep182.Domain
                 return false;
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
-                coupons.Remove(coupons.ElementAt(indexes.ElementAt(i)));
+                couponDB.getInstance().RemoveCoupon(coupons.ElementAt(indexes.ElementAt(i)));
             }
             if (!found)
                 return false;
@@ -112,12 +115,15 @@ namespace wsep182.Domain
         public Boolean editCoupon(String couponId, int newPercentage, String newDueDate)
         {
             Boolean found = false;
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId))
                 {
+                    couponDB.getInstance().RemoveCoupon(coupon);
                     coupon.Percentage = newPercentage;
                     coupon.DueDate = newDueDate;
+                    couponDB.getInstance().addCoupon(coupon);
                     found = true;
                 }
             }
@@ -128,6 +134,7 @@ namespace wsep182.Domain
 
         public Coupon getCoupon(String couponId)
         {
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId))
@@ -140,6 +147,7 @@ namespace wsep182.Domain
 
         public Coupon getCoupon(String couponId, int productInStoreId)
         {
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
@@ -152,6 +160,7 @@ namespace wsep182.Domain
 
         public LinkedList<Coupon> getAllCoupons()
         {
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             return coupons;
         }
 
@@ -170,6 +179,7 @@ namespace wsep182.Domain
             }
             if (DateTime.Compare(dueDateTime, DateTime.Now) < 0)
                 return false;
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon c in coupons)
             {
                 if (c.CouponId.Equals(couponId))
@@ -197,7 +207,7 @@ namespace wsep182.Domain
             }
 
             Coupon toAdd = new Coupon(couponId,productInStoreId, type, categoryOrProductName, percentage, dueDate, restrictions);
-            coupons.AddLast(toAdd);
+            couponDB.getInstance().addCoupon(toAdd);
             return true;
         }
 
@@ -209,7 +219,7 @@ namespace wsep182.Domain
                 foreach (int pid in pisId)
                 {
                     Coupon toAdd = new Coupon(couponId, pid, 1, "", percentage, dueDate, restrictions);
-                    coupons.AddLast(toAdd);
+                    couponDB.getInstance().addCoupon(toAdd);
                 }
             }
             else
@@ -217,7 +227,7 @@ namespace wsep182.Domain
                 foreach (string name in catOrProductsNames)
                 {
                     Coupon toAdd = new Coupon(couponId , -1, type, name, percentage, dueDate, restrictions);
-                    coupons.AddLast(toAdd);
+                    couponDB.getInstance().addCoupon(toAdd);
                 }
             }
             return 1;
@@ -227,6 +237,7 @@ namespace wsep182.Domain
         public LinkedList<Coupon> getAllCouponsById(int productInStoreId)
         {
             LinkedList<Coupon> ans = new LinkedList<Coupon>();
+            LinkedList<Coupon> coupons = couponDB.getInstance().getCoupons();
             foreach (Coupon c in coupons)
             {
                 ProductInStore p = ProductArchive.getInstance().getProductInStore(productInStoreId);

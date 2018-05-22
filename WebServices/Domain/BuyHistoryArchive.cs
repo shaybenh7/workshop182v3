@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class BuyHistoryArchive
     {
 
-        private LinkedList<Purchase> buysHistory;
         private static BuyHistoryArchive instance;
         private static int buyId;
 
         private BuyHistoryArchive()
         {
-            buysHistory = new LinkedList<Purchase>();
             buyId = 0;
         }
 
@@ -41,18 +40,19 @@ namespace wsep182.Domain
         {
             int buyId = getNextBuyId();
             Purchase toAdd = new Purchase(buyId, productId, storeId, userName, price, date, amount, typeOfSale);
-            buysHistory.AddLast(toAdd);
+            BuyHistoryDB.getInstance().addBuyHistory(toAdd);
             return true;
         }
 
         public LinkedList<Purchase> viewHistory()
         {
-            return buysHistory;
+            return BuyHistoryDB.getInstance().getBuyHistory();
         }
         
         public LinkedList<Purchase> viewHistoryByStoreId(int storeId)
         {
-            LinkedList<Purchase> ans = new LinkedList<Purchase>();
+            LinkedList<Purchase> buysHistory = BuyHistoryDB.getInstance().getBuyHistory();
+            LinkedList <Purchase> ans = new LinkedList<Purchase>();
             foreach(Purchase buy in buysHistory)
             {
                 if (buy.StoreId == storeId)
@@ -64,6 +64,7 @@ namespace wsep182.Domain
         }
         public LinkedList<Purchase> viewHistoryByUserName(String userName)
         {
+            LinkedList<Purchase> buysHistory = BuyHistoryDB.getInstance().getBuyHistory();
             LinkedList<Purchase> ans = new LinkedList<Purchase>();
             foreach (Purchase buy in buysHistory)
             {
