@@ -46,7 +46,7 @@ namespace Acceptance_Tests.StoreTests
             int colaId = ss.addProductInStore("cola", 10, 100, zahi, storeid, "Drinks");
             cola = ProductArchive.getInstance().getProductInStore(colaId);
 
-            ss.addSaleToStore(zahi, store.getStoreId(), cola.getProductInStoreId(), 1, 2, "20/5/2018");
+            ss.addSaleToStore(zahi, store.getStoreId(), cola.getProductInStoreId(), 1, 2, "20/8/2018");
 
             LinkedList<Sale> SL = ss.viewSalesByStore(store.getStoreId());
             foreach (Sale sale in SL)
