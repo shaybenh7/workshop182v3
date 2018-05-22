@@ -65,6 +65,7 @@
     <Compile Include="StoreTests\editProductInStore.cs" />
     <Compile Include="StoreTests\editSaleTest.cs" />
     <Compile Include="StoreTests\editSaleTests.cs" />
+    <Compile Include="StoreTests\PolicyTest.cs" />
     <Compile Include="StoreTests\removeCouponTests.cs" />
     <Compile Include="StoreTests\removeDiscountTests.cs" />
     <Compile Include="StoreTests\removeManagerPermissionTests.cs" />
