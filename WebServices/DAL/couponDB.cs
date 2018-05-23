@@ -9,7 +9,6 @@ namespace WebServices.DAL
 {
     public class couponDB : BaseDBConnector<Coupon>
     {
-        private static couponDB instance = null;
 
         public couponDB(string mode) : base(mode) { }
 
