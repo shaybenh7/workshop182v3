@@ -199,6 +199,8 @@
     <Compile Include="DAL\couponDB.cs" />
     <Compile Include="DAL\DiscountDB.cs" />
     <Compile Include="DAL\SaleDB.cs" />
+    <Compile Include="DAL\StoreDB.cs" />
+    <Compile Include="DAL\StoreRoleDictionaryDB.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\BuyHistoryArchive.cs" />
     <Compile Include="Domain\Coupon.cs" />

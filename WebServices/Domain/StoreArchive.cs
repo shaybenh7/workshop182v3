@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
@@ -7,14 +8,53 @@ namespace wsep182.Domain
     {
         private static storeArchive instance;
         private LinkedList<Store> stores;
-        private static int storeIndex = 0;
+        private static int storeIndex;
 
         private Dictionary<int,Dictionary<String,StoreRole>> archive;
 
+        private StoreDB SDB;
+        private StoreRoleDictionaryDB SRDDB;
         private storeArchive()
         {
-            stores = new LinkedList<Store>();
-            archive = new Dictionary<int, Dictionary<string, StoreRole>>();
+            SDB = new StoreDB("Production");
+            SRDDB = new StoreRoleDictionaryDB("Production");
+            stores = SDB.Get();
+            archive = new Dictionary<int, Dictionary<String, StoreRole>>();
+            LinkedList<Tuple<int, String, String>> temp = SRDDB.Get();
+            foreach(Tuple<int, String, String> t in temp)
+            {
+                StoreRole sr=null;
+                if (t.Item3 == "Manager")
+                {
+                    sr=new StoreManager(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
+                }
+                else if (t.Item3 == "Owner")
+                {
+                    sr = new StoreOwner(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
+                }
+                else if (t.Item3 == "Customer")
+                {
+                    sr = new Customer(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
+                }
+                
+                archive.Add(t.Item1,new Dictionary<String, StoreRole> ());
+                archive[t.Item1].Add(t.Item2, sr);
+            }
+
+            storeIndex = currIndex();
+        }
+        public int currIndex()
+        {
+            LinkedList<Store> temp=SDB.Get();
+            int index = 0;
+            foreach(Store s in temp)
+            {
+                if (s.getStoreId() > index)
+                {
+                    index = s.getStoreId();
+                }
+            }
+            return index;
         }
         public static storeArchive getInstance()
         {
@@ -42,6 +82,7 @@ namespace wsep182.Domain
                 if (s.getStoreId() == newStore.getStoreId())
                     return null;
             stores.AddLast(newStore);
+            SDB.Add(newStore);
             return newStore;
         }
 
@@ -52,6 +93,8 @@ namespace wsep182.Domain
                 {
                     stores.Remove(s);
                     stores.AddLast(newStore);
+                    SDB.Remove(s);
+                    SDB.Add(newStore);
                     return true;
                 }
             return false;
@@ -71,6 +114,8 @@ namespace wsep182.Domain
                 if (s.getStoreId() == storeId)
                 {
                     s.setIsActive(0);
+                    SDB.Remove(s);
+                    SDB.Add(s);
                     return true;
                 }
             return false;
@@ -82,6 +127,8 @@ namespace wsep182.Domain
             if (archive[storeId].ContainsKey(userName))
                 return false;
             archive[storeId].Add(userName,newPremissions);
+            Tuple<int, String, String> t = new Tuple<int, String, String>(storeId, userName, newPremissions.type);
+            SRDDB.Add(t);
             return true;
         }
 
@@ -91,8 +138,13 @@ namespace wsep182.Domain
                 return false;
             if (archive[storeId].ContainsKey(userName))
             {
+                
                 archive[storeId].Remove(userName);
                 archive[storeId].Add(userName, newPremissions);
+                Tuple<int, String, String> t = new Tuple<int, String, String>(storeId, userName, "");
+                SRDDB.Remove(t);
+                t = new Tuple<int, String, String>(storeId, userName, newPremissions.type);
+                SRDDB.Add(t);
                 return true;
             }
             return false;

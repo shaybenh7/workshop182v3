@@ -61,6 +61,7 @@ namespace wsep182.Domain
                 {
                     Discount toAdd = new Discount(pid, 1, "", percentage, dueDate, restrictions);
                     discounts.AddLast(toAdd);
+                    DDB.Add(toAdd);
                 }
             }
             else

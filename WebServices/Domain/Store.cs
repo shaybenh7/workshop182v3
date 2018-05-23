@@ -19,6 +19,13 @@ namespace wsep182.Domain
             this.name = name;
             this.storeCreator = storeCreator;
         }
+        public Store(int id, String name, User storeCreator, int isActive)
+        {
+            storeId = id;
+            this.isActive = isActive;
+            this.name = name;
+            this.storeCreator = storeCreator;
+        }
         public int getStoreId()
         {
             return storeId;
