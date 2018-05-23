@@ -12,11 +12,14 @@ namespace wsep182.Domain
     {
         private static CouponsArchive instance;
         System.Timers.Timer couponCollector;
+        private LinkedList<Coupon> coupons;
+
         private couponDB CDB;
 
         private CouponsArchive()
         {
             CDB = new couponDB("Production");
+            coupons = CDB.Get();
             couponCollector = new System.Timers.Timer();
             couponCollector.Elapsed += new ElapsedEventHandler(CheckFinishedcoupon);
             couponCollector.Interval = 60 * 60 * 1000; // interval of one hour
@@ -35,7 +38,6 @@ namespace wsep182.Domain
 
         private void CheckFinishedcoupon(object source, ElapsedEventArgs e)
         {
-            LinkedList<Coupon> coupons = CDB.Get();
             LinkedList <Coupon> CouponToRemove = new LinkedList<Coupon>();
             foreach (Coupon c in coupons)
             {
@@ -46,6 +48,7 @@ namespace wsep182.Domain
             }
             foreach (Coupon c in CouponToRemove)
             {
+                coupons.Remove(c);
                 CDB.Remove(c);
             }
         }
@@ -65,23 +68,23 @@ namespace wsep182.Domain
             if (DateTime.Compare(dueDateTime, DateTime.Now) < 0)
                 return false;
             Coupon toAdd = new Coupon(couponId, productInStoreId, percentage, dueDate);
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                     return false;
             }
+            coupons.AddLast(toAdd);
             CDB.Add(toAdd);
             return true;
         }
 
         public Boolean removeCouponForSpecificProduct(String couponId, int productInStoreId)
         {
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                 {
+                    coupons.Remove(coupon);
                     CDB.Remove(coupon);
                     return true;
                 }
@@ -93,7 +96,6 @@ namespace wsep182.Domain
         {
             Boolean found = false;
             LinkedList<int> indexes = new LinkedList<int>();
-            LinkedList<Coupon> coupons = CDB.Get();
             for (int i = 0; i < coupons.Count; i++)
             {
                 if (coupons.ElementAt(i).CouponId.Equals(couponId))
@@ -106,7 +108,9 @@ namespace wsep182.Domain
                 return false;
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
-                CDB.Remove(coupons.ElementAt(indexes.ElementAt(i)));
+                Coupon toRemove = coupons.ElementAt(indexes.ElementAt(i));
+                coupons.Remove(toRemove);
+                CDB.Remove(toRemove);
             }
             if (!found)
                 return false;
@@ -117,11 +121,11 @@ namespace wsep182.Domain
         public Boolean editCoupon(String couponId, int newPercentage, String newDueDate)
         {
             Boolean found = false;
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId))
                 {
+                    coupons.Remove(coupon);
                     CDB.Remove(coupon);
                     coupon.Percentage = newPercentage;
                     coupon.DueDate = newDueDate;
@@ -136,7 +140,6 @@ namespace wsep182.Domain
 
         public Coupon getCoupon(String couponId)
         {
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId))
@@ -149,7 +152,6 @@ namespace wsep182.Domain
 
         public Coupon getCoupon(String couponId, int productInStoreId)
         {
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon coupon in coupons)
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
@@ -162,7 +164,6 @@ namespace wsep182.Domain
 
         public LinkedList<Coupon> getAllCoupons()
         {
-            LinkedList<Coupon> coupons = CDB.Get();
             return coupons;
         }
 
@@ -181,7 +182,6 @@ namespace wsep182.Domain
             }
             if (DateTime.Compare(dueDateTime, DateTime.Now) < 0)
                 return false;
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon c in coupons)
             {
                 if (c.CouponId.Equals(couponId))
@@ -209,6 +209,7 @@ namespace wsep182.Domain
             }
 
             Coupon toAdd = new Coupon(couponId,productInStoreId, type, categoryOrProductName, percentage, dueDate, restrictions);
+            coupons.AddLast(toAdd);
             CDB.Add(toAdd);
             return true;
         }
@@ -221,6 +222,7 @@ namespace wsep182.Domain
                 foreach (int pid in pisId)
                 {
                     Coupon toAdd = new Coupon(couponId, pid, 1, "", percentage, dueDate, restrictions);
+                    coupons.AddLast(toAdd);
                     CDB.Add(toAdd);
                 }
             }
@@ -229,6 +231,7 @@ namespace wsep182.Domain
                 foreach (string name in catOrProductsNames)
                 {
                     Coupon toAdd = new Coupon(couponId , -1, type, name, percentage, dueDate, restrictions);
+                    coupons.AddLast(toAdd);
                     CDB.Add(toAdd);
                 }
             }
@@ -239,7 +242,6 @@ namespace wsep182.Domain
         public LinkedList<Coupon> getAllCouponsById(int productInStoreId)
         {
             LinkedList<Coupon> ans = new LinkedList<Coupon>();
-            LinkedList<Coupon> coupons = CDB.Get();
             foreach (Coupon c in coupons)
             {
                 ProductInStore p = ProductArchive.getInstance().getProductInStore(productInStoreId);
@@ -270,11 +272,5 @@ namespace wsep182.Domain
             }
             return ans;
         }
-
-
-
-
-
-
     }
 }
