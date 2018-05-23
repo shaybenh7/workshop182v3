@@ -38,6 +38,7 @@
             $("#btnLogin").click(function () {
 
                 username = $("#username").val();
+                document.cookie = "username="+username;
                 pass = $("#password").val();
 
                 jQuery.ajax({

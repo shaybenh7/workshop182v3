@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wsep182.Domain
 {
-    public class Coupon
+    public class Coupon 
     {
         private String couponId;
         private int productInStoreId;

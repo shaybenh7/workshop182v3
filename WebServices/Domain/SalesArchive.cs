@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class SalesArchive
     {
         private LinkedList<Sale> sales;
+        private SaleDB SDB;
         private static SalesArchive instance;
         private static int saleId;
 
         private SalesArchive()
         {
-            sales = new LinkedList<Sale>();
+            SDB = new SaleDB("Production");
+            sales = SDB.Get();
             saleId = 0;
         }
         public static void restartInstance()
@@ -40,6 +43,7 @@ namespace wsep182.Domain
                 if (s.SaleId == saleId)
                 {
                     sales.Remove(s);
+                    SDB.Remove(s);
                     return true;
                 }
             }
@@ -70,6 +74,7 @@ namespace wsep182.Domain
             int saleId = getNextSaleId();
             Sale toAdd = new Sale(saleId, productInStoreId, typeOfSale, amount, dueDate);
             sales.AddLast(toAdd);
+            SDB.Add(toAdd);
             return toAdd;
         }
 
@@ -101,8 +106,10 @@ namespace wsep182.Domain
             {
                 if (sale.SaleId == saleId)
                 {
+                    SDB.Remove(sale);
                     sale.Amount = amount;
                     sale.DueDate = dueDate;
+                    SDB.Add(sale);
                     return true;
                 }
             }
@@ -114,7 +121,9 @@ namespace wsep182.Domain
             {
                 if (sale.SaleId == saleId)
                 {
+                    SDB.Remove(sale);
                     sale.Amount = amount;
+                    SDB.Add(sale);
                     return true;
                 }
             }

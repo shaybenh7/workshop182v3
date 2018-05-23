@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
@@ -12,10 +13,11 @@ namespace wsep182.Domain
         private LinkedList<Discount> discounts;
         private static DiscountsArchive instance;
         System.Timers.Timer DiscountCollector;
-
+        private DiscountDB DDB;
         private DiscountsArchive()
         {
-            discounts = new LinkedList<Discount>();
+            DDB = new DiscountDB("Production");
+            discounts = DDB.Get();
             DiscountCollector = new System.Timers.Timer();
             DiscountCollector.Elapsed += new ElapsedEventHandler(CheckFinishedDiscounts);
             DiscountCollector.Interval = 60 * 60 * 1000; // interval of one hour
@@ -45,6 +47,7 @@ namespace wsep182.Domain
             foreach (Discount d in discountToRemove)
             {
                 discounts.Remove(d);
+                DDB.Remove(d);
             }
         }
 
@@ -66,6 +69,7 @@ namespace wsep182.Domain
                 {
                     Discount toAdd = new Discount(-1, type, name, percentage, dueDate, restrictions);
                     discounts.AddLast(toAdd);
+                    DDB.Add(toAdd);
                 }
             }
             return 1;
@@ -119,6 +123,7 @@ namespace wsep182.Domain
                 if (discount.ProductInStoreId == productInStoreId)
                 {
                     discounts.Remove(discount);
+                    DDB.Remove(discount);
                     return true;
                 }
             }
@@ -138,6 +143,7 @@ namespace wsep182.Domain
                     if (discount.Category.Equals(category) && dueDate.Equals(discount.DueDate))
                     {
                         discounts.Remove(discount);
+                        DDB.Remove(discount);
                         return true;
                     }
                 }
@@ -149,6 +155,7 @@ namespace wsep182.Domain
                     if (discount.Category.Equals(category))
                     {
                         discounts.Remove(discount);
+                        DDB.Remove(discount);
                         flag = true;
                     }
                 }
@@ -161,8 +168,10 @@ namespace wsep182.Domain
             {
                 if (discount.ProductInStoreId == productInStoreId)
                 {
+                    DDB.Remove(discount);
                     discount.Percentage = newPercentage;
                     discount.DueDate = newDueDate;
+                    DDB.Add(discount);
                     return true;
                 }
             }

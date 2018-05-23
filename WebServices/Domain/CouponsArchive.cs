@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class CouponsArchive
     {
-        private LinkedList<Coupon> coupons;
         private static CouponsArchive instance;
         System.Timers.Timer couponCollector;
+        private LinkedList<Coupon> coupons;
+
+        private couponDB CDB;
 
         private CouponsArchive()
         {
-            coupons = new LinkedList<Coupon>();
+            CDB = new couponDB("Production");
+            coupons = CDB.Get();
             couponCollector = new System.Timers.Timer();
             couponCollector.Elapsed += new ElapsedEventHandler(CheckFinishedcoupon);
             couponCollector.Interval = 60 * 60 * 1000; // interval of one hour
@@ -34,7 +38,7 @@ namespace wsep182.Domain
 
         private void CheckFinishedcoupon(object source, ElapsedEventArgs e)
         {
-            LinkedList<Coupon> CouponToRemove = new LinkedList<Coupon>();
+            LinkedList <Coupon> CouponToRemove = new LinkedList<Coupon>();
             foreach (Coupon c in coupons)
             {
                 if (DateTime.Now.CompareTo(DateTime.Parse(c.DueDate)) > 0)
@@ -45,6 +49,7 @@ namespace wsep182.Domain
             foreach (Coupon c in CouponToRemove)
             {
                 coupons.Remove(c);
+                CDB.Remove(c);
             }
         }
 
@@ -69,6 +74,7 @@ namespace wsep182.Domain
                     return false;
             }
             coupons.AddLast(toAdd);
+            CDB.Add(toAdd);
             return true;
         }
 
@@ -79,6 +85,7 @@ namespace wsep182.Domain
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                 {
                     coupons.Remove(coupon);
+                    CDB.Remove(coupon);
                     return true;
                 }
             }
@@ -101,7 +108,9 @@ namespace wsep182.Domain
                 return false;
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
-                coupons.Remove(coupons.ElementAt(indexes.ElementAt(i)));
+                Coupon toRemove = coupons.ElementAt(indexes.ElementAt(i));
+                coupons.Remove(toRemove);
+                CDB.Remove(toRemove);
             }
             if (!found)
                 return false;
@@ -116,8 +125,11 @@ namespace wsep182.Domain
             {
                 if (coupon.CouponId.Equals(couponId))
                 {
+                    coupons.Remove(coupon);
+                    CDB.Remove(coupon);
                     coupon.Percentage = newPercentage;
                     coupon.DueDate = newDueDate;
+                    CDB.Add(coupon);
                     found = true;
                 }
             }
@@ -198,6 +210,7 @@ namespace wsep182.Domain
 
             Coupon toAdd = new Coupon(couponId,productInStoreId, type, categoryOrProductName, percentage, dueDate, restrictions);
             coupons.AddLast(toAdd);
+            CDB.Add(toAdd);
             return true;
         }
 
@@ -210,6 +223,7 @@ namespace wsep182.Domain
                 {
                     Coupon toAdd = new Coupon(couponId, pid, 1, "", percentage, dueDate, restrictions);
                     coupons.AddLast(toAdd);
+                    CDB.Add(toAdd);
                 }
             }
             else
@@ -218,6 +232,7 @@ namespace wsep182.Domain
                 {
                     Coupon toAdd = new Coupon(couponId , -1, type, name, percentage, dueDate, restrictions);
                     coupons.AddLast(toAdd);
+                    CDB.Add(toAdd);
                 }
             }
             return 1;
@@ -257,11 +272,5 @@ namespace wsep182.Domain
             }
             return ans;
         }
-
-
-
-
-
-
     }
 }
