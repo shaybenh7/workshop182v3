@@ -31,11 +31,23 @@ namespace wsep182.Domain
             this.type = type;
             this.restrictions = restrictions;
             if (type == 1)
+            {
                 this.productInStoreId = productInStoreId;
+                this.category = "";
+                this.productName = "";
+            }
             else if (type == 2)
+            {
+                this.productInStoreId = -1;
                 this.category = productNameOrCategory;
+                this.productName = "";
+            }
             else
+            {
+                this.productInStoreId = -1;
+                this.category = "";
                 this.productName = productNameOrCategory;
+            }
         }
 
         public int ProductInStoreId { get => productInStoreId; set => productInStoreId = value; }
