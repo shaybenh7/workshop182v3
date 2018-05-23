@@ -62,7 +62,7 @@ namespace WebServices.DAL
             try
             {
                 con.Open();
-                string sql = "DELETE FROM Sale WHERE saleId is " + s.SaleId + "; ";
+                string sql = "DELETE FROM Sale WHERE saleId = " + s.SaleId + "; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
