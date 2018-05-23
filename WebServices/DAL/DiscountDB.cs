@@ -9,7 +9,7 @@ namespace WebServices.DAL
 {
     public class DiscountDB : BaseDBConnector<Discount>
     {
-        private static couponDB instance = null;
+        private static DiscountDB instance = null;
 
         public DiscountDB(string mode) : base(mode) { }
 
@@ -57,7 +57,7 @@ namespace WebServices.DAL
                 con.Open();
 
                 string sql = "INSERT INTO Discount (productInStoreId, percentage, type, category, productName, dueDate, restrictions)" +
-                             " VALUES ('" + d.ProductInStoreId + "', " + d.Percentage + ", " + d.Type + ", " + d.Category + ", '" + d.ProductName +
+                             " VALUES (" + d.ProductInStoreId + ", " + d.Percentage + ", " + d.Type + ", '" + d.Category + "', '" + d.ProductName +
                              "', '" + d.DueDate + "', '" + d.Restrictions + "')";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();

@@ -33,19 +33,19 @@ namespace wsep182.Domain
             if (type == 1)
             {
                 this.productInStoreId = productInStoreId;
-                this.category = "";
-                this.productName = "";
+                this.category = "null";
+                this.productName = "null";
             }
             else if (type == 2)
             {
                 this.productInStoreId = -1;
                 this.category = productNameOrCategory;
-                this.productName = "";
+                this.productName = "null";
             }
             else
             {
                 this.productInStoreId = -1;
-                this.category = "";
+                this.category = "null";
                 this.productName = productNameOrCategory;
             }
         }
