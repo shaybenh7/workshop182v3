@@ -4,18 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class RaffleSalesArchive
     {
         private LinkedList<RaffleSale> raffleSales;
+        private RaffleSaleDB RSDB;
         private static RaffleSalesArchive instance;
         System.Timers.Timer RaffelCollector;
 
         private RaffleSalesArchive()
         {
-            raffleSales = new LinkedList<RaffleSale>();
+            RSDB = new RaffleSaleDB("Production");
+            raffleSales = RSDB.Get();
             RaffelCollector = new System.Timers.Timer();
             RaffelCollector.Elapsed += new ElapsedEventHandler(CheckFinishedRaffelSales);
             RaffelCollector.Interval = 60*60*1000; // interval of one hour
@@ -35,6 +38,7 @@ namespace wsep182.Domain
             }
             foreach (RaffleSale rs in raffleSalesToRemove)
             {
+                RSDB.Remove(rs);
                 raffleSales.Remove(rs);
             }
         }
@@ -54,6 +58,7 @@ namespace wsep182.Domain
         public Boolean addRaffleSale(int saleId, String userName, double offer, String dueDate)
         {
             RaffleSale toAdd = new RaffleSale(saleId, userName, offer, dueDate);
+            RSDB.Add(toAdd);
             raffleSales.AddLast(toAdd);
             return true;
         }
@@ -135,7 +140,8 @@ namespace wsep182.Domain
                         index += (int)r.Offer;
                     }
                 }
-                if (winnerS != null) { 
+                if (winnerS != null) {
+                    RSDB.Remove(winnerS);
                     raffleSales.Remove(winnerS);
                     relevant.Remove(winnerS);
                 }
@@ -143,6 +149,7 @@ namespace wsep182.Domain
                 {
                     NotificationManager.getInstance().notifyUser(r.UserName, "YOU LOST THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId));
                     raffleSales.Remove(r);
+                    RSDB.Remove(winnerS);
                 }
 
 
