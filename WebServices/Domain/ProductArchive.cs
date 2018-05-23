@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class ProductArchive
     {
+        private ProductDB productDB;
+        private ProductInStoreDB productInStoreDB;
         private static ProductArchive instance;
         private LinkedList<Product> products;
         private LinkedList<ProductInStore> productsInStores;
@@ -15,8 +18,10 @@ namespace wsep182.Domain
         private static int productId = 0;
         private ProductArchive()
         {
-            products = new LinkedList<Product>();
-            productsInStores = new LinkedList<ProductInStore>();
+            productDB = new ProductDB("Production");
+            productInStoreDB = new ProductInStoreDB("Production");
+            products = productDB.Get();
+            productsInStores = productInStoreDB.Get();
             productInStoreId = 0;
             productId = 0;
         }
@@ -47,6 +52,7 @@ namespace wsep182.Domain
                     return null;
             Product newProduct = new Product(productName, getNextProductId());
             products.AddLast(newProduct);
+            productDB.Add(newProduct);
             return newProduct;
         }
 
@@ -59,6 +65,8 @@ namespace wsep182.Domain
                 {
                     products.Remove(p);
                     products.AddLast(newProduct);
+                    productDB.Remove(p);
+                    productDB.Add(newProduct);
                     return true;
                 }
             return false;
@@ -90,6 +98,7 @@ namespace wsep182.Domain
                 if (p.getProductId() == productId)
                 {
                     products.Remove(p);
+                    productDB.Remove(p);
                     return true;
                 }
             return false;
@@ -117,6 +126,7 @@ namespace wsep182.Domain
                 if (p.getProduct().getProductId() == newProduct.getProduct().getProductId() && p.getStore().getStoreId() == newProduct.getStore().getStoreId())
                     return null;
             productsInStores.AddLast(newProduct);
+            productInStoreDB.Add(newProduct);
             return newProduct;
         }
         public ProductInStore addProductInStore(Product product, Store store, int quantity, double price,string category)
@@ -131,6 +141,7 @@ namespace wsep182.Domain
                 if (p.getProduct().getProductId() == newProduct.getProduct().getProductId() && p.getStore().getStoreId() == newProduct.getStore().getStoreId())
                     return null;
             productsInStores.AddLast(newProduct);
+            productInStoreDB.Add(newProduct);
             return newProduct;
         }
 
@@ -148,6 +159,8 @@ namespace wsep182.Domain
                 {
                     productsInStores.Remove(p);
                     productsInStores.AddLast(newProduct);
+                    productInStoreDB.Remove(p);
+                    productInStoreDB.Add(newProduct);
                     return true;
                 }
             return false;
@@ -200,6 +213,8 @@ namespace wsep182.Domain
                     if (SalesArchive.getInstance().getSalesByProductInStoreId(p.getProductInStoreId()).Count>0)
                         return false;
                     p.IsActive = 0;
+                    productInStoreDB.Remove(p);
+                    productInStoreDB.Add(p);
                     return true;
                 }
             return false;
