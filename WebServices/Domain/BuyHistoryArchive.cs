@@ -12,9 +12,11 @@ namespace wsep182.Domain
 
         private static BuyHistoryArchive instance;
         private static int buyId;
+        private BuyHistoryDB BHDB;
 
         private BuyHistoryArchive()
         {
+            BHDB = new BuyHistoryDB("Production");
             buyId = 0;
         }
 
@@ -40,18 +42,18 @@ namespace wsep182.Domain
         {
             int buyId = getNextBuyId();
             Purchase toAdd = new Purchase(buyId, productId, storeId, userName, price, date, amount, typeOfSale);
-            BuyHistoryDB.getInstance().addBuyHistory(toAdd);
+            BHDB.Add(toAdd);
             return true;
         }
 
         public LinkedList<Purchase> viewHistory()
         {
-            return BuyHistoryDB.getInstance().getBuyHistory();
+            return BHDB.Get();
         }
-        
+
         public LinkedList<Purchase> viewHistoryByStoreId(int storeId)
         {
-            LinkedList<Purchase> buysHistory = BuyHistoryDB.getInstance().getBuyHistory();
+            LinkedList<Purchase> buysHistory = BHDB.Get();
             LinkedList <Purchase> ans = new LinkedList<Purchase>();
             foreach(Purchase buy in buysHistory)
             {
@@ -64,7 +66,7 @@ namespace wsep182.Domain
         }
         public LinkedList<Purchase> viewHistoryByUserName(String userName)
         {
-            LinkedList<Purchase> buysHistory = BuyHistoryDB.getInstance().getBuyHistory();
+            LinkedList<Purchase> buysHistory = BHDB.Get();
             LinkedList<Purchase> ans = new LinkedList<Purchase>();
             foreach (Purchase buy in buysHistory)
             {

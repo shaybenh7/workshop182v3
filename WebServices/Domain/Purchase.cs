@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wsep182.Domain
 {
-    public class Purchase
+    public class Purchase 
     {
         private int buyId;
         private int productId;
