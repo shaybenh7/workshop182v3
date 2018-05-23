@@ -46,18 +46,6 @@ namespace wsep182.services
             register(admin, "admin", "123456");
             login(admin, "admin", "123456");
 
-            User adminTest = startSession();
-            register(adminTest, "adminTest", "123456");
-            login(adminTest, "adminTest", "123456");
-
-            int storeid = ss.createStore("Maria&Netta Inc.", admin);
-            store = storeArchive.getInstance().getStore(storeid);
-
-            int c = ss.addProductInStore("Milk chocolate", 3.2, 30, admin, storeid, "chocolate");
-            int s = ss.addProductInStore("Dark chocolate", 5.3, 30, admin, storeid, "chocolate");
-            ss.addSaleToStore(admin, storeid, c, 1, 20, "18/11/2018");
-            ss.addSaleToStore(admin, storeid, s, 3, 20, "18/11/2018");
-
         }
         // req 1.1
         public User startSession()

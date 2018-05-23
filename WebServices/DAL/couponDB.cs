@@ -74,7 +74,7 @@ namespace WebServices.DAL
             {
                 con.Open();
 
-                string sql = "DELETE FROM Coupons WHERE CouponId is '"+p.CouponId+"'; ";
+                string sql = "DELETE FROM Coupons WHERE CouponId = '"+p.CouponId+"'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
