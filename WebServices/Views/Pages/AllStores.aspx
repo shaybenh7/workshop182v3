@@ -24,11 +24,12 @@
                 dataType: "json",
                 success: function (response) {
                     var i;
+                    console.log(response);
                     for (i = 0; i < response.length; i++) {
                         store = response[i];
                         var storeId = store["storeId"];
-                            var storeName = store["name"];
-                            var ownerName = store["storeCreator"]["userName"];
+                        var storeName = store["name"];
+                        var ownerName = store["storeCreator"]["userName"];
                         var string = "";
                         string += "<div class=\"col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women\" >";
                         string += "<div class=\"block2\">";

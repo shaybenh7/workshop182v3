@@ -62,7 +62,7 @@ namespace WebServices.DAL
             {
                 con.Open();
 
-                string sql = "DELETE FROM StoreRoleDictionary WHERE storeId = " + t.Item1 + " AND userName is '"+t.Item2+"'; ";
+                string sql = "DELETE FROM StoreRoleDictionary WHERE storeId = " + t.Item1 + " AND userName = '"+t.Item2+"'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
