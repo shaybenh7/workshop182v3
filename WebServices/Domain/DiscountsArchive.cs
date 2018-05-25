@@ -60,6 +60,10 @@ namespace wsep182.Domain
                 foreach (int pid in pisId)
                 {
                     Discount toAdd = new Discount(pid, 1, "", percentage, dueDate, restrictions);
+                    if (!DDB.Add(toAdd))
+                    {
+                        return -2;
+                    }
                     discounts.AddLast(toAdd);
                 }
             }
@@ -68,8 +72,11 @@ namespace wsep182.Domain
                 foreach (string name in catOrProductsNames)
                 {
                     Discount toAdd = new Discount(-1, type, name, percentage, dueDate, restrictions);
+                    if (!DDB.Add(toAdd))
+                    {
+                        return -2;
+                    }
                     discounts.AddLast(toAdd);
-                    DDB.Add(toAdd);
                 }
             }
             return 1;
