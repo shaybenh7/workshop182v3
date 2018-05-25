@@ -11,7 +11,7 @@ namespace wsep182.Domain
         private UserState state;
         public String userName;
         private String password;
-        private ShoppingCart shoppingCart;
+        public ShoppingCart shoppingCart;
         private Boolean isActive;
         public User(string userName, string password)
         {
@@ -37,7 +37,7 @@ namespace wsep182.Domain
                 return new Guest();
             return user.state;
         }
-        void setState(UserState s)
+        public void setState(UserState s)
         {
             state = s;
         }
