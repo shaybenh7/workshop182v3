@@ -934,8 +934,10 @@ namespace WebService.Controllers
             }
             if (ans > 0)
                 return "Discounts added successfully";
-            if (ans == -4)
+            else if (ans == -4)
                 return "You dont have permissions";
+            else if (ans == -2)
+                return "We're sorry, theres seem to be a problem with our database. Please try again later.";
             return "Coupons failed";
         }
 
