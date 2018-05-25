@@ -191,10 +191,7 @@ namespace wsep182.Domain
 
         public Boolean getIsActive()
         {
-            User user = UserArchive.getInstance().getUser(userName);
-            if (user == null)
-                return false;
-            return user.isActive;
+            return isActive;
         }
 
         internal void setIsActive(Boolean state)
