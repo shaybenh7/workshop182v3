@@ -8,7 +8,7 @@ namespace wsep182.Domain
 {
     public class ShoppingCart
     {
-        LinkedList<UserCart> products;
+        public LinkedList<UserCart> products;
         LinkedList<string> usedCoupons;
         public ShoppingCart()
         {
@@ -201,10 +201,7 @@ namespace wsep182.Domain
             }
             return -1;
         }
-
-
-
-        
+       
 
         public int addToCart(User session, int saleId, int amount)
         {
@@ -237,13 +234,16 @@ namespace wsep182.Domain
                     if(c.getAmount() + amount <= amountForSale)
                     {
                         c.setAmount(c.getAmount() + amount);
+                        UserArchive.getInstance().updateUser(session);
+
                         return 1; // OK
                     }
                     return -7;
                 }
             }
-
+            
             products.AddLast(toAdd);
+            UserArchive.getInstance().updateUser(session);
             return 1;
         }
 
@@ -280,6 +280,8 @@ namespace wsep182.Domain
             UserCart toAdd = new UserCart(session.getUserName(), sale.SaleId, 1);
             toAdd.setOffer(offer);
             session.getShoppingCart().AddLast(toAdd);
+            UserArchive.getInstance().updateUser(session);
+
             return 1;
         }
 
@@ -308,6 +310,8 @@ namespace wsep182.Domain
                 if (product.getUserName().Equals(session.getUserName()) && saleId == product.getSaleId())
                 {
                     product.setAmount(newAmount);
+                    UserArchive.getInstance().updateUser(session);
+
                     return 1;
                 }
             }
@@ -332,6 +336,8 @@ namespace wsep182.Domain
                 if (c.getUserName().Equals(session.getUserName()) && c.getSaleId() == saleId)
                 {
                     products.Remove(c);
+                    UserArchive.getInstance().updateUser(session);
+
                     return 1;
                 }
             }
@@ -415,9 +421,10 @@ namespace wsep182.Domain
             {
                 products.Remove(uc);
             }
+            UserArchive.getInstance().updateUser(session);
+
             return allBought;
         }
-
 
         public int buyProductsInCart(User session, string country, string adress, string creditCard)
         {
@@ -500,6 +507,8 @@ namespace wsep182.Domain
                 if (!(session.getState() is Guest))
                     UserCartsArchive.getInstance().removeUserCart(session.userName,uc.SaleId);
             }
+            UserArchive.getInstance().updateUser(session);
+
             return allBought;
         }
 

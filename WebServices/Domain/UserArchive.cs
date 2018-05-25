@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-
+using WebServices.DAL;
 
 namespace wsep182.Domain
 {
     public class UserArchive
     {
         private static UserArchive instance;
+        private UserDB UDB;
         private LinkedList<User> users;
         private UserArchive()
         {
-            users = new LinkedList<User>();
+            UDB = new UserDB("Production");
+            users = UDB.Get();
         }
         public static UserArchive getInstance()
         {
@@ -35,7 +37,8 @@ namespace wsep182.Domain
             foreach (User u in users)
                 if (u.getUserName().Equals(newUser.getUserName()))
                     return -4;
-            newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
+            //newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
+            UDB.Add(newUser);
             users.AddLast(newUser);
             return 0;
         }
@@ -57,8 +60,10 @@ namespace wsep182.Domain
             {
                 if (u.getUserName().Equals(newUser.getUserName()))
                 {
-                    newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
+                    //newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
+                    UDB.Remove(u);
                     users.Remove(u);
+                    UDB.Add(newUser);
                     users.AddLast(newUser);
                     return true;
                 }
@@ -84,6 +89,7 @@ namespace wsep182.Domain
             foreach (User u in users)
                 if (u.getUserName().Equals(userName))
                 {
+                    UDB.Remove(u);
                     LinkedList<Store> allStores = storeArchive.getInstance().getAllStore();
                     foreach(Store s in allStores)
                     {
@@ -92,6 +98,7 @@ namespace wsep182.Domain
                     }
                     //users.Remove(u);
                     u.setIsActive(false);
+                    UDB.Add(u);
                     return 0;
                 }
             return -2;

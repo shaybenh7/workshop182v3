@@ -198,9 +198,14 @@
     <Compile Include="DAL\BuyHistoryDB.cs" />
     <Compile Include="DAL\couponDB.cs" />
     <Compile Include="DAL\DiscountDB.cs" />
+    <Compile Include="DAL\ProductDB.cs" />
+    <Compile Include="DAL\ProductInStoreDB.cs" />
+    <Compile Include="DAL\PurchasePolicyDB.cs" />
+    <Compile Include="DAL\RaffleSaleDB.cs" />
     <Compile Include="DAL\SaleDB.cs" />
     <Compile Include="DAL\StoreDB.cs" />
     <Compile Include="DAL\StoreRoleDictionaryDB.cs" />
+    <Compile Include="DAL\UserDB.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\BuyHistoryArchive.cs" />
     <Compile Include="Domain\Coupon.cs" />

@@ -12,7 +12,6 @@ namespace wsep182.services
         private static userServices instance = null;
 
         private userServices() {
-            init();
         }
         public static userServices getInstance()
         {
@@ -21,31 +20,6 @@ namespace wsep182.services
                 instance = new userServices();
             }
             return instance;
-        }
-        public void init()
-        {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
-            storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
-            StorePremissionsArchive.restartInstance();
-            PurchasePolicyArchive.restartInstance();
-
-            storeServices ss;
-            User admin;
-            Store store;
-            sellServices sells;
-            ss = storeServices.getInstance();
-            sells = sellServices.getInstance();
-            admin = startSession();
-            register(admin, "admin", "123456");
-            login(admin, "admin", "123456");
-
         }
         // req 1.1
         public User startSession()
