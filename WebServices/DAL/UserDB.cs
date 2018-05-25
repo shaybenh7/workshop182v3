@@ -57,9 +57,9 @@ namespace WebServices.DAL
                 int state = reader.GetInt32("state");
                 string userName = reader.GetString("userName");
                 string password = reader.GetString("password");
-                int isActive = reader.GetInt32("isActive");
+                Boolean isActive = reader.GetBoolean("isActive");
                 User u = new User(userName, password);
-                u.setIsActive(isActive==1);
+                u.setIsActive(isActive);
                 if (state == 2)
                     u.setState(new LogedIn());
                 else if (state == 3)
