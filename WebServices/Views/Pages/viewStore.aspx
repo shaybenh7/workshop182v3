@@ -114,10 +114,10 @@
 
                                     var storeNameElement = document.getElementById("storeName" + i);
                                     storeNameElement.innerHTML += response["store"]["name"];
-                                    if (i == 0) {
-                                        var storeNameHeader = document.getElementById("store-name");
-                                        storeNameHeader.innerHTML += response["store"]["name"];
-                                    }
+                                    //if (i == 0) {
+                                    //    var storeNameHeader = document.getElementById("store-name");
+                                    //    storeNameHeader.innerHTML += response["store"]["name"];
+                                    //}
                                 },
                                 error: function (response) {
                                     console.log(response);
@@ -142,6 +142,24 @@
 
                         })(i);
                     }
+
+                    (function () {
+                        jQuery.ajax({
+                            type: "GET",
+                            url: baseUrl+"/api/store/getStoreNameById?storeId=" + storeId, //add call to get price
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                var name = document.getElementById("store-name");
+                                name.innerHTML += response;
+
+                            },
+                            error: function (response) {
+                                console.log(response);
+                            }
+                        });
+                    })();
+
                     (function () {
                         jQuery.ajax({
                             type: "GET",

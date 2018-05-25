@@ -136,6 +136,12 @@ namespace wsep182.services
             return sR.addStoreOwner(session, s, newOwner);
         }
 
+        public String getStoreNameById(int storeId)
+        {
+            Store s= storeArchive.getInstance().getStore(storeId);
+            return s.getStoreName();
+        }
+
         //req 3.3 b
         /*
         * return:

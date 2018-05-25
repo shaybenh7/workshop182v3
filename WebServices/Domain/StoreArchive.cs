@@ -36,9 +36,12 @@ namespace wsep182.Domain
                 {
                     sr = new Customer(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
                 }
-                
-                archive.Add(t.Item1,new Dictionary<String, StoreRole> ());
-                archive[t.Item1].Add(t.Item2, sr);
+                try
+                {
+                    archive.Add(t.Item1, new Dictionary<String, StoreRole>());
+                    archive[t.Item1].Add(t.Item2, sr);
+                }
+                catch (Exception) { };
             }
 
             storeIndex = currIndex();
@@ -167,6 +170,8 @@ namespace wsep182.Domain
                 return false;
             if (archive[storeId].ContainsKey(userName))
             {
+                Tuple<int, String, String> t = new Tuple<int, String, String>(storeId, userName, "");
+                SRDDB.Remove(t);
                 archive[storeId].Remove(userName);
                 return true;
             }
