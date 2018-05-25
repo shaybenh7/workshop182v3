@@ -323,7 +323,7 @@ namespace wsep182.Domain
             if (session == null || couponId == null || percentage <= 0 || dueDate == null || percentage <= 0 || pisId==null || restrictions==null)
                 return -1;
             if (DateTime.Compare(DateTime.Parse(dueDate), DateTime.Now) < 0)
-                return -1;
+                return -3;
             return CouponsArchive.getInstance().addNewCoupons(couponId, type, pisId, catOrProductsNames, percentage, dueDate, restrictions);
         }
 

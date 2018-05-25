@@ -886,8 +886,12 @@ namespace WebService.Controllers
             }
             if (ans > 0)
                 return "Coupons added successfully";
-            if (ans == -4)
+            else if (ans == -4)
                 return "You dont have permissions";
+            else if (ans == -3)
+                return "Error: the date entered cannot be earlier than todays date.";
+            else if (ans == -2)
+                return "We're sorry, theres seem to be a problem with our database. Please try again later.";
             return "Coupons failed";
         }
 

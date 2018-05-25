@@ -222,8 +222,10 @@ namespace wsep182.Domain
                 foreach (int pid in pisId)
                 {
                     Coupon toAdd = new Coupon(couponId, pid, 1, "", percentage, dueDate, restrictions);
+                    if (!CDB.Add(toAdd))
+                        return -2;
                     coupons.AddLast(toAdd);
-                    CDB.Add(toAdd);
+                    
                 }
             }
             else
@@ -231,8 +233,9 @@ namespace wsep182.Domain
                 foreach (string name in catOrProductsNames)
                 {
                     Coupon toAdd = new Coupon(couponId , -1, type, name, percentage, dueDate, restrictions);
+                    if (!CDB.Add(toAdd))
+                        return -2;
                     coupons.AddLast(toAdd);
-                    CDB.Add(toAdd);
                 }
             }
             return 1;
