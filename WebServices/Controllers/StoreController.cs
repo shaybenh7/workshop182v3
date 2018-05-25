@@ -959,6 +959,24 @@ namespace WebService.Controllers
             return "not implemented";
         }
 
+        [Route("api/store/getStoreNameById")]
+        [HttpGet]
+        public HttpResponseMessage getStoreNameById(int storeId)
+        {
+            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            String name= storeServices.getInstance().getStoreNameById(storeId);
+            HttpResponseMessage response;
+            if (name == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, "Errror: store name not valid!");
+            }
+            else
+            {
+                response = Request.CreateResponse(HttpStatusCode.OK, name);
+            }
+            return response;
+        }
+
         [Route("api/store/getOwners")]
         [HttpGet]
         public HttpResponseMessage getOwners(int storeId)
