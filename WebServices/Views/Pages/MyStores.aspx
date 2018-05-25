@@ -745,17 +745,17 @@
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
                                                 <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="discountDueDate" placeholder="enter due date">
+                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="discountDueDate" placeholder="Enter due date - XX/XX/XXXX">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
 
                                                 <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="discountto-what" placeholder="enter the products ids you want the copun to act on divide by ','">
+                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="discountto-what" placeholder="enter the products ids you want the discount to act on divide by ','">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
                                         
                                                 <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Restriction2" placeholder="enter the contry you want the copun to act on (divide by ',' )">
+                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Restriction2" placeholder="enter the contry you want the discount to act on (divide by ',' )">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
                                                 <br />
