@@ -113,7 +113,7 @@ namespace wsep182.services
         {
             if (session == null)
                 return -1;
-            return RaffleSalesArchive.getInstance().getRemainingSumToPayInRaffleSale(saleId);
+            return RaffleSalesManager.getInstance().getRemainingSumToPayInRaffleSale(saleId);
         }
 
         public LinkedList<UserCart> applyCoupon(User session, string couponId,string country)

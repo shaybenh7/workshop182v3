@@ -72,7 +72,7 @@ namespace wsep182.Domain
 
         public static LinkedList<ProductInStore> getAllProductsInAllStores()
         {
-            return ProductArchive.getInstance().getAllProductsInStores();
+            return ProductManager.getInstance().getAllProductsInStores();
         }
 
 

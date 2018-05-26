@@ -7,26 +7,26 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class UserArchive
+    public class UserManager
     {
-        private static UserArchive instance;
+        private static UserManager instance;
         private UserDB UDB;
         private LinkedList<User> users;
-        private UserArchive()
+        private UserManager()
         {
             UDB = new UserDB(configuration.DB_MODE);
             users = UDB.Get();
         }
-        public static UserArchive getInstance()
+        public static UserManager getInstance()
         {
             if (instance == null)
-                instance = new UserArchive();
+                instance = new UserManager();
             return instance;
         }
 
         public static void restartInstance()
         {
-            instance = new UserArchive();
+            instance = new UserManager();
         }
 
         /*

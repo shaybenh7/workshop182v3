@@ -727,7 +727,7 @@ namespace WebService.Controllers
         public HttpResponseMessage viewUserHistory(String userToGet)
         {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            User u = UserArchive.getInstance().getUser(userToGet);
+            User u = UserManager.getInstance().getUser(userToGet);
             HttpResponseMessage response;
             if (u == null)
             {
@@ -1121,7 +1121,7 @@ namespace WebService.Controllers
             User session = hashServices.getUserByHash(hash);
             HttpResponseMessage response;
             string ans = "Warning: Some of the restriction may change depending on the destination country! \n";
-            int productInStoreId = SalesArchive.getInstance().getSale(saleId).ProductInStoreId;
+            int productInStoreId = SalesManager.getInstance().getSale(saleId).ProductInStoreId;
             ans += storeServices.getInstance().showPolicy(session, productInStoreId);
             response = Request.CreateResponse(HttpStatusCode.OK, ans);
             return response;

@@ -6,14 +6,14 @@ using System.Collections.Generic;
 namespace UnitTests
 {
     [TestClass]
-    public class RaffleSalesArchiveTests
+    public class RaffleSalesManagerTests
     {
-        RaffleSalesArchive rsa;
+        RaffleSalesManager rsa;
         [TestInitialize]
         public void init()
         {
-            RaffleSalesArchive.restartInstance();
-            rsa = RaffleSalesArchive.getInstance();
+            RaffleSalesManager.restartInstance();
+            rsa = RaffleSalesManager.getInstance();
         }
 
 

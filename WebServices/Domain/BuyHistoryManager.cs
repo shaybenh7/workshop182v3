@@ -8,31 +8,31 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class BuyHistoryArchive
+    public class BuyHistoryManager
     {
 
-        private static BuyHistoryArchive instance;
+        private static BuyHistoryManager instance;
         private static int buyId;
         private BuyHistoryDB BHDB;
         private LinkedList<Purchase> buysHistory;
 
-        private BuyHistoryArchive()
+        private BuyHistoryManager()
         {
             BHDB = new BuyHistoryDB(configuration.DB_MODE);
             buysHistory = BHDB.Get();
             buyId = 0;
         }
 
-        public static BuyHistoryArchive getInstance()
+        public static BuyHistoryManager getInstance()
         {
             if (instance == null)
-                instance = new BuyHistoryArchive();
+                instance = new BuyHistoryManager();
             return instance;
         }
 
         public static void restartInstance()
         {
-            instance = new BuyHistoryArchive();
+            instance = new BuyHistoryManager();
         }
 
         public int getNextBuyId()

@@ -9,14 +9,14 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class RaffleSalesArchive
+    public class RaffleSalesManager
     {
         private LinkedList<RaffleSale> raffleSales;
         private RaffleSaleDB RSDB;
-        private static RaffleSalesArchive instance;
+        private static RaffleSalesManager instance;
         System.Timers.Timer RaffelCollector;
 
-        private RaffleSalesArchive()
+        private RaffleSalesManager()
         {
             RSDB = new RaffleSaleDB(configuration.DB_MODE);
             raffleSales = RSDB.Get();
@@ -45,15 +45,15 @@ namespace wsep182.Domain
         }
 
 
-        public static RaffleSalesArchive getInstance()
+        public static RaffleSalesManager getInstance()
         {
             if (instance == null)
-                instance = new RaffleSalesArchive();
+                instance = new RaffleSalesManager();
             return instance;
         }
         public static void restartInstance()
         {
-            instance = new RaffleSalesArchive();
+            instance = new RaffleSalesManager();
         }
 
         public Boolean addRaffleSale(int saleId, String userName, double offer, String dueDate)
@@ -91,10 +91,10 @@ namespace wsep182.Domain
 
         public double getRemainingSumToPayInRaffleSale(int saleId)
         {
-            Sale s = SalesArchive.getInstance().getSale(saleId);
+            Sale s = SalesManager.getInstance().getSale(saleId);
             if (s == null)
                 return -2;
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(s.ProductInStoreId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(s.ProductInStoreId);
             if (p == null)
                 return -3;
             double price = p.getPrice();
@@ -109,8 +109,8 @@ namespace wsep182.Domain
 
         public void sendMessageTORaffleWinner(int saleId)
         {
-            Sale s = SalesArchive.getInstance().getSale(saleId);
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(s.ProductInStoreId);
+            Sale s = SalesManager.getInstance().getSale(saleId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(s.ProductInStoreId);
             LinkedList<RaffleSale> relevant = new LinkedList<RaffleSale>();
             double realPrice = p.price;
             double acc = 0;
@@ -160,8 +160,8 @@ namespace wsep182.Domain
         private string getProductNameFromSaleId(int saleId)
         {
             string ans = "";
-            Sale s = SalesArchive.getInstance().getSale(saleId);
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(s.ProductInStoreId);
+            Sale s = SalesManager.getInstance().getSale(saleId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(s.ProductInStoreId);
             ans = p.product.name;
             return ans;
         }

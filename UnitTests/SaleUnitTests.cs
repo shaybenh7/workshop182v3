@@ -9,18 +9,18 @@ namespace UnitTests
     public class SaleUnitTests
     {
         Sale sale;
-        ProductArchive productArchive;
-        DiscountsArchive discountsArchive;
+        ProductManager productArchive;
+        DiscountsManager discountsArchive;
         Product milk;
         Store store;
         ProductInStore milkInStore;
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            productArchive = ProductArchive.getInstance();
-            discountsArchive = DiscountsArchive.getInstance();
+            ProductManager.restartInstance();
+            DiscountsManager.restartInstance();
+            productArchive = ProductManager.getInstance();
+            discountsArchive = DiscountsManager.getInstance();
             milk =  productArchive.addProduct("milk");
             store = new Store(1, "halavi", new User("itamar", "123456"));
             milkInStore = productArchive.addProductInStore(milk, store, 50, 200);

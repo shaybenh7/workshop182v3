@@ -19,15 +19,15 @@ namespace Acceptance_Tests.SellTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             
             us = userServices.getInstance();
@@ -58,9 +58,9 @@ namespace Acceptance_Tests.SellTests
             ss.addStoreManager(storeId, "niv", itamar);
 
             int colaId = ss.addProductInStore("cola", 3.2, 10, itamar, storeId,"Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(colaId);
+            cola = ProductManager.getInstance().getProductInStore(colaId);
             int spriteId = ss.addProductInStore("sprite", 5.2, 100, itamar, storeId, "Drinks");
-            sprite = ProductArchive.getInstance().getProductInStore(spriteId);
+            sprite = ProductManager.getInstance().getProductInStore(spriteId);
             ss.addSaleToStore(itamar, storeId, cola.getProductInStoreId(), 3, 1, DateTime.Now.AddMonths(10).ToString());
         }
 

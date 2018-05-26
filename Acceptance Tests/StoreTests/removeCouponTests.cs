@@ -12,7 +12,7 @@ namespace Acceptance_Tests.StoreTests
 
         private userServices us;
         private storeServices ss;
-        private CouponsArchive ca;
+        private CouponsManager ca;
         private User zahi;
         private Store store;//itamar owner , niv manneger
         private ProductInStore cola;
@@ -21,20 +21,20 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
             us = userServices.getInstance();
             ss = storeServices.getInstance();
-            ca = CouponsArchive.getInstance();
+            ca = CouponsManager.getInstance();
 
             zahi = us.startSession();
             us.register(zahi, "zahi", "123456");
@@ -44,7 +44,7 @@ namespace Acceptance_Tests.StoreTests
             Store store = storeArchive.getInstance().getStore(storeid);
 
             int colaId = ss.addProductInStore("cola", 10, 100, zahi, storeid, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(colaId);
+            cola = ProductManager.getInstance().getProductInStore(colaId);
 
             ss.addSaleToStore(zahi, store.getStoreId(), cola.getProductInStoreId(), 1, 2, "20/8/2018");
 

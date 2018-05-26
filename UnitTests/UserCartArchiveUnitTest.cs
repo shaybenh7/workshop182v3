@@ -8,13 +8,13 @@ namespace UnitTests
     [TestClass]
     public class UserCartArchiveUnitTest
     {
-        private UserCartsArchive userCartsArchive;
+        private UserCartsManager userCartsArchive;
 
         [TestInitialize]
         public void init()
         {
-            UserCartsArchive.restartInstance();
-            userCartsArchive = UserCartsArchive.getInstance();
+            UserCartsManager.restartInstance();
+            userCartsArchive = UserCartsManager.getInstance();
             userCartsArchive.updateUserCarts("itamar", 1, 1);
             userCartsArchive.updateUserCarts("itamar", 2, 1);
             userCartsArchive.updateUserCarts("niv", 3, 3, 50);

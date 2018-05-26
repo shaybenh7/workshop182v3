@@ -19,15 +19,15 @@ namespace Acceptance_Tests.SaleTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
 
             us = userServices.getInstance();
             ss = storeServices.getInstance();
@@ -55,8 +55,8 @@ namespace Acceptance_Tests.SaleTests
 
             int c = ss.addProductInStore("cola", 3.2, 10, itamar, storeid, "Drinks");
             int s = ss.addProductInStore("sprite", 5.3, 20, itamar, storeid, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(c);
-            sprite = ProductArchive.getInstance().getProductInStore(s);
+            cola = ProductManager.getInstance().getProductInStore(c);
+            sprite = ProductManager.getInstance().getProductInStore(s);
         }
 
         [TestMethod]
@@ -102,7 +102,7 @@ namespace Acceptance_Tests.SaleTests
             int storeid = ss.createStore("admin store", admin);
             Store store2 = storeArchive.getInstance().getStore(storeid);
             int m = ss.addProductInStore("milk", 3.2, 10, admin, storeid, "Drinks");
-            ProductInStore milk = ProductArchive.getInstance().getProductInStore(m);
+            ProductInStore milk = ProductManager.getInstance().getProductInStore(m);
             Assert.AreEqual(ss.addSaleToStore(itamar, store.getStoreId(), milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()), -13) ;//-13 product not in this store
         }
         [TestMethod]
@@ -111,7 +111,7 @@ namespace Acceptance_Tests.SaleTests
             int storeid = ss.createStore("admin store", admin);
             Store store2 = storeArchive.getInstance().getStore(storeid);
             int m = ss.addProductInStore("milk", 3.2, 10, admin, storeid, "Drinks");
-            ProductInStore milk = ProductArchive.getInstance().getProductInStore(m);
+            ProductInStore milk = ProductManager.getInstance().getProductInStore(m);
             Assert.AreEqual(ss.addSaleToStore(admin, store.getStoreId(), milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()) ,-4);//-4 if don't have premition
         }
         [TestMethod]
@@ -120,7 +120,7 @@ namespace Acceptance_Tests.SaleTests
             int storeid = ss.createStore("admin store", admin);
             Store store2 = storeArchive.getInstance().getStore(storeid);
             int m = ss.addProductInStore("milk", 3.2, 10, admin, storeid, "Drinks");
-            ProductInStore milk = ProductArchive.getInstance().getProductInStore(m);
+            ProductInStore milk = ProductManager.getInstance().getProductInStore(m);
             Assert.AreEqual(-1,ss.addSaleToStore(null, store2.getStoreId(), milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()));//could be -1 also
             Assert.AreEqual(-1,ss.addSaleToStore(admin, -4, milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()));//-6 if illegal store id
             Assert.AreEqual(-10,ss.addSaleToStore(admin, store2.getStoreId(), milk.getProductInStoreId(), 1, 1, null) );//-10 due date not good

@@ -30,7 +30,7 @@ namespace WebServices.DAL
                 int isActive = reader.GetInt32("isActive");
                 string name = reader.GetString("name");
                 string storeCreator = reader.GetString("storeCreator");
-                User creator = UserArchive.getInstance().getUser(storeCreator);
+                User creator = UserManager.getInstance().getUser(storeCreator);
                 Store s=new Store(storeId,name, creator, isActive);
                 stores.AddLast(s);
             }

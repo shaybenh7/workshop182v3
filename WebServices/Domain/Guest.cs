@@ -28,7 +28,7 @@ namespace wsep182.Domain
         */
         public override int login(String username, String password)
         {
-            User u = UserArchive.getInstance().getUser(username);
+            User u = UserManager.getInstance().getUser(username);
             if (u != null)
             {
                 //password = encrypt(username + password);

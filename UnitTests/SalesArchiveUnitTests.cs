@@ -6,15 +6,15 @@ using System.Collections.Generic;
 namespace UnitTests
 {
     [TestClass]
-    public class SalesArchiveUnitTests
+    public class SalesManagerUnitTests
     {
-        SalesArchive sa;
+        SalesManager sa;
 
         [TestInitialize]
         public void init()
         {
-            SalesArchive.restartInstance();
-            sa = SalesArchive.getInstance();
+            SalesManager.restartInstance();
+            sa = SalesManager.getInstance();
         }
 
         [TestMethod]

@@ -27,15 +27,15 @@ namespace wsep182.Domain
                 StoreRole sr=null;
                 if (t.Item3 == "Manager")
                 {
-                    sr=new StoreManager(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
+                    sr=new StoreManager(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1));
                 }
                 else if (t.Item3 == "Owner")
                 {
-                    sr = new StoreOwner(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
+                    sr = new StoreOwner(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1));
                 }
                 else if (t.Item3 == "Customer")
                 {
-                    sr = new Customer(UserArchive.getInstance().getUser(t.Item2), getStore(t.Item1));
+                    sr = new Customer(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1));
                 }
                 try
                 {

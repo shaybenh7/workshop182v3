@@ -19,15 +19,15 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             us = userServices.getInstance();
             ss = storeServices.getInstance();
@@ -55,7 +55,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, store.getStoreId(), "Drink");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             Assert.IsNotNull(pis);
             int saleId = ss.addSaleToStore(zahi, store.getStoreId(), pis.getProductInStoreId(), 1, 8, DateTime.Now.AddDays(10).ToString());
             LinkedList<Sale> sales = ses.viewSalesByProductInStoreId(pis.getProductInStoreId());
@@ -95,7 +95,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, store.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             Assert.IsNotNull(pis);
             int saleId = ss.addSaleToStore(zahi, store.getStoreId(), pis.getProductInStoreId(), 1, 8, DateTime.Now.AddDays(10).ToString());
             LinkedList<Sale> sales = ses.viewSalesByProductInStoreId(pis.getProductInStoreId());
@@ -122,7 +122,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsNotNull(store2);
 
             int pis2Id = ss.addProductInStore("cola2", 3.2, 10, zahi, store2.getStoreId(), "Drinks");
-            ProductInStore pis2 = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis2 = ProductManager.getInstance().getProductInStore(pisId);
             Assert.IsNotNull(pis2);
             int saleId2 = ss.addSaleToStore(zahi, store2.getStoreId(), pis2.getProductInStoreId(), 1, 8, DateTime.Now.AddDays(10).ToString());
             LinkedList<Sale> sales2 = ses.viewSalesByProductInStoreId(pis2.getProductInStoreId());
@@ -150,7 +150,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
 
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, store.getStoreId(), "Driks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             Assert.IsNotNull(pis);
             int saleId = ss.addSaleToStore(zahi, store.getStoreId(), pis.getProductInStoreId(), 1, 8, DateTime.Now.AddDays(10).ToString());
             LinkedList<Sale> sales = ses.viewSalesByProductInStoreId(pis.getProductInStoreId());
@@ -171,7 +171,7 @@ namespace Acceptance_Tests.StoreTests
             Store store2 = storeArchive.getInstance().getStore(store2Id);
             Assert.IsNotNull(store2);
             int pis2Id = ss.addProductInStore("cola2", 3.2, 10, zahi, store2.getStoreId(), "Driks");
-            ProductInStore pis2 = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis2 = ProductManager.getInstance().getProductInStore(pisId);
             Assert.IsNotNull(pis2);
             int saleId2 = ss.addSaleToStore(zahi, store2.getStoreId(), pis2.getProductInStoreId(), 1, 8, DateTime.Now.AddDays(10).ToString());
             LinkedList<Sale> sales2 = ses.viewSalesByProductInStoreId(pis2.getProductInStoreId());
@@ -195,7 +195,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, store.getStoreId(), "Drink");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             Assert.IsNotNull(pis);
             int saleId = ss.addSaleToStore(zahi, store.getStoreId(), pis.getProductInStoreId(), 1, 8, DateTime.Now.AddDays(10).ToString());
             LinkedList<Sale> sales = ses.viewSalesByProductInStoreId(pis.getProductInStoreId());

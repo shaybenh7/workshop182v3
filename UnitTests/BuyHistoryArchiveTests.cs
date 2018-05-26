@@ -6,15 +6,15 @@ using wsep182.Domain;
 namespace UnitTests
 {
     [TestClass]
-    public class BuyHistoryArchiveTests
+    public class BuyHistoryManagerTests
     {
-         private BuyHistoryArchive bha;
+         private BuyHistoryManager bha;
 
         [TestInitialize]
         public void init()
         {
-            BuyHistoryArchive.restartInstance();
-            bha = BuyHistoryArchive.getInstance();
+            BuyHistoryManager.restartInstance();
+            bha = BuyHistoryManager.getInstance();
         }
 
         [TestMethod]

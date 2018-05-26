@@ -32,7 +32,7 @@ namespace wsep182.Domain
         }
         public UserState getState()
         {
-            User user = UserArchive.getInstance().getUser(userName);
+            User user = UserManager.getInstance().getUser(userName);
             if (user == null)
                 return new Guest();
             return user.state;
@@ -74,7 +74,7 @@ namespace wsep182.Domain
                     state = new LogedIn();
                 this.userName = username;
                 this.password = password;
-                UserArchive.getInstance().updateUser(this);
+                UserManager.getInstance().updateUser(this);
                 return 0;
             }
             return user;
@@ -105,7 +105,7 @@ namespace wsep182.Domain
             
             User u = new User(username, password);
             u.setState(state.register(username, password));
-            return UserArchive.getInstance().addUser(u);
+            return UserManager.getInstance().addUser(u);
         }
 
         internal LinkedList<StoreRole> getAllStoreRolesOfAUser(string username)
@@ -165,7 +165,7 @@ namespace wsep182.Domain
 
         public static LinkedList<Sale> viewSalesByProductInStoreId(int product)
         {
-            LinkedList<Sale> ans = SalesArchive.getInstance().getSalesByProductInStoreId(product);
+            LinkedList<Sale> ans = SalesManager.getInstance().getSalesByProductInStoreId(product);
             if (ans.Count == 0)
                 return null;
             return ans;
@@ -173,7 +173,7 @@ namespace wsep182.Domain
 
         public static Sale viewSalesBySaleId(int saleId)
         {
-            return SalesArchive.getInstance().getSale(saleId);
+            return SalesManager.getInstance().getSale(saleId);
         }
 
         public LinkedList<Purchase> viewStoreHistory(Store store)
@@ -185,7 +185,7 @@ namespace wsep182.Domain
         {
             if (userNameToGetHistory == null)
                 return null;
-            User userToGetHistory = UserArchive.getInstance().getUser(userNameToGetHistory);
+            User userToGetHistory = UserManager.getInstance().getUser(userNameToGetHistory);
             return state.viewUserHistory(userToGetHistory);
         }
 
@@ -211,7 +211,7 @@ namespace wsep182.Domain
         public Premissions getPremissions(string manager, int storeId)
         {
             Store s = storeArchive.getInstance().getStore(storeId);
-            User managerUser = UserArchive.getInstance().getUser(manager);
+            User managerUser = UserManager.getInstance().getUser(manager);
             return state.getPremissions(managerUser, s);
         }
 

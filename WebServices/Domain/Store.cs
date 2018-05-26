@@ -48,7 +48,7 @@ namespace wsep182.Domain
         }
         public LinkedList<ProductInStore> getProductsInStore()
         {
-            return ProductArchive.getInstance().getAllProductsInStore(storeId);
+            return ProductManager.getInstance().getAllProductsInStore(storeId);
         }
 
         public static Store createStore(String name,User session)
@@ -75,7 +75,7 @@ namespace wsep182.Domain
         {
             LinkedList<ProductInStore> products = getProductsInStore();
             LinkedList<Sale> ans = new LinkedList<Sale>();
-            foreach (Sale sale in SalesArchive.getInstance().getAllSales())
+            foreach (Sale sale in SalesManager.getInstance().getAllSales())
             {
                 foreach(ProductInStore product in products)
                 {

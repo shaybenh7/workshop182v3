@@ -67,8 +67,8 @@ namespace wsep182.Domain
         }
         public Boolean activateCoupon(String couponId)
         {
-            Sale sale = SalesArchive.getInstance().getSale(saleId);
-            Coupon coupon = CouponsArchive.getInstance().getCoupon(couponId, sale.ProductInStoreId);
+            Sale sale = SalesManager.getInstance().getSale(saleId);
+            Coupon coupon = CouponsManager.getInstance().getCoupon(couponId, sale.ProductInStoreId);
             if (coupon != null)
             {
                 couponActivated = true;
@@ -79,11 +79,11 @@ namespace wsep182.Domain
 
         public double updateAndReturnFinalPrice(String couponId)
         {
-            Sale sale = SalesArchive.getInstance().getSale(saleId);
-            Coupon coupon = CouponsArchive.getInstance().getCoupon(couponId, sale.ProductInStoreId);
-            Discount discount = DiscountsArchive.getInstance().getDiscount(sale.ProductInStoreId);
+            Sale sale = SalesManager.getInstance().getSale(saleId);
+            Coupon coupon = CouponsManager.getInstance().getCoupon(couponId, sale.ProductInStoreId);
+            Discount discount = DiscountsManager.getInstance().getDiscount(sale.ProductInStoreId);
             double finalPrice = -1;
-            ProductInStore product = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
+            ProductInStore product = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
             if (product != null)
             {
                 finalPrice = product.getPrice() * amount;

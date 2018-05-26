@@ -8,14 +8,14 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class SalesArchive
+    public class SalesManager
     {
         private LinkedList<Sale> sales;
         private SaleDB SDB;
-        private static SalesArchive instance;
+        private static SalesManager instance;
         private static int saleId;
 
-        private SalesArchive()
+        private SalesManager()
         {
             SDB = new SaleDB(configuration.DB_MODE);
             sales = SDB.Get();
@@ -23,17 +23,17 @@ namespace wsep182.Domain
         }
         public static void restartInstance()
         {
-            instance = new SalesArchive();
+            instance = new SalesManager();
         }
         public int getNextSaleId()
         {
             return ++saleId;
         }
 
-        public static SalesArchive getInstance()
+        public static SalesManager getInstance()
         {
             if (instance == null)
-                instance = new SalesArchive();
+                instance = new SalesManager();
             return instance;
         }
 

@@ -7,13 +7,13 @@ namespace UnitTests
     [TestClass]
     public class DicountArchiveUnitTests
     {
-        DiscountsArchive discountsArchive;
+        DiscountsManager discountsArchive;
 
         [TestInitialize]
         public void init()
         {
-            DiscountsArchive.restartInstance();
-            discountsArchive = DiscountsArchive.getInstance();
+            DiscountsManager.restartInstance();
+            discountsArchive = DiscountsManager.getInstance();
             discountsArchive.addNewDiscount(1,1,"", 10, DateTime.Now.AddDays(10).ToString(),"");
             discountsArchive.addNewDiscount(2,1,"", 20, DateTime.Now.AddDays(15).ToString(),"");
         }

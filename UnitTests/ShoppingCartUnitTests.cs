@@ -13,35 +13,35 @@ namespace UnitTests
         User zahi,aviad;
         Store store;
         Sale sale1,sale2,sale3;
-        ProductArchive pA;
-        SalesArchive saleA;
+        ProductManager pA;
+        SalesManager saleA;
         storeArchive storeA;
-        UserArchive userA;
+        UserManager userA;
         
-        UserCartsArchive userCartA;
-        DiscountsArchive discountA;
-        CouponsArchive couponA;
-        RaffleSalesArchive raffleA;
+        UserCartsManager userCartA;
+        DiscountsManager discountA;
+        CouponsManager couponA;
+        RaffleSalesManager raffleA;
 
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
-            pA = ProductArchive.getInstance();
-            saleA = SalesArchive.getInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            CouponsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
+            pA = ProductManager.getInstance();
+            saleA = SalesManager.getInstance();
             storeA = storeArchive.getInstance();
-            userA = UserArchive.getInstance();
-            userCartA = UserCartsArchive.getInstance();
-            discountA = DiscountsArchive.getInstance();
-            couponA = CouponsArchive.getInstance();
-            raffleA = RaffleSalesArchive.getInstance();
+            userA = UserManager.getInstance();
+            userCartA = UserCartsManager.getInstance();
+            discountA = DiscountsManager.getInstance();
+            couponA = CouponsManager.getInstance();
+            raffleA = RaffleSalesManager.getInstance();
 
             p1 = pA.addProduct("Milk");
             p2 = pA.addProduct("Bread");
@@ -54,9 +54,9 @@ namespace UnitTests
 
             store = storeA.addStore("zahi inc", zahi);
 
-            pis1 = ProductArchive.getInstance().addProductInStore(p1, store,20, 10);
-            pis2 = ProductArchive.getInstance().addProductInStore(p2, store, 30, 15);
-            pis3 = ProductArchive.getInstance().addProductInStore(p3, store, 40, 50);
+            pis1 = ProductManager.getInstance().addProductInStore(p1, store,20, 10);
+            pis2 = ProductManager.getInstance().addProductInStore(p2, store, 30, 15);
+            pis3 = ProductManager.getInstance().addProductInStore(p3, store, 40, 50);
 
             sale1 = saleA.addSale(pis1.getProductInStoreId(), 1, 10, "1/5/2020");
             sale2 = saleA.addSale(pis2.getProductInStoreId(), 1, 10, "1/5/2020");

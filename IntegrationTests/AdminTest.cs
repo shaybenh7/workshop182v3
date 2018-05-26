@@ -14,15 +14,15 @@ namespace IntegrationTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             admin = new User("admin", "123456");
             admin.register("admin", "123456");
@@ -98,7 +98,7 @@ namespace IntegrationTests
             niv.login("niv", "123456");
             StoreOwner itamarOwner = new StoreOwner(itamar, store);
             int colaId = itamarOwner.addProductInStore(itamar, store, "cola", 3.2, 10, "Drinks");
-            ProductInStore cola = ProductArchive.getInstance().getProductInStore(colaId);
+            ProductInStore cola = ProductManager.getInstance().getProductInStore(colaId);
             int saleId = itamarOwner.addSaleToStore(itamar, store, cola.getProductInStoreId(), 1, 5, DateTime.Now.AddMonths(1).ToString());
             LinkedList<Sale> sales = User.viewSalesByProductInStoreId(cola.getProductInStoreId());
             Assert.IsTrue(sales.Count == 1);

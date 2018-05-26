@@ -86,13 +86,13 @@ namespace wsep182.services
                 return -6;
             if (sR == null)
                 return -4;//-4 if don't have premition
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(pisId);
             return sR.editProductInStore(session, p, quantity, price);
         }
 
         public LinkedList<ProductInStore> getProductsInStore(int storeId)
         {
-            return ProductArchive.getInstance().getProductsInStore(storeId);
+            return ProductManager.getInstance().getProductsInStore(storeId);
         }
 
         //req 3.1 c
@@ -115,7 +115,7 @@ namespace wsep182.services
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;//-4 if don't have premition
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(pisId);
             return sR.removeProductFromStore(session, s, p);
         }
 
@@ -126,7 +126,7 @@ namespace wsep182.services
             {
                 return false;
             }
-            User isExist = UserArchive.getInstance().getUser(newOwner);
+            User isExist = UserManager.getInstance().getUser(newOwner);
             Store s = storeArchive.getInstance().getStore(storeId);
             if (isExist == null)
                 return false;
@@ -621,12 +621,12 @@ namespace wsep182.services
 
         public Sale getSaleById(int saleId)
         {
-            return SalesArchive.getInstance().getSale(saleId);
+            return SalesManager.getInstance().getSale(saleId);
         }
 
         public ProductInStore getProductInStoreById(int id)
         {
-            return ProductArchive.getInstance().getProductInStore(id);
+            return ProductManager.getInstance().getProductInStore(id);
         }
 
         public LinkedList<Store> getAllStores()
@@ -648,7 +648,7 @@ namespace wsep182.services
         {
             if (type == 3)
             {
-                return DiscountsArchive.getInstance().addNewDiscounts(type, productInStores, categorysOrProductsName, percentage, dueDate, restrictions);
+                return DiscountsManager.getInstance().addNewDiscounts(type, productInStores, categorysOrProductsName, percentage, dueDate, restrictions);
             }
             Store s = storeArchive.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
@@ -671,7 +671,7 @@ namespace wsep182.services
 
         public string showPolicy(User session, int productInStoreId)
         {
-           return PurchasePolicyArchive.getInstance().showPolicy(productInStoreId);
+           return PurchasePolicyManager.getInstance().showPolicy(productInStoreId);
         }
 
 

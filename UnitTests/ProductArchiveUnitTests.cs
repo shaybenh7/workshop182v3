@@ -6,17 +6,17 @@ using System.Collections.Generic;
 namespace UnitTests
 {
     [TestClass]
-    public class ProductArchiveUnitTests
+    public class ProductManagerUnitTests
     {
-        ProductArchive productArchive;
+        ProductManager productArchive;
         Product p1;
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
 
-            productArchive = ProductArchive.getInstance();
+            productArchive = ProductManager.getInstance();
             p1 = productArchive.addProduct("bread");
         }
 
@@ -219,7 +219,7 @@ namespace UnitTests
             Store store = new Store(1, "halavi", null);
             Product milk = productArchive.addProduct("milk");
             ProductInStore milkInStore = productArchive.addProductInStore(milk, store, 50, 50);
-            int quantity = ProductArchive.getInstance().getProductInStoreQuantity(milkInStore.getProductInStoreId());
+            int quantity = ProductManager.getInstance().getProductInStoreQuantity(milkInStore.getProductInStoreId());
             Assert.AreEqual(quantity,milkInStore.getAmount());
         }
 
@@ -239,7 +239,7 @@ namespace UnitTests
             ProductInStore waterInStore = productArchive.addProductInStore(water, store3, 50, 50);
             ProductInStore pcInStore = productArchive.addProductInStore(pc, store3, 50, 50);
 
-            LinkedList<ProductInStore> ans = ProductArchive.getInstance().getAllProductsInStores();
+            LinkedList<ProductInStore> ans = ProductManager.getInstance().getAllProductsInStores();
             Assert.AreEqual(ans.Count, 4);
         }
 

@@ -20,15 +20,15 @@ namespace Acceptance_Tests.SellTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
             us = userServices.getInstance();
@@ -62,14 +62,14 @@ namespace Acceptance_Tests.SellTests
 
 
             int colaId = ss.addProductInStore("cola", 3.2, 10, itamar, storeId, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(colaId);
+            cola = ProductManager.getInstance().getProductInStore(colaId);
             int spriteId = ss.addProductInStore("sprite", 5.2, 100, itamar, storeId, "Drinks");
-            sprite = ProductArchive.getInstance().getProductInStore(spriteId);
+            sprite = ProductManager.getInstance().getProductInStore(spriteId);
 
             int chickenId = ss.addProductInStore("chicken", 50, 20, zahi, storeId2, "Food");
-            chicken = ProductArchive.getInstance().getProductInStore(chickenId);
+            chicken = ProductManager.getInstance().getProductInStore(chickenId);
             int cowId = ss.addProductInStore("cow", 80, 40, zahi, storeId2, "Food");
-            cow = ProductArchive.getInstance().getProductInStore(cowId);
+            cow = ProductManager.getInstance().getProductInStore(cowId);
             saleId1 = ss.addSaleToStore(itamar, store.getStoreId(), cola.getProductInStoreId(), 1, 5, "20/5/2018");
             saleId2 = ss.addSaleToStore(itamar, store.getStoreId(), sprite.getProductInStoreId(), 1, 20, "20/7/2019");
         }

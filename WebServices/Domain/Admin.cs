@@ -21,62 +21,62 @@ namespace wsep182.Domain
 
         public override int removeUser(User session, string userDeleted)
         {
-            User userToDelete = UserArchive.getInstance().getUser(userDeleted);
+            User userToDelete = UserManager.getInstance().getUser(userDeleted);
             if (userToDelete == null )
                 return -2;
             if (!userToDelete.getIsActive())
                 return -3;
             if (userToDelete.getUserName() == session.getUserName())
                 return -4;
-            if (RaffleSalesArchive.getInstance().getAllRaffleSalesByUserName(userDeleted).Count > 0)
+            if (RaffleSalesManager.getInstance().getAllRaffleSalesByUserName(userDeleted).Count > 0)
                 return -5;
             LinkedList<StoreRole> roles = storeArchive.getInstance().getAllStoreRolesOfAUser(userDeleted);
             if (checkLoneOwnerOrCreator(roles))
                 return -6;
             removeAllRolesOfAUser(roles);
-            return UserArchive.getInstance().removeUser(userDeleted);
+            return UserManager.getInstance().removeUser(userDeleted);
         }
 
         public override int setAmountPolicyOnProduct(string productName, int minAmount, int maxAmount)
         {
             if (productName == null || minAmount<0 || maxAmount<0)
                 return -1;
-            return PurchasePolicyArchive.getInstance().setAmountPolicyOnProduct(productName, minAmount, maxAmount);
+            return PurchasePolicyManager.getInstance().setAmountPolicyOnProduct(productName, minAmount, maxAmount);
         }
 
         public override int setNoDiscountPolicyOnProduct(string productName)
         {
             if (productName == null)
                 return -1;
-            return PurchasePolicyArchive.getInstance().setNoDiscountPolicyOnProduct(productName);
+            return PurchasePolicyManager.getInstance().setNoDiscountPolicyOnProduct(productName);
         }
 
         public override int setNoCouponsPolicyOnProduct(string productName)
         {
             if (productName == null)
                 return -1;
-            return PurchasePolicyArchive.getInstance().setNoCouponsPolicyOnProduct(productName);
+            return PurchasePolicyManager.getInstance().setNoCouponsPolicyOnProduct(productName);
         }
 
         public override int removeAmountPolicyOnProduct(string productName)
         {
             if (productName == null)
                 return -1;
-            return PurchasePolicyArchive.getInstance().removeAmountPolicyOnProduct(productName);
+            return PurchasePolicyManager.getInstance().removeAmountPolicyOnProduct(productName);
         }
 
         public override int removeNoDiscountPolicyOnProduct(string productName)
         {
             if (productName == null)
                 return -1;
-            return PurchasePolicyArchive.getInstance().removeNoDiscountPolicyOnProduct(productName);
+            return PurchasePolicyManager.getInstance().removeNoDiscountPolicyOnProduct(productName);
         }
 
         public override int removeNoCouponsPolicyOnProduct(string productName)
         {
             if (productName == null)
                 return -1;
-            return PurchasePolicyArchive.getInstance().removeNoCouponsPolicyOnProduct(productName);
+            return PurchasePolicyManager.getInstance().removeNoCouponsPolicyOnProduct(productName);
         }
 
         private Boolean checkLoneOwnerOrCreator(LinkedList<StoreRole> roles)
@@ -121,12 +121,12 @@ namespace wsep182.Domain
 
         public override LinkedList<Purchase> viewStoreHistory(Store store, User session)
         {
-            return BuyHistoryArchive.getInstance().viewHistoryByStoreId(store.getStoreId());
+            return BuyHistoryManager.getInstance().viewHistoryByStoreId(store.getStoreId());
         }
 
         public override LinkedList<Purchase> viewUserHistory(User userToGetHistory)
         {
-            return BuyHistoryArchive.getInstance().viewHistoryByUserName(userToGetHistory.getUserName());
+            return BuyHistoryManager.getInstance().viewHistoryByUserName(userToGetHistory.getUserName());
         }
 
         public override Premissions getPremissions(User manager, Store s)

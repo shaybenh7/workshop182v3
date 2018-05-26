@@ -9,13 +9,13 @@ namespace UnitTests
     [TestClass]
     public class UnitTest1
     {
-        UserArchive ua;
+        UserManager ua;
 
         [TestInitialize]
         public void init()
         {
-            UserArchive.restartInstance();
-            ua = UserArchive.getInstance();
+            UserManager.restartInstance();
+            ua = UserManager.getInstance();
         }
 
         [TestMethod]

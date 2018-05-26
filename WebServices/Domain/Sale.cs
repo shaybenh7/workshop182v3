@@ -32,13 +32,13 @@ namespace wsep182.Domain
 
         public double getPriceBeforeDiscount(int amount)
         {
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(productInStoreId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(productInStoreId);
             return p.getPrice() * amount;
         }
         public double getPriceAfterDiscount(int amount)
         {
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(productInStoreId);
-            LinkedList<Discount> dis = DiscountsArchive.getInstance().getAllDiscountsById(productInStoreId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(productInStoreId);
+            LinkedList<Discount> dis = DiscountsManager.getInstance().getAllDiscountsById(productInStoreId);
             if (dis.Count != 0)
             {
                 double initialPrice = p.getPrice();
@@ -55,7 +55,7 @@ namespace wsep182.Domain
         }
         public static LinkedList<Sale> getAllSales()
         {
-            return SalesArchive.getInstance().getAllSales();
+            return SalesManager.getInstance().getAllSales();
         }
 
     }

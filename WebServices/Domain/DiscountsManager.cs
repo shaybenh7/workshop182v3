@@ -9,13 +9,13 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class DiscountsArchive
+    public class DiscountsManager
     {
         private LinkedList<Discount> discounts;
-        private static DiscountsArchive instance;
+        private static DiscountsManager instance;
         System.Timers.Timer DiscountCollector;
         private DiscountDB DDB;
-        private DiscountsArchive()
+        private DiscountsManager()
         {
             DDB = new DiscountDB(configuration.DB_MODE);
             discounts = DDB.Get();
@@ -24,15 +24,15 @@ namespace wsep182.Domain
             DiscountCollector.Interval = 60 * 60 * 1000; // interval of one hour
             DiscountCollector.Enabled = true;
         }
-        public static DiscountsArchive getInstance()
+        public static DiscountsManager getInstance()
         {
             if (instance == null)
-                instance = new DiscountsArchive();
+                instance = new DiscountsManager();
             return instance;
         }
         public static void restartInstance()
         {
-            instance = new DiscountsArchive();
+            instance = new DiscountsManager();
         }
 
         private void CheckFinishedDiscounts(object source, ElapsedEventArgs e)
@@ -211,7 +211,7 @@ namespace wsep182.Domain
             {
                 if (DateTime.Compare(DateTime.Parse(d.DueDate), DateTime.Now) < 0)
                     continue;
-                ProductInStore p = ProductArchive.getInstance().getProductInStore(productInStoreId);
+                ProductInStore p = ProductManager.getInstance().getProductInStore(productInStoreId);
                 string category = p.category;
                 string productName = p.product.name;
 

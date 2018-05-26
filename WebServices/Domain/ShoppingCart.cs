@@ -19,7 +19,7 @@ namespace wsep182.Domain
         public LinkedList<UserCart> getShoppingCartProducts(User session)
         {
             if (!(session.getState() is Guest))
-                 products = UserCartsArchive.getInstance().getUserShoppingCart(session.getUserName());
+                 products = UserCartsManager.getInstance().getUserShoppingCart(session.getUserName());
             updateRegularPricesForCart();
             return products;
         }
@@ -28,8 +28,8 @@ namespace wsep182.Domain
         {
             foreach (UserCart uc in products)
             {
-                Sale s = SalesArchive.getInstance().getSale(uc.getSaleId());
-                double pricePerUnit = ProductArchive.getInstance().getProductInStore(s.ProductInStoreId).getPrice();
+                Sale s = SalesManager.getInstance().getSale(uc.getSaleId());
+                double pricePerUnit = ProductManager.getInstance().getProductInStore(s.ProductInStoreId).getPrice();
                 uc.Price = pricePerUnit * uc.getAmount();
             }
         }
@@ -37,13 +37,13 @@ namespace wsep182.Domain
         public LinkedList<UserCart> getShoppingCartBeforeCheckout(User session)
         {
             if (!(session.getState() is Guest))
-                products = UserCartsArchive.getInstance().getUserShoppingCart(session.getUserName());
+                products = UserCartsManager.getInstance().getUserShoppingCart(session.getUserName());
 
             updateRegularPricesForCart(); // set all the regular prices for the cart - before discount
             foreach(UserCart uc in products)
             {
-                Sale sale = SalesArchive.getInstance().getSale(uc.getSaleId());
-                LinkedList<Discount> discounts = DiscountsArchive.getInstance().getAllDiscountsById(sale.ProductInStoreId);
+                Sale sale = SalesManager.getInstance().getSale(uc.getSaleId());
+                LinkedList<Discount> discounts = DiscountsManager.getInstance().getAllDiscountsById(sale.ProductInStoreId);
                 uc.PriceAfterDiscount = uc.Price;
                 foreach(Discount d in discounts)
                 {
@@ -79,7 +79,7 @@ namespace wsep182.Domain
         public Tuple<int,LinkedList<UserCart>> checkout(User session, string country, string address)
         {
             if (!(session.getState() is Guest))
-                products = UserCartsArchive.getInstance().getUserShoppingCart(session.getUserName());
+                products = UserCartsManager.getInstance().getUserShoppingCart(session.getUserName());
 
             /*
              *  first we check all the products in the cart fulfill their terms of amount
@@ -97,10 +97,10 @@ namespace wsep182.Domain
             Boolean skip = false;
             foreach (UserCart uc in products)
             {
-                Sale s = SalesArchive.getInstance().getSale(uc.getSaleId());
-                LinkedList<Discount> relevantDiscounts = DiscountsArchive.getInstance().getAllDiscountsById(s.ProductInStoreId);
+                Sale s = SalesManager.getInstance().getSale(uc.getSaleId());
+                LinkedList<Discount> relevantDiscounts = DiscountsManager.getInstance().getAllDiscountsById(s.ProductInStoreId);
                 uc.PriceAfterDiscount = uc.Price;
-                LinkedList<PurchasePolicy> policys = PurchasePolicyArchive.getInstance().getAllRelevantPolicysForProductInStore(s.ProductInStoreId, country);
+                LinkedList<PurchasePolicy> policys = PurchasePolicyManager.getInstance().getAllRelevantPolicysForProductInStore(s.ProductInStoreId, country);
                 foreach (PurchasePolicy p in policys)
                 {
                     if (p.NoDiscount)
@@ -149,13 +149,13 @@ namespace wsep182.Domain
         {
             foreach (UserCart uc in products)
             {
-                Sale s = SalesArchive.getInstance().getSale(uc.getSaleId());
-                ProductInStore theProduct = ProductArchive.getInstance().getProductInStore(s.ProductInStoreId);
-                LinkedList<PurchasePolicy> storePolicys = PurchasePolicyArchive.getInstance().getAllStorePolicys(theProduct.store.storeId);
-                LinkedList<PurchasePolicy> countrysPolicys = PurchasePolicyArchive.getInstance().getAllCountryPolicys(country,theProduct.store.storeId);
-                LinkedList<PurchasePolicy> categorysPolicys = PurchasePolicyArchive.getInstance().getAllCategoryPolicys(theProduct.Category, theProduct.store.storeId);
-                LinkedList<PurchasePolicy> productPolicys = PurchasePolicyArchive.getInstance().getAllProductPolicys(theProduct.getProduct().name);
-                LinkedList<PurchasePolicy> productInStorePolicys = PurchasePolicyArchive.getInstance().getAllProductInStorePolicys(theProduct.getProductInStoreId());
+                Sale s = SalesManager.getInstance().getSale(uc.getSaleId());
+                ProductInStore theProduct = ProductManager.getInstance().getProductInStore(s.ProductInStoreId);
+                LinkedList<PurchasePolicy> storePolicys = PurchasePolicyManager.getInstance().getAllStorePolicys(theProduct.store.storeId);
+                LinkedList<PurchasePolicy> countrysPolicys = PurchasePolicyManager.getInstance().getAllCountryPolicys(country,theProduct.store.storeId);
+                LinkedList<PurchasePolicy> categorysPolicys = PurchasePolicyManager.getInstance().getAllCategoryPolicys(theProduct.Category, theProduct.store.storeId);
+                LinkedList<PurchasePolicy> productPolicys = PurchasePolicyManager.getInstance().getAllProductPolicys(theProduct.getProduct().name);
+                LinkedList<PurchasePolicy> productInStorePolicys = PurchasePolicyManager.getInstance().getAllProductInStorePolicys(theProduct.getProductInStoreId());
 
                 int currAmount = uc.getAmount();
                 foreach (PurchasePolicy p in storePolicys)
@@ -205,7 +205,7 @@ namespace wsep182.Domain
 
         public int addToCart(User session, int saleId, int amount)
         {
-            Sale saleExist = SalesArchive.getInstance().getSale(saleId);
+            Sale saleExist = SalesManager.getInstance().getSale(saleId);
             if (saleExist == null)
             {
                 return -3; //-3 = saleId entered doesn't exist
@@ -216,16 +216,16 @@ namespace wsep182.Domain
             }
             if (saleExist.TypeOfSale != 1)
                 return -5; //-5 = trying to add a sale with type different from regular sale type
-            int amountInStore = ProductArchive.getInstance().getProductInStore(saleExist.ProductInStoreId).getAmount();
+            int amountInStore = ProductManager.getInstance().getProductInStore(saleExist.ProductInStoreId).getAmount();
             if (amount > amountInStore || amount <= 0)
                 return -6; // -6 = amount is bigger than the amount that exist in stock
 
-            int amountForSale = SalesArchive.getInstance().getSale(saleId).Amount;
+            int amountForSale = SalesManager.getInstance().getSale(saleId).Amount;
             if (amount > amountForSale || amount <= 0)
                 return -7; //amount is bigger than the amount currently up for sale
 
             if (!(session.getState() is Guest))
-                UserCartsArchive.getInstance().updateUserCarts(session.getUserName(), saleId, amount);
+                UserCartsManager.getInstance().updateUserCarts(session.getUserName(), saleId, amount);
 
             UserCart toAdd = new UserCart(session.getUserName(), saleId, amount);
             foreach (UserCart c in products)
@@ -234,7 +234,7 @@ namespace wsep182.Domain
                     if(c.getAmount() + amount <= amountForSale)
                     {
                         c.setAmount(c.getAmount() + amount);
-                        UserArchive.getInstance().updateUser(session);
+                        UserManager.getInstance().updateUser(session);
 
                         return 1; // OK
                     }
@@ -243,13 +243,13 @@ namespace wsep182.Domain
             }
             
             products.AddLast(toAdd);
-            UserArchive.getInstance().updateUser(session);
+            UserManager.getInstance().updateUser(session);
             return 1;
         }
 
         public int addToCartRaffle(User session, int saleId, double offer)
         {
-            Sale sale = SalesArchive.getInstance().getSale(saleId);
+            Sale sale = SalesManager.getInstance().getSale(saleId);
             if (sale == null)
                 return -3; // sale id entered does not exist
             if (sale.TypeOfSale != 3)
@@ -257,7 +257,7 @@ namespace wsep182.Domain
             if (!checkValidDate(sale))
                 return -5; // the date for the sale is no longer valid
 
-            UserCart isExist = UserCartsArchive.getInstance().getUserCart(session.getUserName(), sale.SaleId);
+            UserCart isExist = UserCartsManager.getInstance().getUserCart(session.getUserName(), sale.SaleId);
             if (isExist != null)
             {
                 return -6; // already have an instance of the raffle sale in the cart
@@ -269,32 +269,32 @@ namespace wsep182.Domain
             }
             if (!(session.getState() is Guest))
             {
-                UserCartsArchive.getInstance().updateUserCarts(session.getUserName(), sale.SaleId, 1, offer);
+                UserCartsManager.getInstance().updateUserCarts(session.getUserName(), sale.SaleId, 1, offer);
             }
             else
             {
                 return -7; // cannot add a raffle sale to cart while on guest mode
             }
 
-            //UserCart toAdd = UserCartsArchive.getInstance().getUserCart(session.getUserName(), sale.SaleId);
+            //UserCart toAdd = UserCartsManager.getInstance().getUserCart(session.getUserName(), sale.SaleId);
             UserCart toAdd = new UserCart(session.getUserName(), sale.SaleId, 1);
             toAdd.setOffer(offer);
             session.getShoppingCart().AddLast(toAdd);
-            UserArchive.getInstance().updateUser(session);
+            UserManager.getInstance().updateUser(session);
 
             return 1;
         }
 
         public int editCart(User session, int saleId, int newAmount)
         {
-            Sale sale = SalesArchive.getInstance().getSale(saleId);
+            Sale sale = SalesManager.getInstance().getSale(saleId);
             if (sale == null)
                 return -2;
 
             if (sale.TypeOfSale == 3)
                 return -3; // trying to edit amount of a raffle sale
 
-            ProductInStore p = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
+            ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
             if (newAmount > sale.Amount)
                 return -4; // new amount is bigger than currently up for sale
             if (newAmount > p.getAmount())
@@ -303,14 +303,14 @@ namespace wsep182.Domain
                 return -6; // new amount can't be zero or lower
 
             if (!(session.getState() is Guest))
-                UserCartsArchive.getInstance().editUserCarts(session.getUserName(), saleId, newAmount);
+                UserCartsManager.getInstance().editUserCarts(session.getUserName(), saleId, newAmount);
 
             foreach (UserCart product in products)
             {
                 if (product.getUserName().Equals(session.getUserName()) && saleId == product.getSaleId())
                 {
                     product.setAmount(newAmount);
-                    UserArchive.getInstance().updateUser(session);
+                    UserManager.getInstance().updateUser(session);
 
                     return 1;
                 }
@@ -320,14 +320,14 @@ namespace wsep182.Domain
 
         public int removeFromCart(User session, int saleId)
         {
-            Sale isExist = SalesArchive.getInstance().getSale(saleId);
+            Sale isExist = SalesManager.getInstance().getSale(saleId);
             if (isExist == null)
             {
                 return -2; // -2 = the sale id does not exist
             }
             if (!(session.getState() is Guest))
             {
-                if (!UserCartsArchive.getInstance().removeUserCart(session.getUserName(), saleId))
+                if (!UserCartsManager.getInstance().removeUserCart(session.getUserName(), saleId))
                     return -3; // trying to remove a product that does not exist in the cart
             }
 
@@ -336,7 +336,7 @@ namespace wsep182.Domain
                 if (c.getUserName().Equals(session.getUserName()) && c.getSaleId() == saleId)
                 {
                     products.Remove(c);
-                    UserArchive.getInstance().updateUser(session);
+                    UserManager.getInstance().updateUser(session);
 
                     return 1;
                 }
@@ -356,13 +356,13 @@ namespace wsep182.Domain
                 {
                     product.activateCoupon(couponId);
                 }
-                Sale sale = SalesArchive.getInstance().getSale(product.getSaleId());
+                Sale sale = SalesManager.getInstance().getSale(product.getSaleId());
                 if (sale.TypeOfSale == 1 && checkValidAmount(sale, product) && checkValidDate(sale)) //regular buy
                 {
                     if (PaymentSystem.getInstance().payForProduct(creditCard, session, product))
                     {
                         ShippingSystem.getInstance().sendShippingRequest();
-                        ProductInStore p = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
+                        ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
                         int productId = p.getProduct().getProductId();
                         int storeId = p.getStore().getStoreId();
                         String userName = session.getUserName();
@@ -371,11 +371,11 @@ namespace wsep182.Domain
                         String date = currentDate.ToString();
                         int amount = product.getAmount();
                         int typeOfSale = sale.TypeOfSale;
-                        BuyHistoryArchive.getInstance().addBuyHistory(productId, storeId, userName, price, date, amount,
+                        BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, price, date, amount,
                             typeOfSale);
                         //products.Remove(product);
                         toDelete.AddLast(product);
-                        SalesArchive.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
+                        SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
                     }
                     else
                     {
@@ -394,10 +394,10 @@ namespace wsep182.Domain
                     }
                     else
                     {
-                        if (RaffleSalesArchive.getInstance().addRaffleSale(sale.SaleId, session.getUserName(), offer, sale.DueDate))
+                        if (RaffleSalesManager.getInstance().addRaffleSale(sale.SaleId, session.getUserName(), offer, sale.DueDate))
                         {
                             PaymentSystem.getInstance().payForProduct(creditCard, session, product);
-                            ProductInStore p = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
+                            ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
                             int productId = p.getProduct().getProductId();
                             int storeId = p.getStore().getStoreId();
                             String userName = session.getUserName();
@@ -405,7 +405,7 @@ namespace wsep182.Domain
                             String date = currentDate.ToString();
                             int amount = product.getAmount();
                             int typeOfSale = sale.TypeOfSale;
-                            BuyHistoryArchive.getInstance().addBuyHistory(productId, storeId, userName, offer, date, amount,
+                            BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, offer, date, amount,
                                 typeOfSale);
                             //products.Remove(product);
                             toDelete.AddLast(product);
@@ -421,7 +421,7 @@ namespace wsep182.Domain
             {
                 products.Remove(uc);
             }
-            UserArchive.getInstance().updateUser(session);
+            UserManager.getInstance().updateUser(session);
 
             return allBought;
         }
@@ -434,14 +434,14 @@ namespace wsep182.Domain
                 return -2;
             foreach (UserCart product in products)
             {
-                Sale sale = SalesArchive.getInstance().getSale(product.getSaleId());
+                Sale sale = SalesManager.getInstance().getSale(product.getSaleId());
                 if (sale.TypeOfSale == 1 && checkValidAmount(sale, product) && checkValidDate(sale)) //regular buy
                 {
                     if (PaymentSystem.getInstance().payForProduct(creditCard, session, product))
                     {
                         if (!ShippingSystem.getInstance().sendShippingRequest(session, country, adress, creditCard))
                             return -9;
-                        ProductInStore p = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
+                        ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
                         int productId = p.getProduct().getProductId();
                         int storeId = p.getStore().getStoreId();
                         String userName = session.getUserName();
@@ -449,10 +449,10 @@ namespace wsep182.Domain
                         String date = currentDate.ToString();
                         int amount = product.getAmount();
                         int typeOfSale = sale.TypeOfSale;
-                        BuyHistoryArchive.getInstance().addBuyHistory(productId, storeId, userName, product.PriceAfterDiscount, date, amount,
+                        BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, product.PriceAfterDiscount, date, amount,
                             typeOfSale);
                         toDelete.AddLast(product);
-                        SalesArchive.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
+                        SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
                         alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 1);
                     }
                     else
@@ -474,8 +474,8 @@ namespace wsep182.Domain
                     {
                         if (PaymentSystem.getInstance().payForProduct(creditCard, session, product))
                         {
-                            RaffleSalesArchive.getInstance().addRaffleSale(sale.SaleId, session.getUserName(), offer, sale.DueDate);
-                            ProductInStore p = ProductArchive.getInstance().getProductInStore(sale.ProductInStoreId);
+                            RaffleSalesManager.getInstance().addRaffleSale(sale.SaleId, session.getUserName(), offer, sale.DueDate);
+                            ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
                             int productId = p.getProduct().getProductId();
                             int storeId = p.getStore().getStoreId();
                             String userName = session.getUserName();
@@ -483,10 +483,10 @@ namespace wsep182.Domain
                             String date = currentDate.ToString();
                             int amount = product.getAmount();
                             int typeOfSale = sale.TypeOfSale;
-                            BuyHistoryArchive.getInstance().addBuyHistory(productId, storeId, userName, offer, date, amount,
+                            BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, offer, date, amount,
                                 typeOfSale);
-                            RaffleSalesArchive.getInstance().sendMessageTORaffleWinner(sale.SaleId);
-                            SalesArchive.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
+                            RaffleSalesManager.getInstance().sendMessageTORaffleWinner(sale.SaleId);
+                            SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
                             alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 3);
                             toDelete.AddLast(product);
                         }
@@ -505,9 +505,9 @@ namespace wsep182.Domain
             {
                 products.Remove(uc);
                 if (!(session.getState() is Guest))
-                    UserCartsArchive.getInstance().removeUserCart(session.userName,uc.SaleId);
+                    UserCartsManager.getInstance().removeUserCart(session.userName,uc.SaleId);
             }
-            UserArchive.getInstance().updateUser(session);
+            UserManager.getInstance().updateUser(session);
 
             return allBought;
         }
@@ -551,9 +551,9 @@ namespace wsep182.Domain
 
         private double getRemainingSumForOffers(int saleId)
         {
-            Sale currSale = SalesArchive.getInstance().getSale(saleId);
-            double totalPrice = ProductArchive.getInstance().getProductInStore(currSale.ProductInStoreId).getPrice();
-            LinkedList<RaffleSale> sales = RaffleSalesArchive.getInstance().getAllRaffleSalesBySaleId(saleId);
+            Sale currSale = SalesManager.getInstance().getSale(saleId);
+            double totalPrice = ProductManager.getInstance().getProductInStore(currSale.ProductInStoreId).getPrice();
+            LinkedList<RaffleSale> sales = RaffleSalesManager.getInstance().getAllRaffleSalesBySaleId(saleId);
             if (sales.Count() == 0)
                 return totalPrice;
             else
@@ -574,15 +574,15 @@ namespace wsep182.Domain
                 country = "";
             if (usedCoupons.Contains(couponId))
                 return products;
-            Coupon coupon = CouponsArchive.getInstance().getCoupon(couponId);
+            Coupon coupon = CouponsManager.getInstance().getCoupon(couponId);
             if (coupon == null)
                 return products;
             Boolean skip = false;
             foreach (UserCart uc in products)
             {
-                Sale s = SalesArchive.getInstance().getSale(uc.getSaleId());
-                LinkedList<Coupon> relevantCoupons = CouponsArchive.getInstance().getAllCouponsById(s.ProductInStoreId);
-                LinkedList<PurchasePolicy> policys = PurchasePolicyArchive.getInstance().getAllRelevantPolicysForProductInStore(s.ProductInStoreId, country);
+                Sale s = SalesManager.getInstance().getSale(uc.getSaleId());
+                LinkedList<Coupon> relevantCoupons = CouponsManager.getInstance().getAllCouponsById(s.ProductInStoreId);
+                LinkedList<PurchasePolicy> policys = PurchasePolicyManager.getInstance().getAllRelevantPolicysForProductInStore(s.ProductInStoreId, country);
                 foreach (PurchasePolicy p in policys)
                 {
                     if (p.NoCoupons)

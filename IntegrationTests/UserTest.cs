@@ -11,15 +11,15 @@ namespace IntegrationTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
         }
 
@@ -192,7 +192,7 @@ namespace IntegrationTests
             Store s = storeArchive.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", 3.2, 10, "Driks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             LinkedList<ProductInStore> pisList = s.getProductsInStore();
             Assert.IsTrue(pisList.Contains(pis));
             Assert.AreEqual(pisList.Count, 1);
@@ -207,7 +207,7 @@ namespace IntegrationTests
             Store s = storeArchive.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", -5, 10, "Driks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             LinkedList<ProductInStore> pisList = s.getProductsInStore();
             Assert.IsFalse(pisList.Contains(pis));
             Assert.AreEqual(pisList.Count, 0);

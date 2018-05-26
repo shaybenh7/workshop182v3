@@ -19,15 +19,15 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
             us = userServices.getInstance();
@@ -53,8 +53,8 @@ namespace Acceptance_Tests.StoreTests
 
             ss.addStoreManager(store.getStoreId(), "niv", itamar);
 
-            cola = ProductArchive.getInstance().getProductInStore(ss.addProductInStore("cola", 3.2, 10, itamar, store.getStoreId(), "Drinks"));
-            sprite = ProductArchive.getInstance().getProductInStore(ss.addProductInStore("sprite", 5.3, 20, itamar, store.getStoreId(), "Drinks"));
+            cola = ProductManager.getInstance().getProductInStore(ss.addProductInStore("cola", 3.2, 10, itamar, store.getStoreId(), "Drinks"));
+            sprite = ProductManager.getInstance().getProductInStore(ss.addProductInStore("sprite", 5.3, 20, itamar, store.getStoreId(), "Drinks"));
 
         }
 
@@ -87,7 +87,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("admin store", admin);
             Store store2 = storeArchive.getInstance().getStore(storeId);
             int milkId = ss.addProductInStore("milk", 3.2, 10, admin, store2.getStoreId(), "Drinks");
-            ProductInStore milk = ProductArchive.getInstance().getProductInStore(milkId);
+            ProductInStore milk = ProductManager.getInstance().getProductInStore(milkId);
             int saleId2 = ss.addSaleToStore(admin, store2.getStoreId(), milk.getProductInStoreId(), 1, 1, "20/5/2018");
             LinkedList<Sale> saleList2 = ss.viewSalesByStore(store2.getStoreId());
 

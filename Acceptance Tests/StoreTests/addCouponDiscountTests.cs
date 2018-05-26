@@ -13,7 +13,7 @@ namespace Acceptance_Tests.StoreTests
 
         private userServices us;
         private storeServices ss;
-        private CouponsArchive ca;
+        private CouponsManager ca;
         private User zahi;
         private Store store;//itamar owner , niv manneger
         private int cola;
@@ -22,20 +22,20 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
             us = userServices.getInstance();
             ss = storeServices.getInstance();
-            ca = CouponsArchive.getInstance();
+            ca = CouponsManager.getInstance();
 
             zahi = us.startSession();
             us.register(zahi, "zahi", "123456");

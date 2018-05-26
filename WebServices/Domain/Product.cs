@@ -37,12 +37,12 @@ namespace wsep182.Domain
         {
             if (productName == null || productName == "" || productName[0] == ' ' || productName[productName.Length-1] == ' ')
                 return null;
-            return ProductArchive.getInstance().addProduct(productName);
+            return ProductManager.getInstance().addProduct(productName);
         }
 
         public static LinkedList<Product> getProducts()
         {
-            return ProductArchive.getInstance().getAllProducts();
+            return ProductManager.getInstance().getAllProducts();
         }
 
 

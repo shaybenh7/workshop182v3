@@ -8,7 +8,7 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class PurchasePolicyArchive
+    public class PurchasePolicyManager
     {
         // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
         private int productNUM = 1;
@@ -19,22 +19,22 @@ namespace wsep182.Domain
 
         PurchasePolicyDB ppDB;
         private LinkedList<PurchasePolicy> policys;
-        private static PurchasePolicyArchive instance;
+        private static PurchasePolicyManager instance;
 
-        private PurchasePolicyArchive()
+        private PurchasePolicyManager()
         {
             ppDB = new PurchasePolicyDB(configuration.DB_MODE);
             policys = ppDB.Get();
         }
-        public static PurchasePolicyArchive getInstance()
+        public static PurchasePolicyManager getInstance()
         {
             if (instance == null)
-                instance = new PurchasePolicyArchive();
+                instance = new PurchasePolicyManager();
             return instance;
         }
         public static void restartInstance()
         {
-            instance = new PurchasePolicyArchive();
+            instance = new PurchasePolicyManager();
         }
 
         public string showPolicy(int productInStoreId)
@@ -118,7 +118,7 @@ namespace wsep182.Domain
         {
             // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
             LinkedList<PurchasePolicy> ans = new LinkedList<PurchasePolicy>();
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(productInStoreId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(productInStoreId);
             appendLists(ans, getAllStorePolicys(pis.store.storeId));
             appendLists(ans, getAllCategoryPolicys(pis.category, pis.store.storeId));
             appendLists(ans, getAllCountryPolicys(country, pis.store.storeId));

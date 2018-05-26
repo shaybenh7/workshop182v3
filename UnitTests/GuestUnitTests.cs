@@ -14,7 +14,7 @@ namespace UnitTests
         [TestInitialize]
         public void init()
         {
-            UserArchive.restartInstance();
+            UserManager.restartInstance();
             g = new Guest();
         }
 
@@ -56,7 +56,7 @@ namespace UnitTests
             User session = us.startSession();
             us.register(session, "zahi", "123456");
             int uId = g.login("zahi", "123456");
-            User u = UserArchive.getInstance().getUser("zahi");
+            User u = UserManager.getInstance().getUser("zahi");
             Assert.AreEqual(u.getUserName(),"zahi");
         }
 

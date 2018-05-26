@@ -8,16 +8,16 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class ProductArchive
+    public class ProductManager
     {
         private ProductDB productDB;
         private ProductInStoreDB productInStoreDB;
-        private static ProductArchive instance;
+        private static ProductManager instance;
         private LinkedList<Product> products;
         private LinkedList<ProductInStore> productsInStores;
         private static int productInStoreId = 0;
         private static int productId = 0;
-        private ProductArchive()
+        private ProductManager()
         {
             productDB = new ProductDB(configuration.DB_MODE);
             productInStoreDB = new ProductInStoreDB(configuration.DB_MODE);
@@ -26,16 +26,16 @@ namespace wsep182.Domain
             productInStoreId = 0;
             productId = 0;
         }
-        public static ProductArchive getInstance()
+        public static ProductManager getInstance()
         {
             if (instance == null)
-                instance = new ProductArchive();
+                instance = new ProductManager();
             return instance;
         }
 
         public static void restartInstance()
         {
-            instance = new ProductArchive();
+            instance = new ProductManager();
         }
 
         public int getNextProductId()
@@ -211,7 +211,7 @@ namespace wsep182.Domain
                 {
                     if (p.getIsActive() == 0)
                         return false;
-                    if (SalesArchive.getInstance().getSalesByProductInStoreId(p.getProductInStoreId()).Count>0)
+                    if (SalesManager.getInstance().getSalesByProductInStoreId(p.getProductInStoreId()).Count>0)
                         return false;
                     p.IsActive = 0;
                     productInStoreDB.Remove(p);

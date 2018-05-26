@@ -20,15 +20,15 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
             us = userServices.getInstance();
@@ -61,8 +61,8 @@ namespace Acceptance_Tests.StoreTests
 
             int c = ss.addProductInStore("cola", 3.2, 10, itamar, storeid, "Drinks");
             int s = ss.addProductInStore("sprite", 5.3, 20, itamar, storeid, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(c);
-            sprite = ProductArchive.getInstance().getProductInStore(s);
+            cola = ProductManager.getInstance().getProductInStore(c);
+            sprite = ProductManager.getInstance().getProductInStore(s);
             saleId = ss.addSaleToStore(itamar, store.getStoreId(), cola.getProductInStoreId(), 1, 1, "20.5.2018");
             raffleSale=ss.addSaleToStore(itamar, store.getStoreId(), cola.getProductInStoreId(), 3, 1, "20.5.2018");
 
@@ -72,15 +72,15 @@ namespace Acceptance_Tests.StoreTests
         public void SimpleEditSale()
         {
             ss.editSale(itamar, store.getStoreId(), saleId, 10, "15.2.2019");
-            Assert.AreEqual(10, SalesArchive.getInstance().getSale(saleId).Amount);
-            Assert.AreEqual("15.2.2019", SalesArchive.getInstance().getSale(saleId).DueDate);
+            Assert.AreEqual(10, SalesManager.getInstance().getSale(saleId).Amount);
+            Assert.AreEqual("15.2.2019", SalesManager.getInstance().getSale(saleId).DueDate);
         }
         [TestMethod]
         public void SimpleEditRaffleSale()
         {
             ss.editSale(itamar, store.getStoreId(), raffleSale, 10, "15.2.2019");
-            Assert.AreEqual(10, SalesArchive.getInstance().getSale(raffleSale).Amount);
-            Assert.AreEqual("15.2.2019", SalesArchive.getInstance().getSale(raffleSale).DueDate);
+            Assert.AreEqual(10, SalesManager.getInstance().getSale(raffleSale).Amount);
+            Assert.AreEqual("15.2.2019", SalesManager.getInstance().getSale(raffleSale).DueDate);
         }
         [TestMethod]
         public void EditSaleNegativeAmount()

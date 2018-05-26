@@ -9,15 +9,15 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class CouponsArchive
+    public class CouponsManager
     {
-        private static CouponsArchive instance;
+        private static CouponsManager instance;
         System.Timers.Timer couponCollector;
         private LinkedList<Coupon> coupons;
 
         private couponDB CDB;
 
-        private CouponsArchive()
+        private CouponsManager()
         {
             CDB = new couponDB(configuration.DB_MODE);
             coupons = CDB.Get();
@@ -26,15 +26,15 @@ namespace wsep182.Domain
             couponCollector.Interval = 60 * 60 * 1000; // interval of one hour
             couponCollector.Enabled = true;
         }
-        public static CouponsArchive getInstance()
+        public static CouponsManager getInstance()
         {
             if (instance == null)
-                instance = new CouponsArchive();
+                instance = new CouponsManager();
             return instance;
         }
         public static void restartInstance()
         {
-            instance = new CouponsArchive();
+            instance = new CouponsManager();
         }
 
         private void CheckFinishedcoupon(object source, ElapsedEventArgs e)
@@ -248,7 +248,7 @@ namespace wsep182.Domain
             LinkedList<Coupon> ans = new LinkedList<Coupon>();
             foreach (Coupon c in coupons)
             {
-                ProductInStore p = ProductArchive.getInstance().getProductInStore(productInStoreId);
+                ProductInStore p = ProductManager.getInstance().getProductInStore(productInStoreId);
                 string category = p.category;
                 string productName = p.product.name;
 

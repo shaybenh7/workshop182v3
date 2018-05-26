@@ -44,7 +44,7 @@ namespace WebServices.DAL
 
             while (reader.Read())
             {
-                Product product = ProductArchive.getInstance().getProductByName(reader.GetString("product"));
+                Product product = ProductManager.getInstance().getProductByName(reader.GetString("product"));
                 Store store = storeArchive.getInstance().getStore(reader.GetInt32("store"));
                 int quantity = reader.GetInt32("quantity");
                 double price = reader.GetDouble("price");

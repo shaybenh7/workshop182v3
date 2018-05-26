@@ -18,15 +18,15 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             us = userServices.getInstance();
             ss = storeServices.getInstance();
@@ -61,7 +61,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(ses.buyProducts(aviad, "1234", ""));
             LinkedList<Purchase> historyList = ss.viewStoreHistory(zahi, store);
             Assert.IsTrue(historyList.Count == 1);
-            Assert.IsTrue(historyList.First.Value.ProductId == ProductArchive.getInstance().getProductInStore(pis).getProduct().getProductId());
+            Assert.IsTrue(historyList.First.Value.ProductId == ProductManager.getInstance().getProductInStore(pis).getProduct().getProductId());
             Assert.IsTrue(historyList.First.Value.Amount == 2);
         }
 
@@ -97,7 +97,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(ses.buyProducts(aviad, "1234", ""));
             LinkedList<Purchase> historyList = ss.viewStoreHistory(zahi, store);
             Assert.IsTrue(historyList.Count == 1);
-            Assert.IsTrue(historyList.First.Value.ProductId == ProductArchive.getInstance().getProductInStore(pis).getProduct().getProductId());
+            Assert.IsTrue(historyList.First.Value.ProductId == ProductManager.getInstance().getProductInStore(pis).getProduct().getProductId());
             Assert.IsTrue(historyList.First.Value.Amount == 2);
 
 
@@ -116,7 +116,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(ses.buyProducts(aviad, "1234", ""));
             LinkedList<Purchase> historyList2 = ss.viewStoreHistory(zahi, store2);
             Assert.IsTrue(historyList2.Count == 1);
-            Assert.IsTrue(historyList2.First.Value.ProductId == ProductArchive.getInstance().getProductInStore(pis2).getProduct().getProductId());
+            Assert.IsTrue(historyList2.First.Value.ProductId == ProductManager.getInstance().getProductInStore(pis2).getProduct().getProductId());
             Assert.IsTrue(historyList2.First.Value.Amount == 2);
         }
 

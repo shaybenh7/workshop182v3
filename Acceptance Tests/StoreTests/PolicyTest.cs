@@ -21,15 +21,15 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
             us = userServices.getInstance();
@@ -47,7 +47,7 @@ namespace Acceptance_Tests.StoreTests
             store = storeArchive.getInstance().getStore(storeid);
 
             int colaId = ss.addProductInStore("cola", 10, 100, zahi, storeid, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(colaId);
+            cola = ProductManager.getInstance().getProductInStore(colaId);
 
             ss.addSaleToStore(zahi, store.getStoreId(), cola.getProductInStoreId(), 1, 20, "20/8/2018");
 

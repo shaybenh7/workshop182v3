@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace wsep182.Domain
 {
-    public class UserCartsArchive
+    public class UserCartsManager
     {
-        private static UserCartsArchive instance;
+        private static UserCartsManager instance;
         private LinkedList<UserCart> carts;
 
-        private UserCartsArchive()
+        private UserCartsManager()
         {
             carts = new LinkedList<UserCart>();
         }
-        public static UserCartsArchive getInstance()
+        public static UserCartsManager getInstance()
         {
             if (instance == null)
-                instance = new UserCartsArchive();
+                instance = new UserCartsManager();
             return instance;
         }
 
         public static void restartInstance()
         {
-            instance = new UserCartsArchive();
+            instance = new UserCartsManager();
         }
         public Boolean updateUserCarts(String userName, int saleId, int amount)
         {

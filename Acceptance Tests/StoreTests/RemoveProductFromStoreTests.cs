@@ -16,15 +16,15 @@ namespace Acceptance_Tests.StoreTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             us = userServices.getInstance();
             ss = storeServices.getInstance();
@@ -39,7 +39,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, storeId, "Drink");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result=ss.removeProductFromStore(s.storeId,pis.productInStoreId, zahi);
             Assert.IsTrue(result > -1);
             LinkedList<ProductInStore> LPIS=us.viewProductsInStores();
@@ -67,7 +67,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drink");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             User admin = us.startSession();
             us.login(admin, "admin", "admin");
             int result = ss.removeProductFromStore(s.getStoreId(),pis.productInStoreId, admin);
@@ -84,7 +84,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             zahi.logOut();
             int result = ss.removeProductFromStore(s.getStoreId(),pis.productInStoreId, zahi);
             Assert.IsFalse(result > -1);
@@ -103,7 +103,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), aviad);
             Assert.IsFalse(result > -1);
             LinkedList<ProductInStore> LPIS = us.viewProductsInStores();
@@ -123,7 +123,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId2 = ss.createStore("Brohim", aviad);
             Store s2 = storeArchive.getInstance().getStore(storeId2);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), aviad);
             Assert.IsFalse(result > -1);
             LinkedList<ProductInStore> LPIS = us.viewProductsInStores();
@@ -138,7 +138,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), null);
             Assert.IsFalse(result > -1);
             LinkedList<ProductInStore> LPIS = us.viewProductsInStores();
@@ -153,7 +153,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), -31, zahi);
             Assert.IsFalse(result > -1);
             LinkedList<ProductInStore> LPIS = us.viewProductsInStores();
@@ -168,7 +168,7 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(-31, pis.getProductInStoreId(), zahi);
             Assert.IsFalse(result > -1);
             LinkedList<ProductInStore> LPIS = us.viewProductsInStores();
@@ -184,9 +184,9 @@ namespace Acceptance_Tests.StoreTests
             int storeId = ss.createStore("abowim", zahi);
             Store s = storeArchive.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int pis2Id = ss.addProductInStore("sprite", 3.2, 10, zahi, s.getStoreId(), "Drinks");
-            ProductInStore pis2 = ProductArchive.getInstance().getProductInStore(pis2Id);
+            ProductInStore pis2 = ProductManager.getInstance().getProductInStore(pis2Id);
             ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), zahi);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), zahi);
             Assert.IsFalse(result>-1);

@@ -16,7 +16,7 @@ namespace SeleniumTests
         [TestInitialize]
         public void Initialize()
         {
-            userServices.getInstance().init();
+            userServices.getInstance().startSession();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");

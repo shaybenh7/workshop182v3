@@ -96,3 +96,7 @@ C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTest
 C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.csproj.CopyComplete
 C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.dll
 C:\Users\Shay Ben Haim\Desktop\workshopv2\workshop182\workshop182v2\SeleniumTests\obj\Debug\SeleniumTests.pdb
+C:\Users\Itamar\Desktop\wsep182V3\workshop182v3\SeleniumTests\obj\Debug\SeleniumTests.csprojResolveAssemblyReference.cache
+C:\Users\Itamar\Desktop\wsep182V3\workshop182v3\SeleniumTests\obj\Debug\SeleniumTests.csproj.CoreCompileInputs.cache
+C:\Users\Itamar\Desktop\wsep182V3\workshop182v3\SeleniumTests\obj\Debug\SeleniumTests.dll
+C:\Users\Itamar\Desktop\wsep182V3\workshop182v3\SeleniumTests\obj\Debug\SeleniumTests.pdb

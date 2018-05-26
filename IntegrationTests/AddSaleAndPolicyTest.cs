@@ -21,17 +21,17 @@ namespace IntegrationTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             zahi = new User("zahi", "123456");
             zahi.register("zahi", "123456");
@@ -55,7 +55,7 @@ namespace IntegrationTests
             zahiOwner.addStoreManager(zahi, store, "aviad");
             niv.logOut();
             int colaId = zahiOwner.addProductInStore(zahi, store, "cola", 3.2, 40, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(colaId);
+            cola = ProductManager.getInstance().getProductInStore(colaId);
         }
         [TestMethod]
         public void simpleAddSalePolicyToStore()

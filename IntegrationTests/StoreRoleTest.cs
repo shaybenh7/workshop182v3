@@ -22,17 +22,17 @@ namespace IntegrationTests
         [TestInitialize]
         public void init()
         {
-            ProductArchive.restartInstance();
-            SalesArchive.restartInstance();
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            UserCartsArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
             StorePremissionsArchive.restartInstance();
 
-            BuyHistoryArchive.restartInstance();
-            CouponsArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            RaffleSalesArchive.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
             zahi = new User("zahi", "123456");
             zahi.register("zahi", "123456");
@@ -53,14 +53,14 @@ namespace IntegrationTests
             zahiOwner.addStoreManager(zahi, store, "aviad");
             niv.logOut();
             int colaId = zahiOwner.addProductInStore(zahi, store, "cola", 3.2, 10, "Drinks");
-            cola = ProductArchive.getInstance().getProductInStore(colaId);
+            cola = ProductManager.getInstance().getProductInStore(colaId);
         }
 
         [TestMethod]
         public void editProductInStoreWithManagerPermission()
         {
             int pisId = zahiOwner.addProductInStore(zahi, store, "cola2", 10, 4, "Drinks");
-            ProductInStore pis= ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis= ProductManager.getInstance().getProductInStore(pisId);
             Assert.AreEqual(2, store.getProductsInStore().Count);
             aviadManeger.editProductInStore(aviad, pis, 13, 4.5);
             Assert.AreEqual(10, pis.getPrice());
@@ -74,7 +74,7 @@ namespace IntegrationTests
         public void editProductInStoreWithoutManagerPermission()
         {
             int pisId = zahiOwner.addProductInStore(zahi, store, "cola2", 10, 4, "Drinks");
-            ProductInStore pis = ProductArchive.getInstance().getProductInStore(pisId);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             Assert.AreEqual(2, store.getProductsInStore().Count);
             aviadManeger.editProductInStore(aviad, pis, 13, 4.5);
             Assert.AreEqual(10, pis.getPrice());
@@ -146,7 +146,7 @@ namespace IntegrationTests
         public void removePISWithManagerPremition()
         {
             zahiOwner.addManagerPermission(zahi, "removeProductFromStore", store, "aviad");
-            ProductInStore colaId = ProductArchive.getInstance().getProductInStore(cola.productInStoreId);
+            ProductInStore colaId = ProductManager.getInstance().getProductInStore(cola.productInStoreId);
             Assert.IsTrue(aviadManeger.removeProductFromStore(aviad,store, colaId) > -1);
             Assert.AreEqual(store.getAllSales().Count, 0);
         }
@@ -154,7 +154,7 @@ namespace IntegrationTests
         public void removePISWithManagerPremitionTwice()
         {
             zahiOwner.addManagerPermission(zahi, "removeProductFromStore", store, "aviad");
-            ProductInStore colaId = ProductArchive.getInstance().getProductInStore(cola.productInStoreId);
+            ProductInStore colaId = ProductManager.getInstance().getProductInStore(cola.productInStoreId);
             Assert.IsTrue(aviadManeger.removeProductFromStore(aviad, store, colaId) > -1);
             Assert.AreEqual(store.getAllSales().Count, 0);
             Assert.IsFalse(aviadManeger.removeProductFromStore(aviad, store, colaId) > -1);
