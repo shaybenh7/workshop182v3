@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using WebServices.DAL;
+using WebServices.Domain;
+
 
 namespace wsep182.Domain
 {
@@ -12,7 +14,7 @@ namespace wsep182.Domain
         private LinkedList<User> users;
         private UserArchive()
         {
-            UDB = new UserDB("Production");
+            UDB = new UserDB(configuration.DB_MODE);
             users = UDB.Get();
         }
         public static UserArchive getInstance()

@@ -17,7 +17,7 @@ namespace wsep182.Domain
 
         private RaffleSalesArchive()
         {
-            RSDB = new RaffleSaleDB("Production");
+            RSDB = new RaffleSaleDB(configuration.DB_MODE);
             raffleSales = RSDB.Get();
             RaffelCollector = new System.Timers.Timer();
             RaffelCollector.Elapsed += new ElapsedEventHandler(CheckFinishedRaffelSales);

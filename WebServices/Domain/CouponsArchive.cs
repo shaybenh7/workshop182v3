@@ -18,7 +18,7 @@ namespace wsep182.Domain
 
         private CouponsArchive()
         {
-            CDB = new couponDB("Production");
+            CDB = new couponDB(configuration.DB_MODE);
             coupons = CDB.Get();
             couponCollector = new System.Timers.Timer();
             couponCollector.Elapsed += new ElapsedEventHandler(CheckFinishedcoupon);

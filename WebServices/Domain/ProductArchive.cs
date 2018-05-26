@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebServices.DAL;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -18,8 +19,8 @@ namespace wsep182.Domain
         private static int productId = 0;
         private ProductArchive()
         {
-            productDB = new ProductDB("Production");
-            productInStoreDB = new ProductInStoreDB("Production");
+            productDB = new ProductDB(configuration.DB_MODE);
+            productInStoreDB = new ProductInStoreDB(configuration.DB_MODE);
             products = productDB.Get();
             productsInStores = productInStoreDB.Get();
             productInStoreId = 0;

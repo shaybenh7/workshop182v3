@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebServices.DAL;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -16,8 +17,8 @@ namespace wsep182.Domain
         private StoreRoleDictionaryDB SRDDB;
         private storeArchive()
         {
-            SDB = new StoreDB("Production");
-            SRDDB = new StoreRoleDictionaryDB("Production");
+            SDB = new StoreDB(configuration.DB_MODE);
+            SRDDB = new StoreRoleDictionaryDB(configuration.DB_MODE);
             stores = SDB.Get();
             archive = new Dictionary<int, Dictionary<String, StoreRole>>();
             LinkedList<Tuple<int, String, String>> temp = SRDDB.Get();
