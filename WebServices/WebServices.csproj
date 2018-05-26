@@ -208,6 +208,7 @@
     <Compile Include="DAL\UserDB.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\BuyHistoryArchive.cs" />
+    <Compile Include="Domain\configuration.cs" />
     <Compile Include="Domain\Coupon.cs" />
     <Compile Include="Domain\CouponsArchive.cs" />
     <Compile Include="Domain\Customer.cs" />
