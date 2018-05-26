@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using WebServices.DAL;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
