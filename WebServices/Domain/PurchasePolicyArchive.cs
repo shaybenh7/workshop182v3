@@ -22,7 +22,7 @@ namespace wsep182.Domain
 
         private PurchasePolicyArchive()
         {
-            ppDB = new PurchasePolicyDB("Production");
+            ppDB = new PurchasePolicyDB(configuration.DB_MODE);
             policys = ppDB.Get();
         }
         public static PurchasePolicyArchive getInstance()

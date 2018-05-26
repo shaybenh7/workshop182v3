@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebServices.DAL;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -17,7 +18,7 @@ namespace wsep182.Domain
 
         private BuyHistoryArchive()
         {
-            BHDB = new BuyHistoryDB("Production");
+            BHDB = new BuyHistoryDB(configuration.DB_MODE);
             buysHistory = BHDB.Get();
             buyId = 0;
         }

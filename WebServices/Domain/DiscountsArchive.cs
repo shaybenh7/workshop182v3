@@ -16,7 +16,7 @@ namespace wsep182.Domain
         private DiscountDB DDB;
         private DiscountsArchive()
         {
-            DDB = new DiscountDB("Production");
+            DDB = new DiscountDB(configuration.DB_MODE);
             discounts = DDB.Get();
             DiscountCollector = new System.Timers.Timer();
             DiscountCollector.Elapsed += new ElapsedEventHandler(CheckFinishedDiscounts);

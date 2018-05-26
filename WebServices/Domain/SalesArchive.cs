@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebServices.DAL;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -16,7 +17,7 @@ namespace wsep182.Domain
 
         private SalesArchive()
         {
-            SDB = new SaleDB("Production");
+            SDB = new SaleDB(configuration.DB_MODE);
             sales = SDB.Get();
             saleId = 0;
         }
