@@ -42,7 +42,9 @@ namespace wsep182.Domain
                     archive.Add(t.Item1, new Dictionary<String, StoreRole>());
                     archive[t.Item1].Add(t.Item2, sr);
                 }
-                catch (Exception) { };
+                catch (Exception) {
+                    archive[t.Item1].Add(t.Item2, sr);
+                };
             }
 
             storeIndex = currIndex();

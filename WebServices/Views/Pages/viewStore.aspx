@@ -192,13 +192,14 @@
                             dataType: "json",
                             success: function (response) {
                                 console.log("here");
-                                console.log(response[0]["user"]["userName"]);
+                                console.log(response);
                                 var owners = document.getElementById("managers");
                                 var j;
                                 for (j = 0; j < response.length - 1; j++) {
                                     owners.innerHTML += response[j]["user"]["userName"] + ", ";
                                 }
-                                owners.innerHTML += response[j]["user"]["userName"];
+                                if (response.length > 0)
+                                    owners.innerHTML += response[j]["user"]["userName"];
 
                             },
                             error: function (response) {
