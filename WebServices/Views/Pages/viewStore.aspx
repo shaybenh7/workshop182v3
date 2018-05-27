@@ -29,7 +29,7 @@
 
     <script type="text/javascript">
         function loadModal(saleId) {
-            document.getElementById("modalContent").innerHTML = '<object type="text/html" data="'+baseUrl+"/viewInstantSale?saleId=' + saleId + ' ></object>';
+            document.getElementById("modalContent").innerHTML = '<object type="text/html" data="+baseUrl+"/viewInstantSale?saleId=' + saleId + ' ></object>';
         }
     </script>
 
@@ -47,6 +47,7 @@
                 dataType: "json",
                 success: function (response) {
                     console.log(response);
+                    
                     var i;
 
                     for (i = 0; i < response.length; i++) {
@@ -209,6 +210,7 @@
                 },
                 error: function (response) {
                     console.log(response);
+
                     window.location.href = baseUrl+"/error";
                 }
             });

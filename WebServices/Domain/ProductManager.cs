@@ -22,7 +22,8 @@ namespace wsep182.Domain
             productDB = new ProductDB(configuration.DB_MODE);
             productInStoreDB = new ProductInStoreDB(configuration.DB_MODE);
             products = productDB.Get();
-            productsInStores = productInStoreDB.Get();
+            //productsInStores = productInStoreDB.Get(); //BUGGG NEEDS TO BE FIXED BY ITAMAR THE RUSSIAN
+            productsInStores = new LinkedList<ProductInStore>();
             productInStoreId = 0;
             productId = 0;
         }

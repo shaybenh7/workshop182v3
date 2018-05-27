@@ -18,7 +18,7 @@ namespace WebServices.DAL
                 con.Open();
 
                 string sql = "INSERT INTO Product (productId, name)" +
-                             " VALUES (" + p.productId + ", " + p.name + "')";
+                             " VALUES (" + p.productId + ", '" + p.name + "')";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();

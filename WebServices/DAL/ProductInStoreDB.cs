@@ -37,7 +37,7 @@ namespace WebServices.DAL
             string sql = " SELECT * FROM ProductInStore";
             LinkedList<ProductInStore> productInStores = new LinkedList<ProductInStore>();
             MySqlCommand cmd = new MySqlCommand(sql, con);
-
+            
             con.Open();
 
             MySqlDataReader reader = cmd.ExecuteReader();

@@ -1018,6 +1018,8 @@ namespace WebService.Controllers
         public HttpResponseMessage viewSalesByStore(int storeId)
         {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            ProductManager.getInstance();
+
             Object sales = storeServices.getInstance().viewSalesByStore(storeId);
             HttpResponseMessage response;
             if (sales == null)
