@@ -316,6 +316,13 @@
     <Compile Include="Views\Pages\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\searchResults.aspx.cs">
+      <DependentUpon>searchResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\searchResults.aspx.designer.cs">
+      <DependentUpon>searchResults.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\shoppingCart.aspx.cs">
       <DependentUpon>shoppingCart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -554,6 +561,7 @@
     <Content Include="Views\Pages\admin.aspx" />
     <Content Include="Views\Pages\index.aspx" />
     <Content Include="Views\Pages\login.aspx" />
+    <Content Include="Views\Pages\searchResults.aspx" />
     <Content Include="Views\Pages\shoppingCart.aspx" />
     <Content Include="Views\Pages\viewInstantSale.aspx" />
     <Content Include="Views\Pages\viewRaffleSale.aspx" />
