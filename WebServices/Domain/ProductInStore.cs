@@ -75,11 +75,5 @@ namespace wsep182.Domain
             return ProductManager.getInstance().getAllProductsInStores();
         }
 
-
-        public static LinkedList<ProductInStore> searchProducts(String searchString)
-        {
-            return ProductManager.getInstance().searchProducts(searchString);
-        }
-
     }
 }

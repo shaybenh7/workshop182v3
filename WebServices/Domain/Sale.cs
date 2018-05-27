@@ -53,7 +53,21 @@ namespace wsep182.Domain
                 return getPriceBeforeDiscount(amount);
             }
         }
-        public static LinkedList<Sale> getAllSales()
+
+		public static LinkedList<Sale> searchSales(String searchString)
+		{
+			LinkedList<Sale> allAvailableSales = new LinkedList<Sale>();
+			LinkedList<ProductInStore> allProducts = ProductManager.getInstance().searchProducts(searchString);
+			foreach (ProductInStore p in allProducts)
+			{
+				LinkedList<Sale> allSalesOfAProduct = SalesManager.getInstance().getSalesByProductInStoreId(p.getProductInStoreId());
+				foreach (Sale sale in allSalesOfAProduct)
+					allAvailableSales.AddLast(sale);
+			}
+			return allAvailableSales;
+		}
+
+		public static LinkedList<Sale> getAllSales()
         {
             return SalesManager.getInstance().getAllSales();
         }

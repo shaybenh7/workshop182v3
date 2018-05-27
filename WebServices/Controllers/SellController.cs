@@ -337,6 +337,12 @@ namespace WebService.Controllers
             return response;
         }
 
+		[Route("api/sell/search")]
+		[HttpGet]
+		public List<Object> search(String query)
+		{
+			return sellServices.getInstance().search(query);
+		}
 
-    }
+	}
 }

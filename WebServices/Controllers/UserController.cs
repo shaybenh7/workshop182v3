@@ -275,14 +275,6 @@ namespace WebService.Controllers
         }
 
 
-        [Route("api/user/search")]
-        [HttpGet]
-        public List<Object> search(String query)
-        {
-            return userServices.getInstance().search(query);
-        }
-
-
 
     }
 }

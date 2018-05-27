@@ -243,12 +243,12 @@ namespace wsep182.Domain
         
         public LinkedList<ProductInStore> searchProducts(String searchString)
         {
-            //TODO:: search for pis where category == searchString or name == searchString
             LinkedList<ProductInStore> res = new LinkedList<ProductInStore>();
-            foreach (ProductInStore p in productsInStores)
-                if (p.getIsActive() == 1)
-                    res.AddLast(p);
-            return res;
+			StringComparison comp = StringComparison.OrdinalIgnoreCase;
+			foreach (ProductInStore p in productsInStores)
+				if (p.getIsActive() == 1 && (p.getProduct().getProductName().IndexOf(searchString, comp) != -1 || p.Category.IndexOf(searchString, comp) != -1))
+					res.AddLast(p);
+			return res;
         }
     }
 }

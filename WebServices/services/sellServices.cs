@@ -123,5 +123,11 @@ namespace wsep182.services
             return session.applyCoupon(couponId,country);
         }
 
-    }
+		//returns Objects in case we also want to search for stores and other stuff with the same query
+		public List<Object> search(String searchString)
+		{
+			return Sale.searchSales(searchString).ToList<Object>();
+		}
+
+	}
 }

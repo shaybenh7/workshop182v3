@@ -26,14 +26,16 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            var searchQuery = <%=ViewData["query"]%>;
+            var searchQuery = "<%=ViewData["query"]%>";
             var mainDiv = document.getElementById('allSalesComponent');
             jQuery.ajax({
                 type: "GET",
-                url: baseUrl + "/api/user/search?query=" + searchQuery,
+                url: baseUrl + "/api/sell/search?query=" + searchQuery,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (response) {
+				success: function (response) {
+					console.log("success: ");
+					console.log(response);
                     var i;
                     for (i = 0; i < response.length; i++) {
 
