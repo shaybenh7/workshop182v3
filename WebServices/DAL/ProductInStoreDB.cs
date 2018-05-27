@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebServices.Domain;
 using wsep182.Domain;
 
 namespace WebServices.DAL
@@ -41,10 +42,15 @@ namespace WebServices.DAL
             con.Open();
 
             MySqlDataReader reader = cmd.ExecuteReader();
-
+            ProductDB pdb = new ProductDB(configuration.DB_MODE);
             while (reader.Read())
             {
-                Product product = ProductManager.getInstance().getProductByName(reader.GetString("product"));
+                Product product = null;
+                String productName = reader.GetString("product");
+                LinkedList<Product> products = pdb.Get();
+                foreach (Product p in products)
+                    if (p.getProductName().Equals(productName))
+                        product = p;
                 Store store = storeArchive.getInstance().getStore(reader.GetInt32("store"));
                 int quantity = reader.GetInt32("quantity");
                 double price = reader.GetDouble("price");

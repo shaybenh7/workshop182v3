@@ -22,13 +22,12 @@ namespace wsep182.Domain
             productDB = new ProductDB(configuration.DB_MODE);
             productInStoreDB = new ProductInStoreDB(configuration.DB_MODE);
             products = productDB.Get();
-            //productsInStores = productInStoreDB.Get(); //BUGGG NEEDS TO BE FIXED BY ITAMAR THE RUSSIAN
-            productsInStores = new LinkedList<ProductInStore>();
+            productsInStores = productInStoreDB.Get(); 
             productInStoreId = 0;
             productId = 0;
         }
         public static ProductManager getInstance()
-        {
+        {   
             if (instance == null)
                 instance = new ProductManager();
             return instance;
