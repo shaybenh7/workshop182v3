@@ -31,94 +31,94 @@ namespace wsep182.Domain
                 {
                     case "addProductInStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].addProductInStore(username, true);
                         
                         break;
 
                     case "editProductInStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].editProductInStore(username, true);
                         break;
 
                     case "removeProductFromStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                          privilegesOfaStore[storeId].removeProductFromStore(username, true);
 
                         break;
 
                     case "addStoreManager":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].addStoreManager(username, true);
                         break;
 
                     case "removeStoreManager":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].removeStoreManager(username, true);
                         break;
                     case "addManagerPermission":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].addManagerPermission(username, true);
                         break;
                     case "removeManagerPermission":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].removeManagerPermission(username, true);
                         break;
                     case "viewPurchasesHistory":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].viewPurchasesHistory(username, true);
                         break;
                     case "removeSaleFromStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].removeSaleFromStore(username, true);
                         break;
                     case "editSale":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].editSale(username, true);
                         break;
                     case "addSaleToStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].addSaleToStore(username, true);
                         break;
                     case "addDiscount":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].addDiscount(username, true);
                         break;
                     case "addNewCoupon":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].addNewCoupon(username, true);
                         break;
                     case "removeDiscount":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].removeDiscount(username, true);
                         break;
                     case "removeCoupon":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].removeCoupon(username, true);
                         break;
                     case "changePolicy":
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].changePolicy(username, true);
                         break;
                     
                     default:
                         if (!privilegesOfaStore.ContainsKey(storeId))
-                            privilegesOfaStore.Add(storeId, new StorePremissions());
+                            privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         break;
                 }
             }
@@ -130,10 +130,16 @@ namespace wsep182.Domain
             return instance;
         }
 
+        public StorePremissions GetPremissionsOfAStore(int storeId)
+        {
+            if (!privilegesOfaStore.ContainsKey(storeId))
+                return null;
+            return privilegesOfaStore[storeId];
+        }
         public Premissions getAllPremissions(int storeId, string username)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             return privilegesOfaStore[storeId].getPrivileges(username);
         }
 
@@ -146,7 +152,7 @@ namespace wsep182.Domain
         public void addProductInStore(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int,String,String>(storeId, username, "addProductInStore"));
             else
@@ -157,7 +163,7 @@ namespace wsep182.Domain
         public void editProductInStore(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "editProductInStore"));
             else
@@ -168,7 +174,7 @@ namespace wsep182.Domain
         public void removeProductFromStore(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeProductFromStore"));
             else
@@ -179,7 +185,7 @@ namespace wsep182.Domain
         public void addStoreManager(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addStoreManager"));
             else
@@ -190,7 +196,7 @@ namespace wsep182.Domain
         public void addDiscount(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addDiscount"));
             else
@@ -201,7 +207,7 @@ namespace wsep182.Domain
         public void addNewCoupon(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addNewCoupon"));
             else
@@ -212,7 +218,7 @@ namespace wsep182.Domain
         public void removeDiscount(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeDiscount"));
             else
@@ -223,7 +229,7 @@ namespace wsep182.Domain
         public void removeCoupon(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeCoupon"));
             else
@@ -234,7 +240,7 @@ namespace wsep182.Domain
         public void removeStoreManager(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeStoreManager"));
             else
@@ -245,7 +251,7 @@ namespace wsep182.Domain
         public void addManagerPermission(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addManagerPermission"));
             else
@@ -256,7 +262,7 @@ namespace wsep182.Domain
         public void removeManagerPermission(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeManagerPermission"));
             else
@@ -267,7 +273,7 @@ namespace wsep182.Domain
         public void addSaleToStore(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addSaleToStore"));
             else
@@ -278,7 +284,7 @@ namespace wsep182.Domain
         public void removeSaleFromStore(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeSaleFromStore"));
             else
@@ -289,7 +295,7 @@ namespace wsep182.Domain
         public void editSale(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "editSale"));
             else
@@ -300,7 +306,7 @@ namespace wsep182.Domain
         public void viewPurchasesHistory(int storeId, string username, Boolean allow)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             if(allow)
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "viewPurchasesHistory"));
             else
@@ -311,7 +317,7 @@ namespace wsep182.Domain
         public Boolean checkPrivilege(int storeId, string username, string privilege)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                privilegesOfaStore.Add(storeId, new StorePremissions());
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             return privilegesOfaStore[storeId].checkPrivilege(username, privilege);
         }
         
