@@ -81,6 +81,12 @@ namespace WebServices.Controllers
             return View();
         }
 
+        public ActionResult searchResults(string query)
+        {
+            ViewData["query"] = query;
+            return View();
+        }
+
         public ActionResult shoppingCart()
         {
             return View();

@@ -168,7 +168,7 @@
                                                         <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="search" id="searchInput" value="search...">
                                                         <div class="focus-input1 trans-04"></div>
                                                     </div>
-                                                    <input type="button" value="Search" id="searchButton" onclick="addProductFunct();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                    <input type="button" value="Search" id="searchButton" onclick="searchFunction();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
                                                 </div>
 
 
@@ -224,6 +224,11 @@
 
 
             });
+
+            function searchFunction() {
+                searchInput = $("#searchInput").val();
+                window.location.href = baseUrl + "/searchResults?query=" + searchInput;
+            }
 
             function getCookie(name) {
                 var dc = document.cookie;
