@@ -16,25 +16,24 @@ namespace WebServices.DAL
         {
             try
             {
-            string sql = "INSERT INTO StorePermission (storeId, username, premission, isActive)" +
-                             " VALUES (" + t.Item1 + ", '" + t.Item2 + "', '" + t.Item3 + "', "+ 1 + ") " +
-                             " ON DUPLICATE KEY UPDATE " +
-                             " isActive ="+1;
-            MySqlCommand cmd = new MySqlCommand(sql, con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-            return true;
+                con.Open();
+                string sql = "INSERT INTO StorePermission (storeId, username, premission)" +
+                                    " VALUES (" + t.Item1 + ", '" + t.Item2 + "', '" + t.Item3 + "' ) ";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
             }
             catch (Exception /*ex*/)
             {
                 con.Close();
                 return false;
             }
-        }
+            }
 
         public override LinkedList<Tuple<int, String, String>> Get()
         {
-            string sql = " SELECT * FROM StorePermission WHERE isActive= " + 1;
+            string sql = " SELECT * FROM StorePermission";
             LinkedList<Tuple<int, String, String>> StorePer = new LinkedList<Tuple<int, String, String>>();
 
             MySqlCommand cmd = new MySqlCommand(sql, con);
@@ -55,13 +54,14 @@ namespace WebServices.DAL
             return StorePer;
         }
 
+
         public override bool Remove(Tuple<int, String, String> t)
         {
             try
             {
                 con.Open();
 
-                string sql = "UPDATE FROM StorePermission SET isActive=" + 0 +"WHERE storeId = " + t.Item1 + " AND username is '" + t.Item2 + "' AND premission is" + t.Item3 +" ; ";
+                string sql = "DELETE FROM StorePermission " +"WHERE storeId = " + t.Item1 + " AND username is '" + t.Item2 + "' AND premission = '" + t.Item3 +"' ; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();

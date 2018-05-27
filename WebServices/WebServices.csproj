@@ -204,6 +204,7 @@
     <Compile Include="DAL\RaffleSaleDB.cs" />
     <Compile Include="DAL\SaleDB.cs" />
     <Compile Include="DAL\StoreDB.cs" />
+    <Compile Include="DAL\StorePremissionsDB.cs" />
     <Compile Include="DAL\StoreRoleDictionaryDB.cs" />
     <Compile Include="DAL\UserDB.cs" />
     <Compile Include="Domain\Admin.cs" />
