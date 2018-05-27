@@ -159,7 +159,11 @@ namespace wsep182.services
             return session.getAllStoreRolesOfAUser(username);
         }
 
-
+        //returns Objects in case we also want to search for stores and other stuff with the same query
+        public List<Object> search(String searchString)
+        {
+            return ProductInStore.searchProducts(searchString).ToList<Object>();
+        }
   }
 }
  

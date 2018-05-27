@@ -240,5 +240,15 @@ namespace wsep182.Domain
                     res.AddLast(p);
             return res;
         }
+        
+        public LinkedList<ProductInStore> searchProducts(String searchString)
+        {
+            //TODO:: search for pis where category == searchString or name == searchString
+            LinkedList<ProductInStore> res = new LinkedList<ProductInStore>();
+            foreach (ProductInStore p in productsInStores)
+                if (p.getIsActive() == 1)
+                    res.AddLast(p);
+            return res;
+        }
     }
 }
