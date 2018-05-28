@@ -133,7 +133,7 @@ namespace wsep182.Domain
         public StorePremissions GetPremissionsOfAStore(int storeId)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                return null;
+                return new StorePremissions(storeId);//check aviad
             return privilegesOfaStore[storeId];
         }
         public Premissions getAllPremissions(int storeId, string username)
