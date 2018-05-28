@@ -13,6 +13,11 @@ namespace wsep182.Domain
             type = "Customer";
         }
 
+        public Customer(User u, Store s,String addedBy) : base(u, s, addedBy)
+        {
+            type = "Customer";
+        }
+
         public LinkedList<Purchase> viewStoreHistory(Store store, User session)
         {
             return null;

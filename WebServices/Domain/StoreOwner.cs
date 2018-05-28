@@ -12,5 +12,9 @@ namespace wsep182.Domain
         {
             type = "Owner";
         }
+        public StoreOwner(User u, Store s,String addedBy) : base(u, s, addedBy)
+        {
+            type = "Owner";
+        }
     }
 }
