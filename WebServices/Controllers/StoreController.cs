@@ -16,6 +16,7 @@ namespace WebService.Controllers
         [HttpGet]
         public string createStore(String storeName)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().createStore(storeName, session);
             if(ans>0)
@@ -30,6 +31,11 @@ namespace WebService.Controllers
                     return "error: illegal store name";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -37,9 +43,17 @@ namespace WebService.Controllers
         [HttpGet]
         public HttpResponseMessage getAllStores()
         {
-            LinkedList<Store> stores = storeServices.getInstance().getAllStores();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, stores);
-            return response;
+            HttpResponseMessage response;
+            try {
+                LinkedList<Store> stores = storeServices.getInstance().getAllStores();
+                response = Request.CreateResponse(HttpStatusCode.OK, stores);
+                return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/store/setAmountPolicyOnStore")]
@@ -50,14 +64,20 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
-            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            int ans = storeServices.getInstance().setAmountPolicyOnStore(session, storeId, minAmount, maxAmount);
-            if (ans > 0)
-                return "Policy added successfully";
-            if (ans == -4)
-                return "You dont have permissions";
-            return "Policy failed";
-
+            try
+            {
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                int ans = storeServices.getInstance().setAmountPolicyOnStore(session, storeId, minAmount, maxAmount);
+                if (ans > 0)
+                    return "Policy added successfully";
+                if (ans == -4)
+                    return "You dont have permissions";
+                return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/setNoDiscountPolicyOnStore")]
@@ -68,6 +88,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoDiscountPolicyOnStore(session, storeId);
             if (ans > 0)
@@ -75,6 +96,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
 
         }
 
@@ -86,6 +112,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoDiscountPolicyOnCategoty(session, storeId, category);
             if (ans > 0)
@@ -93,7 +120,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
-
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/setNoDiscountPolicyOnCountry")]
@@ -104,6 +135,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoDiscountPolicyOnCountry(session, storeId, country);
             if (ans > 0)
@@ -111,7 +143,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
-
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/setNoCouponsPolicyOnStore")]
@@ -122,6 +158,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoCouponsPolicyOnStore(session, storeId);
             if (ans > 0)
@@ -129,6 +166,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
 
         }
 
@@ -140,6 +182,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoCouponPolicyOnProductInStore(session, storeId, productInStoreId);
             if (ans > 0)
@@ -147,7 +190,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
-
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/setNoDiscountPolicyOnProductInStore")]
@@ -158,6 +205,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoDiscountPolicyOnProductInStore(session, storeId, productInStoreId);
             if (ans > 0)
@@ -165,6 +213,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/setNoCouponPolicyOnCountry")]
@@ -175,6 +228,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setNoCouponPolicyOnCountry(session, storeId, country);
             if (ans > 0)
@@ -182,6 +236,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -193,6 +252,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setAmountPolicyOnCategory(session, storeId, category, minAmount, maxAmount);
             if (ans > 0)
@@ -200,6 +260,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/setAmountPolicyOnProductInStore")]
@@ -210,6 +275,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setAmountPolicyOnProductInStore(session, storeId, productInStoreId, minAmount, maxAmount);
             if (ans > 0)
@@ -217,6 +283,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeAmountPolicyOnStore")]
@@ -227,6 +298,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeAmountPolicyOnStore(session, storeId);
             if (ans > 0)
@@ -234,6 +306,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeAmountPolicyOnCategory")]
@@ -244,6 +321,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeAmountPolicyOnCategory(session, storeId, category);
             if (ans > 0)
@@ -251,6 +329,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeAmountPolicyOnProductInStore")]
@@ -261,6 +344,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeAmountPolicyOnProductInStore(session, storeId, productInStoreId);
             if (ans > 0)
@@ -268,6 +352,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -279,6 +368,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeAmountPolicyOnCountry(session, storeId, country);
             if (ans > 0)
@@ -286,6 +376,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoDiscountPolicyOnStore")]
@@ -296,6 +391,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoDiscountPolicyOnStore(session, storeId);
             if (ans > 0)
@@ -303,6 +399,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoDiscountPolicyOnCategoty")]
@@ -313,6 +414,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoDiscountPolicyOnCategoty(session, storeId,category);
             if (ans > 0)
@@ -320,6 +422,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoDiscountPolicyOnProductInStore")]
@@ -330,6 +437,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoDiscountPolicyOnProductInStore(session, storeId, productInStoreId);
             if (ans > 0)
@@ -337,6 +445,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoDiscountPolicyOnCountry")]
@@ -347,6 +460,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoDiscountPolicyOnCountry(session, storeId, country);
             if (ans > 0)
@@ -354,6 +468,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoCouponsPolicyOnStore")]
@@ -364,6 +483,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoCouponsPolicyOnStore(session, storeId);
             if (ans > 0)
@@ -371,6 +491,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoCouponPolicyOnCategoty")]
@@ -381,6 +506,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoCouponPolicyOnCategoty(session, storeId,category);
             if (ans > 0)
@@ -388,6 +514,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoCouponPolicyOnProductInStore")]
@@ -398,6 +529,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoCouponPolicyOnProductInStore(session, storeId, productInStoreId);
             if (ans > 0)
@@ -405,6 +537,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeNoCouponPolicyOnCountry")]
@@ -415,6 +552,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeNoCouponPolicyOnCountry(session, storeId, country);
             if (ans > 0)
@@ -422,6 +560,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -433,6 +576,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().setAmountPolicyOnCountry(session, storeId, country, minAmount, maxAmount);
             if (ans > 0)
@@ -440,6 +584,11 @@ namespace WebService.Controllers
             if (ans == -4)
                 return "You dont have permissions";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -448,6 +597,7 @@ namespace WebService.Controllers
         [HttpGet]
         public string addProductInStore(String productName, Double price, int amount, int storeId,string category)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().addProductInStore(productName, price, amount, session, storeId,category);
             if (ans > 0)
@@ -470,12 +620,18 @@ namespace WebService.Controllers
                     return "error: illegal price";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/editProductInStore")]
         [HttpGet]
         public string editProductInStore(int productInStoreId, Double price, int amount, int storeId)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().editProductInStore(session, storeId, productInStoreId, amount, price);
             switch (ans)
@@ -502,21 +658,35 @@ namespace WebService.Controllers
                     return "error: database error";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
         
         [Route("api/store/getProductInStore")]
         [HttpGet]
         public HttpResponseMessage getProductInStore(int storeId)
         {
+            HttpResponseMessage response;
+            try {
             LinkedList<ProductInStore> pis = storeServices.getInstance().getProductsInStore(storeId);
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, pis);
+            response = Request.CreateResponse(HttpStatusCode.OK, pis);
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
         
         [Route("api/store/removeProductFromStore")]
         [HttpGet]
         public string removeProductFromStore(int storeId, int ProductInStoreId)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeProductFromStore(storeId, ProductInStoreId, session);  
             switch (ans)
@@ -543,17 +713,28 @@ namespace WebService.Controllers
                     return "error: database error";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/addStoreOwner")]
         [HttpGet]
         public string addStoreOwner(int storeId, String newOwner)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             Boolean ans = storeServices.getInstance().addStoreOwner(storeId, newOwner, session);
             if (ans)
                 return "the User "+ newOwner +" has been added as owner sussesfuly";
             return "server error: could not add this user as owner";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -561,6 +742,7 @@ namespace WebService.Controllers
         [HttpGet]
         public string removeStoreOwner(int storeId, String oldOwner)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeStoreOwner(storeId, oldOwner, session);
             switch (ans)
@@ -593,6 +775,11 @@ namespace WebService.Controllers
                     return "error: can't dealet creator";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -600,6 +787,7 @@ namespace WebService.Controllers
         [HttpGet]
         public string addStoreManager(int storeId, String newManager)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().addStoreManager(storeId, newManager, session);
             switch (ans)
@@ -620,12 +808,18 @@ namespace WebService.Controllers
                     return "error: the user is already owner or manneger";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeStoreManager")]
         [HttpGet]
         public string removeStoreManager(int storeId, String oldManageruserName)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeStoreManager(storeId, oldManageruserName, session);
             switch (ans)
@@ -648,12 +842,18 @@ namespace WebService.Controllers
                     return "error: try to remove himself";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/addManagerPermission")]
         [HttpGet]
         public string addManagerPermission(int storeId, String ManageruserName,string permission)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().addManagerPermission(permission, storeId, ManageruserName, session);
             switch (ans)
@@ -676,12 +876,18 @@ namespace WebService.Controllers
                     return ManageruserName + " is not a manager in this store";
             }
             return "Server error: not suppose to happen";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeManagerPermission")]
         [HttpGet]
         public string removeManagerPermission(int storeId, String ManageruserName, string permission)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeManagerPermission(permission, storeId, ManageruserName, session);
             switch (ans)
@@ -702,6 +908,11 @@ namespace WebService.Controllers
                     return "Error: no such permission";
             }
             return "Server error: not suppose to happen";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/viewStoreHistory")]
@@ -711,15 +922,23 @@ namespace WebService.Controllers
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             LinkedList<Purchase> history = storeServices.getInstance().viewStoreHistory(session,storeId);
             HttpResponseMessage response;
-            if (history == null)
+            try
             {
-                response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
+                if (history == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, history);
+                }
+                return response;
             }
-            else
+            catch (Exception e)
             {
-                response = Request.CreateResponse(HttpStatusCode.OK, history);
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
             }
-            return response;
         }
 
         [Route("api/store/viewUserHistory")]
@@ -729,67 +948,83 @@ namespace WebService.Controllers
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             User u = UserManager.getInstance().getUser(userToGet);
             HttpResponseMessage response;
-            if (u == null)
+            try
             {
-                response = Request.CreateResponse(HttpStatusCode.OK, "Error: user does not exist!");
+                if (u == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Error: user does not exist!");
+                    return response;
+                }
+                Object history = storeServices.getInstance().viewUserHistory(session, userToGet);
+
+                if (history == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Error: permissions or user not valid!");
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, history);
+                }
                 return response;
             }
-            Object history = storeServices.getInstance().viewUserHistory(session, userToGet);
-            
-            if (history == null)
+            catch (Exception e)
             {
-                response = Request.CreateResponse(HttpStatusCode.OK, "Error: permissions or user not valid!");
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
             }
-            else
-            {
-                response = Request.CreateResponse(HttpStatusCode.OK, history);
-            }
-            return response;
         }
 
         [Route("api/store/addSaleToStore")]
         [HttpGet]
         public string addSaleToStore(int storeId, int pisId, int typeOfSale, int amount, String dueDtae)
         {
-            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            int ans = storeServices.getInstance().addSaleToStore(session, storeId, pisId, typeOfSale, amount, dueDtae);
-            if (ans > 0)
-                return "sale " + ans + " successfuly added";
-            switch (ans)
-            { 
-                case -1:
-                    return "Error: username is not login";
-                case -3:
-                    return "Error: illegal product name";
-                case -4:
-                    return "Error: don't have permission";
-                case -5:
-                    return "Error: Illegal amount! The amount entered is bigger than the amount in stock";
-                case -6:
-                    return "Error: illegal store id";
-                case -7:
-                    return "Error: illegal price";
-                case -8:
-                    return "Error: illegal product id";
-                case -9:
-                    return "Error: database error";
-                case -10:
-                    return "Error: illegal due date";
-                case -11:
-                    return "Error: illegal type of sale";
-                case -12:
-                    return "Error: illegal amount";
-                case -13:
-                    return "Error: product not in this store";
+            try
+            {
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                int ans = storeServices.getInstance().addSaleToStore(session, storeId, pisId, typeOfSale, amount, dueDtae);
+                if (ans > 0)
+                    return "sale " + ans + " successfuly added";
+                switch (ans)
+                {
+                    case -1:
+                        return "Error: username is not login";
+                    case -3:
+                        return "Error: illegal product name";
+                    case -4:
+                        return "Error: don't have permission";
+                    case -5:
+                        return "Error: Illegal amount! The amount entered is bigger than the amount in stock";
+                    case -6:
+                        return "Error: illegal store id";
+                    case -7:
+                        return "Error: illegal price";
+                    case -8:
+                        return "Error: illegal product id";
+                    case -9:
+                        return "Error: database error";
+                    case -10:
+                        return "Error: illegal due date";
+                    case -11:
+                        return "Error: illegal type of sale";
+                    case -12:
+                        return "Error: illegal amount";
+                    case -13:
+                        return "Error: product not in this store";
 
+                }
+                return "Server error: not suppose to happen";
             }
-            return "Server error: not suppose to happen";
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeSaleFromStore")]
         [HttpGet]
         public string removeSaleFromStore(int storeId, int saleId)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().removeSaleFromStore(session, storeId, saleId);
             
@@ -812,12 +1047,18 @@ namespace WebService.Controllers
 
             }
             return "Server error: not suppose to happen";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/editSale")]
         [HttpGet]
         public string editSale(int storeId, int saleId, int amount, String dueDate)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = storeServices.getInstance().editSale(session, storeId, saleId, amount, dueDate);
             switch (ans)
@@ -846,6 +1087,11 @@ namespace WebService.Controllers
                  
             }
             return "Server error: not suppose to happen";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/addCouponDiscount")]
@@ -853,6 +1099,7 @@ namespace WebService.Controllers
         public string addCouponDiscount(int storeId, String couponId, int type, string towaht
             , int percentage, string dueDate, string restrictions)
         {
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans;
             List<int> emptyInt = new List<int>();
@@ -893,6 +1140,11 @@ namespace WebService.Controllers
             else if (ans == -2)
                 return "We're sorry, theres seem to be a problem with our database. Please try again later.";
             return "Coupons failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/addDiscount")]
@@ -905,6 +1157,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
 
             if (type == 1)
@@ -943,6 +1196,11 @@ namespace WebService.Controllers
             else if (ans == -2)
                 return "We're sorry, theres seem to be a problem with our database. Please try again later.";
             return "Coupons failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/store/removeDiscount")]
@@ -963,9 +1221,10 @@ namespace WebService.Controllers
         [HttpGet]
         public HttpResponseMessage getStoreNameById(int storeId)
         {
+            HttpResponseMessage response;
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             String name= storeServices.getInstance().getStoreNameById(storeId);
-            HttpResponseMessage response;
             if (name == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.OK, "Errror: store name not valid!");
@@ -975,6 +1234,12 @@ namespace WebService.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, name);
             }
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/store/getOwners")]
@@ -984,6 +1249,7 @@ namespace WebService.Controllers
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             Object owners = storeServices.getInstance().getOwners(storeId);
             HttpResponseMessage response;
+            try {
             if (owners == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
@@ -993,35 +1259,49 @@ namespace WebService.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, owners);
             }
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/store/getManagers")]
         [HttpGet]
         public HttpResponseMessage getManagers(int storeId)
         {
-            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            Object Managers = storeServices.getInstance().getManagers(storeId);
             HttpResponseMessage response;
-            if (Managers == null)
+            try
             {
-                response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                Object Managers = storeServices.getInstance().getManagers(storeId);
+                if (Managers == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
+                }
+                else
+                {
+                    response = Request.CreateResponse(HttpStatusCode.OK, Managers);
+                }
+                return response;
             }
-            else
+            catch (Exception e)
             {
-                response = Request.CreateResponse(HttpStatusCode.OK, Managers);
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
             }
-            return response;
         }
 
         [Route("api/store/viewSalesByStore")]
         [HttpGet]
         public HttpResponseMessage viewSalesByStore(int storeId)
         {
+            HttpResponseMessage response;
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             ProductManager.getInstance();
-
             Object sales = storeServices.getInstance().viewSalesByStore(storeId);
-            HttpResponseMessage response;
             if (sales == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
@@ -1031,14 +1311,21 @@ namespace WebService.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, sales);
             }
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/store/getProductInStoreById")]
         [HttpGet]
         public HttpResponseMessage getProductInStoreById(int id)
         {
-            ProductInStore productInStore = storeServices.getInstance().getProductInStoreById(id);
             HttpResponseMessage response;
+            try {
+            ProductInStore productInStore = storeServices.getInstance().getProductInStoreById(id);
             if (productInStore == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
@@ -1048,7 +1335,12 @@ namespace WebService.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, productInStore);
             }
             return response;
-             
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
 
@@ -1056,8 +1348,9 @@ namespace WebService.Controllers
         [HttpGet]
         public HttpResponseMessage checkPriceOfAProduct(int saleId)
         {
-            Sale sale = storeServices.getInstance().getSaleById(saleId);
             HttpResponseMessage response;
+            try {
+            Sale sale = storeServices.getInstance().getSaleById(saleId);
             if (sale == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
@@ -1067,15 +1360,21 @@ namespace WebService.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, sale.getPriceAfterDiscount(1));
             }
             return response;
-
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/store/checkPriceOfAProductBeforeDiscount")]
         [HttpGet]
         public HttpResponseMessage checkPriceOfAProductBeforeDiscount(int saleId)
         {
-            Sale sale = storeServices.getInstance().getSaleById(saleId);
             HttpResponseMessage response;
+            try {
+            Sale sale = storeServices.getInstance().getSaleById(saleId);
             if (sale == null)
             {
                 response = Request.CreateResponse(HttpStatusCode.OK, "Errror: permissions or store not valid!");
@@ -1085,6 +1384,12 @@ namespace WebService.Controllers
                 response = Request.CreateResponse(HttpStatusCode.OK, sale.getPriceBeforeDiscount(1));
             }
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
 
         }
 
@@ -1094,9 +1399,10 @@ namespace WebService.Controllers
         [HttpGet]
         public HttpResponseMessage checkRaffleBids(int saleId)
         {
+            HttpResponseMessage response;
+            try {
             string hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
             User session = hashServices.getUserByHash(hash);
-            HttpResponseMessage response;
             double ans = sellServices.getInstance().getRemainingSumToPayInRaffleSale(session, saleId);
             switch (ans)
             {
@@ -1114,19 +1420,32 @@ namespace WebService.Controllers
                     break;
             }
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
         [Route("api/store/showPolicy")]
         [HttpGet]
         public HttpResponseMessage showPolicy(int saleId)
         {
+            HttpResponseMessage response;
+            try {
             string hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
             User session = hashServices.getUserByHash(hash);
-            HttpResponseMessage response;
             string ans = "Warning: Some of the restriction may change depending on the destination country! \n";
             int productInStoreId = SalesManager.getInstance().getSale(saleId).ProductInStoreId;
             ans += storeServices.getInstance().showPolicy(session, productInStoreId);
             response = Request.CreateResponse(HttpStatusCode.OK, ans);
             return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
 
