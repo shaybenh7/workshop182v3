@@ -21,21 +21,21 @@ namespace wsep182.Domain
             SRDDB = new StoreRoleDictionaryDB(configuration.DB_MODE);
             stores = SDB.Get();
             archive = new Dictionary<int, Dictionary<String, StoreRole>>();
-            LinkedList<Tuple<int, String, String>> temp = SRDDB.Get();
-            foreach(Tuple<int, String, String> t in temp)
+            LinkedList<Tuple<int, String, String,String>> temp = SRDDB.Get();
+            foreach(Tuple<int, String, String,String> t in temp)
             {
                 StoreRole sr=null;
                 if (t.Item3 == "Manager")
                 {
-                    sr=new StoreManager(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1));
+                    sr=new StoreManager(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1), t.Item4);
                 }
                 else if (t.Item3 == "Owner")
                 {
-                    sr = new StoreOwner(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1));
+                    sr = new StoreOwner(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1), t.Item4);
                 }
                 else if (t.Item3 == "Customer")
                 {
-                    sr = new Customer(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1));
+                    sr = new Customer(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1),"customer");
                 }
                 try
                 {
@@ -133,7 +133,7 @@ namespace wsep182.Domain
             if (archive[storeId].ContainsKey(userName))
                 return false;
             archive[storeId].Add(userName,newPremissions);
-            Tuple<int, String, String> t = new Tuple<int, String, String>(storeId, userName, newPremissions.type);
+            Tuple<int, String, String,String> t = new Tuple<int, String, String,String>(storeId, userName, newPremissions.type, newPremissions.addedby);
             SRDDB.Add(t);
             return true;
         }
@@ -147,9 +147,9 @@ namespace wsep182.Domain
                 
                 archive[storeId].Remove(userName);
                 archive[storeId].Add(userName, newPremissions);
-                Tuple<int, String, String> t = new Tuple<int, String, String>(storeId, userName, "");
+                Tuple<int, String, String,String> t = new Tuple<int, String, String,String>(storeId, userName, "","");
                 SRDDB.Remove(t);
-                t = new Tuple<int, String, String>(storeId, userName, newPremissions.type);
+                t = new Tuple<int, String, String,String>(storeId, userName, newPremissions.type, newPremissions.addedby);
                 SRDDB.Add(t);
                 return true;
             }
@@ -173,7 +173,7 @@ namespace wsep182.Domain
                 return false;
             if (archive[storeId].ContainsKey(userName))
             {
-                Tuple<int, String, String> t = new Tuple<int, String, String>(storeId, userName, "");
+                Tuple<int, String, String,String> t = new Tuple<int, String, String,String>(storeId, userName, "","");
                 SRDDB.Remove(t);
                 archive[storeId].Remove(userName);
                 return true;

@@ -11,10 +11,18 @@ namespace wsep182.Domain
         public User user;
         public Store store;
         public string type;
+        public string addedby;
 
         public StoreRole(User u, Store s) {
             user = u;
             store = s;
+        }
+
+        public StoreRole(User u, Store s,String addedby)
+        {
+            user = u;
+            store = s;
+            this.addedby = addedby;
         }
 
         public static StoreRole getStoreRole(Store store, User user)
@@ -114,7 +122,7 @@ namespace wsep182.Domain
                 return -6;//-6 already owner or manneger
             if (sr != null && (sr is Customer))
                 storeArchive.getInstance().removeStoreRole(s.getStoreId(), newManager.getUserName());
-            StoreRole m = new StoreManager(newManager, s);
+            StoreRole m = new StoreManager(newManager, s, session.userName);
             if (storeArchive.getInstance().addStoreRole(m, s.getStoreId(), newManager.getUserName()))
                 return 0;
             return -5;//-5 database error
@@ -151,7 +159,7 @@ namespace wsep182.Domain
                 removeStoreManager(session, s, newOwnerUserName);
             if (sr != null && (sr is Customer))
                 storeArchive.getInstance().removeStoreRole(s.getStoreId(), newOwner.getUserName());
-            StoreRole owner = new StoreOwner(newOwner, s);
+            StoreRole owner = new StoreOwner(newOwner, s,session.userName);
             return storeArchive.getInstance().addStoreRole(owner, s.getStoreId(), newOwner.getUserName());
         }
 
