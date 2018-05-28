@@ -525,60 +525,82 @@ namespace wsep182.Domain
             return PurchasePolicyManager.getInstance().removeNoCouponPolicyOnCountry(storeId, country);
         }
 
+        private StorePremissions getStorePremissions(Store s)
+        {
+            return StorePremissionsArchive.getInstance().GetPremissionsOfAStore(s.getStoreId());
+        }
+
         public Boolean correlate(User session, Store s, String permission, StoreRole sR, Boolean allow)
         {
+            String userName = session.getUserName();
             switch (permission)
             {
                 case "addProductInStore":
-                    sR.getPremissions(session,s).addProductInStore(allow);
+                    getStorePremissions(s).addProductInStore(userName, allow);
+                    //sR.getPremissions(session,s).addProductInStore(allow);
                     return true;
 
                 case "editProductInStore":
-                    sR.getPremissions(session, s).editProductInStore(allow);
+                    getStorePremissions(s).editProductInStore(userName, allow);
+                    //sR.getPremissions(session, s).editProductInStore(allow);
                     return true;
 
                 case "removeProductFromStore":
-                    sR.getPremissions(session, s).removeProductFromStore(allow);
+                    getStorePremissions(s).removeProductFromStore(userName, allow);
+                    //sR.getPremissions(session, s).removeProductFromStore(allow);
                     return true;
 
                 case "addStoreManager":
-                    sR.getPremissions(session, s).addStoreManager(allow);
+                    getStorePremissions(s).addStoreManager(userName, allow);
+                    //sR.getPremissions(session, s).addStoreManager(allow);
                     return true;
                 case "removeStoreManager":
-                    sR.getPremissions(session, s).removeStoreManager(allow);
+                    getStorePremissions(s).removeStoreManager(userName, allow);
+                    //sR.getPremissions(session, s).removeStoreManager(allow);
                     return true;
                 case "addManagerPermission":
-                    sR.getPremissions(session, s).addManagerPermission(allow);
+                    getStorePremissions(s).addManagerPermission(userName, allow);
+                    //sR.getPremissions(session, s).addManagerPermission(allow);
                     return true;
                 case "removeManagerPermission":
-                    sR.getPremissions(session, s).removeManagerPermission(allow);
+                    getStorePremissions(s).removeManagerPermission(userName, allow);
+                    //sR.getPremissions(session, s).removeManagerPermission(allow);
                     return true;
                 case "viewPurchasesHistory":
-                    sR.getPremissions(session, s).viewPurchasesHistory(allow);
+                    getStorePremissions(s).viewPurchasesHistory(userName, allow);
+                    //sR.getPremissions(session, s).viewPurchasesHistory(allow);
                     return true;
                 case "removeSaleFromStore":
-                    sR.getPremissions(session, s).removeSaleFromStore(allow);
+                    getStorePremissions(s).removeSaleFromStore(userName, allow);
+                    ///sR.getPremissions(session, s).removeSaleFromStore(allow);
                     return true;
                 case "editSale":
-                    sR.getPremissions(session, s).editSale(allow);
+                    getStorePremissions(s).editSale(userName, allow);
+                    //sR.getPremissions(session, s).editSale(allow);
                     return true;
                 case "addSaleToStore":
-                    sR.getPremissions(session, s).addSaleToStore(allow);
+                    getStorePremissions(s).addSaleToStore(userName, allow);
+                    //sR.getPremissions(session, s).addSaleToStore(allow);
                     return true;
                 case "addDiscount":
-                    sR.getPremissions(session, s).addDiscount(allow);
+                    getStorePremissions(s).addDiscount(userName, allow);
+                    //sR.getPremissions(session, s).addDiscount(allow);
                     return true;
                 case "addNewCoupon":
-                    sR.getPremissions(session, s).addNewCoupon(allow);
+                    getStorePremissions(s).addNewCoupon(userName, allow);
+                    //sR.getPremissions(session, s).addNewCoupon(allow);
                     return true;
                 case "removeDiscount":
-                    sR.getPremissions(session, s).removeDiscount(allow);
+                    getStorePremissions(s).removeDiscount(userName, allow);
+                    //sR.getPremissions(session, s).removeDiscount(allow);
                     return true;
                 case "removeCoupon":
-                    sR.getPremissions(session, s).removeCoupon(allow);
+                    getStorePremissions(s).removeCoupon(userName, allow);
+                    //sR.getPremissions(session, s).removeCoupon(allow);
                     return true;
                 case "changePolicy":
-                    sR.getPremissions(session, s).changePolicy(allow);
+                    getStorePremissions(s).changePolicy(userName, allow);
+                    //sR.getPremissions(session, s).changePolicy(allow);
                     return true;
 
 
