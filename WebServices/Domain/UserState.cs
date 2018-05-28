@@ -30,7 +30,7 @@ namespace wsep182.Domain
         public virtual int createStore(String storeName, User session)
         {
             Store newStore = storeArchive.getInstance().addStore(storeName, session);
-            storeArchive.getInstance().addStoreRole(new StoreOwner(session, newStore), newStore.getStoreId(), session.getUserName());
+            storeArchive.getInstance().addStoreRole(new StoreOwner(session, newStore, session.getUserName()), newStore.getStoreId(), session.getUserName());
             return newStore.getStoreId();
         }
 

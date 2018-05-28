@@ -15,6 +15,12 @@ namespace wsep182.Domain
             type = "Manager";
         }
 
+        public StoreManager(User u, Store s, String addedBy) : base(u, s, addedBy)
+        {
+            premissions = StorePremissionsArchive.getInstance();
+            type = "Manager";
+        }
+
         public override int addProductInStore(User session, Store s, String productName, double price, int amount, string category)
         {
             if (premissions.checkPrivilege(s.getStoreId(), session.getUserName(),"addProductInStore"))
