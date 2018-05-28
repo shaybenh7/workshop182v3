@@ -16,24 +16,31 @@ namespace WebService.Controllers
         [HttpGet]
         public string register(String Username, String Password)
         {
-            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            int ans = userServices.getInstance().register(session, Username, Password);
-            switch (ans)
+            try
             {
-                case 0:
-                    return "user successfuly added";
-                case -1:
-                    return "error: username is not entered";
-                case -2:
-                    return "error: password is not entered";
-                case -3:
-                    return "error: username contains spaces";
-                case -4:
-                    return "error: username allready exist in the system";
-                case -5:
-                    return "error: you are allready logged in";
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                int ans = userServices.getInstance().register(session, Username, Password);
+                switch (ans)
+                {
+                    case 0:
+                        return "user successfuly added";
+                    case -1:
+                        return "error: username is not entered";
+                    case -2:
+                        return "error: password is not entered";
+                    case -3:
+                        return "error: username contains spaces";
+                    case -4:
+                        return "error: username allready exist in the system";
+                    case -5:
+                        return "error: you are allready logged in";
+                }
+                return "server error: not suppose to happend";
             }
-            return "server error: not suppose to happend";
+            catch(Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -43,40 +50,73 @@ namespace WebService.Controllers
         {
             LinkedList<ProductInStore> pis = userServices.getInstance().viewProductsInStore(storeId);
             HttpResponseMessage response;
-            if (pis == null)
+            try
             {
-                response = Request.CreateResponse(HttpStatusCode.NotFound, "Store is not exist");
+                if (pis == null)
+                {
+                    response = Request.CreateResponse(HttpStatusCode.NotFound, "Store is not exist");
+                    return response;
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, pis);
                 return response;
             }
-            response = Request.CreateResponse(HttpStatusCode.OK, pis);
-            return response;
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/user/viewProductsInStores")]
         [HttpGet]
         public HttpResponseMessage viewProductsInStores()
         {
-            LinkedList<ProductInStore> pis = userServices.getInstance().viewProductsInStores();
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, pis);
-            return response;
+            try
+            {
+                LinkedList<ProductInStore> pis = userServices.getInstance().viewProductsInStores();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, pis);
+                return response;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response;
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/user/viewAllSales")]
         [HttpGet]
         public HttpResponseMessage viewAllSales()
         {
+            try {
             LinkedList<Sale> pis = userServices.getInstance().viewAllSales();
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, pis);
             return response;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response;
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/user/viewSaleById")]
         [HttpGet]
         public HttpResponseMessage viewSaleById(int saleId)
         {
+            try {
             Sale sale = userServices.getInstance().viewSalesBySaleId(saleId);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, sale);
             return response;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response;
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
 
@@ -84,15 +124,24 @@ namespace WebService.Controllers
         [HttpGet]
         public HttpResponseMessage viewStores()
         {
+            try {
             LinkedList<Store> stores = userServices.getInstance().viewStores();
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, stores);
             return response;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response;
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/user/login")]
         [HttpGet]
         public Object login(String Username, String Password)
         {
+            try {
             User session = userServices.getInstance().startSession();
             int ans = userServices.getInstance().login(session, Username, Password);
             switch (ans)
@@ -111,6 +160,11 @@ namespace WebService.Controllers
                     return "error: you are allready logged in";
             }
             return "server error: not suppose to happend";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -132,6 +186,7 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().removeUser(session, userDeleted);
             switch(ans)
@@ -152,6 +207,11 @@ namespace WebService.Controllers
                     return "the user you want to remove is a owner or creator of other stores";
             }
             return "not implemented";
+            }
+            catch (Exception e)
+            {
+               return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/user/setAmountPolicyOnProduct")]
@@ -162,11 +222,17 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().setAmountPolicyOnProduct(session,productName,minAmount,maxAmount);
             if(ans>0)
                 return "Policy added successfully";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/user/setNoCouponsPolicyOnProduct")]
@@ -177,11 +243,17 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().setNoCouponsPolicyOnProduct(session, productName);
             if (ans > 0)
                 return "Policy added successfully";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -194,11 +266,17 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().setNoDiscountPolicyOnProduct(session, productName);
             if (ans > 0)
                 return "Policy added successfully";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
@@ -210,11 +288,17 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().removeAmountPolicyOnProduct(session, productName);
             if (ans > 0)
                 return "Policy removed successfully";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/user/removeNoDiscountPolicyOnProduct")]
@@ -225,11 +309,17 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().removeNoDiscountPolicyOnProduct(session, productName);
             if (ans > 0)
                 return "Policy removed successfully";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
         [Route("api/user/removeNoCouponsPolicyOnProduct")]
@@ -240,38 +330,71 @@ namespace WebService.Controllers
             {
                 return "Not logged in";
             }
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             int ans = userServices.getInstance().removeNoCouponsPolicyOnProduct(session, productName);
             if (ans > 0)
                 return "Policy removed successfully";
             return "Policy failed";
+            }
+            catch (Exception e)
+            {
+                return "could not connect to the Database, please try again later.";
+            }
         }
 
 
 
         [Route("api/user/getAllStoresUnderUser")]
         [HttpGet]
-        public LinkedList<StoreRole> getAllStoreRolesOfAUser()
+        public HttpResponseMessage getAllStoreRolesOfAUser()
         {
-            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            return userServices.getInstance().getAllStoreRolesOfAUser(session, session.getUserName());
+            HttpResponseMessage response;
+            try {
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                response = Request.CreateResponse(HttpStatusCode.OK, userServices.getInstance().getAllStoreRolesOfAUser(session, session.getUserName()));
+                return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/user/getPremissionsOfAManager")]
         [HttpGet]
-        public Premissions getPremissionsOfAManager(string username, int storeId)
+        public HttpResponseMessage getPremissionsOfAManager(string username, int storeId)
         {
-            User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            return userServices.getInstance().getPremissions(session, username, storeId);
+            HttpResponseMessage response;
+            try {
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                response = Request.CreateResponse(HttpStatusCode.OK, userServices.getInstance().getPremissions(session, username, storeId));
+                return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
         [Route("api/user/getPremissionsOfAManager")]
         [HttpGet]
-        public Premissions getPremissionsOfAManager(int storeId)
+        public HttpResponseMessage getPremissionsOfAManager(int storeId)
         {
+            HttpResponseMessage response;
+            try {
             User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             string username = session.getUserName();
-            return userServices.getInstance().getPremissions(session, username, storeId);
+            response = Request.CreateResponse(HttpStatusCode.OK, userServices.getInstance().getPremissions(session, username, storeId));
+            return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
         }
 
 

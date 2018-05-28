@@ -9,12 +9,12 @@ namespace WebServices.DAL
 {
     public class DiscountDB : BaseDBConnector<Discount>
     {
-        private static DiscountDB instance = null;
 
         public DiscountDB(string mode) : base(mode) { }
 
         public override LinkedList<Discount> Get()
         {
+            try {
             string sql = " SELECT * FROM Discount";
             LinkedList<Discount> discounts = new LinkedList<Discount>();
 
@@ -48,6 +48,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return discounts;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override Boolean Add(Discount d)
@@ -64,10 +70,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
@@ -84,10 +90,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }

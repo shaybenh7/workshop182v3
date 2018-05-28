@@ -24,15 +24,16 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
         public override LinkedList<RaffleSale> Get()
         {
+            try {
             string sql = " SELECT * FROM RaffleSale";
             LinkedList<RaffleSale> raffleSale = new LinkedList<RaffleSale>();
 
@@ -54,6 +55,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return raffleSale;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override bool Remove(RaffleSale rs)
@@ -67,10 +74,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }

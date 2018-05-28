@@ -34,42 +34,49 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
+
         }
 
         public override LinkedList<User> Get()
         {
-            string sql = " SELECT * FROM User";
-            LinkedList<User> users = new LinkedList<User>();
-
-            MySqlCommand cmd = new MySqlCommand(sql, con);
-
-            con.Open();
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                int state = reader.GetInt32("state");
-                string userName = reader.GetString("userName");
-                string password = reader.GetString("password");
-                Boolean isActive = reader.GetBoolean("isActive");
-                User u = new User(userName, password);
-                u.setIsActive(isActive);
-                if (state == 2)
-                    u.setState(new LogedIn());
-                else if (state == 3)
-                    u.setState(new Admin());
-                users.AddLast(u);
+                string sql = " SELECT * FROM User";
+                LinkedList<User> users = new LinkedList<User>();
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int state = reader.GetInt32("state");
+                    string userName = reader.GetString("userName");
+                    string password = reader.GetString("password");
+                    Boolean isActive = reader.GetBoolean("isActive");
+                    User u = new User(userName, password);
+                    u.setIsActive(isActive);
+                    if (state == 2)
+                        u.setState(new LogedIn());
+                    else if (state == 3)
+                        u.setState(new Admin());
+                    users.AddLast(u);
+                }
+                con.Close();
+                foreach (User u in users)
+                    u.shoppingCart = GetShoppingCart(u.userName);
+                return users;
             }
-            con.Close();
-            foreach(User u in users)
-                u.shoppingCart = GetShoppingCart(u.userName);
-            return users;
+            catch(Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
+
         }
 
         public override bool Remove(User u)
@@ -86,18 +93,18 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
 
         public ShoppingCart GetShoppingCart(string userName)
         {
+            try {
             ShoppingCart ans = new ShoppingCart();
-
             string sql = " SELECT * FROM UserCart where userName = '"+ userName +"';";
             LinkedList<UserCart> ucs = new LinkedList<UserCart>();
 
@@ -128,6 +135,12 @@ namespace WebServices.DAL
             ans.products = ucs;
 
             return ans;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public Boolean addShoppingCart(LinkedList<UserCart> ucs)
@@ -149,10 +162,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
@@ -168,10 +181,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 

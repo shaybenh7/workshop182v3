@@ -14,6 +14,7 @@ namespace WebServices.DAL
 
         public override LinkedList<PurchasePolicy> Get()
         {
+            try {
             string sql = " SELECT * FROM PurchasePolicy";
             LinkedList<PurchasePolicy> purchasePolicies = new LinkedList<PurchasePolicy>();
 
@@ -54,6 +55,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return purchasePolicies;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override Boolean Add(PurchasePolicy p)
@@ -71,10 +78,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
@@ -91,10 +98,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }

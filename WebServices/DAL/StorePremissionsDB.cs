@@ -24,15 +24,16 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
-            }
+        }
 
         public override LinkedList<Tuple<int, String, String>> Get()
         {
+            try {
             string sql = " SELECT * FROM StorePermission";
             LinkedList<Tuple<int, String, String>> StorePer = new LinkedList<Tuple<int, String, String>>();
 
@@ -52,6 +53,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return StorePer;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
 
@@ -67,10 +74,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }
