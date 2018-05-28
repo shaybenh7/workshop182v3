@@ -1,13 +1,30 @@
 ﻿<%@ Page Title="View Search Results" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="searchResults.aspx.cs" Inherits="WebServices.Views.Pages.searchResults" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="row">
+        <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50" style="max-width: 80%; flex: 0 0 80%;">
+            <div class="bg0 m-t-23 p-b-140" style="margin-left: auto; margin-right: auto; margin-top: 45px; max-width: 100%;">
+                <div class="container">
+                    <div id="allSalesComponent" class="row isotope-grid" style="position: relative;">
+                    </div>
+                </div>
 
-    <div class="bg0 m-t-23 p-b-140" style="margin-left: auto; margin-right: auto; margin-top: 45px; max-width: 100%;">
-        <div class="container">
-            <div id="allSalesComponent" class="row isotope-grid" style="position: relative;">
+            </div>
+
+        </div>
+        <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50" style="max-width: 20%; flex: 0 0 20%;">
+            <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" style="margin-top: 46px; margin-right: 91px; margin-left: -27px;">
+                <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                    Categories:
+                    <div id="categoriesContainer"></div>
+                    Prices Range:
+                    <div id="priceRangeContainer"></div>
+
+                </div>
+
+                <input type="button" value="Apply" id="applyButton" onclick="createStoreButton()" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" />
             </div>
         </div>
-
     </div>
 
     <script type="text/javascript">
@@ -33,9 +50,9 @@
                 url: baseUrl + "/api/sell/search?query=" + searchQuery,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-				success: function (response) {
-					console.log("success: ");
-					console.log(response);
+                success: function (response) {
+                    console.log("success: ");
+                    console.log(response);
                     var i;
                     for (i = 0; i < response.length; i++) {
 
