@@ -14,6 +14,7 @@ namespace WebServices.DAL
 
         public override LinkedList<Coupon> Get()
         {
+            try {
             string sql = " SELECT * FROM Coupons";
             LinkedList<Coupon> Coupons = new LinkedList<Coupon>();
 
@@ -44,6 +45,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return Coupons;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override Boolean Add(Coupon p)
@@ -60,10 +67,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
@@ -79,10 +86,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }

@@ -15,6 +15,7 @@ namespace WebServices.DAL
 
         public override LinkedList<Store> Get()
         {
+            try {
             string sql = " SELECT * FROM Store";
             LinkedList<Store> stores = new LinkedList<Store>();
 
@@ -36,6 +37,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return stores;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override Boolean Add(Store s)
@@ -51,10 +58,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
@@ -70,10 +77,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }

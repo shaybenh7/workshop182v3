@@ -9,12 +9,12 @@ namespace WebServices.DAL
 {
     public class StoreRoleDictionaryDB : BaseDBConnector<Tuple<int,String,String,String>>
     {
-        private static couponDB instance = null;
 
         public StoreRoleDictionaryDB(string mode) : base(mode) { }
 
         public override LinkedList<Tuple<int, String, String,String>> Get()
         {
+            try {
             string sql = " SELECT * FROM StoreRoleDictionary";
             LinkedList<Tuple<int, String, String,String>> storeRoles = new LinkedList<Tuple<int, String, String,String>>();
 
@@ -35,6 +35,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return storeRoles;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override Boolean Add(Tuple<int, String, String,String> t)
@@ -50,10 +56,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
@@ -69,10 +75,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }

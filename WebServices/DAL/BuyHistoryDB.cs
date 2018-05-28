@@ -14,6 +14,7 @@ namespace WebServices.DAL
 
         public override LinkedList<Purchase> Get()
         {
+            try {
             string sql = " SELECT * FROM BuyHistory";
             LinkedList<Purchase> buysHistory = new LinkedList<Purchase>();
 
@@ -39,6 +40,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return buysHistory;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override Boolean Add(Purchase p)
@@ -55,14 +62,13 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false ;
-
+                throw new Exception("DB ERROR");
             }
 
-            
+
         }
 
         public override Boolean Remove(Purchase p)

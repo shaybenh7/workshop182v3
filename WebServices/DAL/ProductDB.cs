@@ -24,15 +24,16 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
 
         public override LinkedList<Product> Get()
         {
+            try {
             string sql = " SELECT * FROM Product";
             LinkedList<Product> products = new LinkedList<Product>();
             MySqlCommand cmd = new MySqlCommand(sql, con);
@@ -50,6 +51,12 @@ namespace WebServices.DAL
             }
             con.Close();
             return products;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
 
         public override bool Remove(Product p)
@@ -63,10 +70,10 @@ namespace WebServices.DAL
                 con.Close();
                 return true;
             }
-            catch (Exception /*ex*/)
+            catch (Exception e)
             {
                 con.Close();
-                return false;
+                throw new Exception("DB ERROR");
             }
         }
     }
