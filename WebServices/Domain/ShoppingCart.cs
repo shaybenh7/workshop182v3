@@ -453,7 +453,7 @@ namespace wsep182.Domain
                             typeOfSale);
                         toDelete.AddLast(product);
                         SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
-                        alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 1);
+                        Purchase.alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 1);
                     }
                     else
                     {
@@ -487,7 +487,7 @@ namespace wsep182.Domain
                                 typeOfSale);
                             RaffleSalesManager.getInstance().sendMessageTORaffleWinner(sale.SaleId);
                             SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
-                            alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 3);
+                            Purchase.alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 3);
                             toDelete.AddLast(product);
                         }
                         else
@@ -510,19 +510,6 @@ namespace wsep182.Domain
             UserManager.getInstance().updateUser(session);
 
             return allBought;
-        }
-
-        public void alertOwnersOnPurchase(LinkedList<StoreOwner> so, int productInStoreId, int typeOfSale)
-        {
-            string inline;
-            if (typeOfSale == 1)
-                inline = "using Instant Sale";
-            else
-                inline = "using Raffle Sale";
-            foreach (StoreOwner s in so)
-            {
-                NotificationManager.getInstance().notifyUser(s.user.userName, "A user have purchased "+inline+" the product id: " + productInStoreId.ToString() + ", from the store-id: "+ s.store.storeId.ToString());
-            }
         }
 
         private Boolean checkValidAmount(Sale sale, UserCart cart)

@@ -38,5 +38,22 @@ namespace wsep182.Domain
         public string Date { get => date; set => date = value; }
         public int Amount { get => amount; set => amount = value; }
         public int TypeOfSale { get => typeOfSale; set => typeOfSale = value; }
+
+
+        public static void alertOwnersOnPurchase(LinkedList<StoreOwner> so, int productInStoreId, int typeOfSale)
+        {
+            string inline;
+            if (typeOfSale == 1)
+                inline = "using Instant Sale";
+            else
+                inline = "using Raffle Sale";
+            foreach (StoreOwner s in so)
+            {
+                NotificationManager.getInstance().notifyUser(s.user.userName, "A user have purchased " + inline + " the product id: " + productInStoreId.ToString() + ", from the store-id: " + s.store.storeId.ToString());
+            }
+        }
+
+
+
     }
 }
