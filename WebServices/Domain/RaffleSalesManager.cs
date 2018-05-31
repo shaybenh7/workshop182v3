@@ -33,7 +33,9 @@ namespace wsep182.Domain
             {
                 if (DateTime.Now.CompareTo(DateTime.Parse(rs.DueDate)) > 0)
                 {
-                    NotificationManager.getInstance().notifyUser(rs.UserName, "the Raffle sale " + rs.SaleId + " has been canceled");
+                    string message = "the Raffle sale " + rs.SaleId + " has been canceled";
+                    NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, rs.SaleId);
+                    //NotificationManager.getInstance().notifyUser(rs.UserName, message);
                     raffleSalesToRemove.AddLast(rs);
                 }
             }
@@ -59,6 +61,9 @@ namespace wsep182.Domain
         public Boolean addRaffleSale(int saleId, String userName, double offer, String dueDate)
         {
             RaffleSale toAdd = new RaffleSale(saleId, userName, offer, dueDate);
+            ProductInStore pis = ProductManager.getInstance().getProductInStore(SalesManager.getInstance().getSale(saleId).ProductInStoreId);
+            StoreRole sR = StoreRole.getStoreRole(pis.store, UserManager.getInstance().getUser(userName));
+            NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
             RSDB.Add(toAdd);
             raffleSales.AddLast(toAdd);
             return true;
@@ -132,7 +137,9 @@ namespace wsep182.Domain
                 {
                     if (winner <= r.Offer + index && winner >= index)
                     {
-                        NotificationManager.getInstance().notifyUser(r.UserName, "YOU WON THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId));
+                        string message = "YOU WON THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId);
+                        NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, r.SaleId);
+                        //NotificationManager.getInstance().notifyUser(r.UserName, message);
                         winnerS = r;
                         break;
                     }
@@ -148,7 +155,10 @@ namespace wsep182.Domain
                 }
                 foreach (RaffleSale r in relevant)
                 {
-                    NotificationManager.getInstance().notifyUser(r.UserName, "YOU LOST THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId));
+                    string message = "YOU LOST THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId);
+                    NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, r.SaleId);
+
+                    //NotificationManager.getInstance().notifyUser(r.UserName, message);
                     raffleSales.Remove(r);
                     RSDB.Remove(winnerS);
                 }
