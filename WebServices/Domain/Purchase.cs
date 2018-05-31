@@ -49,12 +49,13 @@ namespace wsep182.Domain
                 inline = "using Instant Sale";
             else
                 inline = "using Raffle Sale";
-            foreach (StoreOwner s in so)
-            {
-                string message = "A user have purchased " + inline + " the product id: " + productInStoreId.ToString() + ", from the store-id: " + s.store.storeId.ToString();
-                NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.Purchase, message, s.store.getStoreId());
+            //foreach (StoreOwner s in so)
+            //{
+            int storeId = ProductManager.getInstance().getProductInStore(productInStoreId).store.getStoreId();
+            string message = "A user have purchased " + inline + " the product id: " + productInStoreId.ToString() + ", from the store-id: " + storeId.ToString();
+            NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.Purchase, message, storeId);
                 //NotificationManager.getInstance().notifyUser(s.user.userName, message);
-            }
+            //}
         }
 
 

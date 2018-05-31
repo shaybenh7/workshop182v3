@@ -219,6 +219,7 @@
     <Compile Include="Domain\HashArchive.cs" />
     <Compile Include="Domain\LogedIn.cs" />
     <Compile Include="Domain\NotificationManager.cs" />
+    <Compile Include="Domain\NotificationPublisher.cs" />
     <Compile Include="Domain\PaymentSystem.cs" />
     <Compile Include="Domain\Premissions.cs" />
     <Compile Include="Domain\Product.cs" />
