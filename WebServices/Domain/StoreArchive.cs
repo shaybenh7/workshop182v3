@@ -21,17 +21,17 @@ namespace wsep182.Domain
             SRDDB = new StoreRoleDictionaryDB(configuration.DB_MODE);
             stores = SDB.Get();
             archive = new Dictionary<int, Dictionary<String, StoreRole>>();
-            LinkedList<Tuple<int, String, String,String>> temp = SRDDB.Get();
-            foreach(Tuple<int, String, String,String> t in temp)
+            LinkedList<Tuple<int, String, String,String,String>> temp = SRDDB.Get();
+            foreach(Tuple<int, String, String,String,String> t in temp)
             {
                 StoreRole sr=null;
                 if (t.Item3 == "Manager")
                 {
-                    sr=new StoreManager(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1), t.Item4);
+                    sr=new StoreManager(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1), t.Item4, t.Item5);
                 }
                 else if (t.Item3 == "Owner")
                 {
-                    sr = new StoreOwner(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1), t.Item4);
+                    sr = new StoreOwner(UserManager.getInstance().getUser(t.Item2), getStore(t.Item1), t.Item4, t.Item5);
                 }
                 else if (t.Item3 == "Customer")
                 {
@@ -133,7 +133,7 @@ namespace wsep182.Domain
             if (archive[storeId].ContainsKey(userName))
                 return false;
             archive[storeId].Add(userName,newPremissions);
-            Tuple<int, String, String,String> t = new Tuple<int, String, String,String>(storeId, userName, newPremissions.type, newPremissions.addedby);
+            Tuple<int, String, String,String,String> t = new Tuple<int, String, String,String,String>(storeId, userName, newPremissions.type, newPremissions.addedby,newPremissions.dateAdded);
             SRDDB.Add(t);
             return true;
         }
@@ -147,9 +147,9 @@ namespace wsep182.Domain
                 
                 archive[storeId].Remove(userName);
                 archive[storeId].Add(userName, newPremissions);
-                Tuple<int, String, String,String> t = new Tuple<int, String, String,String>(storeId, userName, "","");
+                Tuple<int, String, String,String,String> t = new Tuple<int, String, String,String,String>(storeId, userName, "","","");
                 SRDDB.Remove(t);
-                t = new Tuple<int, String, String,String>(storeId, userName, newPremissions.type, newPremissions.addedby);
+                t = new Tuple<int, String, String,String,String>(storeId, userName, newPremissions.type, newPremissions.addedby,newPremissions.dateAdded);
                 SRDDB.Add(t);
                 return true;
             }
@@ -167,13 +167,28 @@ namespace wsep182.Domain
             return archive[store.getStoreId()][user.getUserName()];
         }
 
+        public LinkedList<Tuple<int, String, String, String, String>> getStoreRolesStats(int storeId)
+        {
+            if (getStore(storeId)==null)
+            {
+                return null;
+            }
+            LinkedList<Tuple<int, String, String, String, String>> ans = new LinkedList<Tuple<int, String, String, String, String>>();
+            Dictionary <String, StoreRole> temp = archive[storeId];
+            foreach (KeyValuePair<String, StoreRole> entry in temp)
+            {
+                ans.AddFirst(new Tuple<int, string, string, string, string>(storeId, entry.Key, entry.Value.type, entry.Value.addedby, entry.Value.dateAdded));
+            }
+            return ans;
+        }
+
         public Boolean removeStoreRole(int storeId, string userName)
         {
             if (!archive.ContainsKey(storeId))
                 return false;
             if (archive[storeId].ContainsKey(userName))
             {
-                Tuple<int, String, String,String> t = new Tuple<int, String, String,String>(storeId, userName, "","");
+                Tuple<int, String, String,String,String> t = new Tuple<int, String, String,String,String>(storeId, userName, "","","");
                 SRDDB.Remove(t);
                 archive[storeId].Remove(userName);
                 return true;

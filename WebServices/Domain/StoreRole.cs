@@ -12,6 +12,7 @@ namespace wsep182.Domain
         public Store store;
         public string type;
         public string addedby;
+        public string dateAdded;
 
         public StoreRole(User u, Store s) {
             user = u;
@@ -23,6 +24,15 @@ namespace wsep182.Domain
             user = u;
             store = s;
             this.addedby = addedby;
+            dateAdded = DateTime.Now.ToString();
+        }
+
+        public StoreRole(User u, Store s, String addedby,String dateAdded)
+        {
+            user = u;
+            store = s;
+            this.addedby = addedby;
+            this.dateAdded = dateAdded;
         }
 
         public static StoreRole getStoreRole(Store store, User user)

@@ -38,7 +38,7 @@ namespace WebService.Controllers
             }
         }
 
-
+        
         [Route("api/store/getAllStores")]
         [HttpGet]
         public HttpResponseMessage getAllStores()
@@ -126,6 +126,8 @@ namespace WebService.Controllers
                 return "could not connect to the Database, please try again later.";
             }
         }
+
+        
 
         [Route("api/store/setNoDiscountPolicyOnCountry")]
         [HttpGet]
@@ -681,7 +683,27 @@ namespace WebService.Controllers
                 return response;
             }
         }
+
+        [Route("api/store/getStoreRolesStats")]
+        [HttpGet]
+        public HttpResponseMessage getStoreRolesStats(int storeId)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                LinkedList<Tuple<int, String, String, String, String>> storeRoles = storeServices.getInstance().getStoreRolesStats(storeId);
+                response = Request.CreateResponse(HttpStatusCode.OK, storeRoles);
+                return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
+        }
+
         
+
         [Route("api/store/removeProductFromStore")]
         [HttpGet]
         public string removeProductFromStore(int storeId, int ProductInStoreId)
