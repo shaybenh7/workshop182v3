@@ -35,7 +35,10 @@ namespace wsep182.Domain
                 privileges.Add(username,new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "addProductInStore"));
+            { 
+                if(!checkPrivilege(username, "addProductInStore"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addProductInStore"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addProductInStore"));
             privileges[username].addProductInStore(allow);
@@ -47,7 +50,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeProductFromStore"));
+            {
+                if (!checkPrivilege(username, "removeProductFromStore"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeProductFromStore"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeProductFromStore"));
             privileges[username].removeProductFromStore(allow);
@@ -59,7 +65,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "editProductInStore"));
+            {
+                if (!checkPrivilege(username, "editProductInStore"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "editProductInStore"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "editProductInStore"));
             privileges[username].editProductInStore(allow);
@@ -70,7 +79,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "addStoreManager"));
+            {
+                if (!checkPrivilege(username, "addStoreManager"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addStoreManager"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addStoreManager"));
             privileges[username].addStoreManager(allow);
@@ -81,7 +93,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "viewPurchasesHistory"));
+            {
+                if (!checkPrivilege(username, "viewPurchasesHistory"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "viewPurchasesHistory"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "viewPurchasesHistory"));
             privileges[username].viewPurchasesHistory(allow);
@@ -92,7 +107,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeStoreManager"));
+            {
+                if (!checkPrivilege(username, "removeStoreManager"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeStoreManager"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeStoreManager"));
             privileges[username].removeStoreManager(allow);
@@ -104,7 +122,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "addManagerPermission"));
+            {
+                if (!checkPrivilege(username, "addManagerPermission"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addManagerPermission"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addManagerPermission"));
             privileges[username].addManagerPermission(allow);
@@ -115,7 +136,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeManagerPermission"));
+            {
+                if (!checkPrivilege(username, "removeManagerPermission"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeManagerPermission"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeManagerPermission"));
             privileges[username].removeManagerPermission(allow);
@@ -127,7 +151,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "addSaleToStore"));
+            {
+                if (!checkPrivilege(username, "addSaleToStore"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addSaleToStore"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addSaleToStore"));
             privileges[username].addSaleToStore(allow);
@@ -139,7 +166,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeSaleFromStore"));
+            {
+                if (!checkPrivilege(username, "removeSaleFromStore"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeSaleFromStore"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeSaleFromStore"));
             privileges[username].removeSaleFromStore(allow);
@@ -151,7 +181,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "editSale"));
+            {
+                if (!checkPrivilege(username, "editSale"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "editSale"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "editSale"));
             privileges[username].editSale(allow);
@@ -163,7 +196,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "addNewCoupon"));
+            {
+                if (!checkPrivilege(username, "addNewCoupon"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addNewCoupon"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addNewCoupon"));
             privileges[username].addNewCoupon(allow);
@@ -175,7 +211,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "addDiscount"));
+            {
+                if (!checkPrivilege(username, "addDiscount"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addDiscount"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addDiscount"));
             privileges[username].addDiscount(allow);
@@ -187,7 +226,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeDiscount"));
+            {
+                if (!checkPrivilege(username, "removeDiscount"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeDiscount"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeDiscount"));
             privileges[username].removeDiscount(allow);
@@ -199,7 +241,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeCoupon"));
+            {
+                if (!checkPrivilege(username, "removeCoupon"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeCoupon"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeCoupon"));
             privileges[username].removeCoupon(allow);
@@ -211,7 +256,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             StorePremissionsDB SPDB = new StorePremissionsDB(configuration.DB_MODE);
             if (allow)
-                SPDB.Add(new Tuple<int, String, String>(storeId, username, "changePolicy"));
+            {
+                if (!checkPrivilege(username, "changePolicy"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "changePolicy"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "changePolicy"));
             privileges[username].changePolicy(allow);
