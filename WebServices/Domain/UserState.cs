@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -30,7 +31,11 @@ namespace wsep182.Domain
         public virtual int createStore(String storeName, User session)
         {
             Store newStore = storeArchive.getInstance().addStore(storeName, session);
-            storeArchive.getInstance().addStoreRole(new StoreOwner(session, newStore, session.getUserName()), newStore.getStoreId(), session.getUserName());
+            StoreRole sR= new StoreOwner(session, newStore, session.getUserName());
+            storeArchive.getInstance().addStoreRole(sR, newStore.getStoreId(), session.getUserName());
+            NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
+            NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
+            NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.Store);
             return newStore.getStoreId();
         }
 

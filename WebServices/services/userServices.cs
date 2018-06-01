@@ -159,6 +159,11 @@ namespace wsep182.services
             return session.getAllStoreRolesOfAUser(username);
         }
 
+        public void signUserToNotifications(User session, int storeId, string notification)
+        {
+            session.signUserToNotifications(notification, storeId);
+        }
+
   }
 }
  

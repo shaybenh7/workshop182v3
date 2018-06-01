@@ -397,6 +397,30 @@ namespace WebService.Controllers
             }
         }
 
+        [Route("api/user/signUserToNotifications")]
+        [HttpGet]
+        public HttpResponseMessage signUserToNotifications(int storeId, string notification)
+        {
+            HttpResponseMessage response;
+            if (System.Web.HttpContext.Current.Request.Cookies["HashCode"] == null)
+            {
+                response = Request.CreateResponse(HttpStatusCode.ExpectationFailed, "Not logged in ");
+                return response;
+            }
+            try
+            {
+                User session = hashServices.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                userServices.getInstance().signUserToNotifications(session, storeId, notification);
+                response = Request.CreateResponse(HttpStatusCode.OK,"Notification Updated");
+                return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
+        }
+
 
 
     }

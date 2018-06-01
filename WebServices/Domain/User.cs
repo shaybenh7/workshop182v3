@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -13,6 +14,8 @@ namespace wsep182.Domain
         private String password;
         public ShoppingCart shoppingCart;
         private Boolean isActive;
+        private object notificationPublisher;
+
         public User(string userName, string password)
         {
             this.password = password;
@@ -21,7 +24,7 @@ namespace wsep182.Domain
             state = new Guest();
             shoppingCart = new ShoppingCart();
         }
-        
+
         public String getUserName()
         {
             return userName;
@@ -41,7 +44,7 @@ namespace wsep182.Domain
         {
             state = s;
         }
-        
+
         public User logOut()
         {
             state = new Guest();
@@ -66,7 +69,7 @@ namespace wsep182.Domain
         public int login(String username, String password)
         {
             int user = state.login(username, password);
-            if (user == 0 )
+            if (user == 0)
             {
                 if (username == "admin" || username == "admin1")
                     state = new Admin();
@@ -93,7 +96,7 @@ namespace wsep182.Domain
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password)
                 || username.Equals("") || password.Equals("") || username.Contains(" "))
             {
-                if (username==null || username.Equals(""))
+                if (username == null || username.Equals(""))
                     return -1;
                 if (password == null || password.Equals(""))
                     return -2;
@@ -102,7 +105,7 @@ namespace wsep182.Domain
             }
             if (!(state is Guest))
                 return -5;
-            
+
             User u = new User(username, password);
             u.setState(state.register(username, password));
             return UserManager.getInstance().addUser(u);
@@ -127,14 +130,14 @@ namespace wsep182.Domain
          */
         public int createStore(String storeName)
         {
-            if (storeName == null || storeName.Length==0 || String.IsNullOrWhiteSpace(storeName))
+            if (storeName == null || storeName.Length == 0 || String.IsNullOrWhiteSpace(storeName))
                 return -3; //-3 if iligale Storename
             return this.state.createStore(storeName, this);
         }
 
         public int removeUser(String userName)
         {
-            return this.state.removeUser(this,userName);
+            return this.state.removeUser(this, userName);
         }
 
 
@@ -153,7 +156,7 @@ namespace wsep182.Domain
         }
         public Boolean buyProducts(String creditCard, String couponId)
         {
-            return shoppingCart.buyProducts(this, creditCard,couponId);
+            return shoppingCart.buyProducts(this, creditCard, couponId);
         }
 
         public int addToCartRaffle(int saleId, double offer)
@@ -178,7 +181,7 @@ namespace wsep182.Domain
 
         public LinkedList<Purchase> viewStoreHistory(Store store)
         {
-            return state.viewStoreHistory(store,this);
+            return state.viewStoreHistory(store, this);
         }
 
         public LinkedList<Purchase> viewUserHistory(String userNameToGetHistory)
@@ -230,9 +233,28 @@ namespace wsep182.Domain
 
         public LinkedList<UserCart> applyCoupon(string couponId, string country)
         {
-            return shoppingCart.applyCoupon(this, couponId,country);
+            return shoppingCart.applyCoupon(this, couponId, country);
         }
 
+        public void signUserToNotifications(string notification, int storeId)
+        {
+            Store store = storeArchive.getInstance().getStore(storeId);
+            StoreRole sR = StoreRole.getStoreRole(store, this);
+            switch (notification)
+            {
+                case "Store":
+                    NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.Store);
+                    break;
+                case "Purchase":
+                    NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
+                    break;
+                case "RaffleSale":
+                    NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -170,7 +171,14 @@ namespace wsep182.Domain
             if (sr != null && (sr is Customer))
                 storeArchive.getInstance().removeStoreRole(s.getStoreId(), newOwner.getUserName());
             StoreRole owner = new StoreOwner(newOwner, s,session.userName);
-            return storeArchive.getInstance().addStoreRole(owner, s.getStoreId(), newOwner.getUserName());
+            Boolean ans = storeArchive.getInstance().addStoreRole(owner, s.getStoreId(), newOwner.getUserName());
+            if (ans)
+            {
+                NotificationPublisher.getInstance().signToCategory(this, NotificationPublisher.NotificationCategories.Purchase);
+                NotificationPublisher.getInstance().signToCategory(this, NotificationPublisher.NotificationCategories.RaffleSale);
+                NotificationPublisher.getInstance().signToCategory(this, NotificationPublisher.NotificationCategories.Store);
+            }
+            return ans;
         }
 
         public virtual int removeStoreOwner(User session, Store s, String ownerToDelete)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -40,6 +41,7 @@ namespace wsep182.Domain
         public int TypeOfSale { get => typeOfSale; set => typeOfSale = value; }
 
 
+        //ALERTS ALL LISTENERS, NOT JUST THE OWNERS
         public static void alertOwnersOnPurchase(LinkedList<StoreOwner> so, int productInStoreId, int typeOfSale)
         {
             string inline;
@@ -47,10 +49,13 @@ namespace wsep182.Domain
                 inline = "using Instant Sale";
             else
                 inline = "using Raffle Sale";
-            foreach (StoreOwner s in so)
-            {
-                NotificationManager.getInstance().notifyUser(s.user.userName, "A user have purchased " + inline + " the product id: " + productInStoreId.ToString() + ", from the store-id: " + s.store.storeId.ToString());
-            }
+            //foreach (StoreOwner s in so)
+            //{
+            int storeId = ProductManager.getInstance().getProductInStore(productInStoreId).store.getStoreId();
+            string message = "A user have purchased " + inline + " the product id: " + productInStoreId.ToString() + ", from the store-id: " + storeId.ToString();
+            NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.Purchase, message, storeId);
+                //NotificationManager.getInstance().notifyUser(s.user.userName, message);
+            //}
         }
 
 
