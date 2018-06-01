@@ -35,7 +35,6 @@ function viewOfAdmin() {
                 string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
                 string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
                 string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
-                string += "<a href=\"#\" id=\"updateNotificationsPreferences" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Update Notification Preferences</a>";
                 string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
                 string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
                 string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
@@ -100,7 +99,6 @@ $(document).ready(function () {
                         string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
                         string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
                         string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
-                        string += "<a href=\"#\" id=\"updateNotificationsPreferences" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Update Notification Preferences</a>";
                         string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
                         string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
                         string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
@@ -160,7 +158,6 @@ $(document).ready(function () {
                                             $("#viewPurchasesHistory" + i).css('display', 'none');
                                         if (response.viewAddPolicy != true)
                                             $("#viewAddPolicy" + i).css('display', 'none');
-                                        $("#updateNotificationsPreferences" + i).css('display', 'none');
                                         $("#viewManagersPermissions" + i).css('display', 'none');
                                         $("#viewRolesHistory" + i).css('display', 'none');
 
@@ -1084,64 +1081,6 @@ var addmanagerPermisionFunc = function () {
     }
 }
 
-
-var signUserToNotifications = function () {
-    if ($("#StorePrefCB")[0].checked) {
-        addNotificationPreferencesFunction("Store");
-    }
-    else {
-        removeNotificationPreferenceFunction("Store");
-    }
-    if ($("#PurchasePrefCB")[0].checked) {
-        addNotificationPreferencesFunction("Purchase");
-    }
-    else {
-        removeNotificationPreferenceFunction("Purchase");
-    }
-    if ($("#RaffleSalePrefCB")[0].checked) {
-        addNotificationPreferencesFunction("RaffleSale");
-    }
-    else {
-        removeNotificationPreferenceFunction("RaffleSale");
-    }
-}
-
-var addNotificationPreferencesFunction = function (preference) {
-    jQuery.ajax({
-        type: "GET",
-        url: baseUrl + "/api/user/signUserToNotifications?storeId=" + lastClickedStoreId +
-            "&notification=" + preference,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            alert(response);
-            window.location.reload(false);
-        },
-        error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl + "/error";
-        }
-    });
-}
-
-
-var removeNotificationPreferenceFunction = function (preference) {
-    jQuery.ajax({
-        type: "GET",
-        url: baseUrl + "/api/user/removeUserFromNotifications?storeId=" + lastClickedStoreId +
-            "&notification=" + preference,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            alert(response);
-            window.location.reload(false);
-        },
-        error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl + "/error";
-        }
-    });
-}
 
 var sendRemoveManagerPremission = function (manager, premission) {
     sendPremission(manager, premission, "api/store/removeManagerPermission")
