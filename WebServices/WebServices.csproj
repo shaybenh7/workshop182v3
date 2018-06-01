@@ -221,6 +221,8 @@
     <Compile Include="Domain\LogedIn.cs" />
     <Compile Include="Domain\NotificationManager.cs" />
     <Compile Include="Domain\NotificationPublisher.cs" />
+    <Compile Include="Domain\PaymentInterface.cs" />
+    <Compile Include="Domain\PaymentProxy.cs" />
     <Compile Include="Domain\PaymentSystem.cs" />
     <Compile Include="Domain\Premissions.cs" />
     <Compile Include="Domain\Product.cs" />
@@ -233,6 +235,8 @@
     <Compile Include="Domain\RaffleSalesManager.cs" />
     <Compile Include="Domain\Sale.cs" />
     <Compile Include="Domain\SalesManager.cs" />
+    <Compile Include="Domain\ShippingInterface.cs" />
+    <Compile Include="Domain\ShippingProxy.cs" />
     <Compile Include="Domain\ShippingSystem.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />

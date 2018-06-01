@@ -13,34 +13,34 @@ namespace IntegrationTests
         Store store;
         Product cola, sprite;
         ProductInStore colaInStore, spriteInStore;
-        UserArchive userArchive;
+        UserManager userArchive;
         storeArchive storeArchive;
-        ProductArchive productArchive;
-        DiscountsArchive discountsArchive;
-        CouponsArchive couponsArchive;
-        SalesArchive salesArchive;
-        PurchasePolicyArchive purchasePolicyArchive;
+        ProductManager productArchive;
+        DiscountsManager discountsArchive;
+        CouponsManager couponsArchive;
+        SalesManager salesArchive;
+        PurchasePolicyManager purchasePolicyArchive;
         Sale colaRegularSale,spriteRaffleSale;
 
         [TestInitialize]
         public void init()
         {
             //              ARCHIVE INIT
-            PurchasePolicyArchive.restartInstance();
-            SalesArchive.restartInstance();
-            DiscountsArchive.restartInstance();
-            CouponsArchive.restartInstance();
+            PurchasePolicyManager.restartInstance();
+            SalesManager.restartInstance();
+            DiscountsManager.restartInstance();
+            CouponsManager.restartInstance();
             storeArchive.restartInstance();
-            UserArchive.restartInstance();
-            ProductArchive.restartInstance();
-            UserCartsArchive.restartInstance();
-            purchasePolicyArchive = PurchasePolicyArchive.getInstance();
-            salesArchive = SalesArchive.getInstance();
-            discountsArchive = DiscountsArchive.getInstance();
-            couponsArchive = CouponsArchive.getInstance();
-            productArchive = ProductArchive.getInstance();
+            UserManager.restartInstance();
+            ProductManager.restartInstance();
+            UserCartsManager.restartInstance();
+            purchasePolicyArchive = PurchasePolicyManager.getInstance();
+            salesArchive = SalesManager.getInstance();
+            discountsArchive = DiscountsManager.getInstance();
+            couponsArchive = CouponsManager.getInstance();
+            productArchive = ProductManager.getInstance();
             storeArchive = storeArchive.getInstance();
-            userArchive = UserArchive.getInstance();
+            userArchive = UserManager.getInstance();
             //              USERS INIT
             admin = new User("admin", "123456");
             admin.register("admin", "123456");
@@ -264,7 +264,7 @@ namespace IntegrationTests
         {
             // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
             discountsArchive.addNewDiscount(colaInStore.getProductInStoreId(), 1, "", 50, DateTime.Now.AddDays(20).ToString(), "");
-            PurchasePolicyArchive.getInstance().setNoDiscountPolicyOnProduct("cola");
+            PurchasePolicyManager.getInstance().setNoDiscountPolicyOnProduct("cola");
             itamar.addToCart(colaRegularSale.SaleId, 5);
             itamar.getShoppingCartBeforeCheckout();
             Tuple<int, LinkedList<UserCart>> ans = itamar.checkout("England", "ben gurion 13");
@@ -277,7 +277,7 @@ namespace IntegrationTests
         {
             // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
             discountsArchive.addNewDiscount(colaInStore.getProductInStoreId(), 1, "", 50, DateTime.Now.AddDays(20).ToString(), "");
-            PurchasePolicyArchive.getInstance().setNoDiscountPolicyOnStore(store.storeId);
+            PurchasePolicyManager.getInstance().setNoDiscountPolicyOnStore(store.storeId);
             itamar.addToCart(colaRegularSale.SaleId, 5);
             itamar.getShoppingCartBeforeCheckout();
             Tuple<int, LinkedList<UserCart>> ans = itamar.checkout("England", "ben gurion 13");
@@ -290,7 +290,7 @@ namespace IntegrationTests
         {
             // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
             discountsArchive.addNewDiscount(colaInStore.getProductInStoreId(), 1, "", 50, DateTime.Now.AddDays(20).ToString(), "");
-            PurchasePolicyArchive.getInstance().setNoDiscountPolicyOnCategoty(store.storeId,colaInStore.category);
+            PurchasePolicyManager.getInstance().setNoDiscountPolicyOnCategoty(store.storeId,colaInStore.category);
             itamar.addToCart(colaRegularSale.SaleId, 5);
             itamar.getShoppingCartBeforeCheckout();
             Tuple<int, LinkedList<UserCart>> ans = itamar.checkout("England", "ben gurion 13");
@@ -303,7 +303,7 @@ namespace IntegrationTests
         {
             // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
             discountsArchive.addNewDiscount(colaInStore.getProductInStoreId(), 1, "", 50, DateTime.Now.AddDays(20).ToString(), "");
-            PurchasePolicyArchive.getInstance().setNoDiscountPolicyOnProductInStore(colaInStore.getProductInStoreId());
+            PurchasePolicyManager.getInstance().setNoDiscountPolicyOnProductInStore(colaInStore.getProductInStoreId());
             itamar.addToCart(colaRegularSale.SaleId, 5);
             itamar.getShoppingCartBeforeCheckout();
             Tuple<int, LinkedList<UserCart>> ans = itamar.checkout("England", "ben gurion 13");
@@ -316,7 +316,7 @@ namespace IntegrationTests
         {
             // 1-Product(system level) , 2- Store, 3-category, 4- product in store, 5-country
             discountsArchive.addNewDiscount(colaInStore.getProductInStoreId(), 1, "", 50, DateTime.Now.AddDays(20).ToString(), "");
-            PurchasePolicyArchive.getInstance().setNoDiscountPolicyOnCountry(store.storeId, "England");
+            PurchasePolicyManager.getInstance().setNoDiscountPolicyOnCountry(store.storeId, "England");
             itamar.addToCart(colaRegularSale.SaleId, 5);
             itamar.getShoppingCartBeforeCheckout();
             Tuple<int, LinkedList<UserCart>> ans = itamar.checkout("England", "ben gurion 13");
