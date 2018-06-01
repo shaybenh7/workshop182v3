@@ -691,6 +691,7 @@ namespace WebService.Controllers
             HttpResponseMessage response;
             try
             {
+                //storeId, userName, Owner/Manager, Who added, Date
                 LinkedList<Tuple<int, String, String, String, String>> storeRoles = storeServices.getInstance().getStoreRolesStats(storeId);
                 response = Request.CreateResponse(HttpStatusCode.OK, storeRoles);
                 return response;
@@ -708,6 +709,7 @@ namespace WebService.Controllers
             HttpResponseMessage response;
             try
             {
+                //storeId, userName, permission
                 LinkedList<Tuple<int, String, String>> permissions = StorePremissionsArchive.getInstance().getManagersPermissionsInStore(storeId);
                 response = Request.CreateResponse(HttpStatusCode.OK, permissions);
                 return response;

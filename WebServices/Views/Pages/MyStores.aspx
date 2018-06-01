@@ -51,7 +51,7 @@
                                                     <br />
                                                     <br />
                                                     <br />
-                                                    <input type="button" value="Add product" id="add_product_btn" onclick="addProductFunct();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                    <input type="button" value="Add product" id="add_product_btn" onclick="addProductFunct();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                                 </div>
 
 
@@ -107,11 +107,11 @@
 
 
                                                 <div class="flex-w flex-r-m p-b-10">
-                                                    
+
                                                     <br />
                                                     <br />
                                                     <br />
-                                                    <input type="button" value="Edit product" id="aviad-Edit-product" onclick="editStoreProduct();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                    <input type="button" value="Edit product" id="aviad-Edit-product" onclick="editStoreProduct();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                                 </div>
 
 
@@ -155,7 +155,7 @@
                                                 <br />
                                                 <br />
 
-                                                <input type="button" value="Remove product" id="aviad-Remove-product" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" onclick="removeStoreProduct();"/>
+                                                <input type="button" value="Remove product" id="aviad-Remove-product" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" onclick="removeStoreProduct();" />
 
 
 
@@ -196,7 +196,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <input type="button" value="Add manager" id="Add-manager-Btn" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" onclick="addNewManager()"/>
+                                                <input type="button" value="Add manager" id="Add-manager-Btn" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" onclick="addNewManager()" />
 
 
 
@@ -237,7 +237,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <input type="button" value="Remove manager" id="Remove-manager-Btn" onclick="RemoveStoreManager();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <input type="button" value="Remove manager" id="Remove-manager-Btn" onclick="RemoveStoreManager();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
 
 
 
@@ -278,7 +278,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <input type="button" value="Add Owner" id="AddOwnerBtn" onclick="addStoreOwner();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <input type="button" value="Add Owner" id="AddOwnerBtn" onclick="addStoreOwner();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +316,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <input type="button" onclick="removeStoreOwner();" value="Remove owner" id="aviad-Remove-owner" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <input type="button" onclick="removeStoreOwner();" value="Remove owner" id="aviad-Remove-owner" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
 
                                             </div>
                                         </div>
@@ -329,61 +329,8 @@
 
                     </div>
                 </div>
+
                 
-                <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="updateNotificationsPreferencesModal">
-                    <div class="overlay-modal1 js-hide-modal1"></div>
-
-                    <div class="container">
-                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-
-                            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                                <img src="images/icons/icon-close.png" alt="CLOSE">
-                            </button>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-7 p-b-30">
-                                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                        <div class="wrap-slick3 flex-sb flex-w">
-
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <span class="mtext-106 cl2">Update Notification Preferences</span>
-                                                <br />
-                                                <br />
-                                                <br />
-
-
-                                                <div style="display: table; width: 100%;">
-                                                    
-                                                    <div style="display: flex; margin-bottom: 10px;">
-                                                        <input type="checkbox" id="StorePrefCB" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
-                                                        Store Notifications
-                                                    </div>
-                                                    <div style="display: flex; margin-bottom: 10px;">
-                                                        <input type="checkbox" id="PurchasePrefCB" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
-                                                        Purchase Notifications  
-                                                    </div>
-                                                    <div style="display: flex; margin-bottom: 10px;">
-                                                        <input type="checkbox" id="RaffleSalePrefCB" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
-                                                        Raffle Sale Notifications  
-                                                    </div>
-
-                                                </div>
-
-                                                <input type="button" style="margin-left:700px;" value="Update Notifications" onclick="signUserToNotifications()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
-
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                </div>
-
                 <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="addManagerPermissionModal">
                     <div class="overlay-modal1 js-hide-modal1"></div>
 
@@ -472,10 +419,10 @@
                                                         <input type="checkbox" id="addPolicy" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
                                                         Add policy  
                                                     </div>
-         
+
                                                 </div>
 
-                                                <input type="button" style="margin-left:700px;" value="Add permissions" onclick="addmanagerPermisionFunc()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <input type="button" style="margin-left: 700px;" value="Add permissions" onclick="addmanagerPermisionFunc()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
 
 
 
@@ -579,7 +526,7 @@
                                                         Add Policy  
                                                     </div>
                                                 </div>
-                                                <input type="button" value="Remove permissions" onclick="removeManagerPermision()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <input type="button" value="Remove permissions" onclick="removeManagerPermision()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
 
 
 
@@ -650,7 +597,7 @@
                                                     <br />
                                                     <br />
                                                     <br />
-                                                    <input type="button" value="Add sale" id="AddSaleBtn" onclick="addSale();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                    <input type="button" value="Add sale" id="AddSaleBtn" onclick="addSale();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                                 </div>
                                             </div>
                                         </div>
@@ -683,7 +630,7 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                  <div class="wrap-input1 w-full p-b-4">
+                                                <div class="wrap-input1 w-full p-b-4">
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Sale-id5" placeholder="Enter sale id">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
@@ -694,16 +641,16 @@
                                                 </div>
                                                 <br />
                                                 <div class="wrap-input1 w-full p-b-4">
-                                                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="product-due-date" placeholder="Enter due date - XX/XX/XXXX">
-                                                        <div class="focus-input1 trans-04"></div>
-                                                 </div>
+                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="product-due-date" placeholder="Enter due date - XX/XX/XXXX">
+                                                    <div class="focus-input1 trans-04"></div>
+                                                </div>
                                                 <div class="flex-w flex-r-m p-b-10">
                                                     <div></div>
-                                                    
+
                                                     <br />
                                                     <br />
                                                     <br />
-                                                    <input type="button" value="Edit sale" id="editSaleBtn" onclick="editSale();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                    <input type="button" value="Edit sale" id="editSaleBtn" onclick="editSale();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                                 </div>
 
 
@@ -739,12 +686,12 @@
                                                 <br />
                                                 <br />
                                                 <div class="wrap-input1 w-full p-b-4">
-                                                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Sale-id6" placeholder="Enter sale id">
-                                                        <div class="focus-input1 trans-04"></div>
-                                                 </div>
-                                               
+                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Sale-id6" placeholder="Enter sale id">
+                                                    <div class="focus-input1 trans-04"></div>
+                                                </div>
 
-                                                <input type="button" value="Remove Sale" id="aviad-Remove-Sale" onclick="removeSale();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+
+                                                <input type="button" value="Remove Sale" id="aviad-Remove-Sale" onclick="removeSale();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
 
 
 
@@ -775,11 +722,11 @@
 
                                             <div class="size-204 flex-w flex-m respon6-next" style="padding-left: 50px;">
                                                 <span class="mtext-106 cl2">Add discount</span>
-                                                 <br />
-                                                <br /> 
                                                 <br />
                                                 <br />
-                                                
+                                                <br />
+                                                <br />
+
                                                 <div class="size-204 respon6-next">
                                                     <div>
 
@@ -790,7 +737,7 @@
                                                                 <option>product</option>
                                                             </asp:PlaceHolder>
                                                         </select>
-                                                        
+
                                                         <div class="dropDownSelect2"></div>
                                                     </div>
                                                 </div>
@@ -807,7 +754,7 @@
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="discountto-what" placeholder="enter the products ids you want the discount to act on divide by ','">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
-                                        
+
                                                 <div class="wrap-input1 w-full p-b-4">
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Restriction2" placeholder="enter the contry you want the discount to act on (divide by ',' )">
                                                     <div class="focus-input1 trans-04"></div>
@@ -816,17 +763,17 @@
                                                 <br />
 
                                                 <div style="display: flex; margin-bottom: 10px;">
-                                                        <input type="checkbox" name="gender" id="discountRaffle" value="male" style="margin-top: 5px; margin-right: 10px;">
-                                                        Raffle sale
+                                                    <input type="checkbox" name="gender" id="discountRaffle" value="male" style="margin-top: 5px; margin-right: 10px;">
+                                                    Raffle sale
                                                 </div>
                                                 <br />
                                                 <br />
                                                 <div style="display: flex; margin-bottom: 10px; margin-left: 60px;">
-                                                        <input type="checkbox" name="gender" id="discountInstant" value="male" style="margin-top: 5px; margin-right: 10px;">
-                                                         instant sale
+                                                    <input type="checkbox" name="gender" id="discountInstant" value="male" style="margin-top: 5px; margin-right: 10px;">
+                                                    instant sale
                                                 </div>
-                                                <div style="margin-top:40px;margin-left:700px;">
-                                                    <input type="button" value="Add discount" onclick="addDiscountFunc()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <div style="margin-top: 40px; margin-left: 700px;">
+                                                    <input type="button" value="Add discount" onclick="addDiscountFunc()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                                 </div>
 
 
@@ -895,7 +842,7 @@
                     <div class="overlay-modal1 js-hide-modal1"></div>
 
                     <div class="container">
-                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top:20px;">
+                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 20px;">
 
                             <button class="how-pos3 hov3 trans-04 js-hide-modal1">
                                 <img src="images/icons/icon-close.png" alt="CLOSE">
@@ -908,14 +855,15 @@
                                             <div class="size-204 flex-w flex-m respon6-next" style="padding-left: 50px;">
                                                 <span class="mtext-106 cl2">Add new coupon</span>
                                                 <br />
-                                                <br /> <br />
+                                                <br />
+                                                <br />
                                                 <br />
                                                 <div class="wrap-input1 w-full p-b-4">
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="copun-id" placeholder="Enter copun id">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
-                                                 <br />
-      
+                                                <br />
+
                                                 <div class="size-204 respon6-next">
                                                     <div>
 
@@ -926,11 +874,11 @@
                                                                 <option>product</option>
                                                             </asp:PlaceHolder>
                                                         </select>
-                                                        
+
                                                         <div class="dropDownSelect2"></div>
                                                     </div>
                                                 </div>
-                                                 <br />
+                                                <br />
                                                 <br />
                                                 <div class="wrap-input1 w-full p-b-4">
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="DiscountPrecentage" placeholder="enter the discount precentage">
@@ -945,7 +893,7 @@
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="to-what" placeholder="enter the products ids you want the copun to act on divide by ','">
                                                     <div class="focus-input1 trans-04"></div>
                                                 </div>
-                                        
+
                                                 <div class="wrap-input1 w-full p-b-4">
                                                     <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="Restriction" placeholder="enter the contry you want the copun to act on (divide by ',' )">
                                                     <div class="focus-input1 trans-04"></div>
@@ -954,18 +902,18 @@
                                                 <br />
 
                                                 <div style="display: flex; margin-bottom: 10px;">
-                                                        <input type="checkbox" name="gender" id="copunRaffle" value="male" style="margin-top: 5px; margin-right: 10px;" checked>
-                                                        Raffle sale
+                                                    <input type="checkbox" name="gender" id="copunRaffle" value="male" style="margin-top: 5px; margin-right: 10px;" checked>
+                                                    Raffle sale
                                                 </div>
                                                 <br />
                                                 <br />
                                                 <div style="display: flex; margin-bottom: 10px; margin-left: 60px;">
-                                                        <input type="checkbox" name="gender" id="copunInstant" value="male" style="margin-top: 5px; margin-right: 10px;" checked>
-                                                         instant sale
+                                                    <input type="checkbox" name="gender" id="copunInstant" value="male" style="margin-top: 5px; margin-right: 10px;" checked>
+                                                    instant sale
                                                 </div>
 
-                                                <div style="margin-top:40px;margin-left:700px;">
-                                                    <input type="button" value="Add coupon" onclick="addCopun()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <div style="margin-top: 40px; margin-left: 700px;">
+                                                    <input type="button" value="Add coupon" onclick="addCopun()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                                 </div>
 
 
@@ -984,7 +932,7 @@
             </div>
         </div>
         <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50" style="max-width: 33%; flex: 0 0 33%;">
-            <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" style="margin-top:46px; margin-right:91px; margin-left:-27px;">
+            <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" style="margin-top: 46px; margin-right: 91px; margin-left: -27px;">
                 <h4 class="mtext-109 cl2 p-b-30">Create New Store
                 </h4>
 
@@ -1011,170 +959,242 @@
 
                 </div>
 
-                <input type="button" value="Create Store" id="createStoreButton12" onclick="createStoreButton()" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"/>
+                <input type="button" value="Create Store" id="createStoreButton12" onclick="createStoreButton()" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" />
             </div>
         </div>
     </div>
 
     <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewPurchasesHistoryModal">
-                    <div class="overlay-modal1 js-hide-modal1"></div>
-                    
-                    <div class="container">
-                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 25px;">
+        <div class="overlay-modal1 js-hide-modal1"></div>
 
-                            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                                <img src="images/icons/icon-close.png" alt="CLOSE">
-                            </button>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-7 p-b-30">
-                                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                        <div class="wrap-slick3 flex-sb flex-w">
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 25px;">
 
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <span class="mtext-106 cl2">Store History Purchase</span>
-                                                <br />
-                                                <br />
-                                                <div id="viewHistory" style=" margin-top:50px" class="size-204 respon6-next">
-                                                    
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <br />
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="images/icons/icon-close.png" alt="CLOSE">
+                </button>
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
 
-
-                                            </div>
-                                        </div>
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <span class="mtext-106 cl2">Store History Purchase</span>
+                                    <br />
+                                    <br />
+                                    <div id="viewHistory" style="margin-top: 50px" class="size-204 respon6-next">
                                     </div>
+                                    <br />
+                                    <br />
+                                    <br />
+
+
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
-
-     <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewProductInStoreModal">
-                    <div class="overlay-modal1 js-hide-modal1"></div>
-                    
-                    <div class="container">
-                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 25px;">
-
-                            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                                <img src="images/icons/icon-close.png" alt="CLOSE">
-                            </button>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-7 p-b-30">
-                                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                        <div class="wrap-slick3 flex-sb flex-w">
-
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <span class="mtext-106 cl2">All Product In Store</span>
-                                                <br />
-                                                <br />
-                                                <div id="ViewProduct" style=" margin-top:50px" class="size-204 respon6-next">
-                                                    
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <br />
+            </div>
 
 
-                                            </div>
-                                        </div>
+
+        </div>
+    </div>
+
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewProductInStoreModal">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 25px;">
+
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="images/icons/icon-close.png" alt="CLOSE">
+                </button>
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <span class="mtext-106 cl2">All Product In Store</span>
+                                    <br />
+                                    <br />
+                                    <div id="ViewProduct" style="margin-top: 50px" class="size-204 respon6-next">
                                     </div>
+                                    <br />
+                                    <br />
+                                    <br />
+
+
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
+            </div>
 
 
-        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewAddPolicyModal">
-                    <div class="overlay-modal1 js-hide-modal1"></div>
-                    
-                    <div class="container">
-                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 25px;">
 
-                            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                                <img src="images/icons/icon-close.png" alt="CLOSE">
-                            </button>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-7 p-b-30">
-                                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                        <div class="wrap-slick3 flex-sb flex-w">
-
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <div>
-                                                <span class="mtext-106 cl2" style="margin-right:50px">Add policy</span>
-                                                    </div>
-                                                <br />
-                                                <br />
-                                                <br />
-                                                <div class="size-204 respon6-next">
-                                                    <div>
-                                                        <select name="time" id="PolicyType">
-                                                                        <option>product in store</option>
-                                                                        <option>category</option>
-                                                                        <option>store</option>
-                                                                        <option>country</option>
-                                                                        <asp:PlaceHolder ID="PlaceHolder1" Visible="false" runat="server">
-                                                                            <option>product</option>
-                                                                        </asp:PlaceHolder>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="minPolicy" name="storeName" placeholder="minmum amount">
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="maxPolicy" name="storeName" placeholder="max amount">
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <div style="display: flex; margin-bottom: 10px; margin-left:20px">
-                                                        <input type="checkbox" id="NoDiscount" name="gender" value="male" style="margin-top: 5px; margin-right: 10px;">
-                                                        without discount
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <div style="display: flex; margin-bottom: 10px;margin-left:40px">
-                                                        <input type="checkbox" id="NoCopuns" name="gender" value="male" style="margin-top: 5px; margin-right: 10px;">
-                                                        without coupons
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="PolicyChange"  name="storeName" placeholder="enter product in store id">
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <br />
-                                                <input type="button" id="addPolicy33" value="Add policy" onclick="addPolicy()" style="margin-left: 700px;" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+        </div>
+    </div>
 
 
-                                            </div>
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewAddPolicyModal">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent" style="padding-top: 25px;">
+
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="images/icons/icon-close.png" alt="CLOSE">
+                </button>
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <div>
+                                        <span class="mtext-106 cl2" style="margin-right: 50px">Add policy</span>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <div class="size-204 respon6-next">
+                                        <div>
+                                            <select name="time" id="PolicyType">
+                                                <option>product in store</option>
+                                                <option>category</option>
+                                                <option>store</option>
+                                                <option>country</option>
+                                                <asp:PlaceHolder ID="PlaceHolder1" Visible="false" runat="server">
+                                                    <option>product</option>
+                                                </asp:PlaceHolder>
+                                            </select>
                                         </div>
                                     </div>
+                                    <br />
+                                    <br />
+                                    <div class="wrap-input1 w-full p-b-4">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="minPolicy" name="storeName" placeholder="minmum amount">
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="wrap-input1 w-full p-b-4">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="maxPolicy" name="storeName" placeholder="max amount">
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div style="display: flex; margin-bottom: 10px; margin-left: 20px">
+                                        <input type="checkbox" id="NoDiscount" name="gender" value="male" style="margin-top: 5px; margin-right: 10px;">
+                                        without discount
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div style="display: flex; margin-bottom: 10px; margin-left: 40px">
+                                        <input type="checkbox" id="NoCopuns" name="gender" value="male" style="margin-top: 5px; margin-right: 10px;">
+                                        without coupons
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="wrap-input1 w-full p-b-4">
+                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" id="PolicyChange" name="storeName" placeholder="enter product in store id">
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <input type="button" id="addPolicy33" value="Add policy" onclick="addPolicy()" style="margin-left: 700px;" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
+
+
                                 </div>
                             </div>
-                
                         </div>
-
-
-
                     </div>
                 </div>
 
+            </div>
 
-            <script type="text/javascript" src="vendor/JS/MyStores.js"></script>
+
+
+        </div>
+    </div>
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewManagersPermissionsModal">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="images/icons/icon-close.png" alt="CLOSE">
+                </button>
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <span class="mtext-106 cl2">View History</span>
+                                    <br />
+
+                                    <table id="permissionsTable" class="table-shopping-cart">
+
+                                        <tr class="table_head">
+                                            <th class="column-2">userName</th>
+                                            <th class="column-1">StoreId</th>
+                                            <th class="column-5">Permission</th>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="viewRolesHistoryModal">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="images/icons/icon-close.png" alt="CLOSE">
+                </button>
+                <div class="row">
+                    <div class="col-md-6 col-lg-7 p-b-30">
+                        <div class="p-l-25 p-r-30 p-lr-0-lg">
+                            <div class="wrap-slick3 flex-sb flex-w">
+
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <span class="mtext-106 cl2">View History</span>
+                                    <br />
+
+                                    <table id="roleHistoryTable" class="table-shopping-cart">
+
+                                        <tr class="table_head">
+                                            <th class="column-1">userName</th>
+                                            <th class="column-1">StoreId</th>
+                                            <th class="column-1">Role</th>
+                                            <th class="column-1">Added By</th>
+                                            <th class="column-5">Date</th>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="vendor/JS/MyStores.js"></script>
 
 
     <script type="text/javascript">

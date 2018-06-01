@@ -35,7 +35,6 @@ function viewOfAdmin() {
                 string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
                 string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
                 string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
-                string += "<a href=\"#\" id=\"updateNotificationsPreferences" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Update Notification Preferences</a>";
                 string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
                 string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
                 string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
@@ -45,13 +44,15 @@ function viewOfAdmin() {
                 string += "<a href=\"#\" id=\"addNewCoupon" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewCopun(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Coupon</a>";
                 string += "<a href=\"#\" id=\"viewPurchasesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View History</a>";
                 string += "<a href=\"#\" id=\"viewAddPolicy" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddPolicy(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add policy</a>";
+                string += "<a href=\"#\" id=\"viewManagerPermissions" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewManagerPermissionsFunc(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Managers Permissions</a>";
+                string += "<a href=\"#\" id=\"viewRolesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewRoleHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Store Roles History</a>";
                 string += "</div>";
                 string += "</div>";
                 mainDiv.innerHTML += string;
 
             }
         },
-        error:  function (response) {
+        error: function (response) {
             console.log(response);
             window.location.href = baseUrl + "/error";
         }
@@ -98,7 +99,6 @@ $(document).ready(function () {
                         string += "<a href=\"#\" id=\"removeStoreManager" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Manager</a>";
                         string += "<a href=\"#\" id=\"addStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Store Owner</a>";
                         string += "<a href=\"#\" id=\"removeStoreOwner" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Store Owner</a>";
-                        string += "<a href=\"#\" id=\"updateNotificationsPreferences" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Update Notification Preferences</a>";
                         string += "<a href=\"#\" id=\"addManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Manager Permission</a>";
                         string += "<a href=\"#\" id=\"removeManagerPermission" + i + "\" data-id=\"" + storeId + "\" onclick=\"modalLinkListener(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Remove Manager Permission</a>";
                         string += "<a href=\"#\" id=\"addSaleToStore" + i + "\" data-id=\"" + storeId + "\" onclick=\"addSaleView(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Sale</a>";
@@ -108,6 +108,8 @@ $(document).ready(function () {
                         string += "<a href=\"#\" id=\"addNewCoupon" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewCopun(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add Coupon</a>";
                         string += "<a href=\"#\" id=\"viewPurchasesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View History</a>";
                         string += "<a href=\"#\" id=\"viewAddPolicy" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewAddPolicy(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">Add policy</a>";
+                        string += "<a href=\"#\" id=\"viewManagersPermissions" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewManagerPermissionsFunc(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Managers Permissions</a>";
+                        string += "<a href=\"#\" id=\"viewRolesHistory" + i + "\" data-id=\"" + storeId + "\" onclick=\"viewRoleHistory(event);\" class=\"flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5 \">View Store Roles History</a>";
                         string += "</div>";
                         string += "</div>";
                         mainDiv.innerHTML += string;
@@ -156,6 +158,9 @@ $(document).ready(function () {
                                             $("#viewPurchasesHistory" + i).css('display', 'none');
                                         if (response.viewAddPolicy != true)
                                             $("#viewAddPolicy" + i).css('display', 'none');
+                                        $("#viewManagersPermissions" + i).css('display', 'none');
+                                        $("#viewRolesHistory" + i).css('display', 'none');
+
                                     },
                                     error: function (response) {
                                         console.log(response);
@@ -190,7 +195,7 @@ var createStoreButton = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/createStore?storeName=" + Storename,
+        url: baseUrl + "/api/store/createStore?storeName=" + Storename,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -214,7 +219,7 @@ var addProductFunct = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/addProductInStore?productName=" + productName + "&price=" + price
+        url: baseUrl + "/api/store/addProductInStore?productName=" + productName + "&price=" + price
             + "&amount=" + amount + "&storeId=" + lastClickedStoreId + "&category=" + cat,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -235,7 +240,7 @@ var addNewManager = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/addStoreManager?storeId=" + lastClickedStoreId + "&newManager=" + ManagerName,
+        url: baseUrl + "/api/store/addStoreManager?storeId=" + lastClickedStoreId + "&newManager=" + ManagerName,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -255,7 +260,7 @@ var RemoveStoreManager = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/removeStoreManager?storeId=" + lastClickedStoreId + "&oldManageruserName=" + ManagerName,
+        url: baseUrl + "/api/store/removeStoreManager?storeId=" + lastClickedStoreId + "&oldManageruserName=" + ManagerName,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -275,7 +280,7 @@ var addStoreOwner = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/addStoreOwner?storeId=" + lastClickedStoreId + "&newOwner=" + NewOwnerName,
+        url: baseUrl + "/api/store/addStoreOwner?storeId=" + lastClickedStoreId + "&newOwner=" + NewOwnerName,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -295,7 +300,7 @@ var removeStoreOwner = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/removeStoreOwner?storeId=" + lastClickedStoreId + "&oldOwner=" + OldOwnerName,
+        url: baseUrl + "/api/store/removeStoreOwner?storeId=" + lastClickedStoreId + "&oldOwner=" + OldOwnerName,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -314,10 +319,10 @@ var editStoreProduct = function () {
     productId = $("#product-id2").val();
     price = $("#product-price2").val();
     amount = $("#product-amount2").val();
-    
+
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/editProductInStore?productInStoreId=" + productId +
+        url: baseUrl + "/api/store/editProductInStore?productInStoreId=" + productId +
             "&price=" + price + "&amount=" + amount + "&storeId=" + lastClickedStoreId,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -338,8 +343,8 @@ var removeStoreProduct = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/removeProductFromStore?storeId=" + lastClickedStoreId +
-            "&ProductInStoreId=" + productId, 
+        url: baseUrl + "/api/store/removeProductFromStore?storeId=" + lastClickedStoreId +
+            "&ProductInStoreId=" + productId,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -358,7 +363,7 @@ var addSale = function () {
     productId = $("#products")[0].selectedIndex;
     productId = productsInStore[productId].productInStoreId;
     amount = $("#product-amount-in-sale2").val();
-    kindOfSale = $("#saleOption")[0].selectedIndex+1;
+    kindOfSale = $("#saleOption")[0].selectedIndex + 1;
     if (kindOfSale === 2) {
         kindOfSale = 3;
     }
@@ -366,7 +371,7 @@ var addSale = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/addSaleToStore?storeId=" + lastClickedStoreId +
+        url: baseUrl + "/api/store/addSaleToStore?storeId=" + lastClickedStoreId +
             "&pisId=" + productId + "&typeOfSale=" + kindOfSale + "&amount=" + amount +
             "&dueDtae=" + date,
         contentType: "application/json; charset=utf-8",
@@ -390,7 +395,7 @@ var editSale = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/editSale?storeId=" + lastClickedStoreId +
+        url: baseUrl + "/api/store/editSale?storeId=" + lastClickedStoreId +
             "&saleId=" + saleId + "&amount=" + amount + "&dueDate=" + date +
             "&dueDtae=" + date,
         contentType: "application/json; charset=utf-8",
@@ -412,8 +417,8 @@ var removeSale = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/removeSaleFromStore?storeId=" + lastClickedStoreId +
-            "&saleId=" + saleId ,
+        url: baseUrl + "/api/store/removeSaleFromStore?storeId=" + lastClickedStoreId +
+            "&saleId=" + saleId,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -433,7 +438,7 @@ function addSaleView(e) {
     modalLinkListener(e);
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/getProductInStore?storeId=" + lastClickedStoreId,
+        url: baseUrl + "/api/store/getProductInStore?storeId=" + lastClickedStoreId,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -459,7 +464,7 @@ function viewProducts(e) {
     storeid = lastClickedStoreId;
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/getProductInStore?storeId=" + lastClickedStoreId,
+        url: baseUrl + "/api/store/getProductInStore?storeId=" + lastClickedStoreId,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -470,20 +475,20 @@ function viewProducts(e) {
             }
             else {
                 viewHistory.innerHTML = "<div >"
-                for (var i = 0; i < response.length; i++){
+                for (var i = 0; i < response.length; i++) {
                     if (response[i].isActive == 0)
                         continue;
-                    viewHistory.innerHTML += "<div style=\"width: 300px; padding: 17px; border-color: black; border-width: 1px; margin-left: 20px; margin-bottom: 20px; border-style: groove; \"> "+
-                        "<div> product in store id : " + response[i].productInStoreId + "</div>"+
+                    viewHistory.innerHTML += "<div style=\"width: 300px; padding: 17px; border-color: black; border-width: 1px; margin-left: 20px; margin-bottom: 20px; border-style: groove; \"> " +
+                        "<div> product in store id : " + response[i].productInStoreId + "</div>" +
                         "<div>     product-id : " + response[i].product.productId + "</div>" +
                         "<div>     product name : " + response[i].product.name + "</div>" +
                         "<div>     price : " + response[i].price + "</div>" +
                         "<div>     amount : " + response[i].quantity + "</div>" +
                         "<div>     category : " + response[i].category + "</div>" +
-                            "</div>";
+                        "</div>";
 
                 }
-                viewHistory.innerHTML +="</div>"
+                viewHistory.innerHTML += "</div>"
             }
 
         },
@@ -499,7 +504,7 @@ function viewHistory(e) {
     storeid = lastClickedStoreId;
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/viewStoreHistory?storeId=" + lastClickedStoreId,
+        url: baseUrl + "/api/store/viewStoreHistory?storeId=" + lastClickedStoreId,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -511,7 +516,7 @@ function viewHistory(e) {
             else {
                 viewHistory.innerHTML = "<div >"
                 for (var i = 0; i < response.length; i++) {
-                    newDiv= "<div style=\"width: 300px; padding: 17px; border-color: black; border-width: 1px; margin-left: 20px; margin-bottom: 20px; border-style: groove; \"> " +
+                    newDiv = "<div style=\"width: 300px; padding: 17px; border-color: black; border-width: 1px; margin-left: 20px; margin-bottom: 20px; border-style: groove; \"> " +
                         "<div> Buyer : " + response[i].UserName + "</div>" +
                         "<div> product-id : " + response[i].ProductId + "</div>" +
                         "<div> Date : " + response[i].Date + "</div>";
@@ -524,22 +529,22 @@ function viewHistory(e) {
                             "</div>";
                     }
                     viewHistory.innerHTML += newDiv;
-                       
+
 
                 }
                 viewHistory.innerHTML += "</div>"
             }
-            
+
         },
         error: function (response) {
             console.log(response);
             window.location.href = baseUrl + "/error";
         }
     });
-    
+
 }
 
-var viewAddPolicy= function(e){
+var viewAddPolicy = function (e) {
     modalLinkListener(e);
     $("#addPolicy33").click(addPolicy);
     $("#PolicyType").on('change', function () {
@@ -585,7 +590,7 @@ var viewAddDiscount = function (e) {
     modalLinkListener(e);
     $("#typeOfDiscount").on('change', function () {
         typeOfCopun = $("#typeOfDiscount")[0].selectedIndex;
-        changeTypeOfCopun(typeOfCopun,"#discountto-what");
+        changeTypeOfCopun(typeOfCopun, "#discountto-what");
     });
 
 }
@@ -614,19 +619,19 @@ var addCopun = function () {
     }
 
     copunId = $("#copun-id").val();
-    typeOfCopun = $("#typeOfCopun")[0].selectedIndex+1;
+    typeOfCopun = $("#typeOfCopun")[0].selectedIndex + 1;
     to_what = $("#to-what").val();
     Restriction = fixRestricion("#Restriction", "#copunRaffle", "#copunInstant");
     DiscountPrecentage = $("#DiscountPrecentage").val();
     CopunDueDate = $("#CopunDueDate").val();
-    
+
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/addCouponDiscount?storeId=" + lastClickedStoreId +
+        url: baseUrl + "/api/store/addCouponDiscount?storeId=" + lastClickedStoreId +
             "&couponId=" + copunId + "&type=" + typeOfCopun + "&towaht=" + to_what +
             "&percentage=" + DiscountPrecentage + "&dueDate=" + CopunDueDate +
-            "&restrictions=" + Restriction ,
+            "&restrictions=" + Restriction,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -641,7 +646,7 @@ var addCopun = function () {
 }
 
 var addPolicy = function () {
-    typeOfPolicy = $("#PolicyType")[0].selectedIndex ;
+    typeOfPolicy = $("#PolicyType")[0].selectedIndex;
     minAmount = $("#minPolicy").val();
     maxAmount = $("#maxPolicy").val();
     noDiscount = $("#NoDiscount")[0].checked;
@@ -671,7 +676,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
     if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "") {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/user/setAmountPolicyOnProduct?productName=" + pId +
+            url: baseUrl + "/api/user/setAmountPolicyOnProduct?productName=" + pId +
                 "&minAmount=" + minAmount + "&maxAmount=" + maxAmount,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -688,7 +693,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
     if (noDiscount) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/user/setAmountPolicyOnProduct?productName=" + pId ,
+            url: baseUrl + "/api/user/setAmountPolicyOnProduct?productName=" + pId,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -705,7 +710,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
     if (NoCopuns) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/user/setNoCouponsPolicyOnProduct?productName=" + pId ,
+            url: baseUrl + "/api/user/setNoCouponsPolicyOnProduct?productName=" + pId,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -724,7 +729,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
     if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "") {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setAmountPolicyOnCountry?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setAmountPolicyOnCountry?storeId=" + lastClickedStoreId +
                 "&country=" + country + "&minAmount=" + minAmount + "&maxAmount=" + maxAmount,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -741,7 +746,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
     if (noDiscount) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoDiscountPolicyOnCountry?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setNoDiscountPolicyOnCountry?storeId=" + lastClickedStoreId +
                 "&country=" + country,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -758,7 +763,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
     if (NoCopuns) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoCouponPolicyOnCountry?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setNoCouponPolicyOnCountry?storeId=" + lastClickedStoreId +
                 "&country=" + country,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -778,7 +783,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
     if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "") {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setAmountPolicyOnStore?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setAmountPolicyOnStore?storeId=" + lastClickedStoreId +
                 "&minAmount=" + minAmount + "&maxAmount=" + maxAmount,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -795,7 +800,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
     if (noDiscount) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoDiscountPolicyOnStore?storeId=" + lastClickedStoreId ,
+            url: baseUrl + "/api/store/setNoDiscountPolicyOnStore?storeId=" + lastClickedStoreId,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -811,7 +816,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
     if (NoCopuns) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoCouponsPolicyOnStore?storeId=" + lastClickedStoreId,
+            url: baseUrl + "/api/store/setNoCouponsPolicyOnStore?storeId=" + lastClickedStoreId,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -830,7 +835,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
     if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "") {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setAmountPolicyOnCategory?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setAmountPolicyOnCategory?storeId=" + lastClickedStoreId +
                 "&category=" + catName + "&minAmount=" + minAmount + "&maxAmount=" + maxAmount,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -847,7 +852,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
     if (noDiscount) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoDiscountPolicyOnCategoty?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setNoDiscountPolicyOnCategoty?storeId=" + lastClickedStoreId +
                 "&category=" + catName,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -864,7 +869,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
     if (NoCopuns) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoDiscountPolicyOnCategoty?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setNoDiscountPolicyOnCategoty?storeId=" + lastClickedStoreId +
                 "&category=" + catName,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -881,11 +886,10 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
 }
 
 var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns, pisId) {
-    if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "")
-    {
+    if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "") {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setAmountPolicyOnProductInStore?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setAmountPolicyOnProductInStore?storeId=" + lastClickedStoreId +
                 "&productInStoreId=" + pisId + "&minAmount=" + minAmount + "&maxAmount=" + maxAmount,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -899,11 +903,10 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             }
         });
     }
-    if (noDiscount)
-    {
+    if (noDiscount) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoDiscountPolicyOnProductInStore?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setNoDiscountPolicyOnProductInStore?storeId=" + lastClickedStoreId +
                 "&productInStoreId=" + pisId,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -917,11 +920,10 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             }
         });
     }
-    if (NoCopuns)
-    {
+    if (NoCopuns) {
         jQuery.ajax({
             type: "GET",
-            url: baseUrl+"/api/store/setNoCouponPolicyOnProductInStore?storeId=" + lastClickedStoreId +
+            url: baseUrl + "/api/store/setNoCouponPolicyOnProductInStore?storeId=" + lastClickedStoreId +
                 "&productInStoreId=" + pisId,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -946,7 +948,7 @@ var addDiscountFunc = function () {
 
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/api/store/addDiscount?storeId=" + lastClickedStoreId +
+        url: baseUrl + "/api/store/addDiscount?storeId=" + lastClickedStoreId +
             "&type=" + type + "&percentage=" + DiscountPrecentage +
             "&toWhat=" + to_what + "&dueDate=" + DueDate +
             "&restrictions=" + Restriction,
@@ -1080,81 +1082,104 @@ var addmanagerPermisionFunc = function () {
 }
 
 
-var signUserToNotifications = function () {
-    if ($("#StorePrefCB")[0].checked) {
-        addNotificationPreferencesFunction("Store");
-    }
-    else {
-        removeNotificationPreferenceFunction("Store");
-    }
-    if ($("#PurchasePrefCB")[0].checked) {
-        addNotificationPreferencesFunction("Purchase");
-    }
-    else {
-        removeNotificationPreferenceFunction("Purchase");
-    }
-    if ($("#RaffleSalePrefCB")[0].checked) {
-        addNotificationPreferencesFunction("RaffleSale");
-    }
-    else {
-        removeNotificationPreferenceFunction("RaffleSale");
-    }
-}
-
-var addNotificationPreferencesFunction = function (preference) {
-    jQuery.ajax({
-        type: "GET",
-        url: baseUrl + "/api/user/signUserToNotifications?storeId=" + lastClickedStoreId +
-            "&notification=" + preference,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            alert(response);
-            window.location.reload(false);
-        },
-        error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl + "/error";
-        }
-    });
-}
-
-var removeNotificationPreferenceFunction = function (preference) {
-    jQuery.ajax({
-        type: "GET",
-        url: baseUrl + "/api/user/removeUserFromNotifications?storeId=" + lastClickedStoreId +
-            "&notification=" + preference,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (response) {
-            alert(response);
-            window.location.reload(false);
-        },
-        error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl + "/error";
-        }
-    });
-}
-
 var sendRemoveManagerPremission = function (manager, premission) {
     sendPremission(manager, premission, "api/store/removeManagerPermission")
 }
 
 var sendAddManagerPremission = function (manager, premission) {
-    sendPremission(manager, premission,"api/store/addManagerPermission")
+    sendPremission(manager, premission, "api/store/addManagerPermission")
 }
 
 var sendPremission = function (manager, premission, uri) {
     jQuery.ajax({
         type: "GET",
-        url: baseUrl+"/"+ uri +"?storeId=" + lastClickedStoreId +
+        url: baseUrl + "/" + uri + "?storeId=" + lastClickedStoreId +
             "&ManageruserName=" + manager + "&permission=" + premission,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
             alert(response);
             window.location.reload(false);
+        },
+        error: function (response) {
+            console.log(response);
+            window.location.href = baseUrl + "/error";
+        }
+    });
+}
+
+function viewRoleHistory(e) {
+    modalLinkListener(e);
+    var mainDivModal = document.getElementById('roleHistoryTable');
+    jQuery.ajax({
+        type: "GET",
+        url: baseUrl + "/api/store/getStoreRolesStats?storeId=" + lastClickedStoreId,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            var i;
+            for (i = 0; i < response.length; i++) {
+                //storeId, userName, Owner/Manager, Who added, Date
+
+                element = response[i];
+                var storeId = element["m_Item1"];
+                var userName = element["m_Item2"];
+                var role = element["m_Item3"];
+                var addedby = element["m_Item4"];
+                var date = element["m_Item5"];
+
+                var string = "";
+                string += "<tr class=\"table_row\">";
+                string += "<td class=\"column-1\">" + userName + "</td>";
+                string += "<td class=\"column-1\">" + storeId + "</td>";
+                string += "<td class=\"column-1\">" + role + "</td>";
+                string += "<td class=\"column-1\">" + addedby + "</td>";
+                string += "<td class=\"column-5\">" + date + "</td>";
+
+                string += "</tr>";
+                mainDivModal.innerHTML += string;
+
+            }
+            //window.location.reload(false);
+        },
+        error: function (response) {
+            console.log(response);
+            window.location.href = baseUrl + "/error";
+        }
+    });
+}
+
+function viewManagerPermissionsFunc(e) {
+    modalLinkListener(e);
+    var mainDivModal = document.getElementById('permissionsTable');
+    jQuery.ajax({
+        type: "GET",
+        url: baseUrl + "/api/store/getManagersPermissionsInStore?storeId=" + lastClickedStoreId,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            var i;
+            for (i = 0; i < response.length; i++) {
+                //storeId, userName, Owner/Manager, Who added, Date
+
+                element = response[i];
+                var storeId = element["m_Item1"];
+                var userName = element["m_Item2"];
+                var permission = element["m_Item3"];
+
+                var string = "";
+                string += "<tr class=\"table_row\">";
+                string += "<td class=\"column-1\">" + userName + "</td>";
+                string += "<td class=\"column-1\">" + storeId + "</td>";
+                string += "<td class=\"column-1\">" + permission + "</td>";
+
+                string += "</tr>";
+                mainDivModal.innerHTML += string;
+
+            }
+            //window.location.reload(false);
         },
         error: function (response) {
             console.log(response);

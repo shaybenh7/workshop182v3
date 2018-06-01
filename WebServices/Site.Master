@@ -78,6 +78,8 @@
 
                         <asp:PlaceHolder ID="logout" Visible="false" runat="server">
                             <div class="right-top-bar flex-w h-full" style="cursor: pointer; color: #efe1e1;">
+                                <a id="updatePreferencesLink" onclick="openModalNotifications();" class="flex-c-m trans-04 p-lr-25">Update Alerts Preferences
+                                </a>
 
                                 <a id="LogoutLink" onclick="logout();" class="flex-c-m trans-04 p-lr-25">Logout
                                 </a>
@@ -146,48 +148,132 @@
 
 
 
-                        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="searchModal">
-                    <div class="overlay-modal1 js-hide-modal1"></div>
+        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="searchModal">
+            <div class="overlay-modal1 js-hide-modal1"></div>
 
-                    <div class="container">
-                        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+            <div class="container">
+                <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
 
-                            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                                <img src="images/icons/icon-close.png" alt="CLOSE">
-                            </button>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-7 p-b-30">
-                                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                        <div class="wrap-slick3 flex-sb flex-w">
+                    <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                        <img src="images/icons/icon-close.png" alt="CLOSE">
+                    </button>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-7 p-b-30">
+                            <div class="p-l-25 p-r-30 p-lr-0-lg">
+                                <div class="wrap-slick3 flex-sb flex-w">
 
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <div class="flex-w flex-r-m p-b-10">
-                                                    <div></div>
+                                    <div class="size-204 flex-w flex-m respon6-next">
+                                        <div class="flex-w flex-r-m p-b-10">
+                                            <div></div>
 
-                                                    <div class="wrap-input1 w-full p-b-4">
-                                                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="search" id="searchInput" value="search...">
-                                                        <div class="focus-input1 trans-04"></div>
-                                                    </div>
-                                                    <input type="button" value="Search" id="searchButton" onclick="searchFunction();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
-                                                </div>
-
-
-
+                                            <div class="wrap-input1 w-full p-b-4">
+                                                <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="search" id="searchInput" value="search...">
+                                                <div class="focus-input1 trans-04"></div>
                                             </div>
+                                            <input type="button" value="Search" id="searchButton" onclick="searchFunction();" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
                                         </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
 
 
 
+            </div>
+        </div>
+
+        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="updateNotificationsPreferencesModal">
+            <div class="overlay-modal1 js-hide-modal1"></div>
+
+            <div class="container">
+                <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+
+                    <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                        <img src="images/icons/icon-close.png" alt="CLOSE">
+                    </button>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-7 p-b-30">
+                            <div class="p-l-25 p-r-30 p-lr-0-lg">
+                                <div class="wrap-slick3 flex-sb flex-w">
+
+                                    <div class="size-204 flex-w flex-m respon6-next">
+                                        <span class="mtext-106 cl2">Update Notification Preferences</span>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <div class="size-204 respon6-next">
+                                            <div>
+                                                <select name="time" id="storesDD">
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <div style="display: table; width: 100%;">
+
+                                            <div style="display: flex; margin-bottom: 10px;">
+                                                <input type="checkbox" id="StorePrefCB" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
+                                                Store Notifications
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 10px;">
+                                                <input type="checkbox" id="PurchasePrefCB" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
+                                                Purchase Notifications  
+                                            </div>
+                                            <div style="display: flex; margin-bottom: 10px;">
+                                                <input type="checkbox" id="RaffleSalePrefCB" name="gender" value="female" style="margin-top: 5px; margin-right: 10px;">
+                                                Raffle Sale Notifications  
+                                            </div>
+
+                                        </div>
+
+                                        <input type="button" style="margin-left: 700px;" value="Update Notifications" onclick="signUserToNotifications()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" />
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
         <script type="text/javascript">
+            function openModalNotifications() {
+                jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl + "/api/user/getAllStoresUnderUser",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        var productHtml = document.getElementById("storesDD");
+                        productHtml.innerHTML = ""
+                        for (i = 0; i < response.length; i++) {
+                            productHtml.innerHTML += "<option>" + response[i].storeId + "</option>";
+                        }
+
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        window.location.href = baseUrl + "/error";
+                    }
+                });
+                var element = document.getElementById("updateNotificationsPreferencesModal");
+                element.classList.add("show-modal1");
+            }
             function openModalSearch() {
                 var element = document.getElementById("searchModal");
                 element.classList.add("show-modal1");
@@ -249,6 +335,67 @@
                 //return unescape(dc.substring(begin + prefix.length, end));
                 return decodeURI(dc.substring(begin + prefix.length, end));
             }
+
+            var signUserToNotifications = function () {
+                if ($("#StorePrefCB")[0].checked) {
+                    addNotificationPreferencesFunction("Store");
+                }
+                else {
+                    removeNotificationPreferenceFunction("Store");
+                }
+                if ($("#PurchasePrefCB")[0].checked) {
+                    addNotificationPreferencesFunction("Purchase");
+                }
+                else {
+                    removeNotificationPreferenceFunction("Purchase");
+                }
+                if ($("#RaffleSalePrefCB")[0].checked) {
+                    addNotificationPreferencesFunction("RaffleSale");
+                }
+                else {
+                    removeNotificationPreferenceFunction("RaffleSale");
+                }
+            }
+
+            var addNotificationPreferencesFunction = function (preference) {
+                lastClickedStoreId = $("#storesDD")[0].selectedIndex;
+                jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl + "/api/user/signUserToNotifications?storeId=" + lastClickedStoreId +
+                        "&notification=" + preference,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert(response);
+                        window.location.reload(false);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        window.location.href = baseUrl + "/error";
+                    }
+                });
+            }
+
+
+            var removeNotificationPreferenceFunction = function (preference) {
+                lastClickedStoreId = $("#storesDD")[0].selectedIndex;
+                jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl + "/api/user/removeUserFromNotifications?storeId=" + lastClickedStoreId +
+                        "&notification=" + preference,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert(response);
+                        window.location.reload(false);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        window.location.href = baseUrl + "/error";
+                    }
+                });
+            }
+
         </script>
         <script src="vendor/JS/webSocket.js" type="text/javascript"></script>
 
