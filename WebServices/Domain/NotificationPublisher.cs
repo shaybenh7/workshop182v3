@@ -40,5 +40,17 @@ namespace WebServices.Domain
                     return;
             usersPreferences[category].AddLast(storeRole);
         }
+
+        public void removeFromCategory(StoreRole storeRole, NotificationCategories category)
+        {
+            if (!usersPreferences.ContainsKey(category))
+                return;
+            foreach (StoreRole sR in usersPreferences[category])
+                if (sR.user.getUserName() == storeRole.user.getUserName() && sR.store.getStoreId() == storeRole.store.getStoreId())
+                {
+                    usersPreferences[category].Remove(sR);
+                    return;
+                }
+        }
     }
 }

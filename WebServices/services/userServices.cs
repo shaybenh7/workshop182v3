@@ -164,6 +164,11 @@ namespace wsep182.services
             session.signUserToNotifications(notification, storeId);
         }
 
-  }
+        public void removeUserFromNotifications(User session, int storeId, string notification)
+        {
+            session.removeUserFromNotifications(notification, storeId);
+        }
+
+    }
 }
  

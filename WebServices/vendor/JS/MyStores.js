@@ -1082,20 +1082,46 @@ var addmanagerPermisionFunc = function () {
 
 var signUserToNotifications = function () {
     if ($("#StorePrefCB")[0].checked) {
-        sendNotificationPreferencesFunction("Store");
+        addNotificationPreferencesFunction("Store");
+    }
+    else {
+        removeNotificationPreferenceFunction("Store");
     }
     if ($("#PurchasePrefCB")[0].checked) {
-        sendNotificationPreferencesFunction("Purchase");
+        addNotificationPreferencesFunction("Purchase");
+    }
+    else {
+        removeNotificationPreferenceFunction("Purchase");
     }
     if ($("#RaffleSalePrefCB")[0].checked) {
-        sendNotificationPreferencesFunction("RaffleSale");
+        addNotificationPreferencesFunction("RaffleSale");
+    }
+    else {
+        removeNotificationPreferenceFunction("RaffleSale");
     }
 }
 
-var sendNotificationPreferencesFunction = function (preference) {
+var addNotificationPreferencesFunction = function (preference) {
     jQuery.ajax({
         type: "GET",
         url: baseUrl + "/api/user/signUserToNotifications?storeId=" + lastClickedStoreId +
+            "&notification=" + preference,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert(response);
+            window.location.reload(false);
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+}
+
+var removeNotificationPreferenceFunction = function (preference) {
+    jQuery.ajax({
+        type: "GET",
+        url: baseUrl + "/api/user/removeUserFromNotifications?storeId=" + lastClickedStoreId +
             "&notification=" + preference,
         contentType: "application/json; charset=utf-8",
         dataType: "json",

@@ -235,7 +235,7 @@ namespace wsep182.Domain
         {
             return shoppingCart.applyCoupon(this, couponId, country);
         }
-
+        
         public void signUserToNotifications(string notification, int storeId)
         {
             Store store = storeArchive.getInstance().getStore(storeId);
@@ -255,6 +255,24 @@ namespace wsep182.Domain
                     break;
             }
         }
-
+        public void removeUserFromNotifications(string notification, int storeId)
+        {
+            Store store = storeArchive.getInstance().getStore(storeId);
+            StoreRole sR = StoreRole.getStoreRole(store, this);
+            switch (notification)
+            {
+                case "Store":
+                    NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.Store);
+                    break;
+                case "Purchase":
+                    NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
+                    break;
+                case "RaffleSale":
+                    NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
