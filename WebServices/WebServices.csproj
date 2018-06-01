@@ -529,9 +529,11 @@
     <Content Include="vendor\jqueryui\jquery-ui.theme.css" />
     <Content Include="vendor\jqueryui\jquery-ui.theme.min.css" />
     <Content Include="vendor\jquery\jquery-3.2.1.min.js" />
+    <Content Include="vendor\JS\AdminAddPolicy.js" />
     <Content Include="vendor\JS\MyStores.js" />
     <Content Include="vendor\JS\shoppingCart.js" />
     <Content Include="vendor\JS\temp.js" />
+    <Content Include="vendor\JS\webSocket.js" />
     <Content Include="vendor\lightbox2\css\lightbox.css" />
     <Content Include="vendor\lightbox2\css\lightbox.min.css" />
     <Content Include="vendor\lightbox2\images\close.png" />
