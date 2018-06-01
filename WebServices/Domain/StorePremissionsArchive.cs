@@ -33,7 +33,6 @@ namespace wsep182.Domain
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
                         privilegesOfaStore[storeId].getPrivileges(username).addProductInStore(true);
-                        
                         break;
 
                     case "editProductInStore":
@@ -155,11 +154,14 @@ namespace wsep182.Domain
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
                 privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-            if(allow)
-                SPDB.Add(new Tuple<int,String,String>(storeId, username, "addProductInStore"));
+            if (allow)
+            {
+                if (!checkPrivilege(storeId,username, "addProductInStore"))
+                    SPDB.Add(new Tuple<int, String, String>(storeId, username, "addProductInStore"));
+            }
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addProductInStore"));
-            privilegesOfaStore[storeId].addProductInStore(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).addProductInStore(allow);
         }
 
         public void editProductInStore(int storeId, string username, Boolean allow)
@@ -170,7 +172,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "editProductInStore"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "editProductInStore"));
-            privilegesOfaStore[storeId].editProductInStore(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).editProductInStore(allow);
         }
 
         public void removeProductFromStore(int storeId, string username, Boolean allow)
@@ -181,7 +183,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeProductFromStore"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeProductFromStore"));
-            privilegesOfaStore[storeId].removeProductFromStore(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).removeProductFromStore(allow);
         }
 
         public void addStoreManager(int storeId, string username, Boolean allow)
@@ -192,7 +194,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addStoreManager"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addStoreManager"));
-            privilegesOfaStore[storeId].addStoreManager(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).addStoreManager(allow);
         }
 
         public void addDiscount(int storeId, string username, Boolean allow)
@@ -203,7 +205,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addDiscount"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addDiscount"));
-            privilegesOfaStore[storeId].addDiscount(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).addDiscount(allow);
         }
 
         public void addNewCoupon(int storeId, string username, Boolean allow)
@@ -214,7 +216,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addNewCoupon"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addNewCoupon"));
-            privilegesOfaStore[storeId].addNewCoupon(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).addNewCoupon(allow);
         }
 
         public void removeDiscount(int storeId, string username, Boolean allow)
@@ -225,7 +227,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeDiscount"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeDiscount"));
-            privilegesOfaStore[storeId].removeDiscount(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).removeDiscount(allow);
         }
 
         public void removeCoupon(int storeId, string username, Boolean allow)
@@ -236,7 +238,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeCoupon"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeCoupon"));
-            privilegesOfaStore[storeId].removeCoupon(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).removeCoupon(allow);
         }
 
         public void removeStoreManager(int storeId, string username, Boolean allow)
@@ -247,7 +249,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeStoreManager"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeStoreManager"));
-            privilegesOfaStore[storeId].removeStoreManager(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).removeStoreManager(allow);
         }
 
         public void addManagerPermission(int storeId, string username, Boolean allow)
@@ -258,7 +260,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addManagerPermission"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addManagerPermission"));
-            privilegesOfaStore[storeId].addManagerPermission(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).addManagerPermission(allow);
         }
 
         public void removeManagerPermission(int storeId, string username, Boolean allow)
@@ -269,7 +271,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeManagerPermission"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeManagerPermission"));
-            privilegesOfaStore[storeId].removeManagerPermission(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).removeManagerPermission(allow);
         }
 
         public void addSaleToStore(int storeId, string username, Boolean allow)
@@ -280,7 +282,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "addSaleToStore"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "addSaleToStore"));
-            privilegesOfaStore[storeId].addSaleToStore(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).addSaleToStore(allow);
         }
 
         public void removeSaleFromStore(int storeId, string username, Boolean allow)
@@ -291,7 +293,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "removeSaleFromStore"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "removeSaleFromStore"));
-            privilegesOfaStore[storeId].removeSaleFromStore(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).removeSaleFromStore(allow);
         }
 
         public void editSale(int storeId, string username, Boolean allow)
@@ -302,7 +304,7 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "editSale"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "editSale"));
-            privilegesOfaStore[storeId].editSale(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).editSale(allow);
         }
 
         public void viewPurchasesHistory(int storeId, string username, Boolean allow)
@@ -313,14 +315,14 @@ namespace wsep182.Domain
                 SPDB.Add(new Tuple<int, String, String>(storeId, username, "viewPurchasesHistory"));
             else
                 SPDB.Remove(new Tuple<int, String, String>(storeId, username, "viewPurchasesHistory"));
-            privilegesOfaStore[storeId].viewPurchasesHistory(username, allow);
+            privilegesOfaStore[storeId].getPrivileges(username).viewPurchasesHistory(allow);
         }
 
         public Boolean checkPrivilege(int storeId, string username, string privilege)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
                 privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-            return privilegesOfaStore[storeId].checkPrivilege(username, privilege);
+            return privilegesOfaStore[storeId].getPrivileges(username).checkPrivilege(privilege);
         }
 
         public LinkedList<Tuple<int, String, String>> getManagersPermissionsInStore(int storeId)
