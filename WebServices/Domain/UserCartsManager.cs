@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.DAL;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -10,10 +12,12 @@ namespace wsep182.Domain
     {
         private static UserCartsManager instance;
         private LinkedList<UserCart> carts;
+        private UserCartDB UCDB;
 
         private UserCartsManager()
         {
-            carts = new LinkedList<UserCart>();
+            UCDB = new UserCartDB(configuration.DB_MODE);
+            carts = UCDB.Get();
         }
         public static UserCartsManager getInstance()
         {
@@ -32,14 +36,26 @@ namespace wsep182.Domain
             {
                 if(cart.getUserName().Equals(userName) && cart.getSaleId() == saleId)
                 {
-                    cart.setAmount(cart.getAmount() + amount);
-                    return true;
+                    if (UCDB.Remove(cart))
+                    {
+                        cart.setAmount(cart.getAmount() + amount);
+                        if (UCDB.Add(cart))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
+
             }
 
             UserCart toAdd = new UserCart(userName, saleId, amount);
-            carts.AddLast(toAdd);
-            return true;
+            if (UCDB.Add(toAdd))
+            {
+                carts.AddLast(toAdd);
+                return true;
+            }
+            return false;
         }
         public Boolean updateUserCarts(String userName, int saleId, int amount,double offer)
         {
@@ -47,15 +63,26 @@ namespace wsep182.Domain
             {
                 if (cart.getUserName().Equals(userName) && cart.getSaleId() == saleId)
                 {
-                    cart.setOffer(offer);
-                    return true;
+                    if (UCDB.Remove(cart))
+                    {
+                        cart.setOffer(offer);
+                        if (UCDB.Add(cart))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
 
             UserCart toAdd = new UserCart(userName, saleId, amount);
             toAdd.setOffer(offer);
-            carts.AddLast(toAdd);
-            return true;
+            if (UCDB.Add(toAdd))
+            {
+                carts.AddLast(toAdd);
+                return true;
+            }
+            return false;
         }
 
         public Boolean editUserCarts(String userName, int saleId, int amount)
@@ -64,8 +91,15 @@ namespace wsep182.Domain
             {
                 if (cart.getUserName().Equals(userName) && cart.getSaleId() == saleId)
                 {
-                    cart.setAmount(amount);
-                    return true;
+                    if (UCDB.Remove(cart))
+                    {
+                        cart.setAmount(amount);
+                        if (UCDB.Add(cart))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
             return false ;
@@ -103,8 +137,12 @@ namespace wsep182.Domain
             {
                 if(c.getUserName().Equals(userName) && c.getSaleId() == saleId)
                 {
-                    carts.Remove(c);
-                    return true;
+                    if (UCDB.Remove(c))
+                    {
+                        carts.Remove(c);
+                        return true;
+                    }
+                    return false;
                 }
             }
             return false;

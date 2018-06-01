@@ -240,13 +240,12 @@ namespace wsep182.Domain
                     {
                         c.setAmount(c.getAmount() + amount);
                         UserManager.getInstance().updateUser(session);
-
                         return 1; // OK
                     }
                     return -7;
                 }
             }
-            
+            //in updateUserCarts we already add the product in case it doesn't exist, so no need to add to DB here also
             products.AddLast(toAdd);
             UserManager.getInstance().updateUser(session);
             return 1;
@@ -509,9 +508,9 @@ namespace wsep182.Domain
             }
             foreach (UserCart uc in toDelete)
             {
-                products.Remove(uc);
                 if (!(session.getState() is Guest))
                     UserCartsManager.getInstance().removeUserCart(session.userName,uc.SaleId);
+                products.Remove(uc);
             }
             UserManager.getInstance().updateUser(session);
 
