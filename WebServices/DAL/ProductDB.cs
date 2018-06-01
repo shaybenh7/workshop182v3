@@ -64,7 +64,7 @@ namespace WebServices.DAL
             try
             {
                 con.Open();
-                string sql = "DELETE FROM Product WHERE name is '" + p.name + "'; ";
+                string sql = "DELETE FROM Product WHERE name = '" + p.name + "'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
