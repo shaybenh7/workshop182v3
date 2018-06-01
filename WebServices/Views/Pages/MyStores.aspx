@@ -346,12 +346,6 @@
 
                                             <div class="size-204 flex-w flex-m respon6-next">
                                                 <span class="mtext-106 cl2">Update Notification Preferences</span>
-
-                                                <div class="wrap-input1 w-full p-b-4">
-                                                    <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="offer" id="notifications-to-change-preferences" placeholder="Enter manager name">
-                                                    <div class="focus-input1 trans-04"></div>
-
-                                                </div>
                                                 <br />
                                                 <br />
                                                 <br />
@@ -374,7 +368,7 @@
 
                                                 </div>
 
-                                                <input type="button" style="margin-left:700px;" value="Add permissions" onclick="" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
+                                                <input type="button" style="margin-left:700px;" value="Update Notifications" onclick="signUserToNotifications()" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"/>
 
 
 

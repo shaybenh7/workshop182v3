@@ -1079,6 +1079,37 @@ var addmanagerPermisionFunc = function () {
     }
 }
 
+
+var signUserToNotifications = function () {
+    if ($("#StorePrefCB")[0].checked) {
+        sendNotificationPreferencesFunction("Store");
+    }
+    if ($("#PurchasePrefCB")[0].checked) {
+        sendNotificationPreferencesFunction("Purchase");
+    }
+    if ($("#RaffleSalePrefCB")[0].checked) {
+        sendNotificationPreferencesFunction("RaffleSale");
+    }
+}
+
+var sendNotificationPreferencesFunction = function (preference) {
+    jQuery.ajax({
+        type: "GET",
+        url: baseUrl + "/api/user/signUserToNotifications?storeId=" + lastClickedStoreId +
+            "&notification=" + preference,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert(response);
+            window.location.reload(false);
+        },
+        error: function (response) {
+            console.log(response);
+
+        }
+    });
+}
+
 var sendRemoveManagerPremission = function (manager, premission) {
     sendPremission(manager, premission, "api/store/removeManagerPermission")
 }
