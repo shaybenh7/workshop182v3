@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 
 namespace WebServices.DAL
@@ -134,22 +136,22 @@ namespace WebServices.DAL
         private void insertUsers()
         {
             String password = "123";
-            string sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'aviad' , '" + password + "' , 1 );";
+            string sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'aviad' , '" + encrypt("aviad" + password) + "' , 1 );";
             MySqlCommand cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + password + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'shay' , '" + password + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'shay' , '" + encrypt("shay" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'itamar' , '" + password + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'itamar' , '" + encrypt("itamar" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'zahi' , '" + password + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'zahi' , '" + encrypt("zahi" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'notActiveUser' , '" + password + "' , 0 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'notActiveUser' , '" + encrypt("notActiveUser" + password) + "' , 0 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
         }
@@ -344,6 +346,22 @@ namespace WebServices.DAL
             sql = "INSERT INTO `RaffleSale`(`saleId`, `userName`, `offer`, `dueDate`) VALUES ( 8 ,'zahi', 5 ,'" + date + "')";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();  
+        }
+
+        private static String encrypt(string value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (var hash = SHA512.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
 
     }
