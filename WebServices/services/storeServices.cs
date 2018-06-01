@@ -95,6 +95,11 @@ namespace wsep182.services
             return ProductManager.getInstance().getProductsInStore(storeId);
         }
 
+        public LinkedList<Tuple<int, String, String, String, String>> getStoreRolesStats(int storeId)
+        {
+            return storeArchive.getInstance().getStoreRolesStats(storeId);
+        }
+
         //req 3.1 c
         /*
         * return:
