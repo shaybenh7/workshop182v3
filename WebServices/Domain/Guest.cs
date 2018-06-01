@@ -31,7 +31,7 @@ namespace wsep182.Domain
             User u = UserManager.getInstance().getUser(username);
             if (u != null)
             {
-                //password = encrypt(username + password);
+                password = encrypt(username + password);
                 if (u.getPassword() == password)
                 {
                     if (!u.getIsActive())
@@ -43,16 +43,21 @@ namespace wsep182.Domain
             }
             return -1;
         }
-        private String encrypt(String password)
+
+        private static String encrypt(string value)
         {
-            return password;
-            //byte[] pwd;
-            //using (SHA512 shaM = new SHA512Managed())
-            //{
-            //    pwd = System.Text.Encoding.UTF8.GetBytes(password);
-            //    pwd = shaM.ComputeHash(pwd);
-            //}
-            //return System.Text.Encoding.UTF8.GetString(pwd);
+            StringBuilder Sb = new StringBuilder();
+
+            using (var hash = SHA512.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
         public override Boolean isLogedIn()
         {

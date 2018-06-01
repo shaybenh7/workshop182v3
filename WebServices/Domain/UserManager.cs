@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Text;
 using WebServices.DAL;
 using WebServices.Domain;
 
@@ -39,21 +40,26 @@ namespace wsep182.Domain
             foreach (User u in users)
                 if (u.getUserName().Equals(newUser.getUserName()))
                     return -4;
-            //newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
+            newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
             UDB.Add(newUser);
             users.AddLast(newUser);
             return 0;
         }
 
-        private String encrypt(String password)
+        private static String encrypt(string value)
         {
-            byte[] pwd;
-            using (SHA512 shaM = new SHA512Managed())
+            StringBuilder Sb = new StringBuilder();
+
+            using (var hash = SHA512.Create())
             {
-                pwd = System.Text.Encoding.UTF8.GetBytes(password);
-                pwd = shaM.ComputeHash(pwd);
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
             }
-            return System.Text.Encoding.UTF8.GetString(pwd);
+
+            return Sb.ToString();
         }
 
         public Boolean updateUser(User newUser)
@@ -62,7 +68,7 @@ namespace wsep182.Domain
             {
                 if (u.getUserName().Equals(newUser.getUserName()))
                 {
-                    //newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
+                    newUser.setPassword(encrypt(newUser.getUserName() + newUser.getPassword()));
                     UDB.Remove(u);
                     users.Remove(u);
                     UDB.Add(newUser);
