@@ -77,7 +77,8 @@ namespace wsep182.Domain
                     state = new LogedIn();
                 this.userName = username;
                 this.password = password;
-                UserManager.getInstance().updateUser(this);
+                //UserManager.getInstance().updateUser(this);
+                shoppingCart.products = UserCartsManager.getInstance().getUserShoppingCart(userName);
                 return 0;
             }
             return user;

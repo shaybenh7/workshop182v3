@@ -32,7 +32,7 @@ namespace wsep182.Domain
             if (u != null)
             {
                 password = encrypt(username + password);
-                if (u.getPassword() == password)
+                if (u.getPassword().Equals(password))
                 {
                     if (!u.getIsActive())
                         return -3;
