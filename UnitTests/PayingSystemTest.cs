@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using wsep182.Domain;
 using wsep182.services;
+using WebServices.Domain;
 
 namespace IntegrationTests
 {
@@ -15,6 +16,8 @@ namespace IntegrationTests
         private User zahi, itamar, niv, admin, admin1; //admin,itamar logedin
         private Store store;//itamar owner , niv manneger
         ProductInStore cola, sprite;
+        PaymentInterface paymentProxy;
+
 
         [TestInitialize]
         public void init()
@@ -29,6 +32,8 @@ namespace IntegrationTests
             DiscountsManager.restartInstance();
             RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
+
+            paymentProxy = new PaymentProxy();
 
             us = userServices.getInstance();
             ss = storeServices.getInstance();
@@ -72,7 +77,7 @@ namespace IntegrationTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans=sellS.checkout(zahi,"Rager 214 Bash" ,"Israel", "123456");
-            Assert.IsTrue(PaymentSystem.getInstance().payForProduct("123", zahi, ans.Item2.First.Value));
+            Assert.IsTrue(paymentProxy.payForProduct("123", zahi, ans.Item2.First.Value));
         }
         [TestMethod]
         public void nullCreditCard()
@@ -82,7 +87,7 @@ namespace IntegrationTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(PaymentSystem.getInstance().payForProduct(null, zahi, ans.Item2.First.Value));
+            Assert.IsFalse(paymentProxy.payForProduct(null, zahi, ans.Item2.First.Value));
         }
         [TestMethod]
         public void emptyCreditCard()
@@ -92,7 +97,7 @@ namespace IntegrationTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(PaymentSystem.getInstance().payForProduct("", zahi, ans.Item2.First.Value));
+            Assert.IsFalse(paymentProxy.payForProduct("", zahi, ans.Item2.First.Value));
         }
         [TestMethod]
         public void nullUser()
@@ -102,7 +107,7 @@ namespace IntegrationTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(PaymentSystem.getInstance().payForProduct("123", null, ans.Item2.First.Value));
+            Assert.IsFalse(paymentProxy.payForProduct("123", null, ans.Item2.First.Value));
         }
         [TestMethod]
         public void nullProduct()
@@ -112,7 +117,7 @@ namespace IntegrationTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(PaymentSystem.getInstance().payForProduct("123", zahi, null));
+            Assert.IsFalse(paymentProxy.payForProduct("123", zahi, null));
         }
 
     }

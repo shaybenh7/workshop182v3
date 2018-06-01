@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using wsep182.Domain;
 using wsep182.services;
+using WebServices.Domain;
 
 namespace UnitTests
 {
@@ -16,9 +17,12 @@ namespace UnitTests
         private Store store;//itamar owner , niv manneger
         ProductInStore cola, sprite;
 
+        ShippingInterface shippingProxy;
+
         [TestInitialize]
         public void init()
         {
+            configuration.DB_MODE = "Testing";
             ProductManager.restartInstance();
             SalesManager.restartInstance();
             storeArchive.restartInstance();
@@ -29,6 +33,8 @@ namespace UnitTests
             DiscountsManager.restartInstance();
             RaffleSalesManager.restartInstance();
             StorePremissionsArchive.restartInstance();
+
+            shippingProxy = new ShippingProxy();
 
             us = userServices.getInstance();
             ss = storeServices.getInstance();
@@ -72,7 +78,7 @@ namespace UnitTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(ShippingSystem.getInstance().sendShippingRequest(zahi,"Italy","Rome", null));
+            Assert.IsFalse(shippingProxy.sendShippingRequest(zahi,"Italy","Rome", null));
         }
 
         [TestMethod]
@@ -83,7 +89,7 @@ namespace UnitTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(ShippingSystem.getInstance().sendShippingRequest(zahi, "Italy", "Rome", ""));
+            Assert.IsFalse(shippingProxy.sendShippingRequest(zahi, "Italy", "Rome", ""));
         }
 
         [TestMethod]
@@ -94,7 +100,7 @@ namespace UnitTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(ShippingSystem.getInstance().sendShippingRequest(null, "Italy", "Rome", "123"));
+            Assert.IsFalse(shippingProxy.sendShippingRequest(null, "Italy", "Rome", "123"));
         }
 
         [TestMethod]
@@ -105,7 +111,7 @@ namespace UnitTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(ShippingSystem.getInstance().sendShippingRequest(zahi, null, "Rome", "123"));
+            Assert.IsFalse(shippingProxy.sendShippingRequest(zahi, null, "Rome", "123"));
         }
 
         [TestMethod]
@@ -116,7 +122,7 @@ namespace UnitTests
             Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
             sellS.getShoppingCartBeforeCheckout(zahi);
             Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
-            Assert.IsFalse(ShippingSystem.getInstance().sendShippingRequest(zahi, "Italy", null, "123"));
+            Assert.IsFalse(shippingProxy.sendShippingRequest(zahi, "Italy", null, "123"));
         }
 
     }

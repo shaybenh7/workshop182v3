@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class ShippingSystem
+    public class ShippingSystem : ShippingInterface
     {
         private static ShippingSystem instance;
 
