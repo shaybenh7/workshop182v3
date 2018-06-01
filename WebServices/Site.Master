@@ -254,7 +254,7 @@
             function openModalNotifications() {
                 jQuery.ajax({
                     type: "GET",
-                    url: baseUrl + "/api/user/getAllStoresUnderUser",
+                    url: baseUrl + "/api/store/getAllStores",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
