@@ -196,6 +196,7 @@
     <Compile Include="Controllers\WebSocketController.cs" />
     <Compile Include="DAL\BaseDBConnector.cs" />
     <Compile Include="DAL\BuyHistoryDB.cs" />
+    <Compile Include="DAL\CleanDB.cs" />
     <Compile Include="DAL\couponDB.cs" />
     <Compile Include="DAL\DiscountDB.cs" />
     <Compile Include="DAL\ProductDB.cs" />
