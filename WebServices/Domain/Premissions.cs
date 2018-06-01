@@ -36,6 +36,8 @@ namespace wsep182.Domain
             if (privileges.ContainsKey(privilege))
                 privileges.Remove(privilege);
         }
+
+
         public void addProductInStore(Boolean allow)
         {
             if (allow)
@@ -157,6 +159,8 @@ namespace wsep182.Domain
                 return false;
             }
         }
+
+
 
     }
 }

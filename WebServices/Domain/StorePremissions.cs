@@ -19,6 +19,10 @@ namespace wsep182.Domain
                 privileges.Add(username, new Premissions());
             return privileges[username];
         }
+        public Dictionary<string, Premissions> getAllPrivileges()
+        {
+            return this.privileges;
+        }
         //        bool addProduct;
         public StorePremissions(int storeId)
         {

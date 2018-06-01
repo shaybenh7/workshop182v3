@@ -320,13 +320,29 @@ namespace wsep182.Domain
                 privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
             return privilegesOfaStore[storeId].checkPrivilege(username, privilege);
         }
-        
 
-        
+        public LinkedList<Tuple<int, String, String>> getManagersPermissionsInStore(int storeId)
+        {
+            if (storeArchive.getInstance().getStore(storeId) == null)
+                return null;
+            LinkedList<Tuple<int, String, String>> ans = new LinkedList<Tuple<int, String, String>>();
+            StorePremissions SP = this.privilegesOfaStore[storeId];
+            Dictionary<string, Premissions> privileges = SP.getAllPrivileges();
+            foreach (KeyValuePair<string, Premissions> entry in privileges)
+            {
+                foreach (KeyValuePair<string, Boolean> entry2 in entry.Value.getPrivileges())
+                    if (entry2.Value)
+                        ans.AddFirst(new Tuple<int, String, String>(storeId, entry.Key, entry2.Key));
+            }
+            return ans;
+        }
+
+
+
         //public Boolean addNewCoupon(string username, string privilege)
         //{
         //   return privilegesOfaUser[username].checkPrivilege(privilege);
         //}
-        
+
     }
 }
