@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebServices.Domain;
 
 namespace wsep182.Domain
 {
@@ -10,10 +11,14 @@ namespace wsep182.Domain
     {
         public LinkedList<UserCart> products;
         LinkedList<string> usedCoupons;
+        PaymentInterface paymentProxy;
+        ShippingInterface shippingProxy;
         public ShoppingCart()
         {
             products = new LinkedList<UserCart>();
             usedCoupons = new LinkedList<string>();
+            paymentProxy = new PaymentProxy();
+            shippingProxy = new ShippingProxy();
         }
 
         public LinkedList<UserCart> getShoppingCartProducts(User session)
@@ -437,10 +442,11 @@ namespace wsep182.Domain
                 Sale sale = SalesManager.getInstance().getSale(product.getSaleId());
                 if (sale.TypeOfSale == 1 && checkValidAmount(sale, product) && checkValidDate(sale)) //regular buy
                 {
-                    if (PaymentSystem.getInstance().payForProduct(creditCard, session, product))
+                    if (paymentProxy.payForProduct(creditCard, session, product))
                     {
-                        if (!ShippingSystem.getInstance().sendShippingRequest(session, country, adress, creditCard))
+                        if (!shippingProxy.sendShippingRequest(session, country, adress, creditCard))
                             return -9;
+                        
                         ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
                         int productId = p.getProduct().getProductId();
                         int storeId = p.getStore().getStoreId();
@@ -472,7 +478,7 @@ namespace wsep182.Domain
                     }
                     else
                     {
-                        if (PaymentSystem.getInstance().payForProduct(creditCard, session, product))
+                        if (paymentProxy.payForProduct(creditCard, session, product))
                         {
                             RaffleSalesManager.getInstance().addRaffleSale(sale.SaleId, session.getUserName(), offer, sale.DueDate);
                             ProductInStore p = ProductManager.getInstance().getProductInStore(sale.ProductInStoreId);
