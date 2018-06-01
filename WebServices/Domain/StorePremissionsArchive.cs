@@ -133,7 +133,9 @@ namespace wsep182.Domain
         public StorePremissions GetPremissionsOfAStore(int storeId)
         {
             if (!privilegesOfaStore.ContainsKey(storeId))
-                return new StorePremissions(storeId);//check aviad
+            {
+                privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
+            }
             return privilegesOfaStore[storeId];
         }
         public Premissions getAllPremissions(int storeId, string username)
@@ -326,7 +328,15 @@ namespace wsep182.Domain
             if (storeArchive.getInstance().getStore(storeId) == null)
                 return null;
             LinkedList<Tuple<int, String, String>> ans = new LinkedList<Tuple<int, String, String>>();
-            StorePremissions SP = this.privilegesOfaStore[storeId];
+            StorePremissions SP;
+            try
+            {
+                SP= this.privilegesOfaStore[storeId];
+            }
+            catch(Exception e)
+            {
+                return ans;
+            }
             Dictionary<string, Premissions> privileges = SP.getAllPrivileges();
             foreach (KeyValuePair<string, Premissions> entry in privileges)
             {
