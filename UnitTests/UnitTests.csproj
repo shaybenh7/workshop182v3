@@ -52,6 +52,7 @@
     <Compile Include="CouponArchiveUnitTest.cs" />
     <Compile Include="DicountArchiveUnitTests.cs" />
     <Compile Include="GuestUnitTests.cs" />
+    <Compile Include="PayingSystemTest.cs" />
     <Compile Include="ProductArchiveUnitTests.cs" />
     <Compile Include="RaffleSalesArchiveTests.cs" />
     <Compile Include="SalesArchiveUnitTests.cs" />
