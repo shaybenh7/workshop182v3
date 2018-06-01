@@ -201,8 +201,9 @@
                                         console.log(response);
                                     },
                                     error: function (response) {
-                                        console.log("responseeee");
-                                    }
+					                    console.log(response);
+					                    window.location.href = baseUrl + "/error";
+				                    }
                                 });
                             });
                         
@@ -219,8 +220,9 @@
                                     storeNameElement.innerHTML += response["store"]["name"];
                                 },
                                 error: function (response) {
-                                    console.log(response);
-                                }
+					                console.log(response);
+					                window.location.href = baseUrl + "/error";
+				                }
                             });
                             jQuery.ajax({
                                 type: "GET",
@@ -233,8 +235,9 @@
                                     productNameElement.innerHTML += response.toFixed(2);;
                                 },
                                 error: function (response) {
-                                    console.log(response);
-                                }
+					                console.log(response);
+					                window.location.href = baseUrl + "/error";
+				                }
                             });
                             jQuery.ajax({
                                 type: "GET",
@@ -246,15 +249,16 @@
                                     salePriceElement.innerHTML += response;
                                 },
                                 error: function (response) {
-                                    console.log(response);
-                                }
+					                console.log(response);
+					                window.location.href = baseUrl + "/error";
+				                }
                             });
                         })();
                 },
                 error: function (response) {
-                    console.log("fuck");
-                    window.location.href = baseUrl+"/error";
-                }
+					console.log(response);
+					window.location.href = baseUrl + "/error";
+				}
             });
         });
     </script>

@@ -87,8 +87,8 @@ namespace wsep182.Domain
             foreach (Store s in stores)
                 if (s.getStoreId() == newStore.getStoreId())
                     return null;
-            stores.AddLast(newStore);
             SDB.Add(newStore);
+            stores.AddLast(newStore);
             return newStore;
         }
 
@@ -97,10 +97,10 @@ namespace wsep182.Domain
             foreach (Store s in stores)
                 if (s.getStoreId() == newStore.getStoreId())
                 {
-                    stores.Remove(s);
-                    stores.AddLast(newStore);
                     SDB.Remove(s);
+                    stores.Remove(s);
                     SDB.Add(newStore);
+                    stores.AddLast(newStore);
                     return true;
                 }
             return false;
@@ -119,8 +119,8 @@ namespace wsep182.Domain
             foreach (Store s in stores)
                 if (s.getStoreId() == storeId)
                 {
-                    s.setIsActive(0);
                     SDB.Remove(s);
+                    s.setIsActive(0);
                     SDB.Add(s);
                     return true;
                 }
@@ -132,9 +132,9 @@ namespace wsep182.Domain
                 archive.Add(storeId,new Dictionary<string, StoreRole>());
             if (archive[storeId].ContainsKey(userName))
                 return false;
-            archive[storeId].Add(userName,newPremissions);
             Tuple<int, String, String,String,String> t = new Tuple<int, String, String,String,String>(storeId, userName, newPremissions.type, newPremissions.addedby,newPremissions.dateAdded);
             SRDDB.Add(t);
+            archive[storeId].Add(userName, newPremissions);
             return true;
         }
 
@@ -144,13 +144,12 @@ namespace wsep182.Domain
                 return false;
             if (archive[storeId].ContainsKey(userName))
             {
-                
-                archive[storeId].Remove(userName);
-                archive[storeId].Add(userName, newPremissions);
-                Tuple<int, String, String,String,String> t = new Tuple<int, String, String,String,String>(storeId, userName, "","","");
+                Tuple<int, String, String, String, String> t = new Tuple<int, String, String, String, String>(storeId, userName, "", "", "");
                 SRDDB.Remove(t);
-                t = new Tuple<int, String, String,String,String>(storeId, userName, newPremissions.type, newPremissions.addedby,newPremissions.dateAdded);
+                archive[storeId].Remove(userName);
+                t = new Tuple<int, String, String, String, String>(storeId, userName, newPremissions.type, newPremissions.addedby, newPremissions.dateAdded);
                 SRDDB.Add(t);
+                archive[storeId].Add(userName, newPremissions);
                 return true;
             }
             return false;

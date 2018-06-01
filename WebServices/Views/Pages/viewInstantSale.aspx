@@ -205,7 +205,8 @@
                                      productNameElement.innerHTML += str;
                                 },
                                 error: function (response) {
-                                    console.log("response");
+                                    console.log(response);
+                                    window.location.href = baseUrl+"/error";
                                 }
                             });
 
@@ -221,9 +222,10 @@
                                 success: function (response) {
                                      alert(response);
                                 },
-                                error: function (response) {
-                                    console.log("response");
-                                }
+                            error: function (response) {
+                                console.log(response);
+                                window.location.href = baseUrl+"/error";
+                            }
                             });
                         });
 
@@ -240,9 +242,10 @@
                                 var storeNameElement = document.getElementById("storeName");
                                 storeNameElement.innerHTML += response["store"]["name"];
                             },
-                            error: function (response) {
-                                console.log(response);
-                            }
+                        error: function (response) {
+                            console.log(response);
+                            window.location.href = baseUrl+"/error";
+                        }
                         });
                         jQuery.ajax({
                             type: "GET",
@@ -254,9 +257,10 @@
                                 var salePriceElement = document.getElementById("salePriceAfterDiscount");
                                 salePriceElement.innerHTML += response;
                             },
-                            error: function (response) {
-                                console.log(response);
-                            }
+                        error: function (response) {
+                            console.log(response);
+                            window.location.href = baseUrl+"/error";
+                        }
                         });
                         jQuery.ajax({
                             type: "GET",
@@ -268,14 +272,15 @@
                                 var salePriceElement = document.getElementById("salePrice");
                                 salePriceElement.innerHTML += response;
                             },
-                            error: function (response) {
-                                console.log(response);
-                            }
+                        error: function (response) {
+                            console.log(response);
+                            window.location.href = baseUrl+"/error";
+                        }
                         });
                     })();
                 },
                 error: function (response) {
-                    console.log("fuck");
+                    console.log(response);
                     window.location.href = baseUrl+"/error";
                 }
             });

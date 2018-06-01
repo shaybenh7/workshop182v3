@@ -66,6 +66,7 @@
                         },
                         error: function (response) {
                             console.log(response);
+                            window.location.href = baseUrl + "/error";
                         }
                     });
 
@@ -176,6 +177,7 @@ var checkoutFunc2 =function() {
                             },
                             error: function (response) {
                                 console.log(response);
+                                window.location.href = baseUrl + "/error";
                             }
                         });
 
@@ -187,9 +189,8 @@ var checkoutFunc2 =function() {
             }
         },
         error: function (response) {
-            console.log("error");
             console.log(response);
-            //window.location.href = baseUrl+"/error";
+            window.location.href = baseUrl+"/error";
         }
     });
 
@@ -234,6 +235,7 @@ function applyCoupon() {
         },
         error: function (response) {
             console.log(response);
+            window.location.href = baseUrl + "/error";
         }
     });
     

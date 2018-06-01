@@ -43,8 +43,8 @@ namespace wsep182.Domain
             {
                 if (s.SaleId == saleId)
                 {
-                    sales.Remove(s);
                     SDB.Remove(s);
+                    sales.Remove(s);
                     return true;
                 }
             }
@@ -74,8 +74,8 @@ namespace wsep182.Domain
             }
             int saleId = getNextSaleId();
             Sale toAdd = new Sale(saleId, productInStoreId, typeOfSale, amount, dueDate);
-            sales.AddLast(toAdd);
             SDB.Add(toAdd);
+            sales.AddLast(toAdd);
             return toAdd;
         }
 

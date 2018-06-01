@@ -47,8 +47,9 @@ namespace wsep182.Domain
             }
             foreach (Discount d in discountToRemove)
             {
-                discounts.Remove(d);
                 DDB.Remove(d);
+                discounts.Remove(d);
+                
             }
         }
 
@@ -65,8 +66,8 @@ namespace wsep182.Domain
                     {
                         return -2;
                     }
-                    discounts.AddLast(toAdd);
                     DDB.Add(toAdd);
+                    discounts.AddLast(toAdd);
                 }
             }
             else
@@ -131,8 +132,8 @@ namespace wsep182.Domain
             {
                 if (discount.ProductInStoreId == productInStoreId)
                 {
-                    discounts.Remove(discount);
                     DDB.Remove(discount);
+                    discounts.Remove(discount);
                     return true;
                 }
             }
@@ -151,8 +152,8 @@ namespace wsep182.Domain
                 {
                     if (discount.Category.Equals(category) && dueDate.Equals(discount.DueDate))
                     {
-                        discounts.Remove(discount);
                         DDB.Remove(discount);
+                        discounts.Remove(discount);
                         return true;
                     }
                 }
@@ -163,8 +164,8 @@ namespace wsep182.Domain
                 {
                     if (discount.Category.Equals(category))
                     {
-                        discounts.Remove(discount);
                         DDB.Remove(discount);
+                        discounts.Remove(discount);
                         flag = true;
                     }
                 }

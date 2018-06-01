@@ -23,8 +23,8 @@ namespace wsep182.Domain
             productInStoreDB = new ProductInStoreDB(configuration.DB_MODE);
             products = productDB.Get();
             productsInStores = productInStoreDB.Get(); 
-            productInStoreId = 0;
-            productId = 0;
+            productInStoreId = currProductInStoreIndex();
+            productId = currProductIndex();
         }
         public static ProductManager getInstance()
         {   
@@ -37,7 +37,32 @@ namespace wsep182.Domain
         {
             instance = new ProductManager();
         }
-
+        public int currProductIndex()
+        {
+            LinkedList<Product> temp = productDB.Get();
+            int index = 0;
+            foreach (Product p in temp)
+            {
+                if (p.getProductId() > index)
+                {
+                    index = p.getProductId();
+                }
+            }
+            return index;
+        }
+        public int currProductInStoreIndex()
+        {
+            LinkedList<ProductInStore> temp = productInStoreDB.Get();
+            int index = 0;
+            foreach (ProductInStore p in temp)
+            {
+                if (p.getProductInStoreId() > index)
+                {
+                    index = p.getProductInStoreId();
+                }
+            }
+            return index;
+        }
         public int getNextProductId()
         {
             return ++productId;
@@ -52,8 +77,8 @@ namespace wsep182.Domain
                 if (p.getProductName() == productName)
                     return null;
             Product newProduct = new Product(productName, getNextProductId());
-            products.AddLast(newProduct);
             productDB.Add(newProduct);
+            products.AddLast(newProduct);
             return newProduct;
         }
 
@@ -64,10 +89,10 @@ namespace wsep182.Domain
             foreach (Product p in products)
                 if (p.getProductId() == newProduct.getProductId())
                 {
-                    products.Remove(p);
-                    products.AddLast(newProduct);
                     productDB.Remove(p);
+                    products.Remove(p);
                     productDB.Add(newProduct);
+                    products.AddLast(newProduct);
                     return true;
                 }
             return false;
@@ -98,8 +123,8 @@ namespace wsep182.Domain
             foreach (Product p in products)
                 if (p.getProductId() == productId)
                 {
-                    products.Remove(p);
                     productDB.Remove(p);
+                    products.Remove(p);
                     return true;
                 }
             return false;
@@ -126,8 +151,8 @@ namespace wsep182.Domain
             foreach (ProductInStore p in productsInStores)
                 if (p.getProduct().getProductId() == newProduct.getProduct().getProductId() && p.getStore().getStoreId() == newProduct.getStore().getStoreId())
                     return null;
-            productsInStores.AddLast(newProduct);
             productInStoreDB.Add(newProduct);
+            productsInStores.AddLast(newProduct);
             return newProduct;
         }
         public ProductInStore addProductInStore(Product product, Store store, int quantity, double price,string category)
@@ -137,12 +162,12 @@ namespace wsep182.Domain
             {
                 newProduct = new ProductInStore(getNextProductInStoreId(), category, product, price, quantity, store);
             }
-
-            foreach (ProductInStore p in productsInStores)
-                if (p.getProduct().getProductId() == newProduct.getProduct().getProductId() && p.getStore().getStoreId() == newProduct.getStore().getStoreId())
-                    return null;
-            productsInStores.AddLast(newProduct);
+            if(productsInStores.Count>0)
+                foreach (ProductInStore p in productsInStores)
+                    if (p.getProduct().getProductId() == newProduct.getProduct().getProductId() && p.getStore().getStoreId() == newProduct.getStore().getStoreId())
+                        return null;
             productInStoreDB.Add(newProduct);
+            productsInStores.AddLast(newProduct);
             return newProduct;
         }
 
@@ -158,10 +183,10 @@ namespace wsep182.Domain
             foreach (ProductInStore p in productsInStores)
                 if (p.getProduct().getProductId() == newProduct.getProduct().getProductId() && p.getStore().getStoreId() == newProduct.getStore().getStoreId())
                 {
-                    productsInStores.Remove(p);
-                    productsInStores.AddLast(newProduct);
                     productInStoreDB.Remove(p);
+                    productsInStores.Remove(p);
                     productInStoreDB.Add(newProduct);
+                    productsInStores.AddLast(newProduct);
                     return true;
                 }
             return false;
@@ -213,8 +238,8 @@ namespace wsep182.Domain
                         return false;
                     if (SalesManager.getInstance().getSalesByProductInStoreId(p.getProductInStoreId()).Count>0)
                         return false;
-                    p.IsActive = 0;
                     productInStoreDB.Remove(p);
+                    p.IsActive = 0;
                     productInStoreDB.Add(p);
                     return true;
                 }

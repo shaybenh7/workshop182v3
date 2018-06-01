@@ -100,9 +100,10 @@
                                     var storeNameElement = document.getElementById("storeName" + i);
                                     storeNameElement.innerHTML += response["store"]["name"];
                                 },
-                                error: function (response) {
-                                    console.log(response);
-                                }
+                            error: function (response) {
+                                console.log(response);
+                                window.location.href = baseUrl+"/error";
+                            }
                             });
 
                             jQuery.ajax({
