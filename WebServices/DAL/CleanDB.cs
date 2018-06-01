@@ -122,7 +122,7 @@ namespace WebServices.DAL
             }
             catch(Exception e)
             {
-
+                con.Close();
             }
         }
         /*

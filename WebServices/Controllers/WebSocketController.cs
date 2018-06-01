@@ -20,8 +20,23 @@ namespace WebServices.Controllers
     public class WebSocketController : ApiController
     {
         static readonly Dictionary<string, WebSocket> _users = new Dictionary<string, WebSocket>();
-        public static Dictionary<string, LinkedList<String>> PendingMessages = new Dictionary<string, LinkedList<String>>(); 
+        public static Dictionary<string, LinkedList<String>> PendingMessages = initPendingMessages();
 
+
+        public static Dictionary<string, LinkedList<String>> initPendingMessages()
+        {
+            LinkedList<Tuple<String, String>> temp = NotificationManager.getInstance().getPendingMessagesDB().Get();
+            Dictionary<string, LinkedList<String>> ans = new Dictionary<string, LinkedList<String>>();
+            foreach(Tuple<String,String> msg in temp)
+            {
+                if (!ans.ContainsKey(msg.Item1))
+                {
+                    ans.Add(msg.Item1, new LinkedList<string>());
+                }
+                ans[msg.Item1].AddFirst(msg.Item2);
+            }
+            return ans;
+        }
 
         public HttpResponseMessage Get()
         {
@@ -63,6 +78,7 @@ namespace WebServices.Controllers
                     { 
                         sendMessageToClient(hash, message);
                     }
+                    NotificationManager.getInstance().getPendingMessagesDB().Remove(new Tuple<string, string>(newConnectedUser.getUserName(), ""));
                     CurrentPendingMessages.Clear();
                 }
             }
@@ -127,12 +143,14 @@ namespace WebServices.Controllers
             PendingMessages.TryGetValue(newConnectedUser.getUserName(), out CurrentPendingMessages);
             if (CurrentPendingMessages == null)
             {
+                NotificationManager.getInstance().getPendingMessagesDB().Add(new Tuple<string, string>(newConnectedUser.getUserName(), message));
                 CurrentPendingMessages = new LinkedList<String>();
                 CurrentPendingMessages.AddLast(message);
                 PendingMessages.Add(newConnectedUser.getUserName(), CurrentPendingMessages);
             }
             else
             {
+                NotificationManager.getInstance().getPendingMessagesDB().Add(new Tuple<string, string>(newConnectedUser.getUserName(), message));
                 CurrentPendingMessages.AddLast(message);
             }
         }
