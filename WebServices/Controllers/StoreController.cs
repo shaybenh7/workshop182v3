@@ -701,8 +701,23 @@ namespace WebService.Controllers
                 return response;
             }
         }
-
-        
+        [Route("api/store/getManagersPermissionsInStore")]
+        [HttpGet]
+        public HttpResponseMessage getManagersPermissionsInStore(int storeId)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                LinkedList<Tuple<int, String, String>> permissions = StorePremissionsArchive.getInstance().getManagersPermissionsInStore(storeId);
+                response = Request.CreateResponse(HttpStatusCode.OK, permissions);
+                return response;
+            }
+            catch (Exception e)
+            {
+                response = Request.CreateResponse(HttpStatusCode.NotFound, "could not connect to the Database, please try again later.");
+                return response;
+            }
+        }
 
         [Route("api/store/removeProductFromStore")]
         [HttpGet]

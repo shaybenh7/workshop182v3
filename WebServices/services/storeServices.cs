@@ -100,6 +100,11 @@ namespace wsep182.services
             return storeArchive.getInstance().getStoreRolesStats(storeId);
         }
 
+        public LinkedList<Tuple<int, String, String>> getManagersPermissionsInStore(int storeId)
+        {
+            return StorePremissionsArchive.getInstance().getManagersPermissionsInStore(storeId);
+        }
+
         //req 3.1 c
         /*
         * return:
