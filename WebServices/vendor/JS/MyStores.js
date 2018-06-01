@@ -200,7 +200,7 @@ var createStoreButton = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.reload(false);
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -225,7 +225,7 @@ var addProductFunct = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -245,7 +245,7 @@ var addNewManager = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -265,7 +265,7 @@ var RemoveStoreManager = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -285,7 +285,7 @@ var addStoreOwner = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -305,7 +305,7 @@ var removeStoreOwner = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -328,7 +328,7 @@ var editStoreProduct = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -349,7 +349,7 @@ var removeStoreProduct = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -378,7 +378,7 @@ var addSale = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -402,7 +402,7 @@ var editSale = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -423,7 +423,7 @@ var removeSale = function () {
         },
         error: function (response) {
             console.log(response);
-            // window.location.reload(false); 
+            window.location.href = baseUrl + "/error";
         }
     });
 };
@@ -449,7 +449,7 @@ function addSaleView(e) {
         },
         error: function (response) {
             console.log(response);
-
+            window.location.href = baseUrl + "/error";
         }
     });
 
@@ -489,7 +489,7 @@ function viewProducts(e) {
         },
         error: function (response) {
             console.log(response);
-
+            window.location.href = baseUrl + "/error";
         }
     });
 }
@@ -533,7 +533,7 @@ function viewHistory(e) {
         },
         error: function (response) {
             console.log(response);
-            
+            window.location.href = baseUrl + "/error";
         }
     });
     
@@ -635,7 +635,7 @@ var addCopun = function () {
         },
         error: function (response) {
             console.log(response);
-
+            window.location.href = baseUrl + "/error";
         }
     });
 }
@@ -681,7 +681,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -697,7 +697,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -714,7 +714,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -734,7 +734,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -751,7 +751,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -768,7 +768,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -788,7 +788,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -804,7 +804,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -820,7 +820,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -840,7 +840,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -857,7 +857,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -874,7 +874,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -895,7 +895,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -913,7 +913,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -931,7 +931,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             },
             error: function (response) {
                 console.log(response);
-
+                window.location.href = baseUrl + "/error";
             }
         });
     }
@@ -958,7 +958,7 @@ var addDiscountFunc = function () {
         },
         error: function (response) {
             console.log(response);
-
+            window.location.href = baseUrl + "/error";
         }
     });
 }
@@ -1114,6 +1114,7 @@ var addNotificationPreferencesFunction = function (preference) {
         },
         error: function (response) {
             console.log(response);
+            window.location.href = baseUrl + "/error";
         }
     });
 }
@@ -1131,7 +1132,7 @@ var removeNotificationPreferenceFunction = function (preference) {
         },
         error: function (response) {
             console.log(response);
-
+            window.location.href = baseUrl + "/error";
         }
     });
 }
@@ -1157,7 +1158,7 @@ var sendPremission = function (manager, premission, uri) {
         },
         error: function (response) {
             console.log(response);
-
+            window.location.href = baseUrl + "/error";
         }
     });
 }

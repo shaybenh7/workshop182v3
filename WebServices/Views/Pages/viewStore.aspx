@@ -121,8 +121,9 @@
                                     //}
                                 },
                                 error: function (response) {
-                                    console.log(response);
-                                }
+					                console.log(response);
+					                window.location.href = baseUrl + "/error";
+				                }
                             });
 
                             jQuery.ajax({
@@ -135,8 +136,9 @@
                                     salePriceElement.innerHTML += response;
                                 },
                                 error: function (response) {
-                                    console.log(response);
-                                }
+					                console.log(response);
+					                window.location.href = baseUrl + "/error";
+				                }
                             });
 
                             
@@ -156,8 +158,9 @@
 
                             },
                             error: function (response) {
-                                console.log(response);
-                            }
+					            console.log(response);
+					            window.location.href = baseUrl + "/error";
+				            }
                         });
                     })();
 
@@ -179,8 +182,9 @@
 
                             },
                             error: function (response) {
-                                console.log(response);
-                            }
+					            console.log(response);
+					            window.location.href = baseUrl + "/error";
+				            }
                         });
                     })();
 
@@ -203,15 +207,15 @@
 
                             },
                             error: function (response) {
-                                console.log(response);
-                            }
+					            console.log(response);
+					            window.location.href = baseUrl + "/error";
+				            }
                         });
                     })();
 
                 },
                 error: function (response) {
                     console.log(response);
-
                     window.location.href = baseUrl+"/error";
                 }
             });

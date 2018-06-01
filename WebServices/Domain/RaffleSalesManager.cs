@@ -159,8 +159,9 @@ namespace wsep182.Domain
                     NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, r.SaleId);
 
                     //NotificationManager.getInstance().notifyUser(r.UserName, message);
-                    raffleSales.Remove(r);
                     RSDB.Remove(winnerS);
+                    raffleSales.Remove(r);
+                    
                 }
 
 

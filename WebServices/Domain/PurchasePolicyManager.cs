@@ -203,8 +203,8 @@ namespace wsep182.Domain
             toAdd.MinAmount = minAmount;
             toAdd.MaxAmount = maxAmount;
             toAdd.NoLimit = false;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setAmountPolicyOnStore(int storeId, int minAmount, int maxAmount)
@@ -216,9 +216,8 @@ namespace wsep182.Domain
             toAdd.MinAmount = minAmount;
             toAdd.MaxAmount = maxAmount;
             toAdd.NoLimit = false;
-            policys.AddLast(toAdd);
-
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setAmountPolicyOnCategory(int storeId, string category, int minAmount, int maxAmount)
@@ -231,8 +230,8 @@ namespace wsep182.Domain
             toAdd.MinAmount = minAmount;
             toAdd.MaxAmount = maxAmount;
             toAdd.NoLimit = false;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setAmountPolicyOnProductInStore(int productInStoreId, int minAmount, int maxAmount)
@@ -244,8 +243,8 @@ namespace wsep182.Domain
             toAdd.MinAmount = minAmount;
             toAdd.MaxAmount = maxAmount;
             toAdd.NoLimit = false;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setAmountPolicyOnCountry(int storeId, string country, int minAmount, int maxAmount)
@@ -258,8 +257,8 @@ namespace wsep182.Domain
             toAdd.MinAmount = minAmount;
             toAdd.MaxAmount = maxAmount;
             toAdd.NoLimit = false;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
 
@@ -271,8 +270,8 @@ namespace wsep182.Domain
             toAdd.TypeOfPolicy = 1;
             toAdd.ProductName = productName;
             toAdd.NoDiscount = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoDiscountPolicyOnStore(int storeId)
@@ -282,8 +281,8 @@ namespace wsep182.Domain
             toAdd.TypeOfPolicy = 2;
             toAdd.StoreId = storeId;
             toAdd.NoDiscount = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoDiscountPolicyOnCategoty(int storeId, String category)
@@ -294,8 +293,8 @@ namespace wsep182.Domain
             toAdd.StoreId = storeId;
             toAdd.Category = category;
             toAdd.NoDiscount = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoDiscountPolicyOnProductInStore(int productInStoreId)
@@ -305,8 +304,8 @@ namespace wsep182.Domain
             toAdd.TypeOfPolicy = 4;
             toAdd.ProductInStoreId = productInStoreId;
             toAdd.NoDiscount = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoDiscountPolicyOnCountry(int storeId, string country)
@@ -317,8 +316,8 @@ namespace wsep182.Domain
             toAdd.StoreId = storeId;
             toAdd.Country = country;
             toAdd.NoDiscount = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
 
@@ -330,8 +329,8 @@ namespace wsep182.Domain
             toAdd.TypeOfPolicy = 1;
             toAdd.ProductName = productName;
             toAdd.NoCoupons = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoCouponsPolicyOnStore(int storeId)
@@ -341,8 +340,8 @@ namespace wsep182.Domain
             toAdd.TypeOfPolicy = 2;
             toAdd.StoreId = storeId;
             toAdd.NoCoupons = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoCouponPolicyOnCategoty(int storeId, String category)
@@ -353,8 +352,8 @@ namespace wsep182.Domain
             toAdd.StoreId = storeId;
             toAdd.Category = category;
             toAdd.NoCoupons = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoCouponPolicyOnProductInStore(int productInStoreId)
@@ -364,8 +363,8 @@ namespace wsep182.Domain
             toAdd.TypeOfPolicy = 4;
             toAdd.ProductInStoreId = productInStoreId;
             toAdd.NoCoupons = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
         public int setNoCouponPolicyOnCountry(int storeId, string country)
@@ -376,8 +375,8 @@ namespace wsep182.Domain
             toAdd.StoreId = storeId;
             toAdd.Country = country;
             toAdd.NoCoupons = true;
-            policys.AddLast(toAdd);
             ppDB.Add(toAdd);
+            policys.AddLast(toAdd);
             return 1;
         }
 
@@ -392,8 +391,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == productNUM && p.ProductName.Equals(productName) && p.NoLimit == false)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -406,8 +405,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == storeNUM && p.StoreId == storeId && p.NoLimit == false)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -420,8 +419,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == categoryNUM && p.StoreId == storeId && p.Category.Equals(category) && p.NoLimit == false)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -434,8 +433,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == productInStoreNUM && p.ProductInStoreId == productInStoreId && p.NoLimit == false)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -448,8 +447,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == countryNUM && p.StoreId == storeId && p.Country.Equals(country) && p.NoLimit == false)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -464,8 +463,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == productNUM && p.ProductName.Equals(productName) &&  p.NoDiscount == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -478,8 +477,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == storeNUM && p.StoreId == storeId && p.NoDiscount == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -492,8 +491,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == categoryNUM && p.StoreId == storeId && p.Category.Equals(category) && p.NoDiscount == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -506,8 +505,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == productInStoreNUM && p.ProductInStoreId == productInStoreId && p.NoDiscount == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -520,8 +519,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == countryNUM && p.StoreId == storeId && p.Country.Equals(country) && p.NoDiscount == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -536,8 +535,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == productNUM && p.ProductName.Equals(productName) && p.NoCoupons == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -550,8 +549,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == storeNUM && p.StoreId == storeId && p.NoCoupons == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -564,8 +563,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == categoryNUM && p.StoreId == storeId && p.Category.Equals(category) && p.NoCoupons == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
@@ -578,13 +577,13 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == productInStoreNUM && p.ProductInStoreId == productInStoreId && p.NoCoupons == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }
             return -1;
-        }
+        } 
         public int removeNoCouponPolicyOnCountry(int storeId, string country)
         {
             // 1-Product (system level) , 2- Store, 3-category, 4- product in store, 5-country
@@ -592,8 +591,8 @@ namespace wsep182.Domain
             {
                 if (p.TypeOfPolicy == countryNUM && p.Country.Equals(country) && p.NoCoupons == true)
                 {
-                    policys.Remove(p);
                     ppDB.Remove(p);
+                    policys.Remove(p);
                     return 1;
                 }
             }

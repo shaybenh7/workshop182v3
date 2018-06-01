@@ -61,6 +61,7 @@
                         }
                     },
                     error: function (response) {
+                        console.log(response);
                         window.location.href = baseUrl+"/error";
                     }
                 });

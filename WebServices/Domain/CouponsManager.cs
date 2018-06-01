@@ -49,8 +49,9 @@ namespace wsep182.Domain
             }
             foreach (Coupon c in CouponToRemove)
             {
-                coupons.Remove(c);
                 CDB.Remove(c);
+                coupons.Remove(c);
+                
             }
         }
 
@@ -74,8 +75,9 @@ namespace wsep182.Domain
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                     return false;
             }
-            coupons.AddLast(toAdd);
             CDB.Add(toAdd);
+            coupons.AddLast(toAdd);
+            
             return true;
         }
 
@@ -85,8 +87,8 @@ namespace wsep182.Domain
             {
                 if (coupon.CouponId.Equals(couponId) && coupon.ProductInStoreId == productInStoreId)
                 {
-                    coupons.Remove(coupon);
                     CDB.Remove(coupon);
+                    coupons.Remove(coupon);
                     return true;
                 }
             }
@@ -110,8 +112,8 @@ namespace wsep182.Domain
             for (int i = indexes.Count - 1; i >= 0; i--)
             {
                 Coupon toRemove = coupons.ElementAt(indexes.ElementAt(i));
-                coupons.Remove(toRemove);
                 CDB.Remove(toRemove);
+                coupons.Remove(toRemove);
             }
             if (!found)
                 return false;
@@ -126,8 +128,8 @@ namespace wsep182.Domain
             {
                 if (coupon.CouponId.Equals(couponId))
                 {
-                    coupons.Remove(coupon);
                     CDB.Remove(coupon);
+                    coupons.Remove(coupon);
                     coupon.Percentage = newPercentage;
                     coupon.DueDate = newDueDate;
                     CDB.Add(coupon);
@@ -210,8 +212,8 @@ namespace wsep182.Domain
             }
 
             Coupon toAdd = new Coupon(couponId,productInStoreId, type, categoryOrProductName, percentage, dueDate, restrictions);
-            coupons.AddLast(toAdd);
             CDB.Add(toAdd);
+            coupons.AddLast(toAdd);
             return true;
         }
 
