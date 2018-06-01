@@ -32,88 +32,88 @@ namespace wsep182.Domain
                     case "addProductInStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].addProductInStore(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).addProductInStore(true);
                         
                         break;
 
                     case "editProductInStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].editProductInStore(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).editProductInStore(true);
                         break;
 
                     case "removeProductFromStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                         privilegesOfaStore[storeId].removeProductFromStore(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).removeProductFromStore(true);
 
                         break;
 
                     case "addStoreManager":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].addStoreManager(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).addStoreManager(true);
                         break;
 
                     case "removeStoreManager":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].removeStoreManager(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).removeStoreManager(true);
                         break;
                     case "addManagerPermission":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].addManagerPermission(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).addManagerPermission(true);
                         break;
                     case "removeManagerPermission":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].removeManagerPermission(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).removeManagerPermission(true);
                         break;
                     case "viewPurchasesHistory":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].viewPurchasesHistory(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).viewPurchasesHistory(true);
                         break;
                     case "removeSaleFromStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].removeSaleFromStore(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).removeSaleFromStore(true);
                         break;
                     case "editSale":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].editSale(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).editSale(true);
                         break;
                     case "addSaleToStore":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].addSaleToStore(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).addSaleToStore(true);
                         break;
                     case "addDiscount":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].addDiscount(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).addDiscount(true);
                         break;
                     case "addNewCoupon":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].addNewCoupon(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).addNewCoupon(true);
                         break;
                     case "removeDiscount":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].removeDiscount(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).removeDiscount(true);
                         break;
                     case "removeCoupon":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].removeCoupon(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).removeCoupon(true);
                         break;
                     case "changePolicy":
                         if (!privilegesOfaStore.ContainsKey(storeId))
                             privilegesOfaStore.Add(storeId, new StorePremissions(storeId));
-                        privilegesOfaStore[storeId].changePolicy(username, true);
+                        privilegesOfaStore[storeId].getPrivileges(username).changePolicy(true);
                         break;
                     
                     default:

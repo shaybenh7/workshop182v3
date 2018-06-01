@@ -68,7 +68,7 @@ namespace WebServices.DAL
             {
                 con.Open();
 
-                string sql = "DELETE FROM StorePermission " +"WHERE storeId = " + t.Item1 + " AND username is '" + t.Item2 + "' AND premission = '" + t.Item3 +"' ; ";
+                string sql = "DELETE FROM StorePermission " +"WHERE storeId = " + t.Item1 + " AND username = '" + t.Item2 + "' AND premission = '" + t.Item3 +"' ; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
