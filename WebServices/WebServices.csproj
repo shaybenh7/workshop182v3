@@ -199,6 +199,7 @@
     <Compile Include="DAL\CleanDB.cs" />
     <Compile Include="DAL\couponDB.cs" />
     <Compile Include="DAL\DiscountDB.cs" />
+    <Compile Include="DAL\PendingMessagesDB.cs" />
     <Compile Include="DAL\ProductDB.cs" />
     <Compile Include="DAL\ProductInStoreDB.cs" />
     <Compile Include="DAL\PurchasePolicyDB.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="DAL\StoreDB.cs" />
     <Compile Include="DAL\StorePremissionsDB.cs" />
     <Compile Include="DAL\StoreRoleDictionaryDB.cs" />
+    <Compile Include="DAL\UserCartDB.cs" />
     <Compile Include="DAL\UserDB.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\BuyHistoryManager.cs" />
@@ -529,11 +531,9 @@
     <Content Include="vendor\jqueryui\jquery-ui.theme.css" />
     <Content Include="vendor\jqueryui\jquery-ui.theme.min.css" />
     <Content Include="vendor\jquery\jquery-3.2.1.min.js" />
-    <Content Include="vendor\JS\AdminAddPolicy.js" />
     <Content Include="vendor\JS\MyStores.js" />
     <Content Include="vendor\JS\shoppingCart.js" />
     <Content Include="vendor\JS\temp.js" />
-    <Content Include="vendor\JS\webSocket.js" />
     <Content Include="vendor\lightbox2\css\lightbox.css" />
     <Content Include="vendor\lightbox2\css\lightbox.min.css" />
     <Content Include="vendor\lightbox2\images\close.png" />
