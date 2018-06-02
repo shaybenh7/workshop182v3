@@ -421,6 +421,13 @@ namespace WebService.Controllers
             }
         }
 
+        [Route("api/user/initdb")]
+        [HttpGet]
+        public void initDB()
+        {
+            userServices.getInstance().init();
+        }
+
         [Route("api/user/removeUserFromNotifications")]
         [HttpGet]
         public HttpResponseMessage removeUserFromNotifications(int storeId, string notification)

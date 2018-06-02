@@ -368,7 +368,7 @@ var addSale = function () {
         kindOfSale = 3;
     }
     date = $("#product-due-date2").val();
-
+    
     jQuery.ajax({
         type: "GET",
         url: baseUrl + "/api/store/addSaleToStore?storeId=" + lastClickedStoreId +
@@ -646,6 +646,7 @@ var addCopun = function () {
 }
 
 var addPolicy = function () {
+    
     typeOfPolicy = $("#PolicyType")[0].selectedIndex;
     minAmount = $("#minPolicy").val();
     maxAmount = $("#maxPolicy").val();
@@ -669,7 +670,6 @@ var addPolicy = function () {
             addProductPolicy(minAmount, maxAmount, noDiscount, NoCopuns, PolicyChange);
             break;
     }
-
 }
 
 var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId) {
@@ -886,7 +886,9 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
 }
 
 var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns, pisId) {
+    console.log(minAmount + " " + maxAmount + " " + noDiscount + " " + NoCopuns + " " + pisId);
     if (minAmount !== undefined && minAmount !== "" && maxAmount !== undefined && maxAmount !== "") {
+        
         jQuery.ajax({
             type: "GET",
             url: baseUrl + "/api/store/setAmountPolicyOnProductInStore?storeId=" + lastClickedStoreId +
@@ -894,6 +896,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
+                
                 alert(response);
                 window.location.reload(false);
             },

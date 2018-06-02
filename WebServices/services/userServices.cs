@@ -169,6 +169,24 @@ namespace wsep182.services
             session.removeUserFromNotifications(notification, storeId);
         }
 
+
+        public void init()
+        {
+            ProductManager.restartInstance();
+            SalesManager.restartInstance();
+            storeArchive.restartInstance();
+            UserManager.restartInstance();
+            UserCartsManager.restartInstance();
+            BuyHistoryManager.restartInstance();
+            CouponsManager.restartInstance();
+            DiscountsManager.restartInstance();
+            RaffleSalesManager.restartInstance();
+            StorePremissionsArchive.restartInstance();
+            PurchasePolicyManager.restartInstance();
+            NotificationManager.restartInstance();
+
+        }
+
     }
 }
  
