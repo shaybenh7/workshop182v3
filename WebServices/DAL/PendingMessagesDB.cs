@@ -18,7 +18,7 @@ namespace WebServices.DAL
                 con.Open();
 
                 string sql = "INSERT INTO PendingMessages (userName, message)" +
-                             " VALUES (" + msg.Item1 + ", '" + msg.Item2+ "')";
+                             " VALUES ('" + msg.Item1 + "', '" + msg.Item2+ "')";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();

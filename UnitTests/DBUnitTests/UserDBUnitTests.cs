@@ -52,6 +52,7 @@ namespace UnitTests
             catch (Exception e)
             { Assert.AreEqual(true, false, "there was a connection error to the testing db"); }
         }
+        [TestMethod]
         public void get()
         {
             try

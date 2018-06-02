@@ -33,7 +33,7 @@ namespace UnitTests.DBUnitTests
                 Sale toAdd = new Sale(2, 2, 2, 20, "10/10/2010");
                 saleDB.Add(toAdd);
                 li = saleDB.Get();
-                Assert.AreEqual(li.Count, 0);
+                Assert.AreEqual(li.Count, 2);
             }
             catch (Exception e)
             { Assert.AreEqual(true, false, "there was a connection error to the testing db"); }

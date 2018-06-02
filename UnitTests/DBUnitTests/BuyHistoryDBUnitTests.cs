@@ -64,6 +64,7 @@ namespace UnitTests.DBUnitTests
                 buyHistoryDB.Add(toAdd2);
                 buyHistoryDB.Add(toAdd3);
                 buyHistoryDB.Add(toAdd4);
+                li = buyHistoryDB.Get();
                 Assert.AreEqual(li.Count, 5);
             }
             catch (Exception e)

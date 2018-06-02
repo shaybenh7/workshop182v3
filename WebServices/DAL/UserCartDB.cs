@@ -79,7 +79,7 @@ namespace WebServices.DAL
             try
             {
                 con.Open();
-                string sql = "DELETE FROM UserCart WHERE userName is '" + uc.UserName + "' AND saleId = " + uc.SaleId + ";";
+                string sql = "DELETE FROM UserCart WHERE userName = '" + uc.UserName + "' AND saleId = " + uc.SaleId + ";";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
