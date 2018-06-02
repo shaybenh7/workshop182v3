@@ -239,7 +239,6 @@ namespace wsep182.Domain
                     if(c.getAmount() + amount <= amountForSale)
                     {
                         c.setAmount(c.getAmount() + amount);
-                        //UserManager.getInstance().updateUser(session);
                         return 1; // OK
                     }
                     return -7;
@@ -247,7 +246,6 @@ namespace wsep182.Domain
             }
             //in updateUserCarts we already add the product in case it doesn't exist, so no need to add to DB here also
             products.AddLast(toAdd);
-            //UserManager.getInstance().updateUser(session);
             return 1;
         }
 
@@ -284,7 +282,6 @@ namespace wsep182.Domain
             UserCart toAdd = new UserCart(session.getUserName(), sale.SaleId, 1);
             toAdd.setOffer(offer);
             session.getShoppingCart().AddLast(toAdd);
-            //UserManager.getInstance().updateUser(session);
 
             return 1;
         }
@@ -314,7 +311,6 @@ namespace wsep182.Domain
                 if (product.getUserName().Equals(session.getUserName()) && saleId == product.getSaleId())
                 {
                     product.setAmount(newAmount);
-                    //UserManager.getInstance().updateUser(session);
 
                     return 1;
                 }
@@ -340,7 +336,6 @@ namespace wsep182.Domain
                 if (c.getUserName().Equals(session.getUserName()) && c.getSaleId() == saleId)
                 {
                     products.Remove(c);
-                    //UserManager.getInstance().updateUser(session);
 
                     return 1;
                 }
@@ -425,7 +420,6 @@ namespace wsep182.Domain
             {
                 products.Remove(uc);
             }
-            //UserManager.getInstance().updateUser(session);
 
             return allBought;
         }
@@ -514,7 +508,6 @@ namespace wsep182.Domain
                     UserCartsManager.getInstance().removeUserCart(session.userName,uc.SaleId);
                 products.Remove(uc);
             }
-            //UserManager.getInstance().updateUser(session);
 
             return allBought;
         }
