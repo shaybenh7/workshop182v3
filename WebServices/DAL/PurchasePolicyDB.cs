@@ -91,8 +91,8 @@ namespace WebServices.DAL
             {
                 con.Open();
 
-                string sql = "DELETE FROM PurchasePolicy WHERE typeOfPolicy=" + p.TypeOfPolicy + " AND productName is '"+ p.ProductName + "' "+
-                    "AND storeId="+ p.StoreId + " AND category is '" + p.Category +"'" + " AND productInStoreId="+p.ProductInStoreId+ "AND country is '"+p.Country+"'; ";
+                string sql = "DELETE FROM PurchasePolicy WHERE typeOfPolicy=" + p.TypeOfPolicy + " AND productName = '"+ p.ProductName + "' "+
+                    "AND storeId="+ p.StoreId + " AND category = '" + p.Category +"'" + " AND productInStoreId="+p.ProductInStoreId+ " AND country = '"+p.Country+"'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();

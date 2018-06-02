@@ -13,13 +13,13 @@ namespace wsep182.Domain
         private LinkedList<Sale> sales;
         private SaleDB SDB;
         private static SalesManager instance;
-        private static int saleId;
+        private static int saleId=0;
 
         private SalesManager()
         {
             SDB = new SaleDB(configuration.DB_MODE);
             sales = SDB.Get();
-            saleId = 0;
+            saleId = currSaleIndex();
         }
         public static void restartInstance()
         {
@@ -28,6 +28,20 @@ namespace wsep182.Domain
         public int getNextSaleId()
         {
             return ++saleId;
+        }
+
+        public int currSaleIndex()
+        {
+            LinkedList<Sale> temp = SDB.Get();
+            int index = 0;
+            foreach (Sale s in temp)
+            {
+                if (s.SaleId > index)
+                {
+                    index = s.SaleId;
+                }
+            }
+            return index;
         }
 
         public static SalesManager getInstance()
