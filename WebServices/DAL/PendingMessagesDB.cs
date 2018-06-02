@@ -62,7 +62,7 @@ namespace WebServices.DAL
             try
             {
                 con.Open();
-                string sql = "DELETE FROM PendingMessages WHERE userName = '" + msg.Item1+"; ";
+                string sql = "DELETE FROM PendingMessages WHERE userName = '" + msg.Item1+"'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
