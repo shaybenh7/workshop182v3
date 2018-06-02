@@ -12,12 +12,13 @@ namespace SeleniumTests
     {
         public static String URL = "http://localhost:53416/";
         IWebDriver driver = new ChromeDriver("./");
-        private int sleepTime = 500;
+        private int sleepTime = 2000;
 
         [TestInitialize]
         public void Initialize()
         {
-
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");

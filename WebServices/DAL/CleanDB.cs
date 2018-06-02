@@ -100,17 +100,20 @@ namespace WebServices.DAL
             sql = "DELETE from 	UsersNotificationPreferences;";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            
-/*
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + "123456") + "' , 1 );";
-            cmd = new MySqlCommand(sql, con);
-            cmd.ExecuteNonQuery();
 
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin1' , '" + encrypt("admin1" + "123456") + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'adminTest' , '" + encrypt("adminTest" + "123456") + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            */
-            
+            /*
+                        sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + "123456") + "' , 1 );";
+                        cmd = new MySqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+
+                        sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin1' , '" + encrypt("admin1" + "123456") + "' , 1 );";
+                        cmd = new MySqlCommand(sql, con);
+                        cmd.ExecuteNonQuery();
+                        */
+
             con.Close();
         }
         /*
@@ -378,6 +381,44 @@ namespace WebServices.DAL
             }
 
             return Sb.ToString();
+        }
+        public void addUserToDB(String username,String password)
+        {
+            try
+            {
+                con.Open();
+
+                string sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 2 , '" + username + "' , '" + encrypt(username + password) + "' , 1 );";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                con.Close();
+            }
+            
+        }
+        public void addStoreToDB(String username, String storename)
+        {
+            try
+            {
+                con.Open();
+
+                string sql = "INSERT INTO `Store`(`storeId`, `isActive`, `name`, `storeCreator`) VALUES ( 1 , 1 , '"+ storename +"' , '"+ username +"' )";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                sql = "INSERT INTO `StoreRoleDictionary`(`storeId`, `userName`, `storeRole`, `addedBy`, `timeAdded`) VALUES( 1 , '"+ username + "' , 'Owner' , '"+ username + "' , '" + DateTime.Now.ToString() + "' )";
+                cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                con.Close();
+            }
+
         }
 
     }
