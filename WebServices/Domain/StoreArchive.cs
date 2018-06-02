@@ -74,7 +74,8 @@ namespace wsep182.Domain
         }
         public int getNextStoreId()
         {
-            return ++storeArchive.storeIndex;
+            storeIndex = currIndex();
+            return ++storeIndex;
         }
 
         public Store addStore(String storeName, User storeOwner)

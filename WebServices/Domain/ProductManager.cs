@@ -65,10 +65,12 @@ namespace wsep182.Domain
         }
         public int getNextProductId()
         {
+            productId = currProductIndex();
             return ++productId;
         }
         public int getNextProductInStoreId()
         {
+            productInStoreId = currProductInStoreIndex();
             return ++productInStoreId;
         }
         public Product addProduct(String productName)

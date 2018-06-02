@@ -27,6 +27,7 @@ namespace wsep182.Domain
         }
         public int getNextSaleId()
         {
+            saleId = currSaleIndex();
             return ++saleId;
         }
 
