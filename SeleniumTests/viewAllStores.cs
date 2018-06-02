@@ -11,10 +11,12 @@ namespace SeleniumTests
     {
         public static String URL = "http://localhost:53416/";
         IWebDriver driver = new ChromeDriver("./");
-        private int sleepTime = 500;
+        private int sleepTime = 2000;
         [TestInitialize]
         public void Initialize()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.insertData();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");
@@ -59,29 +61,29 @@ namespace SeleniumTests
         {
             IWebElement AllStores = driver.FindElement(By.Id("AllStoresLink"));
             AllStores.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement store0 = driver.FindElement(By.Id("storeName0"));
-            Assert.IsTrue(store0.Text.Equals("Store Name: Maria&Netta Inc."));
+            Assert.IsTrue(store0.Text.Contains("abowim"));
             IWebElement storeCreator = driver.FindElement(By.Id("ownerName0"));
-            Assert.IsTrue(storeCreator.Text.Contains("Store Creator: admin"));
+            Assert.IsTrue(storeCreator.Text.Contains("zahi"));
         }
         [TestMethod]
         public void GUIviewAllStoresAndGetInTheStore()
         {
             IWebElement AllProducts = driver.FindElement(By.Id("AllStoresLink"));
             AllProducts.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement store0 = driver.FindElement(By.Id("storeName0"));
             store0.Click();
             Thread.Sleep(sleepTime);
             IWebElement storeName = driver.FindElement(By.Id("store-name"));
-            Assert.IsTrue(storeName.Text.Contains("Maria&Netta Inc."));
+            Assert.IsTrue(storeName.Text.Contains("abowim"));
             IWebElement owner = driver.FindElement(By.Id("owners"));
-            Assert.IsTrue(owner.Text.Contains("admin"));
+            Assert.IsTrue(owner.Text.Contains("zahi"));
             IWebElement product0 = driver.FindElement(By.Id("productName0"));
             Assert.IsTrue(product0.Text.Contains("cola"));
             IWebElement product1 = driver.FindElement(By.Id("productName1"));
-            Assert.IsTrue(product1.Text.Contains("cola"));
+            Assert.IsTrue(product1.Text.Contains("sprit"));
         }
         [TestCleanup]
         public void CleanUp()

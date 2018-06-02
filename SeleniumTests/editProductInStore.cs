@@ -15,10 +15,15 @@ namespace SeleniumTests
         {
             public static String URL = "http://localhost:53416/";
             IWebDriver driver = new ChromeDriver("./");
-            private int sleepTime = 500;
+            private int sleepTime = 2000;
             [TestInitialize]
             public void Initialize()
             {
+                WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+                cDB.emptyDB();
+                cDB.addUserToDB("zahiSimpleRegister", "123456");
+                cDB.addStoreToDB("zahiSimpleRegister", "abowStore");
+
                 driver.Manage().Window.Maximize();
                 driver.Navigate().GoToUrl(URL);
                 Console.WriteLine("Opened URL");
@@ -61,24 +66,6 @@ namespace SeleniumTests
                 logout.Click();
                 Thread.Sleep(sleepTime);
 
-                IWebElement register = driver.FindElement(By.Id("RegisterLink"));
-                register.Click();
-                Thread.Sleep(sleepTime);
-                userName = driver.FindElement(By.Id("username"));
-                userName.SendKeys("zahiSimpleRegister");
-                Thread.Sleep(sleepTime);
-                IWebElement password1 = driver.FindElement(By.Id("password1"));
-                password1.SendKeys("123456");
-                Thread.Sleep(sleepTime);
-                IWebElement password2 = driver.FindElement(By.Id("password2"));
-                password2.SendKeys("123456");
-                Thread.Sleep(sleepTime);
-                IWebElement btnRegister = driver.FindElement(By.Id("btnRegister"));
-                btnRegister.Click();
-                Thread.Sleep(sleepTime);
-                alert = driver.SwitchTo().Alert();
-                alert.Accept();
-                Thread.Sleep(sleepTime);
                 login = driver.FindElement(By.Id("LoginLink"));
                 login.Click();
                 Thread.Sleep(sleepTime);
@@ -93,18 +80,8 @@ namespace SeleniumTests
                 Thread.Sleep(sleepTime);
                 IWebElement MystoreBtn = driver.FindElement(By.Id("MyStoresPublicLink"));
                 MystoreBtn.Click();
-                Thread.Sleep(sleepTime);
-                IWebElement newStoreInput = driver.FindElement(By.Id("storeName"));
-                newStoreInput.SendKeys("abowStore");
-                Thread.Sleep(sleepTime);
-                IWebElement crateStoreBtn = driver.FindElement(By.Id("createStoreButton12"));
-                crateStoreBtn.Click();
-                Thread.Sleep(sleepTime);
-                alert = driver.SwitchTo().Alert();
-                alert.Accept();
-                Thread.Sleep(sleepTime);
-
-                 crateStoreBtn = driver.FindElement(By.Id("addProductInStore0"));
+                Thread.Sleep(sleepTime*2);
+                IWebElement crateStoreBtn = driver.FindElement(By.Id("addProductInStore0"));
                 crateStoreBtn.Click();
                 Thread.Sleep(sleepTime);
                 IWebElement productName = driver.FindElement(By.Id("product-name"));
@@ -144,7 +121,7 @@ namespace SeleniumTests
                 editProductInStoreBtn.Click();
                 Thread.Sleep(sleepTime);
                 IWebElement pisId = driver.FindElement(By.Id("product-id2"));
-                pisId.SendKeys("3");
+                pisId.SendKeys("1");
                 Thread.Sleep(sleepTime);
                 IWebElement price = driver.FindElement(By.Id("product-price2"));
                 price.SendKeys("12");

@@ -12,14 +12,15 @@ namespace SeleniumTests
     {
         public static String URL = "http://localhost:53416/";
         IWebDriver driver = new ChromeDriver("./");
-        private int sleepTime = 500;
+        private int sleepTime = 2000;
         [TestInitialize]
         public void Initialize()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.insertData();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");
-
             IWebElement login = driver.FindElement(By.Id("LoginLink"));
             login.Click();
             Thread.Sleep(sleepTime);
@@ -55,72 +56,29 @@ namespace SeleniumTests
             logout.Click();
             Thread.Sleep(sleepTime);
 
-            IWebElement register = driver.FindElement(By.Id("RegisterLink"));
-            register.Click();
-            Thread.Sleep(sleepTime);
-            userName = driver.FindElement(By.Id("username"));
-            userName.SendKeys("zahiSimpleRegister");
-            Thread.Sleep(sleepTime);
-            IWebElement password1 = driver.FindElement(By.Id("password1"));
-            password1.SendKeys("123456");
-            Thread.Sleep(sleepTime);
-            IWebElement password2 = driver.FindElement(By.Id("password2"));
-            password2.SendKeys("123456");
-            Thread.Sleep(sleepTime);
-            IWebElement btnRegister = driver.FindElement(By.Id("btnRegister"));
-            btnRegister.Click();
-            Thread.Sleep(sleepTime);
-            IAlert alert = driver.SwitchTo().Alert();
-            alert.Accept();
-            Thread.Sleep(sleepTime);
-            login = driver.FindElement(By.Id("LoginLink"));
-            login.Click();
-            Thread.Sleep(sleepTime);
-            userName = driver.FindElement(By.Id("username"));
-            userName.SendKeys("zahiSimpleRegister");
-            Thread.Sleep(sleepTime);
-            password = driver.FindElement(By.Id("password"));
-            password.SendKeys("123456");
-            Thread.Sleep(sleepTime);
-            btnLogin = driver.FindElement(By.Id("btnLogin"));
-            btnLogin.Click();
-            Thread.Sleep(sleepTime);
-            IWebElement MystoreBtn = driver.FindElement(By.Id("MyStoresPublicLink"));
-            MystoreBtn.Click();
-            Thread.Sleep(sleepTime);
-            IWebElement newStoreInput = driver.FindElement(By.Id("storeName"));
-            newStoreInput.SendKeys("abowStore");
-            Thread.Sleep(sleepTime);
-            IWebElement crateStoreBtn = driver.FindElement(By.Id("createStoreButton12"));
-            crateStoreBtn.Click();
-            Thread.Sleep(sleepTime);
-            alert = driver.SwitchTo().Alert();
-            alert.Accept();
-            Thread.Sleep(sleepTime);
-
             //add product to cart
             IWebElement AllProducts = driver.FindElement(By.Id("AllProductsLink"));
             AllProducts.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement sale1 = driver.FindElement(By.Id("viewSale0"));
             sale1.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement submitViewInstantSale = driver.FindElement(By.Id("submit"));
             submitViewInstantSale.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IAlert alert2 = driver.SwitchTo().Alert();
             alert2.Accept();
             Thread.Sleep(sleepTime);
             IWebElement shoppingCartIcon = driver.FindElement(By.Id("shoppingCartIcon"));
             shoppingCartIcon.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
         }
         [TestMethod]
         public void simpleRemoveProductFromCart()
         {
             IWebElement removebtn = driver.FindElement(By.Id("remove0"));
             removebtn.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement totalPrice = driver.FindElement(By.Id("total-price"));
             Assert.IsTrue(totalPrice.Text.Contains("0.00"));
         }

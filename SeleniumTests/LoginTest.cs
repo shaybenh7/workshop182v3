@@ -22,7 +22,7 @@ namespace SeleniumTests
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");
-            /*
+            
             IWebElement login = driver.FindElement(By.Id("LoginLink"));
             login.Click();
             Thread.Sleep(sleepTime);
@@ -58,7 +58,7 @@ namespace SeleniumTests
             IWebElement logout = driver.FindElement(By.Id("LogoutLink"));
             logout.Click();
             Thread.Sleep(sleepTime);
-            */
+            
 
         }
 

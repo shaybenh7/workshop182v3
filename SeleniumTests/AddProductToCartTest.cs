@@ -12,11 +12,12 @@ namespace SeleniumTests
     {
         public static String URL = "http://localhost:53416/";
         IWebDriver driver = new ChromeDriver("./");
-        private int sleepTime = 500;
+        private int sleepTime = 2000;
         [TestInitialize]
         public void Initialize()
         {
-
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.insertData();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");
@@ -67,13 +68,13 @@ namespace SeleniumTests
         {
             IWebElement AllProducts = driver.FindElement(By.Id("AllProductsLink"));
             AllProducts.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement sale1 = driver.FindElement(By.Id("viewSale0"));
             sale1.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement submitViewInstantSale = driver.FindElement(By.Id("submit"));
             submitViewInstantSale.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IAlert alert = driver.SwitchTo().Alert();
             string alertText = alert.Text;
             Assert.IsTrue(alertText.Contains("Product was added successfully!"));
@@ -81,9 +82,9 @@ namespace SeleniumTests
             Thread.Sleep(sleepTime);
             IWebElement shoppingCartIcon = driver.FindElement(By.Id("shoppingCartIcon"));
             shoppingCartIcon.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement productInCart = driver.FindElement(By.Id("productName0"));
-            Assert.IsTrue(productInCart.Text.Equals("Milk chocolate"));
+            Assert.IsTrue(productInCart.Text.Equals("cola"));
         }
 
         [TestMethod]
@@ -91,16 +92,16 @@ namespace SeleniumTests
         {
             IWebElement AllProducts = driver.FindElement(By.Id("AllProductsLink"));
             AllProducts.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement sale1 = driver.FindElement(By.Id("viewSale0"));
             sale1.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement upQuan = driver.FindElement(By.Id("up-bar"));
             upQuan.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement submitViewInstantSale = driver.FindElement(By.Id("submit"));
             submitViewInstantSale.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IAlert alert = driver.SwitchTo().Alert();
             string alertText = alert.Text;
             Assert.IsTrue(alertText.Contains("Product was added successfully!"));
@@ -108,10 +109,10 @@ namespace SeleniumTests
             Thread.Sleep(sleepTime);
             IWebElement shoppingCartIcon = driver.FindElement(By.Id("shoppingCartIcon"));
             shoppingCartIcon.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement productInCart = driver.FindElement(By.Id("productName0"));
             IWebElement productQuant = driver.FindElement(By.Id("quantity0"));
-            Assert.IsTrue(productInCart.Text.Equals("Milk chocolate"));
+            Assert.IsTrue(productInCart.Text.Equals("cola"));
             Assert.IsTrue(productQuant.Text.Equals("2"));
 
         }
@@ -121,13 +122,13 @@ namespace SeleniumTests
         {
             IWebElement AllProducts = driver.FindElement(By.Id("AllProductsLink"));
             AllProducts.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement sale1 = driver.FindElement(By.Id("viewSale0"));
             sale1.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement upQuan = driver.FindElement(By.Id("up-bar"));
             upQuan.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             upQuan.Click();
             Thread.Sleep(sleepTime);
             upQuan.Click();
@@ -139,18 +140,18 @@ namespace SeleniumTests
             Thread.Sleep(sleepTime);
             IWebElement submitViewInstantSale = driver.FindElement(By.Id("submit"));
             submitViewInstantSale.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IAlert alert = driver.SwitchTo().Alert();
             string alertText = alert.Text;
             Assert.IsTrue(alertText.Contains("Product was added successfully!"));
             alert.Accept();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement shoppingCartIcon = driver.FindElement(By.Id("shoppingCartIcon"));
             shoppingCartIcon.Click();
-            Thread.Sleep(sleepTime);
+            Thread.Sleep(sleepTime*2);
             IWebElement productInCart = driver.FindElement(By.Id("productName0"));
             IWebElement productQuant = driver.FindElement(By.Id("quantity0"));
-            Assert.IsTrue(productInCart.Text.Equals("Milk chocolate"));
+            Assert.IsTrue(productInCart.Text.Equals("cola"));
             Assert.IsTrue(productQuant.Text.Equals("4"));
         }
 
