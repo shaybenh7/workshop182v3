@@ -75,5 +75,12 @@ namespace WebServices.Domain
                     return;
                 }
         }
+
+        public void removeAllNotificationSubscriptionsOfAStoreRole(StoreRole sR)
+        {
+            removeFromCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
+            removeFromCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
+            removeFromCategory(sR, NotificationPublisher.NotificationCategories.Store);
+        }
     }
 }

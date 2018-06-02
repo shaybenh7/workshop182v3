@@ -137,8 +137,10 @@ namespace wsep182.Domain
                 {
                     if (winner <= r.Offer + index && winner >= index)
                     {
-                        string message = "YOU WON THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId);
-                        NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, r.SaleId);
+                        string message = r.UserName + " WON THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId);
+                        NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, p.getStore().storeId);
+                        StoreRole sR = StoreRole.getStoreRole(p.getStore(), UserManager.getInstance().getUser(r.UserName));
+                        NotificationPublisher.getInstance().removeAllNotificationSubscriptionsOfAStoreRole(sR);
                         //NotificationManager.getInstance().notifyUser(r.UserName, message);
                         winnerS = r;
                         break;
@@ -155,9 +157,10 @@ namespace wsep182.Domain
                 }
                 foreach (RaffleSale r in relevant)
                 {
-                    string message = "YOU LOST THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId);
-                    NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, r.SaleId);
-
+                    string message = r.UserName + " LOST THE RAFFLE SALE ON PRODUCT: " + getProductNameFromSaleId(r.SaleId);
+                    NotificationPublisher.getInstance().publish(NotificationPublisher.NotificationCategories.RaffleSale, message, p.getStore().storeId);
+                    StoreRole sR = StoreRole.getStoreRole(p.getStore(), UserManager.getInstance().getUser(r.UserName));
+                    NotificationPublisher.getInstance().removeAllNotificationSubscriptionsOfAStoreRole(sR);
                     //NotificationManager.getInstance().notifyUser(r.UserName, message);
                     RSDB.Remove(winnerS);
                     raffleSales.Remove(r);
@@ -177,12 +180,7 @@ namespace wsep182.Domain
             return ans;
         }
 
-        private void removeNotificationSubscription(StoreRole sR)
-        {
-            NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
-            NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
-            NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.Store);
-        }
+
 
 
 

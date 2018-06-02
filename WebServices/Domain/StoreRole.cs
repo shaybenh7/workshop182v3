@@ -153,9 +153,7 @@ namespace wsep182.Domain
                 return -7;
             if ( storeArchive.getInstance().removeStoreRole(s.getStoreId(), oldManager))
             {
-                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Purchase);
-                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.RaffleSale);
-                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Store);
+                NotificationPublisher.getInstance().removeAllNotificationSubscriptionsOfAStoreRole(this);
                 return 0;
             }
             return -5;//-5 database eror
@@ -198,9 +196,7 @@ namespace wsep182.Domain
                 return -12;//-12 if dealet creator
             if (storeArchive.getInstance().removeStoreRole(s.getStoreId(), ownerToDelete))
             {
-                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Purchase);
-                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.RaffleSale);
-                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Store);
+                NotificationPublisher.getInstance().removeAllNotificationSubscriptionsOfAStoreRole(this);
                 return 0;
             }
             return -9;//-9 database eror
