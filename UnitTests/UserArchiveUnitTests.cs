@@ -14,6 +14,8 @@ namespace UnitTests
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             UserManager.restartInstance();
             ua = UserManager.getInstance();
         }

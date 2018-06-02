@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using wsep182.Domain;
 using wsep182.services;
+using WebServices.DAL;
 namespace Acceptance_Tests.StoreTests
 {
     [TestClass]
@@ -20,7 +21,9 @@ namespace Acceptance_Tests.StoreTests
             [TestInitialize]
             public void init()
             {
-                ProductManager.restartInstance();
+            CleanDB cDB = new CleanDB();
+            cDB.emptyDB();
+            ProductManager.restartInstance();
                 SalesManager.restartInstance();
                 storeArchive.restartInstance();
                 UserManager.restartInstance();

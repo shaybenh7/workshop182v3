@@ -17,9 +17,12 @@ namespace Acceptance_Tests.SellTests
         private int store, store2;//itamar owner , niv manneger
         int cola, sprite, chicken, cow;
         int saleId1, saleId2;
+
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
             storeArchive.restartInstance();

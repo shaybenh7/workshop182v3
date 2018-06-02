@@ -13,6 +13,8 @@ namespace UnitTests
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             BuyHistoryManager.restartInstance();
             bha = BuyHistoryManager.getInstance();
         }

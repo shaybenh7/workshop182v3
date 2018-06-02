@@ -26,6 +26,8 @@ namespace IntegrationTests
         public void init()
         {
             //              ARCHIVE INIT
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             PurchasePolicyManager.restartInstance();
             SalesManager.restartInstance();
             DiscountsManager.restartInstance();

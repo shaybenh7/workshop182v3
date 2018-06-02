@@ -9,7 +9,7 @@ namespace Acceptance_Tests.SellTests
     [TestClass]
     public class viewCartTest
     {
-
+        
         private userServices us;
         private storeServices ss;
         private sellServices sellS;
@@ -20,6 +20,8 @@ namespace Acceptance_Tests.SellTests
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
             storeArchive.restartInstance();
