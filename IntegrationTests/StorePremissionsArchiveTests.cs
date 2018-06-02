@@ -141,5 +141,19 @@ namespace UnitTests
         }
             
 
+        [TestMethod]
+        public void getHistoryOfAppointment()
+        {
+            LinkedList<Tuple<int, String, String, String, String>> ans = storeArchive.getInstance().getStoreRolesStats(s.storeId);
+            Assert.IsTrue(ans.Count != 0);
+        }
+        [TestMethod]
+        public void getManagersPermission()
+        {
+            LinkedList<Tuple<int, String, String>> ans = StorePremissionsArchive.getInstance().getManagersPermissionsInStore(s.storeId);
+            Assert.IsTrue(ans.Count != 0);
+        }
+            
+
     }
 }
