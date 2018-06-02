@@ -21,7 +21,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -44,7 +44,7 @@ namespace Acceptance_Tests.StoreTests
             us.login(aviad, "aviad", "123456");
 
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             LinkedList<StoreManager> managers = store.getManagers();
             Assert.AreEqual(managers.Count, 0);
 
@@ -67,7 +67,7 @@ namespace Acceptance_Tests.StoreTests
         public void OwnerTryAddHimselfToBeStoreManager()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreManager(store.getStoreId(), "zahi", zahi);
             LinkedList<StoreManager>  managers = store.getManagers();
             Assert.AreEqual(managers.Count, 0);
@@ -80,7 +80,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "aviad", zahi);
             ss.addStoreManager(store.getStoreId(), "aviad", zahi);
             LinkedList<StoreManager>  managers = store.getManagers();
@@ -92,7 +92,7 @@ namespace Acceptance_Tests.StoreTests
         {
 
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreManager(store.getStoreId(), null, zahi);
             LinkedList<StoreManager> managers = store.getManagers();
             Assert.AreEqual(managers.Count, 0);
@@ -106,7 +106,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreManager(store.getStoreId(), "aviad", null);
             LinkedList<StoreManager> managers = store.getManagers();
             Assert.AreEqual(managers.Count, 0);
@@ -120,7 +120,7 @@ namespace Acceptance_Tests.StoreTests
             us.login(aviad, "aviad", "123456");
             storeServices ss = storeServices.getInstance();
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreManager(-7, "aviad", zahi);
             LinkedList<StoreManager> managers = store.getManagers();
             Assert.AreEqual(managers.Count, 0);
@@ -135,7 +135,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             LinkedList<StoreManager> managers = store.getManagers();
             Assert.AreEqual(managers.Count, 0);
             ss.addStoreManager(store.getStoreId(), "aviad", zahi);

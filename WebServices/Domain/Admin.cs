@@ -30,7 +30,7 @@ namespace wsep182.Domain
                 return -4;
             if (RaffleSalesManager.getInstance().getAllRaffleSalesByUserName(userDeleted).Count > 0)
                 return -5;
-            LinkedList<StoreRole> roles = storeArchive.getInstance().getAllStoreRolesOfAUser(userDeleted);
+            LinkedList<StoreRole> roles = StoreManagement.getInstance().getAllStoreRolesOfAUser(userDeleted);
             if (checkLoneOwnerOrCreator(roles))
                 return -6;
             removeAllRolesOfAUser(roles);
@@ -104,11 +104,11 @@ namespace wsep182.Domain
                 if (sr is StoreOwner)
                 {
                     if (sr.getStore().getOwners().Count > 1)
-                        res = res && storeArchive.getInstance().removeStoreRole(sr.getStore().getStoreId(), sr.getUser().getUserName());
+                        res = res && StoreManagement.getInstance().removeStoreRole(sr.getStore().getStoreId(), sr.getUser().getUserName());
                     else throw new Exception("something went seriously wrong"); // in the interval between the call to the safety check to now, something occured
                 }
                 else
-                    res = res && storeArchive.getInstance().removeStoreRole(sr.getStore().getStoreId(), sr.getUser().getUserName());
+                    res = res && StoreManagement.getInstance().removeStoreRole(sr.getStore().getStoreId(), sr.getUser().getUserName());
             }
             return res;
         }

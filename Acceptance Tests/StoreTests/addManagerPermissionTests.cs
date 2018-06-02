@@ -36,7 +36,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             StorePremissionsArchive.restartInstance();
@@ -61,7 +61,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(niv, "niv", "123456");
             ss = storeServices.getInstance();
             int s = ss.createStore("abowim", zahi);
-            store = storeArchive.getInstance().getStore(s);
+            store = StoreManagement.getInstance().getStore(s);
             ss.addStoreManager(store.getStoreId(), "aviad", zahi);
             niv.logOut();
         }

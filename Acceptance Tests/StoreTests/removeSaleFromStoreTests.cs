@@ -25,7 +25,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -41,7 +41,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(zahi, "zahi", "123456");
             us.login(zahi, "zahi", "123456");
 
-            store = storeArchive.getInstance().getStore(ss.createStore("Abowim", zahi));
+            store = StoreManagement.getInstance().getStore(ss.createStore("Abowim", zahi));
 
             cola = ProductManager.getInstance().getProductInStore(ss.addProductInStore("cola", 10, 100, zahi, store.getStoreId(), "Drinks"));
 

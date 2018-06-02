@@ -65,8 +65,8 @@
 
                         },
                         error: function (response) {
-                            console.log(response);
-                            window.location.href = baseUrl + "/error";
+                            alert("Lost DB connection");
+                            window.location.href = baseUrl + "/index";
                         }
                     });
 
@@ -79,8 +79,8 @@
 
         },
         error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl+"/error";
+            alert("Lost DB connection");
+            window.location.href = baseUrl + "/index";
         }
     });
 });
@@ -97,8 +97,8 @@ var RemoveProductFromCart = function (saleId) {
             console.log(response);
         },
         error: function (response) {
-            console.log("responseeee");
-            window.location.href = baseUrl+"/error";
+            alert("Lost DB connection");
+            window.location.href = baseUrl + "/index";
         }
     });
 }
@@ -176,8 +176,8 @@ var checkoutFunc2 =function() {
 
                             },
                             error: function (response) {
-                                console.log(response);
-                                window.location.href = baseUrl + "/error";
+                                alert("Lost DB connection");
+                                window.location.href = baseUrl + "/index";
                             }
                         });
 
@@ -189,8 +189,8 @@ var checkoutFunc2 =function() {
             }
         },
         error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl+"/error";
+            alert("Lost DB connection");
+            window.location.href = baseUrl + "/index";
         }
     });
 
@@ -234,8 +234,8 @@ function applyCoupon() {
             }
         },
         error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("Lost DB connection");
+            window.location.href = baseUrl + "/index";
         }
     });
     

@@ -14,7 +14,7 @@ namespace IntegrationTests
         Product cola, sprite;
         ProductInStore colaInStore, spriteInStore;
         UserManager userArchive;
-        storeArchive storeArchive;
+        StoreManagement StoreManagement;
         ProductManager productArchive;
         DiscountsManager discountsArchive;
         CouponsManager couponsArchive;
@@ -32,7 +32,7 @@ namespace IntegrationTests
             SalesManager.restartInstance();
             DiscountsManager.restartInstance();
             CouponsManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             ProductManager.restartInstance();
             UserCartsManager.restartInstance();
@@ -41,7 +41,7 @@ namespace IntegrationTests
             discountsArchive = DiscountsManager.getInstance();
             couponsArchive = CouponsManager.getInstance();
             productArchive = ProductManager.getInstance();
-            storeArchive = storeArchive.getInstance();
+            StoreManagement = StoreManagement.getInstance();
             userArchive = UserManager.getInstance();
             //              USERS INIT
             admin = new User("admin", "123456");
@@ -60,7 +60,7 @@ namespace IntegrationTests
             cola = productArchive.addProduct("cola");
             sprite = productArchive.addProduct("sprite");
             //             STORES AND PRODUCTS IN STORES
-            store = storeArchive.addStore("samsung", storeOwner);
+            store = StoreManagement.addStore("samsung", storeOwner);
             colaInStore = productArchive.addProductInStore(cola, store, 200, 500, "cola category");
             spriteInStore =  productArchive.addProductInStore(sprite, store, 100, 200, "sprite category");
             //             SALES INIT

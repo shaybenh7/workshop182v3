@@ -17,7 +17,7 @@ namespace Acceptance_Tests.UserTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -36,7 +36,7 @@ namespace Acceptance_Tests.UserTests
             us.login(session, "zahi", "123456");
             storeServices ss = storeServices.getInstance();
             int id=ss.createStore("abowim", session);
-            Store s = storeArchive.getInstance().getStore(id);
+            Store s = StoreManagement.getInstance().getStore(id);
             int pis=ss.addProductInStore("cola", 3.2, 10, session, id, "drinks");
             LinkedList<ProductInStore> pisList = us.viewProductsInStore(id);
             LinkedList<ProductInStore> piStorsList = us.viewProductsInStores();

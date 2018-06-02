@@ -147,8 +147,8 @@
 									storeNameElement.innerHTML += response["store"]["name"];
 								},
 								error: function (response) {
-                                    console.log(response);
-                                    window.location.href = baseUrl+"/error";
+                                    alert("Lost DB connection");
+                                    window.location.href = baseUrl+"/index";
                                 }
 							});
 
@@ -162,8 +162,8 @@
 									salePriceElement.innerHTML += response.toFixed(2);
 								},
 								error: function (response) {
-                                    console.log(response);
-                                    window.location.href = baseUrl+"/error";
+                                    alert("Lost DB connection");
+                                    window.location.href = baseUrl+"/index";
                                 }
 							});
 						})(i);

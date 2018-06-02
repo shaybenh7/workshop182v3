@@ -15,7 +15,7 @@ namespace IntegrationTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -64,7 +64,7 @@ namespace IntegrationTests
             niv.register("niv", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(s.getStoreName(), "bro burger");
             Assert.AreEqual(s.getOwners().Count, 1);
             StoreRole sr = new StoreOwner(aviad, s);
@@ -84,7 +84,7 @@ namespace IntegrationTests
             niv.register("niv", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(s.getStoreName(), "bro burger");
             Assert.AreEqual(s.getOwners().Count, 1);
             StoreRole sr = new StoreOwner(aviad, s);
@@ -104,7 +104,7 @@ namespace IntegrationTests
             niv.register("niv", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(s.getStoreName(), "bro burger");
             Assert.AreEqual(s.getOwners().Count, 1);
             StoreRole sr = new StoreOwner(aviad, s);
@@ -129,7 +129,7 @@ namespace IntegrationTests
             aviad.login("aviad", "123456");
             zahi.login("zahi", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(s.getStoreName(), "bro burger");
             Assert.AreEqual(s.getOwners().Count, 1);
             StoreRole sr = new StoreOwner(aviad, s);
@@ -149,7 +149,7 @@ namespace IntegrationTests
             niv.register("niv", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(s.getStoreName(), "bro burger");
             Assert.AreEqual(s.getOwners().Count, 1);
             StoreRole sr = new StoreOwner(aviad, s);
@@ -171,7 +171,7 @@ namespace IntegrationTests
             niv.register("niv", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(s.getStoreName(), "bro burger");
             Assert.AreEqual(s.getOwners().Count, 1);
             StoreRole sr = new StoreOwner(aviad, s);
@@ -191,7 +191,7 @@ namespace IntegrationTests
             aviad.register("aviad", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", 3.2, 10, "Driks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
@@ -206,7 +206,7 @@ namespace IntegrationTests
             aviad.register("aviad", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", -5, 10, "Driks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
@@ -221,7 +221,7 @@ namespace IntegrationTests
             aviad.register("aviad", "123456");
             aviad.login("aviad", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", 3.2, 10, "Driks");
             sr.addProductInStore(aviad, s, "sprite", 3.2, 10, "Driks");
@@ -238,7 +238,7 @@ namespace IntegrationTests
             zahi.register("zahi", "123456");
             zahi.login("zahi", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", 3.2, 10, "Driks");
             sr.addProductInStore(zahi, s, "sprite", 3.2, 10, "Driks");
@@ -253,7 +253,7 @@ namespace IntegrationTests
             aviad.login("aviad", "123456");
             User zahi = new User("zahi", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sr = new StoreOwner(aviad, s);
             int pisId = sr.addProductInStore(aviad, s, "cola", 3.2, 10, "Driks");
             sr.addProductInStore(zahi, s, "sprite", 3.2, 10, "Driks");
@@ -268,7 +268,7 @@ namespace IntegrationTests
             aviad.login("aviad", "123456");
             User zahi = new User("zahi", "123456");
             int storeId = aviad.createStore("bro burger");
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             LinkedList<ProductInStore> pisList = s.getProductsInStore();
             Assert.AreEqual(pisList.Count, 0);
         }

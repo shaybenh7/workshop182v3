@@ -24,7 +24,7 @@ namespace Acceptance_Tests.SellTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -48,13 +48,13 @@ namespace Acceptance_Tests.SellTests
             us.register(zahi, "zahi", "123456");
             us.login(zahi, "zahi", "123456");
             int storeId2 = ss.createStore("Darkness Inc.", zahi);
-            store2 = storeArchive.getInstance().getStore(storeId2);
+            store2 = StoreManagement.getInstance().getStore(storeId2);
 
             itamar = us.startSession();
             us.register(itamar, "itamar", "123456");
             us.login(itamar, "itamar", "123456");
             int storeId = ss.createStore("Maria&Netta Inc.", itamar);
-            store = storeArchive.getInstance().getStore(storeId);
+            store = StoreManagement.getInstance().getStore(storeId);
 
             niv = us.startSession();
             us.register(niv, "niv", "123456");

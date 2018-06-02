@@ -24,7 +24,7 @@ namespace Acceptance_Tests.SaleTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -48,7 +48,7 @@ namespace Acceptance_Tests.SaleTests
             us.register(itamar, "itamar", "123456");
             us.login(itamar, "itamar", "123456");
             int storeid = ss.createStore("Maria&Netta Inc.", itamar);
-            store = storeArchive.getInstance().getStore(storeid);
+            store = StoreManagement.getInstance().getStore(storeid);
 
             niv = us.startSession();
             us.register(niv, "niv", "123456");
@@ -103,7 +103,7 @@ namespace Acceptance_Tests.SaleTests
         public void AddSaleWithProductNotInStore()
         {
             int storeid = ss.createStore("admin store", admin);
-            Store store2 = storeArchive.getInstance().getStore(storeid);
+            Store store2 = StoreManagement.getInstance().getStore(storeid);
             int m = ss.addProductInStore("milk", 3.2, 10, admin, storeid, "Drinks");
             ProductInStore milk = ProductManager.getInstance().getProductInStore(m);
             Assert.AreEqual(ss.addSaleToStore(itamar, store.getStoreId(), milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()), -13) ;//-13 product not in this store
@@ -112,7 +112,7 @@ namespace Acceptance_Tests.SaleTests
         public void AddSaleWithOwnerOfAnotherStore()
         {
             int storeid = ss.createStore("admin store", admin);
-            Store store2 = storeArchive.getInstance().getStore(storeid);
+            Store store2 = StoreManagement.getInstance().getStore(storeid);
             int m = ss.addProductInStore("milk", 3.2, 10, admin, storeid, "Drinks");
             ProductInStore milk = ProductManager.getInstance().getProductInStore(m);
             Assert.AreEqual(ss.addSaleToStore(admin, store.getStoreId(), milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()) ,-4);//-4 if don't have premition
@@ -121,7 +121,7 @@ namespace Acceptance_Tests.SaleTests
         public void AddSaleWithNullParameters()
         {
             int storeid = ss.createStore("admin store", admin);
-            Store store2 = storeArchive.getInstance().getStore(storeid);
+            Store store2 = StoreManagement.getInstance().getStore(storeid);
             int m = ss.addProductInStore("milk", 3.2, 10, admin, storeid, "Drinks");
             ProductInStore milk = ProductManager.getInstance().getProductInStore(m);
             Assert.AreEqual(-1,ss.addSaleToStore(null, store2.getStoreId(), milk.getProductInStoreId(), 1, 1, DateTime.Now.AddMonths(1).ToString()));//could be -1 also

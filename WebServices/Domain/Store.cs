@@ -53,22 +53,22 @@ namespace wsep182.Domain
 
         public static Store createStore(String name,User session)
         {
-            return storeArchive.getInstance().addStore(name,session);
+            return StoreManagement.getInstance().addStore(name,session);
         }
 
         public LinkedList<StoreOwner> getOwners()
         {
-            return storeArchive.getInstance().getAllOwners(storeId);
+            return StoreManagement.getInstance().getAllOwners(storeId);
         }
 
         public static LinkedList<Store> viewStores()
         {
-            return storeArchive.getInstance().getAllStore();
+            return StoreManagement.getInstance().getAllStore();
         }
 
         public LinkedList<StoreManager> getManagers()
         {
-            return storeArchive.getInstance().getAllManagers(storeId);
+            return StoreManagement.getInstance().getAllManagers(storeId);
         }
 
 		public LinkedList<Sale> getAllSales()

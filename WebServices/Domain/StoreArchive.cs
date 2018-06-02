@@ -5,9 +5,9 @@ using WebServices.Domain;
 
 namespace wsep182.Domain
 {
-    public class storeArchive
+    public class StoreManagement
     {
-        private static storeArchive instance;
+        private static StoreManagement instance;
         private LinkedList<Store> stores;
         private static int storeIndex;
 
@@ -15,7 +15,7 @@ namespace wsep182.Domain
 
         private StoreDB SDB;
         private StoreRoleDictionaryDB SRDDB;
-        private storeArchive()
+        private StoreManagement()
         {
             SDB = new StoreDB(configuration.DB_MODE);
             SRDDB = new StoreRoleDictionaryDB(configuration.DB_MODE);
@@ -62,15 +62,15 @@ namespace wsep182.Domain
             }
             return index;
         }
-        public static storeArchive getInstance()
+        public static StoreManagement getInstance()
         {
             if (instance == null)
-                instance = new storeArchive();
+                instance = new StoreManagement();
             return instance;
         }
         public static void restartInstance()
         {
-            instance = new storeArchive();
+            instance = new StoreManagement();
         }
         public int getNextStoreId()
         {

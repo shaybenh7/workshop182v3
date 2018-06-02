@@ -22,7 +22,7 @@ namespace Acceptance_Tests.UserTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -46,7 +46,7 @@ namespace Acceptance_Tests.UserTests
             us.register(itamar, "itamar", "123456");
             itamar.login("itamar", "123456");
             int id=itamar.createStore("Maria&Netta Inc.");
-            store = storeArchive.getInstance().getStore(id);
+            store = StoreManagement.getInstance().getStore(id);
             niv = us.startSession();
             us.register(niv, "niv", "123456");
             
@@ -164,7 +164,7 @@ namespace Acceptance_Tests.UserTests
         public void RemoveMannegerInFewStores()
         {
             int s2 = ss.createStore("admin store", admin);
-            Store store2 = storeArchive.getInstance().getStore(s2);
+            Store store2 = StoreManagement.getInstance().getStore(s2);
             ss.addStoreManager(store2.getStoreId(), "niv", admin);
             Assert.IsTrue(us.removeUser(admin,"niv") >= 0);
             Assert.IsFalse(us.login(niv,"niv", "123456") >= 0);

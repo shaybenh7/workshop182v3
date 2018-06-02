@@ -8,15 +8,15 @@ namespace UnitTests
     public class StoreArchiveTests
     {
 
-        storeArchive sa;
+        StoreManagement sa;
         private User zahi;
         [TestInitialize]
         public void init()
         {
             WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
             cDB.emptyDB();
-            storeArchive.restartInstance();
-            sa = storeArchive.getInstance();
+            StoreManagement.restartInstance();
+            sa = StoreManagement.getInstance();
         }
 
         [TestMethod]

@@ -66,7 +66,6 @@ namespace wsep182.Domain
                     {
                         return -2;
                     }
-                    DDB.Add(toAdd);
                     discounts.AddLast(toAdd);
                 }
             }

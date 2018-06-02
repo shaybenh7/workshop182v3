@@ -16,7 +16,7 @@ namespace wsep182.Domain
 
         public override LinkedList<Purchase> viewStoreHistory(Store store, User session)
         {
-            StoreRole sR = storeArchive.getInstance().getStoreRole(store, session);
+            StoreRole sR = StoreManagement.getInstance().getStoreRole(store, session);
             return sR.viewPurchasesHistory(session, store);
         }
     }

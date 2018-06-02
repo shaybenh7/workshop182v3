@@ -57,7 +57,7 @@ namespace wsep182.services
         {
             if (session==null || !session.getState().isLogedIn() || productName == null || category == null)
                 return -1;//-1 if user Not Login
-            Store s = storeArchive.getInstance().getStore(sId);
+            Store s = StoreManagement.getInstance().getStore(sId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;//-4 if don't have premition
@@ -80,7 +80,7 @@ namespace wsep182.services
         */
         public virtual int editProductInStore(User session, int sId,int pisId, int quantity, double price)
         {
-            Store s = storeArchive.getInstance().getStore(sId);
+            Store s = StoreManagement.getInstance().getStore(sId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (s == null)
                 return -6;
@@ -97,7 +97,7 @@ namespace wsep182.services
 
         public LinkedList<Tuple<int, String, String, String, String>> getStoreRolesStats(int storeId)
         {
-            return storeArchive.getInstance().getStoreRolesStats(storeId);
+            return StoreManagement.getInstance().getStoreRolesStats(storeId);
         }
 
         public LinkedList<Tuple<int, String, String>> getManagersPermissionsInStore(int storeId)
@@ -121,7 +121,7 @@ namespace wsep182.services
         */
         public int removeProductFromStore(int sId, int pisId, User session)
         {
-            Store s = storeArchive.getInstance().getStore(sId);
+            Store s = StoreManagement.getInstance().getStore(sId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;//-4 if don't have premition
@@ -137,7 +137,7 @@ namespace wsep182.services
                 return false;
             }
             User isExist = UserManager.getInstance().getUser(newOwner);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             if (isExist == null)
                 return false;
             StoreRole sR = StoreRole.getStoreRole(s, session);
@@ -148,7 +148,7 @@ namespace wsep182.services
 
         public String getStoreNameById(int storeId)
         {
-            Store s= storeArchive.getInstance().getStore(storeId);
+            Store s= StoreManagement.getInstance().getStore(storeId);
             return s.getStoreName();
         }
 
@@ -171,7 +171,7 @@ namespace wsep182.services
         */
         public int removeStoreOwner(int sId, String oldOwner, User session)
         {
-            Store s = storeArchive.getInstance().getStore(sId);
+            Store s = StoreManagement.getInstance().getStore(sId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;
@@ -191,7 +191,7 @@ namespace wsep182.services
         */
         public int addStoreManager(int sId, String newManager, User session)
         {
-            Store s = storeArchive.getInstance().getStore(sId);
+            Store s = StoreManagement.getInstance().getStore(sId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;//-4 if don't have premition
@@ -212,7 +212,7 @@ namespace wsep182.services
       */
         public int removeStoreManager(int sId, String oldManageruserName, User session)
         {
-            Store s = storeArchive.getInstance().getStore(sId);
+            Store s = StoreManagement.getInstance().getStore(sId);
             if (oldManageruserName == session.getUserName())
                 return -10;// -10 can't remove himself
             StoreRole sR = StoreRole.getStoreRole(s, session);
@@ -237,7 +237,7 @@ namespace wsep182.services
 */
         public int addManagerPermission(String permission, int storeId, String managerToAdd, User session)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4; //-4 if don't have premition
@@ -248,7 +248,7 @@ namespace wsep182.services
         //req 3.4 d
         public int removeManagerPermission(String permission, int storeId, String manager, User session)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4; //-4 if you do not have permissions
@@ -258,7 +258,7 @@ namespace wsep182.services
         //req 3.7 and 5.4 a
         public LinkedList<Purchase> viewStoreHistory(User session, int storeId)
         {
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             if (session == null | store == null)
                 return null;
             return session.viewStoreHistory(store);
@@ -291,7 +291,7 @@ namespace wsep182.services
      */
         public int addSaleToStore(User session, int storeId, int productInStoreId, int typeOfSale, int amount, String dueDate)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             if (session==null||!session.getState().isLogedIn())
                 return -1;//-1 if user Not Login
             StoreRole sR = StoreRole.getStoreRole(s, session);
@@ -310,7 +310,7 @@ namespace wsep182.services
    */
         public int removeSaleFromStore(User session, int storeId, int saleId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;
@@ -332,7 +332,7 @@ namespace wsep182.services
                 */
         public int editSale(User session, int storeId, int saleId, int amount, String dueDate)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -4;//-4 if don't have premition
@@ -364,7 +364,7 @@ namespace wsep182.services
         public Boolean addCouponDiscount(User session, String couponId, int productInStoreId, int type, string categoryOrProductName,
          int percentage, String dueDate, string restrictions,int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return false;
@@ -398,7 +398,7 @@ namespace wsep182.services
 
         public int setAmountPolicyOnStore(User session, int storeId, int minAmount, int maxAmount)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -408,7 +408,7 @@ namespace wsep182.services
 
         public int setAmountPolicyOnCategory(User session, int storeId, String category, int minAmount, int maxAmount)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -418,7 +418,7 @@ namespace wsep182.services
 
         public int setAmountPolicyOnProductInStore(User session, int storeId, int productInStoreId, int minAmount, int maxAmount)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -427,7 +427,7 @@ namespace wsep182.services
 
         public int setAmountPolicyOnCountry(User session, int storeId, string country, int minAmount, int maxAmount)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -436,7 +436,7 @@ namespace wsep182.services
 
         public int setNoDiscountPolicyOnStore(User session, int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -445,7 +445,7 @@ namespace wsep182.services
 
         public int setNoDiscountPolicyOnCategoty(User session, int storeId, String category)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -454,7 +454,7 @@ namespace wsep182.services
 
         public int setNoDiscountPolicyOnCountry(User session, int storeId, String country)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -463,7 +463,7 @@ namespace wsep182.services
 
         public int setNoCouponsPolicyOnStore(User session, int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -472,7 +472,7 @@ namespace wsep182.services
 
         public int setNoCouponPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -481,7 +481,7 @@ namespace wsep182.services
 
         public int setNoDiscountPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -490,7 +490,7 @@ namespace wsep182.services
 
         public int setNoCouponPolicyOnCountry(User session, int storeId, string country)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -499,7 +499,7 @@ namespace wsep182.services
 
         public int removeAmountPolicyOnStore(User session, int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -508,7 +508,7 @@ namespace wsep182.services
 
         public int removeAmountPolicyOnCategory(User session, int storeId, string category)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -517,7 +517,7 @@ namespace wsep182.services
 
         public int removeAmountPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -526,7 +526,7 @@ namespace wsep182.services
 
         public int removeAmountPolicyOnCountry(User session, int storeId, string country)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -535,7 +535,7 @@ namespace wsep182.services
 
         public int removeNoDiscountPolicyOnStore(User session, int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -544,7 +544,7 @@ namespace wsep182.services
 
         public int removeNoDiscountPolicyOnCategoty(User session, int storeId,string category)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -553,7 +553,7 @@ namespace wsep182.services
 
         public int removeNoDiscountPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -562,7 +562,7 @@ namespace wsep182.services
 
         public int removeNoDiscountPolicyOnCountry(User session, int storeId, string country)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -571,7 +571,7 @@ namespace wsep182.services
 
         public int removeNoCouponsPolicyOnStore(User session, int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -580,7 +580,7 @@ namespace wsep182.services
 
         public int removeNoCouponPolicyOnCategoty(User session, int storeId,string category)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -589,7 +589,7 @@ namespace wsep182.services
 
         public int removeNoCouponPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -598,7 +598,7 @@ namespace wsep182.services
 
         public int removeNoCouponPolicyOnCountry(User session, int storeId, string country)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -607,7 +607,7 @@ namespace wsep182.services
 
         public LinkedList<StoreOwner> getOwners(int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             if (s == null)
                 return null;
             return s.getOwners();
@@ -615,7 +615,7 @@ namespace wsep182.services
 
         public LinkedList<StoreManager> getManagers(int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             if (s == null)
                 return null;
             return s.getManagers();
@@ -623,7 +623,7 @@ namespace wsep182.services
 
         public LinkedList<Sale> viewSalesByStore(int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             if (s == null)
                 return null;
             return s.getAllSales();
@@ -641,7 +641,7 @@ namespace wsep182.services
 
         public LinkedList<Store> getAllStores()
         {
-            return storeArchive.getInstance().getAllStore();
+            return StoreManagement.getInstance().getAllStore();
         }
 
         public double checkRaffleBids(int saleId)
@@ -660,7 +660,7 @@ namespace wsep182.services
             {
                 return DiscountsManager.getInstance().addNewDiscounts(type, productInStores, categorysOrProductsName, percentage, dueDate, restrictions);
             }
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;
@@ -671,7 +671,7 @@ namespace wsep182.services
         public int addNewCoupons(User session, int storeId, String couponId, int type, List<int> pisId, List<string> catOrProductsNames
             , int percentage, string dueDate, string restrictions)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(s, session);
             if (sR == null)
                 return -1;

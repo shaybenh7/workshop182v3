@@ -98,7 +98,7 @@ namespace wsep182.Domain
                 if (u.getUserName().Equals(userName))
                 {
                     UDB.Remove(u);
-                    LinkedList<Store> allStores = storeArchive.getInstance().getAllStore();
+                    LinkedList<Store> allStores = StoreManagement.getInstance().getAllStore();
                     foreach(Store s in allStores)
                     {
                         if(s.getStoreCreator().getUserName().Equals(u.getUserName()) && s.getIsActive() == 1)

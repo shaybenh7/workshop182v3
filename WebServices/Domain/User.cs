@@ -116,7 +116,7 @@ namespace wsep182.Domain
         {
             if (username == this.userName || state is Admin)
             {
-                return storeArchive.getInstance().getAllStoreRolesOfAUser(username);
+                return StoreManagement.getInstance().getAllStoreRolesOfAUser(username);
             }
             return null;
         }
@@ -214,7 +214,7 @@ namespace wsep182.Domain
         }
         public Premissions getPremissions(string manager, int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             User managerUser = UserManager.getInstance().getUser(manager);
             return state.getPremissions(managerUser, s);
         }
@@ -239,7 +239,7 @@ namespace wsep182.Domain
         
         public void signUserToNotifications(string notification, int storeId)
         {
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(store, this);
             switch (notification)
             {
@@ -258,7 +258,7 @@ namespace wsep182.Domain
         }
         public void removeUserFromNotifications(string notification, int storeId)
         {
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             StoreRole sR = StoreRole.getStoreRole(store, this);
             switch (notification)
             {

@@ -18,7 +18,7 @@ namespace IntegrationTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -40,7 +40,7 @@ namespace IntegrationTests
             itamar.register("itamar", "123456");
             itamar.login("itamar", "123456");
             int storeId = itamar.createStore("Maria&Netta Inc.");
-            store = storeArchive.getInstance().getStore(storeId);
+            store = StoreManagement.getInstance().getStore(storeId);
             niv = new User("niv", "123456");
             niv.register("niv", "123456");
         }

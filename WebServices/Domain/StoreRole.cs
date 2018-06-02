@@ -40,7 +40,7 @@ namespace wsep182.Domain
         {
             if (store == null || user == null)
                 return null;
-            return storeArchive.getInstance().getStoreRole(store, user);
+            return StoreManagement.getInstance().getStoreRole(store, user);
         }
 
 
@@ -128,13 +128,13 @@ namespace wsep182.Domain
             if (newManager == null)
                 return -2;//-2 if new manager name not exist
 
-            StoreRole sr = storeArchive.getInstance().getStoreRole(s, newManager);
+            StoreRole sr = StoreManagement.getInstance().getStoreRole(s, newManager);
             if (sr != null && (sr is StoreOwner || sr is StoreManager))
                 return -6;//-6 already owner or manneger
             if (sr != null && (sr is Customer))
-                storeArchive.getInstance().removeStoreRole(s.getStoreId(), newManager.getUserName());
+                StoreManagement.getInstance().removeStoreRole(s.getStoreId(), newManager.getUserName());
             StoreRole m = new StoreManager(newManager, s, session.userName);
-            if (storeArchive.getInstance().addStoreRole(m, s.getStoreId(), newManager.getUserName()))
+            if (StoreManagement.getInstance().addStoreRole(m, s.getStoreId(), newManager.getUserName()))
                 return 0;
             return -5;//-5 database error
         }
@@ -148,10 +148,10 @@ namespace wsep182.Domain
                 return -3;//-3 if illegal store id
             if (oldManager == null)
                 return -6;// -6 old manager name doesn't exsist
-            StoreRole sr = storeArchive.getInstance().getStoreRole(s, session2);
+            StoreRole sr = StoreManagement.getInstance().getStoreRole(s, session2);
             if (sr != null && !(sr is StoreManager))
                 return -7;
-            if ( storeArchive.getInstance().removeStoreRole(s.getStoreId(), oldManager))
+            if (StoreManagement.getInstance().removeStoreRole(s.getStoreId(), oldManager))
             {
                 NotificationPublisher.getInstance().removeAllNotificationSubscriptionsOfAStoreRole(this);
                 return 0;
@@ -166,15 +166,15 @@ namespace wsep182.Domain
             {
                 return false;
             }
-            StoreRole sr = storeArchive.getInstance().getStoreRole(s, newOwner);
+            StoreRole sr = StoreManagement.getInstance().getStoreRole(s, newOwner);
             if (sr != null && (sr is StoreOwner))
                 return false;
             if (sr != null && (sr is StoreManager))
                 removeStoreManager(session, s, newOwnerUserName);
             if (sr != null && (sr is Customer))
-                storeArchive.getInstance().removeStoreRole(s.getStoreId(), newOwner.getUserName());
+                StoreManagement.getInstance().removeStoreRole(s.getStoreId(), newOwner.getUserName());
             StoreRole owner = new StoreOwner(newOwner, s,session.userName);
-            Boolean ans = storeArchive.getInstance().addStoreRole(owner, s.getStoreId(), newOwner.getUserName());
+            Boolean ans = StoreManagement.getInstance().addStoreRole(owner, s.getStoreId(), newOwner.getUserName());
             if (ans)
             {
                 NotificationPublisher.getInstance().signToCategory(this, NotificationPublisher.NotificationCategories.Purchase);
@@ -194,7 +194,7 @@ namespace wsep182.Domain
                 return -11;//-11 not a owner
             if (s.getStoreCreator().getUserName().Equals(ownerToDelete))
                 return -12;//-12 if dealet creator
-            if (storeArchive.getInstance().removeStoreRole(s.getStoreId(), ownerToDelete))
+            if (StoreManagement.getInstance().removeStoreRole(s.getStoreId(), ownerToDelete))
             {
                 NotificationPublisher.getInstance().removeAllNotificationSubscriptionsOfAStoreRole(this);
                 return 0;
@@ -213,7 +213,7 @@ namespace wsep182.Domain
                 return -6;//-6 manager name doesn't exsist
             if (s == null)
                 return -3;// -3 if illegal store id
-            StoreRole sR = storeArchive.getInstance().getStoreRole(s, manager);
+            StoreRole sR = StoreManagement.getInstance().getStoreRole(s, manager);
             if (!(sR is StoreManager))
                 return -8;
             if( correlate(manager, s, permission, sR, true))
@@ -235,7 +235,7 @@ namespace wsep182.Domain
                 return -1; //user not logged in
             if (s == null)
                 return -3; //Illegal store id
-            StoreRole sR = storeArchive.getInstance().getStoreRole(s, manager);
+            StoreRole sR = StoreManagement.getInstance().getStoreRole(s, manager);
             if (correlate(manager, s, permission, sR, false))
                 return 0;
             return -7; //No permissions
@@ -383,168 +383,168 @@ namespace wsep182.Domain
 
         public virtual int setAmountPolicyOnStore(User session,int storeId, int minAmount, int maxAmount)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
+            if (StoreManagement.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
                 return -1;
             return PurchasePolicyManager.getInstance().setAmountPolicyOnStore(storeId, minAmount, maxAmount);
         }
 
         public virtual int setAmountPolicyOnCategory(User session, int storeId, String category, int minAmount, int maxAmount)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
+            if (StoreManagement.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
                 return -1;
             return PurchasePolicyManager.getInstance().setAmountPolicyOnCategory(storeId, category, minAmount, maxAmount);
         }
 
         public virtual int setAmountPolicyOnProductInStore(User session, int storeId, int productInStoreId, int minAmount, int maxAmount)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
+            if (StoreManagement.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
                 return -1;
             return PurchasePolicyManager.getInstance().setAmountPolicyOnProductInStore(productInStoreId, minAmount, maxAmount);
         }
 
         public virtual int setAmountPolicyOnCountry(User session, int storeId, string country, int minAmount, int maxAmount)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
+            if (StoreManagement.getInstance().getStore(storeId) == null || minAmount < 0 || maxAmount < 0)
                 return -1;
             return PurchasePolicyManager.getInstance().setAmountPolicyOnCountry(storeId, country, minAmount, maxAmount);
         }
 
         public virtual int setNoDiscountPolicyOnStore(User session, int storeId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoDiscountPolicyOnStore(storeId);
         }
 
         public virtual int setNoDiscountPolicyOnCategoty(User session, int storeId,String category)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoDiscountPolicyOnCategoty(storeId, category);
         }
 
         public virtual int setNoDiscountPolicyOnCountry(User session, int storeId, String country)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoDiscountPolicyOnCountry(storeId, country);
         }
 
         public virtual int setNoCouponsPolicyOnStore(User session, int storeId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoCouponsPolicyOnStore(storeId);
         }
 
         public virtual int setNoCouponPolicyOnCategoty(User session, int storeId, String category)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoCouponPolicyOnCategoty(storeId, category);
         }
 
         public virtual int setNoCouponPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoCouponPolicyOnProductInStore(productInStoreId);
         }
 
         public virtual int setNoDiscountPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoDiscountPolicyOnProductInStore(productInStoreId);
         }
 
         public virtual int setNoCouponPolicyOnCountry(User session, int storeId, string country)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().setNoCouponPolicyOnCountry(storeId,country);
         }
 
         public virtual int removeAmountPolicyOnStore(User session, int storeId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeAmountPolicyOnStore(storeId);
         }
 
         public virtual int removeAmountPolicyOnCategory(User session, int storeId, string category)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeAmountPolicyOnCategory(storeId,category);
         }
 
         public virtual int removeAmountPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeAmountPolicyOnProductInStore(productInStoreId);
         }
 
         public virtual int removeAmountPolicyOnCountry(User session, int storeId, string country)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeAmountPolicyOnCountry(storeId,country);
         }
 
         public virtual int removeNoDiscountPolicyOnStore(User session, int storeId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoDiscountPolicyOnStore(storeId);
         }
 
         public virtual int removeNoDiscountPolicyOnCategoty(User session, int storeId, String category)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoDiscountPolicyOnCategoty(storeId, category);
         }
 
         public virtual int removeNoDiscountPolicyOnProductInStore(User session, int storeId, int productInStoreId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoDiscountPolicyOnProductInStore(productInStoreId);
         }
 
         public virtual int removeNoDiscountPolicyOnCountry(User session, int storeId, string country)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoDiscountPolicyOnCountry(storeId,country);
         }
 
         public virtual int removeNoCouponsPolicyOnStore(User session, int storeId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoCouponsPolicyOnStore(storeId);
         }
 
         public virtual int removeNoCouponPolicyOnCategoty(User session, int storeId, String category)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoCouponPolicyOnCategoty(storeId,category);
         }
 
         public virtual int removeNoCouponPolicyOnProductInStore(User session,int storeId, int productInStoreId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoCouponPolicyOnProductInStore(productInStoreId);
         }
 
         public virtual int removeNoCouponPolicyOnCountry(User session, int storeId, string country)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return -1;
             return PurchasePolicyManager.getInstance().removeNoCouponPolicyOnCountry(storeId, country);
         }

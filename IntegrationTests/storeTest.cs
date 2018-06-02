@@ -25,7 +25,7 @@ namespace IntegrationTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             StorePremissionsArchive.restartInstance();
@@ -48,9 +48,9 @@ namespace IntegrationTests
             niv = new User("niv", "123456");
             niv.register("niv", "123456");
             int storeId = zahi.createStore("abowim");
-            store = storeArchive.getInstance().getStore(storeId);
+            store = StoreManagement.getInstance().getStore(storeId);
             int storeId2 = zahi.createStore("broes");
-            store2 = storeArchive.getInstance().getStore(storeId2);
+            store2 = StoreManagement.getInstance().getStore(storeId2);
             zahiOwner = new StoreOwner(zahi, store);
             
             aviadManeger = new StoreManager(aviad, store);

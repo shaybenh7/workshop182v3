@@ -47,7 +47,7 @@ namespace wsep182.services
         //req 1.3 a
         public LinkedList<ProductInStore> viewProductsInStore(int storeId)
         {
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             if (s == null)
                 return null;
             return s.getProductsInStore();
@@ -174,7 +174,7 @@ namespace wsep182.services
         {
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();

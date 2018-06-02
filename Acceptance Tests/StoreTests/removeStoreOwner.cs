@@ -23,7 +23,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -47,7 +47,7 @@ namespace Acceptance_Tests.StoreTests
             itamar = us.startSession();
             us.register(itamar, "itamar", "123456");
             itamar.login("itamar", "123456");
-            store = storeArchive.getInstance().getStore(itamar.createStore("Maria&Netta Inc."));
+            store = StoreManagement.getInstance().getStore(itamar.createStore("Maria&Netta Inc."));
 
             niv = us.startSession();
             us.register(niv, "niv", "123456");

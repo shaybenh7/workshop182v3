@@ -205,7 +205,7 @@ var createStoreButton = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -230,7 +230,7 @@ var addProductFunct = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -250,7 +250,7 @@ var addNewManager = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -270,7 +270,7 @@ var RemoveStoreManager = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -290,7 +290,7 @@ var addStoreOwner = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -310,7 +310,7 @@ var removeStoreOwner = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -333,7 +333,7 @@ var editStoreProduct = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -354,7 +354,7 @@ var removeStoreProduct = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -383,7 +383,7 @@ var addSale = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -396,8 +396,7 @@ var editSale = function () {
     jQuery.ajax({
         type: "GET",
         url: baseUrl + "/api/store/editSale?storeId=" + lastClickedStoreId +
-            "&saleId=" + saleId + "&amount=" + amount + "&dueDate=" + date +
-            "&dueDtae=" + date,
+            "&saleId=" + saleId + "&amount=" + amount + "&dueDate=" + date,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -406,8 +405,7 @@ var editSale = function () {
 
         },
         error: function (response) {
-            console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -428,7 +426,7 @@ var removeSale = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 };
@@ -454,7 +452,7 @@ function addSaleView(e) {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 
@@ -494,7 +492,7 @@ function viewProducts(e) {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 }
@@ -538,7 +536,7 @@ function viewHistory(e) {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 
@@ -640,7 +638,7 @@ var addCopun = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 }
@@ -686,7 +684,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -702,7 +700,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -719,7 +717,7 @@ var addProductPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, pId
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -739,7 +737,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -756,7 +754,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -773,7 +771,7 @@ var addCountryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, cou
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -793,7 +791,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -809,7 +807,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -825,7 +823,7 @@ var addStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopuns) {
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -845,7 +843,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -862,7 +860,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -879,7 +877,7 @@ var addCategoryPolicy = function (minAmpunt, maxAmount, noDiscount, NoCopuns, ca
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -902,7 +900,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -919,7 +917,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -936,7 +934,7 @@ var addProductInStorePolicy = function (minAmount, maxAmount, noDiscount, NoCopu
             },
             error: function (response) {
                 console.log(response);
-                window.location.href = baseUrl + "/error";
+                alert("You must fill all fields!");
             }
         });
     }
@@ -963,7 +961,7 @@ var addDiscountFunc = function () {
         },
         error: function (response) {
             console.log(response);
-            window.location.href = baseUrl + "/error";
+            alert("You must fill all fields!");
         }
     });
 }
