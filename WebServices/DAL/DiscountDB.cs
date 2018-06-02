@@ -84,7 +84,7 @@ namespace WebServices.DAL
                 con.Open();
 
                 string sql = "DELETE FROM Discount WHERE productInStoreId = " + d.ProductInStoreId + " AND percentage = "+ d.Percentage +
-                    " AND type = "+d.Type+ " AND category is '"+d.Category+ "' AND productName is '"+d.ProductName+ "' AND dueDate is '"+d.DueDate+ "' AND restrictions is '"+d.Restrictions+"'; ";
+                    " AND type = "+d.Type+ " AND category = '"+d.Category+ "' AND productName = '"+d.ProductName+ "' AND dueDate = '"+d.DueDate+ "' AND restrictions = '"+d.Restrictions+"'; ";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();
