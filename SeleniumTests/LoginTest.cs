@@ -17,11 +17,12 @@ namespace SeleniumTests
         [TestInitialize]
         public void Initialize()
         {
-
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.insertData();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(URL);
             Console.WriteLine("Opened URL");
-
+            /*
             IWebElement login = driver.FindElement(By.Id("LoginLink"));
             login.Click();
             Thread.Sleep(sleepTime);
@@ -57,6 +58,7 @@ namespace SeleniumTests
             IWebElement logout = driver.FindElement(By.Id("LogoutLink"));
             logout.Click();
             Thread.Sleep(sleepTime);
+            */
 
         }
 
@@ -67,10 +69,10 @@ namespace SeleniumTests
             login.Click();
             Thread.Sleep(sleepTime);
             IWebElement userName = driver.FindElement(By.Id("username"));
-            userName.SendKeys("adminTest");
+            userName.SendKeys("aviad");
             Thread.Sleep(sleepTime);
             IWebElement password = driver.FindElement(By.Id("password"));
-            password.SendKeys("123456");
+            password.SendKeys("123");
             Thread.Sleep(sleepTime);
             IWebElement btnLogin = driver.FindElement(By.Id("btnLogin"));
             btnLogin.Click();
@@ -78,7 +80,7 @@ namespace SeleniumTests
 
             IWebElement welcome = driver.FindElement(By.Id("welcome"));
             String welcomeText = welcome.Text;
-            Assert.IsTrue(welcomeText.Contains("Welcome adminTest"));
+            Assert.IsTrue(welcomeText.Contains("Welcome"));
         }
         [TestMethod]
         public void loginNotExist()
@@ -105,10 +107,10 @@ namespace SeleniumTests
             login.Click();
             Thread.Sleep(sleepTime);
             IWebElement userName = driver.FindElement(By.Id("username"));
-            userName.SendKeys("admin");
+            userName.SendKeys("aviad");
             Thread.Sleep(sleepTime);
             IWebElement password = driver.FindElement(By.Id("password"));
-            password.SendKeys("1234567");
+            password.SendKeys("123456");
             Thread.Sleep(sleepTime);
             IWebElement btnLogin = driver.FindElement(By.Id("btnLogin"));
             btnLogin.Click();
@@ -138,7 +140,7 @@ namespace SeleniumTests
             login.Click();
             Thread.Sleep(sleepTime);
             IWebElement userName = driver.FindElement(By.Id("username"));
-            userName.SendKeys("admin");
+            userName.SendKeys("aviad");
             Thread.Sleep(sleepTime);
             IWebElement btnLogin = driver.FindElement(By.Id("btnLogin"));
             btnLogin.Click();
