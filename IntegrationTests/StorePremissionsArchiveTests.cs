@@ -130,7 +130,7 @@ namespace UnitTests
         [TestMethod]
         public void getHistoryOfAppointment()
         {
-            LinkedList<Tuple<int, String, String, String, String>> ans = storeArchive.getInstance().getStoreRolesStats(s.storeId);
+            LinkedList<Tuple<int, String, String, String, String>> ans = StoreManagement.getInstance().getStoreRolesStats(s.storeId);
             Assert.IsTrue(ans.Count != 0);
         }
         [TestMethod]
