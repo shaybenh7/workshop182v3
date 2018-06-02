@@ -23,6 +23,10 @@ namespace wsep182.Domain
             this.productInStoreId = productInStoreId;
             this.percentage = percentage;
             this.dueDate = dueDate;
+            category = "";
+            productName = "";
+            restrictions = "";
+            type = 0;
         }
 
         public Coupon(String couponId, int productInStoreId, int type, string productNameOrCategory, double percentage, String dueDate, string restrictions)

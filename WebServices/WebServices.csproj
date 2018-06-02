@@ -210,6 +210,7 @@
     <Compile Include="DAL\StoreRoleDictionaryDB.cs" />
     <Compile Include="DAL\UserCartDB.cs" />
     <Compile Include="DAL\UserDB.cs" />
+    <Compile Include="DAL\UsersNotificationPreferencesDB.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\BuyHistoryManager.cs" />
     <Compile Include="Domain\configuration.cs" />
