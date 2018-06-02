@@ -203,11 +203,10 @@
 
                                     <div class="size-204 flex-w flex-m respon6-next">
                                         <span class="mtext-106 cl2">Update Notification Preferences</span>
-                                        <br />
-                                        <br />
-                                        <br />
                                         <div class="size-204 respon6-next">
                                             <div>
+                                                <span class="stext-110 cl2">Store:
+                                                </span>
                                                 <select name="time" id="storesDD">
                                                 </select>
                                                 <div class="dropDownSelect2"></div>
@@ -262,7 +261,7 @@
                         var productHtml = document.getElementById("storesDD");
                         productHtml.innerHTML = ""
                         for (i = 0; i < response.length; i++) {
-                            productHtml.innerHTML += "<option>" + response[i].storeId + "</option>";
+                            productHtml.innerHTML += "<option value=\""+response[i].storeId+"\">" + response[i].name + "</option>";
                         }
 
                     },
@@ -358,7 +357,7 @@
             }
 
             var addNotificationPreferencesFunction = function (preference) {
-                lastClickedStoreId = $("#storesDD")[0].selectedIndex;
+                lastClickedStoreId = document.getElementById("storesDD").value;
                 jQuery.ajax({
                     type: "GET",
                     url: baseUrl + "/api/user/signUserToNotifications?storeId=" + lastClickedStoreId +
@@ -371,14 +370,14 @@
                     },
                     error: function (response) {
                         console.log(response);
-                        window.location.href = baseUrl + "/error";
+                        //window.location.href = baseUrl + "/error";
                     }
                 });
             }
 
 
             var removeNotificationPreferenceFunction = function (preference) {
-                lastClickedStoreId = $("#storesDD")[0].selectedIndex;
+                lastClickedStoreId = document.getElementById("storesDD").value;
                 jQuery.ajax({
                     type: "GET",
                     url: baseUrl + "/api/user/removeUserFromNotifications?storeId=" + lastClickedStoreId +
@@ -391,7 +390,7 @@
                     },
                     error: function (response) {
                         console.log(response);
-                        window.location.href = baseUrl + "/error";
+                        //window.location.href = baseUrl + "/error";
                     }
                 });
             }
