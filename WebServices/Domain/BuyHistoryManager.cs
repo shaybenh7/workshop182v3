@@ -13,8 +13,8 @@ namespace wsep182.Domain
 
         private static BuyHistoryManager instance;
         private static int buyId;
-        private BuyHistoryDB BHDB;
-        private LinkedList<Purchase> buysHistory;
+        public BuyHistoryDB BHDB;
+        public LinkedList<Purchase> buysHistory;
 
         private BuyHistoryManager()
         {

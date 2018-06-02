@@ -454,8 +454,9 @@ namespace wsep182.Domain
                         String date = currentDate.ToString();
                         int amount = product.getAmount();
                         int typeOfSale = sale.TypeOfSale;
-                        BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, product.PriceAfterDiscount, date, amount,
-                            typeOfSale);
+                        Purchase.addBuyHistory(productId, storeId, userName, product.PriceAfterDiscount, date, amount, typeOfSale);
+                        //BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, product.PriceAfterDiscount, date, amount,
+                        //    typeOfSale);
                         toDelete.AddLast(product);
                         SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
                         Purchase.alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 1);
@@ -488,8 +489,9 @@ namespace wsep182.Domain
                             String date = currentDate.ToString();
                             int amount = product.getAmount();
                             int typeOfSale = sale.TypeOfSale;
-                            BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, offer, date, amount,
-                                typeOfSale);
+                            Purchase.addBuyHistory(productId, storeId, userName, offer, date, amount,typeOfSale);
+                            //BuyHistoryManager.getInstance().addBuyHistory(productId, storeId, userName, offer, date, amount,
+                            //    typeOfSale);
                             RaffleSalesManager.getInstance().sendMessageTORaffleWinner(sale.SaleId);
                             SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
                             Purchase.alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 3);

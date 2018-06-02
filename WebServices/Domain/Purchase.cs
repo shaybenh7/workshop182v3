@@ -58,6 +58,16 @@ namespace wsep182.Domain
             //}
         }
 
+        public static Boolean addBuyHistory(int productId, int storeId, String userName, double price,
+                                     String date, int amount, int typeOfSale)
+        {
+            int buyId = BuyHistoryManager.getInstance().getNextBuyId();
+            Purchase toAdd = new Purchase(buyId, productId, storeId, userName, price, date, amount, typeOfSale);
+            BuyHistoryManager.getInstance().BHDB.Add(toAdd);
+            BuyHistoryManager.getInstance().buysHistory.AddLast(toAdd);
+            return true;
+        }
+
 
 
     }
