@@ -50,6 +50,20 @@
   <ItemGroup>
     <Compile Include="BuyHistoryArchiveTests.cs" />
     <Compile Include="CouponArchiveUnitTest.cs" />
+    <Compile Include="DBUnitTests\BuyHistoryDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\CouponDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\DiscountDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\PendingMessagesDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\ProductDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\ProductInStoreDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\PurchasePolicyDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\RaffleSaleDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\SaleDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\StoreDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\StorePermissionsDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\StoreRoleDictionaryDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\UsersNotificationPreferencesDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\UserCartDBUnitTests.cs" />
     <Compile Include="DicountArchiveUnitTests.cs" />
     <Compile Include="GuestUnitTests.cs" />
     <Compile Include="PayingSystemTest.cs" />
@@ -61,7 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreArchiveTests.cs" />
     <Compile Include="ShippingSystemTests.cs" />
-    <Compile Include="UserDBUnitTests.cs" />
+    <Compile Include="DBUnitTests\UserDBUnitTests.cs" />
     <Compile Include="UserArchiveUnitTests.cs" />
     <Compile Include="UserCartArchiveUnitTest.cs" />
   </ItemGroup>

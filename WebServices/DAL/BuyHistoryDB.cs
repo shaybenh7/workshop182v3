@@ -73,7 +73,21 @@ namespace WebServices.DAL
 
         public override Boolean Remove(Purchase p)
         {
-            throw new NotImplementedException();
+            try
+            {
+                con.Open();
+
+                string sql = "DELETE FROM BuyHistory WHERE buyId=" + p.BuyId + ";";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                throw new Exception("DB ERROR");
+            }
         }
     }
 }

@@ -9,7 +9,6 @@ namespace WebServices.DAL
 {
     public class StoreDB : BaseDBConnector<Store>
     {
-        private static StoreDB instance = null;
 
         public StoreDB(string mode) : base(mode) { }
 

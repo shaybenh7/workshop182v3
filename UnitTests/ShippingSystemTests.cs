@@ -73,6 +73,17 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void allGood()
+        {
+            us.login(zahi, "zahi", "123456");
+            LinkedList<Sale> saleList = ss.viewSalesByStore(store.getStoreId());
+            Assert.IsTrue(sellS.addProductToCart(zahi, saleList.First.Value.SaleId, 1) > 0);
+            sellS.getShoppingCartBeforeCheckout(zahi);
+            Tuple<int, LinkedList<UserCart>> ans = sellS.checkout(zahi, "Rager 214 Bash", "Israel", "123456");
+            Assert.IsTrue(shippingProxy.sendShippingRequest(zahi, "Italy", "Rome", "123456"));
+        }
+
+        [TestMethod]
         public void nullCreditCard()
         {
             us.login(zahi, "zahi", "123456");
