@@ -453,7 +453,7 @@ namespace wsep182.Domain
                         //    typeOfSale);
                         toDelete.AddLast(product);
                         SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
-                        Purchase.alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 1);
+                        Purchase.alertOwnersOnPurchase(StoreManagement.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 1);
                     }
                     else
                     {
@@ -488,7 +488,7 @@ namespace wsep182.Domain
                             //    typeOfSale);
                             RaffleSalesManager.getInstance().sendMessageTORaffleWinner(sale.SaleId);
                             SalesManager.getInstance().setNewAmountForSale(product.getSaleId(), sale.Amount - product.getAmount());
-                            Purchase.alertOwnersOnPurchase(storeArchive.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 3);
+                            Purchase.alertOwnersOnPurchase(StoreManagement.getInstance().getAllOwners(p.store.storeId), p.productInStoreId, 3);
                             toDelete.AddLast(product);
                         }
                         else

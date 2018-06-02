@@ -36,7 +36,7 @@ namespace WebServices.Domain
                 {
                     ans.Add((NotificationCategories)pref.Item1, new LinkedList<StoreRole>());
                 }
-                StoreRole toadd = storeArchive.getInstance().getStoreRoleByNameAndStore(pref.Item3, pref.Item2);
+                StoreRole toadd = StoreManagement.getInstance().getStoreRoleByNameAndStore(pref.Item3, pref.Item2);
                 if(toadd!=null)
                     ans[(NotificationCategories)pref.Item1].AddFirst(toadd);
             }

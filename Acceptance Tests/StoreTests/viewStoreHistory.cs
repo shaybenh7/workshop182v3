@@ -23,7 +23,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();

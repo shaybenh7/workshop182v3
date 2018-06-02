@@ -27,7 +27,7 @@ namespace UnitTests
             configuration.DB_MODE = "Testing";
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -57,7 +57,7 @@ namespace UnitTests
             us.login(itamar, "itamar", "123456");
             int storeId = ss.createStore("Maria&Netta Inc.", itamar);
 
-            store = storeArchive.getInstance().getStore(storeId);
+            store = StoreManagement.getInstance().getStore(storeId);
 
             niv = us.startSession();
             us.register(niv, "niv", "123456");

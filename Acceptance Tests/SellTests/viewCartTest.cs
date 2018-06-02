@@ -24,7 +24,7 @@ namespace Acceptance_Tests.SellTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();

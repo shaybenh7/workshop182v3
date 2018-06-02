@@ -78,8 +78,8 @@
 
                         <asp:PlaceHolder ID="logout" Visible="false" runat="server">
                             <div class="right-top-bar flex-w h-full" style="cursor: pointer; color: #efe1e1;">
-                                <a id="updatePreferencesLink" onclick="openModalNotifications();" class="flex-c-m trans-04 p-lr-25">Update Alerts Preferences
-                                </a>
+<%--                                <a id="updatePreferencesLink" onclick="openModalNotifications();" class="flex-c-m trans-04 p-lr-25">Update Alerts Preferences
+                                </a>--%>
 
                                 <a id="LogoutLink" onclick="logout();" class="flex-c-m trans-04 p-lr-25">Logout
                                 </a>

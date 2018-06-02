@@ -21,7 +21,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -40,7 +40,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, storeId, "Drink");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result=ss.removeProductFromStore(s.storeId,pis.productInStoreId, zahi);
@@ -54,7 +54,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drink");
             ProductInStore pis = new ProductInStore(2, new Product("cola"), 4, 3, s);
             int result = ss.removeProductFromStore(s.getStoreId(),pis.productInStoreId, zahi);
@@ -68,7 +68,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drink");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             User admin = us.startSession();
@@ -85,7 +85,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             zahi.logOut();
@@ -104,7 +104,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), aviad);
@@ -122,9 +122,9 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int storeId2 = ss.createStore("Brohim", aviad);
-            Store s2 = storeArchive.getInstance().getStore(storeId2);
+            Store s2 = StoreManagement.getInstance().getStore(storeId2);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), aviad);
@@ -139,7 +139,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), pis.getProductInStoreId(), null);
@@ -154,7 +154,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(s.getStoreId(), -31, zahi);
@@ -169,7 +169,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int result = ss.removeProductFromStore(-31, pis.getProductInStoreId(), zahi);
@@ -185,7 +185,7 @@ namespace Acceptance_Tests.StoreTests
         {
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeId);
+            Store s = StoreManagement.getInstance().getStore(storeId);
             int pisId = ss.addProductInStore("cola", 3.2, 10, zahi, s.getStoreId(), "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(pisId);
             int pis2Id = ss.addProductInStore("sprite", 3.2, 10, zahi, s.getStoreId(), "Drinks");

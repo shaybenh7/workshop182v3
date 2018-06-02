@@ -15,7 +15,7 @@ namespace UnitTests
         Sale sale1,sale2,sale3;
         ProductManager pA;
         SalesManager saleA;
-        storeArchive storeA;
+        StoreManagement storeA;
         UserManager userA;
         
         UserCartsManager userCartA;
@@ -30,7 +30,7 @@ namespace UnitTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             DiscountsManager.restartInstance();
@@ -38,7 +38,7 @@ namespace UnitTests
             RaffleSalesManager.restartInstance();
             pA = ProductManager.getInstance();
             saleA = SalesManager.getInstance();
-            storeA = storeArchive.getInstance();
+            storeA = StoreManagement.getInstance();
             userA = UserManager.getInstance();
             userCartA = UserCartsManager.getInstance();
             discountA = DiscountsManager.getInstance();

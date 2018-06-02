@@ -24,7 +24,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -53,7 +53,7 @@ namespace Acceptance_Tests.StoreTests
             User aviad = us.startSession();
             Assert.IsNotNull(aviad);
             int storeId = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.IsNotNull(store);
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
@@ -93,7 +93,7 @@ namespace Acceptance_Tests.StoreTests
             User aviad = us.startSession();
             Assert.IsNotNull(aviad);
             int storeId = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.IsNotNull(store);
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
@@ -121,7 +121,7 @@ namespace Acceptance_Tests.StoreTests
             Assert.IsTrue(us.login(vadim, "vadim", "123456") > -1);
 
             int store2Id = ss.createStore("abowim", zahi);
-            Store store2 = storeArchive.getInstance().getStore(store2Id);
+            Store store2 = StoreManagement.getInstance().getStore(store2Id);
             Assert.IsNotNull(store2);
 
             int pis2Id = ss.addProductInStore("cola2", 3.2, 10, zahi, store2.getStoreId(), "Drinks");
@@ -147,7 +147,7 @@ namespace Acceptance_Tests.StoreTests
             User aviad = us.startSession();
             Assert.IsNotNull(aviad);
             int storeId = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.IsNotNull(store);
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);
@@ -171,7 +171,7 @@ namespace Acceptance_Tests.StoreTests
 
 
             int store2Id = ss.createStore("abowim", zahi);
-            Store store2 = storeArchive.getInstance().getStore(store2Id);
+            Store store2 = StoreManagement.getInstance().getStore(store2Id);
             Assert.IsNotNull(store2);
             int pis2Id = ss.addProductInStore("cola2", 3.2, 10, zahi, store2.getStoreId(), "Driks");
             ProductInStore pis2 = ProductManager.getInstance().getProductInStore(pisId);
@@ -193,7 +193,7 @@ namespace Acceptance_Tests.StoreTests
             User aviad = us.startSession();
             Assert.IsNotNull(aviad);
             int storeId = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.IsNotNull(store);
             Assert.IsTrue(us.register(aviad, "aviad", "123456") > -1);
             Assert.IsTrue(us.login(aviad, "aviad", "123456") > -1);

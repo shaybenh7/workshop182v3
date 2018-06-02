@@ -19,7 +19,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -38,7 +38,7 @@ namespace Acceptance_Tests.StoreTests
             us.login(zahi, "zahi", "123456");
             storeServices ss = storeServices.getInstance();
             int storeId=ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(store.getStoreName(), "abowim");
             LinkedList<StoreOwner> owners = store.getOwners();
             Assert.AreEqual(owners.Count, 1);
@@ -96,7 +96,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(zahi, "zahi", "123456");
             us.login(zahi, "zahi", "123456");
             int storeId = ss.createStore("abowim bro", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.AreEqual(store.getStoreName(), "abowim bro");
             LinkedList<StoreOwner> owners = store.getOwners();
             Assert.AreEqual(owners.Count, 1);
@@ -130,9 +130,9 @@ namespace Acceptance_Tests.StoreTests
             us.login(zahi, "zahi", "123456");
             storeServices ss = storeServices.getInstance();
             int storeId = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             int storeId2 = ss.createStore("abowim", zahi);
-            Store store2 = storeArchive.getInstance().getStore(storeId2);
+            Store store2 = StoreManagement.getInstance().getStore(storeId2);
             Assert.AreEqual(store2.getStoreName(), "abowim");
             LinkedList<StoreOwner> owners = store2.getOwners();
             Assert.AreEqual(owners.Count, 1);

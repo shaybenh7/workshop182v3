@@ -30,9 +30,9 @@ namespace wsep182.Domain
 
         public virtual int createStore(String storeName, User session)
         {
-            Store newStore = storeArchive.getInstance().addStore(storeName, session);
+            Store newStore = StoreManagement.getInstance().addStore(storeName, session);
             StoreRole sR= new StoreOwner(session, newStore, session.getUserName());
-            storeArchive.getInstance().addStoreRole(sR, newStore.getStoreId(), session.getUserName());
+            StoreManagement.getInstance().addStoreRole(sR, newStore.getStoreId(), session.getUserName());
             NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
             NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
             NotificationPublisher.getInstance().signToCategory(sR, NotificationPublisher.NotificationCategories.Store);

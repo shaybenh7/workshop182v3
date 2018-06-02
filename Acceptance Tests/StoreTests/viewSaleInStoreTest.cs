@@ -24,7 +24,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -48,7 +48,7 @@ namespace Acceptance_Tests.StoreTests
             itamar = us.startSession();
             us.register(itamar, "itamar", "123456");
             us.login(itamar, "itamar", "123456");
-            store = storeArchive.getInstance().getStore(ss.createStore("Maria&Netta Inc.", itamar));
+            store = StoreManagement.getInstance().getStore(ss.createStore("Maria&Netta Inc.", itamar));
 
             niv = us.startSession();
             us.register(niv, "niv", "123456");
@@ -88,7 +88,7 @@ namespace Acceptance_Tests.StoreTests
             int saleId1 = ss.addSaleToStore(itamar, store.getStoreId(), cola.getProductInStoreId(), 1, 1, "20/5/2018");
             LinkedList<Sale> saleList1 = ss.viewSalesByStore(store.getStoreId());
             int storeId = ss.createStore("admin store", admin);
-            Store store2 = storeArchive.getInstance().getStore(storeId);
+            Store store2 = StoreManagement.getInstance().getStore(storeId);
             int milkId = ss.addProductInStore("milk", 3.2, 10, admin, store2.getStoreId(), "Drinks");
             ProductInStore milk = ProductManager.getInstance().getProductInStore(milkId);
             int saleId2 = ss.addSaleToStore(admin, store2.getStoreId(), milk.getProductInStoreId(), 1, 1, "20/5/2018");

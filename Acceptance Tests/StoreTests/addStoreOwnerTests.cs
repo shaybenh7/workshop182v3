@@ -22,7 +22,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -44,7 +44,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             aviad.login("aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "aviad", zahi);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<String> owners = new LinkedList<String>();
@@ -61,7 +61,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddStoreOwnerWhichIsMyself()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "zahi", zahi);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();
@@ -79,7 +79,7 @@ namespace Acceptance_Tests.StoreTests
             User aviad = us.startSession();
             us.register(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             us.login(aviad, "aviad", "123456");
             ss.addStoreOwner(store.getStoreId(), "aviad", zahi);
             Assert.IsFalse(ss.addStoreOwner(store.getStoreId(), "zahi", aviad));
@@ -102,7 +102,7 @@ namespace Acceptance_Tests.StoreTests
             us.login(aviad, "aviad", "123456");
             storeServices ss = storeServices.getInstance();
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "aviad", aviad);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();
@@ -127,7 +127,7 @@ namespace Acceptance_Tests.StoreTests
             User niv = new User("niv", "123456");
             storeServices ss = storeServices.getInstance();
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "itamar", aviad);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();
@@ -153,7 +153,7 @@ namespace Acceptance_Tests.StoreTests
         {
             User aviad = new User("aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "aviad", zahi);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();
@@ -169,7 +169,7 @@ namespace Acceptance_Tests.StoreTests
         public void StoreOwnerAddUserWhichIsNullAsOwner()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), null, zahi);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();
@@ -188,7 +188,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(store.getStoreId(), "zahi", null);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();
@@ -207,7 +207,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeid);
+            Store store = StoreManagement.getInstance().getStore(storeid);
             ss.addStoreOwner(-31, "aviad", zahi);
             LinkedList<StoreOwner> Userowners = store.getOwners();
             LinkedList<User> owners = new LinkedList<User>();

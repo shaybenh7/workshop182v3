@@ -22,7 +22,7 @@ namespace Acceptance_Tests.SellTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -48,7 +48,7 @@ namespace Acceptance_Tests.SellTests
             User aviad = us.startSession();
             Assert.IsNotNull(aviad);
             int storeId= ss.createStore("abowim", zahi);
-            Store store = storeArchive.getInstance().getStore(storeId);
+            Store store = StoreManagement.getInstance().getStore(storeId);
             Assert.IsNotNull(store);
             Assert.IsTrue(us.register(aviad, "aviad", "123456")>-1);
             Assert.IsTrue(us.login(aviad,"aviad", "123456")>-1);

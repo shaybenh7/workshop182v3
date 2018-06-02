@@ -25,7 +25,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
                 SalesManager.restartInstance();
-                storeArchive.restartInstance();
+                StoreManagement.restartInstance();
                 UserManager.restartInstance();
                 UserCartsManager.restartInstance();
                 StorePremissionsArchive.restartInstance();
@@ -49,7 +49,7 @@ namespace Acceptance_Tests.StoreTests
                 niv = us.startSession();
                 us.register(niv, "niv", "123456");
                 ss = storeServices.getInstance();
-                store = storeArchive.getInstance().getStore(ss.createStore("abowim", zahi));
+                store = StoreManagement.getInstance().getStore(ss.createStore("abowim", zahi));
                 ss.addStoreManager(store.getStoreId(), "aviad", zahi);
                 niv.logOut();
                 //ADD ALL PERMISSIONS

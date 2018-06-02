@@ -28,7 +28,7 @@ namespace UnitTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -53,8 +53,8 @@ namespace UnitTests
 
             int sId = ss.createStore("makolet", partislav);
             int s2Id = ss.createStore("makolet", partislav);
-            s = storeArchive.getInstance().getStore(sId);
-            s2 = storeArchive.getInstance().getStore(s2Id);
+            s = StoreManagement.getInstance().getStore(sId);
+            s2 = StoreManagement.getInstance().getStore(s2Id);
 
             ownerRole = StoreRole.getStoreRole(s, partislav);
             ownerRole2 = StoreRole.getStoreRole(s, partislav);

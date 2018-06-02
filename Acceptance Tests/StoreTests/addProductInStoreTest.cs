@@ -21,7 +21,7 @@ namespace Acceptance_Tests.StoreTests
             cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
-            storeArchive.restartInstance();
+            StoreManagement.restartInstance();
             UserManager.restartInstance();
             UserCartsManager.restartInstance();
             BuyHistoryManager.restartInstance();
@@ -40,7 +40,7 @@ namespace Acceptance_Tests.StoreTests
         public void SimpleAddProduct()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", 3.2, 10, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.AreEqual(pis.getPrice(), 3.2);
@@ -59,7 +59,7 @@ namespace Acceptance_Tests.StoreTests
             us.register(aviad, "aviad", "123456");
             us.login(aviad, "aviad", "123456");
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", 3.2, 10, aviad, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -71,7 +71,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductTwice()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", 3.2, 10, zahi, storeid, "Drinks");
             int p2 = ss.addProductInStore("cola", 3.2, 10, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
@@ -90,7 +90,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithNegativeAmount()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", 3.2, -31, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -101,7 +101,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithNegativePrice()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", -3, 31, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -112,7 +112,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithZeroPrice()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", 0, 31, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -123,7 +123,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithZeroAmount()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("cola", 3.2, 0, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.AreEqual(s.getProductsInStore().Count, 0);
@@ -136,7 +136,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithEmptyName()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("", 3.2, 31, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -147,7 +147,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithOnlySpacesName()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("     ", 3.2, 31, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -159,7 +159,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductInStoreWithNullProduct()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore(null, 3.2, 31, null, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.IsNull(pis);
@@ -170,7 +170,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductWithSpacesInName()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             int p = ss.addProductInStore("coca cola", 3.2, 10, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);
             Assert.AreEqual(pis.getPrice(), 3.2);
@@ -196,7 +196,7 @@ namespace Acceptance_Tests.StoreTests
         public void AddProductToStoreByGuest()
         {
             int storeid = ss.createStore("abowim", zahi);
-            Store s = storeArchive.getInstance().getStore(storeid);
+            Store s = StoreManagement.getInstance().getStore(storeid);
             zahi.logOut();
             int p = ss.addProductInStore("cola", 3.2, 10, zahi, storeid, "Drinks");
             ProductInStore pis = ProductManager.getInstance().getProductInStore(p);

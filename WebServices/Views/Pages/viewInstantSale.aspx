@@ -206,7 +206,7 @@
                                 },
                                 error: function (response) {
                                     console.log(response);
-                                    window.location.href = baseUrl+"/error";
+                                    window.location.href = baseUrl+"/index";
                                 }
                             });
 
@@ -224,7 +224,7 @@
                                 },
                             error: function (response) {
                                 console.log(response);
-                                window.location.href = baseUrl+"/error";
+                                window.location.href = baseUrl+"/index";
                             }
                             });
                         });
@@ -244,7 +244,7 @@
                             },
                         error: function (response) {
                             console.log(response);
-                            window.location.href = baseUrl+"/error";
+                            window.location.href = baseUrl+"/index";
                         }
                         });
                         jQuery.ajax({
@@ -259,7 +259,7 @@
                             },
                         error: function (response) {
                             console.log(response);
-                            window.location.href = baseUrl+"/error";
+                            window.location.href = baseUrl+"/index";
                         }
                         });
                         jQuery.ajax({
@@ -274,14 +274,14 @@
                             },
                         error: function (response) {
                             console.log(response);
-                            window.location.href = baseUrl+"/error";
+                            window.location.href = baseUrl+"/index";
                         }
                         });
                     })();
                 },
                 error: function (response) {
                     console.log(response);
-                    window.location.href = baseUrl+"/error";
+                    window.location.href = baseUrl+"/index";
                 }
             });
         });

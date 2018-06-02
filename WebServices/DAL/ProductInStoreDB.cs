@@ -52,7 +52,7 @@ namespace WebServices.DAL
                 foreach (Product p in products)
                     if (p.getProductName().Equals(productName))
                         product = p;
-                Store store = storeArchive.getInstance().getStore(reader.GetInt32("store"));
+                Store store = StoreManagement.getInstance().getStore(reader.GetInt32("store"));
                 int quantity = reader.GetInt32("quantity");
                 double price = reader.GetDouble("price");
                 int isActive = reader.GetInt32("isActive");

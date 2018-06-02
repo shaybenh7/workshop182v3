@@ -327,7 +327,7 @@ namespace wsep182.Domain
 
         public LinkedList<Tuple<int, String, String>> getManagersPermissionsInStore(int storeId)
         {
-            if (storeArchive.getInstance().getStore(storeId) == null)
+            if (StoreManagement.getInstance().getStore(storeId) == null)
                 return null;
             LinkedList<Tuple<int, String, String>> ans = new LinkedList<Tuple<int, String, String>>();
             StorePremissions SP;
