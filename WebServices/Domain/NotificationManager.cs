@@ -24,7 +24,10 @@ namespace wsep182.Domain
                 instance = new NotificationManager();
             return instance;
         }
-
+        public static void restartInstance()
+        {
+            instance = new NotificationManager();
+        }
         public PendingMessagesDB getPendingMessagesDB()
         {
             return PMDB;
