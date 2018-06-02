@@ -11,7 +11,7 @@ namespace WebServices.DAL
     public class CleanDB 
     {
         protected MySqlConnection con;
-        private string Testing_DB = "host=sql2.freesqldatabase.com;user=sql2239931;password=nL4!aB9%;database=sql2239931; SslMode=none";
+        private string Testing_DB = "host=sql7.freemysqlhosting.net;user=sql7241007;password=5Dx9kwphMb;database=sql7241007; SslMode=none";
 
         public CleanDB() {
             try
@@ -70,6 +70,9 @@ namespace WebServices.DAL
             sql = "DELETE from ProductInStore;";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
+            sql = "DELETE from PendingMessages;";
+            cmd = new MySqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
             sql = "DELETE from PurchasePolicy;";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -94,6 +97,10 @@ namespace WebServices.DAL
             sql = "DELETE from UserCart;";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
+            sql = "DELETE from 	UsersNotificationPreferences;";
+            cmd = new MySqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            
 /*
             sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + "123456") + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
@@ -103,6 +110,7 @@ namespace WebServices.DAL
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
             */
+            
             con.Close();
         }
         /*

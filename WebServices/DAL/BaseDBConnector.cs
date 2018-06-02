@@ -11,7 +11,7 @@ namespace WebServices.DAL
         protected MySqlConnection con;
         //private string Production_DB = "check";
         private string Production_DB = "host=sql7.freemysqlhosting.net;user=sql7239352;password=QlLSHgNryg;database=sql7239352; SslMode=none";
-        private string Testing_DB = "host=sql2.freesqldatabase.com;user=sql2239931;password=nL4!aB9%;database=sql2239931; SslMode=none";
+        private string Testing_DB = "host=sql7.freemysqlhosting.net;user=sql7241007;password=5Dx9kwphMb;database=sql7241007; SslMode=none";
         public BaseDBConnector(string mode)
         {
             try
