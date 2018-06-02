@@ -67,6 +67,8 @@
     <Compile Include="removeSallFromStore.cs" />
     <Compile Include="removeStoreManneger.cs" />
     <Compile Include="removeStoreOwner.cs" />
+    <Compile Include="addPolicy.cs" />
+    <Compile Include="UsersNotification.cs" />
     <Compile Include="viewAllProducts.cs" />
     <Compile Include="viewAllStores.cs" />
   </ItemGroup>
