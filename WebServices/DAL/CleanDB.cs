@@ -94,7 +94,15 @@ namespace WebServices.DAL
             sql = "DELETE from UserCart;";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
+/*
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + "123456") + "' , 1 );";
+            cmd = new MySqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
 
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin1' , '" + encrypt("admin1" + "123456") + "' , 1 );";
+            cmd = new MySqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            */
             con.Close();
         }
         /*

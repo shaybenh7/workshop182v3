@@ -13,6 +13,8 @@ namespace UnitTests
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             CouponsManager.restartInstance();
             couponArchive = CouponsManager.getInstance();
             couponArchive.addNewCoupon("firstCoupon", 1, 50, DateTime.Now.AddDays(10).ToString());

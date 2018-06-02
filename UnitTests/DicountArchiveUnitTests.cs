@@ -12,6 +12,8 @@ namespace UnitTests
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             DiscountsManager.restartInstance();
             discountsArchive = DiscountsManager.getInstance();
             discountsArchive.addNewDiscount(1,1,"", 10, DateTime.Now.AddDays(10).ToString(),"");

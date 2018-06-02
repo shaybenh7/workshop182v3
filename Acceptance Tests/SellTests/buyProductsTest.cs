@@ -18,6 +18,8 @@ namespace Acceptance_Tests.SellTests
         [TestInitialize]
         public void init()
         {
+            WebServices.DAL.CleanDB cDB = new WebServices.DAL.CleanDB();
+            cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
             storeArchive.restartInstance();

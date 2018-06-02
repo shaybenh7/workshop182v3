@@ -1,6 +1,7 @@
 ﻿using System;
 using wsep182.Domain;
 using wsep182.services;
+using WebServices.DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Acceptance_Tests
@@ -12,6 +13,8 @@ namespace Acceptance_Tests
         [TestInitialize]
         public void init()
         {
+            CleanDB cDB=new CleanDB();
+            cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
             storeArchive.restartInstance();

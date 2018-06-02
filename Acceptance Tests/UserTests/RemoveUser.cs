@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WebServices.DAL;
 using wsep182.Domain;
 using wsep182.services;
 
@@ -17,6 +18,8 @@ namespace Acceptance_Tests.UserTests
         [TestInitialize]
         public void init()
         {
+            CleanDB cDB = new CleanDB();
+            cDB.emptyDB();
             ProductManager.restartInstance();
             SalesManager.restartInstance();
             storeArchive.restartInstance();
@@ -30,11 +33,11 @@ namespace Acceptance_Tests.UserTests
             us = userServices.getInstance();
             ss = storeServices.getInstance();
             admin = us.startSession();
-            us.register(admin, "admin", "123456");
+            //us.register(admin, "admin", "123456");
             us.login(admin, "admin", "123456");
 
             admin1 = us.startSession();
-            us.register(admin1, "admin1", "123456");
+            //us.register(admin1, "admin1", "123456");
             
             zahi = us.startSession();
             us.register(zahi, "zahi", "123456");

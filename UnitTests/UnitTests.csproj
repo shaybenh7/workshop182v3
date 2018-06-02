@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreArchiveTests.cs" />
     <Compile Include="ShippingSystemTests.cs" />
+    <Compile Include="UserDBUnitTests.cs" />
     <Compile Include="UserArchiveUnitTests.cs" />
     <Compile Include="UserCartArchiveUnitTest.cs" />
   </ItemGroup>
