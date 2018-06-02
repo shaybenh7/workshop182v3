@@ -152,7 +152,12 @@ namespace wsep182.Domain
             if (sr != null && !(sr is StoreManager))
                 return -7;
             if ( storeArchive.getInstance().removeStoreRole(s.getStoreId(), oldManager))
-                return 0;//OK
+            {
+                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Purchase);
+                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.RaffleSale);
+                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Store);
+                return 0;
+            }
             return -5;//-5 database eror
         }
 
@@ -191,8 +196,13 @@ namespace wsep182.Domain
                 return -11;//-11 not a owner
             if (s.getStoreCreator().getUserName().Equals(ownerToDelete))
                 return -12;//-12 if dealet creator
-             if(storeArchive.getInstance().removeStoreRole(s.getStoreId(), ownerToDelete))
+            if (storeArchive.getInstance().removeStoreRole(s.getStoreId(), ownerToDelete))
+            {
+                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Purchase);
+                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.RaffleSale);
+                NotificationPublisher.getInstance().removeFromCategory(this, NotificationPublisher.NotificationCategories.Store);
                 return 0;
+            }
             return -9;//-9 database eror
         }
         public virtual int addManagerPermission(User session, String permission, Store s, String managerUserName)

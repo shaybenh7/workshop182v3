@@ -177,6 +177,12 @@ namespace wsep182.Domain
             return ans;
         }
 
+        private void removeNotificationSubscription(StoreRole sR)
+        {
+            NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.Purchase);
+            NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.RaffleSale);
+            NotificationPublisher.getInstance().removeFromCategory(sR, NotificationPublisher.NotificationCategories.Store);
+        }
 
 
 
