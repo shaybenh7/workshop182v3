@@ -22,7 +22,7 @@ namespace WebServices.DAL
             {
                 con.Open();
 
-                int state = 1;
+                int state = 2;
                 if (u.getState() is LogedIn)
                     state = 2;
                 else if (u.getState() is Admin)

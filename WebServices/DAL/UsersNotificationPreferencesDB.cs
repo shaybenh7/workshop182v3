@@ -19,7 +19,7 @@ namespace WebServices.DAL
                 con.Open();
 
                 string sql = "INSERT INTO UsersNotificationPreferences (category, username, storeId)" +
-                             " VALUES (" + pref.Item1 + ", '" + pref.Item2 + ", '" + pref.Item3 + "')";
+                             " VALUES (" + pref.Item1 + ", '" + pref.Item2 + "', " + pref.Item3 + ")";
                 MySqlCommand cmd = new MySqlCommand(sql, con);
                 cmd.ExecuteNonQuery();
                 con.Close();

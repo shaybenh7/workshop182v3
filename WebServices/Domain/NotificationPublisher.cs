@@ -15,8 +15,9 @@ namespace WebServices.Domain
         UsersNotificationPreferencesDB UNPDB;
         private NotificationPublisher()
         {
-            usersPreferences = initUsersPreferences();
             UNPDB = new UsersNotificationPreferencesDB(configuration.DB_MODE);
+            usersPreferences = initUsersPreferences();
+            
         }
         public static NotificationPublisher getInstance()
         {
