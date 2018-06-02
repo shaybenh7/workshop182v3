@@ -152,22 +152,22 @@ namespace WebServices.DAL
         private void insertUsers()
         {
             String password = "123";
-            string sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'aviad' , '" + encrypt("aviad" + password) + "' , 1 );";
+            string sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 2 , 'aviad' , '" + encrypt("aviad" + password) + "' , 1 );";
             MySqlCommand cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + password) + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 3 , 'admin' , '" + encrypt("admin" + "123456") + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'shay' , '" + encrypt("shay" + password) + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 2 , 'shay' , '" + encrypt("shay" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'itamar' , '" + encrypt("itamar" + password) + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 2 , 'itamar' , '" + encrypt("itamar" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'zahi' , '" + encrypt("zahi" + password) + "' , 1 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 2 , 'zahi' , '" + encrypt("zahi" + password) + "' , 1 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 1 , 'notActiveUser' , '" + encrypt("notActiveUser" + password) + "' , 0 );";
+            sql = "INSERT INTO `User`(`state`, `userName`, `password`, `isActive`) VALUES ( 2 , 'notActiveUser' , '" + encrypt("notActiveUser" + password) + "' , 0 );";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
         }
@@ -188,9 +188,9 @@ namespace WebServices.DAL
             sql = "INSERT INTO `Store`(`storeId`, `isActive`, `name`, `storeCreator`) VALUES ( 3 , 1 , 'MariaNettaInc' , 'itamar' )";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `Store`(`storeId`, `isActive`, `name`, `storeCreator`) VALUES ( 4 , 0 , 'NotActive' , 'itamar' )";
+           /* sql = "INSERT INTO `Store`(`storeId`, `isActive`, `name`, `storeCreator`) VALUES ( 4 , 0 , 'NotActive' , 'itamar' )";
             cmd = new MySqlCommand(sql, con);
-            cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();*/
             sql = "INSERT INTO `Store`(`storeId`, `isActive`, `name`, `storeCreator`) VALUES ( 5 , 1 , 'adminStore' , 'admin' )";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
@@ -214,9 +214,9 @@ namespace WebServices.DAL
             sql = "INSERT INTO `StoreRoleDictionary`(`storeId`, `userName`, `storeRole`, `addedBy`, `timeAdded`) VALUES( 3 , 'itamar' , 'Owner' , 'itamar' , '" + DateTime.Now.ToString() + "' )";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
-            sql = "INSERT INTO `StoreRoleDictionary`(`storeId`, `userName`, `storeRole`, `addedBy`, `timeAdded`) VALUES( 4 , 'itamar' , 'Owner' , 'itamar' , '" + DateTime.Now.ToString() + "' )";
+            /*sql = "INSERT INTO `StoreRoleDictionary`(`storeId`, `userName`, `storeRole`, `addedBy`, `timeAdded`) VALUES( 4 , 'itamar' , 'Owner' , 'itamar' , '" + DateTime.Now.ToString() + "' )";
             cmd = new MySqlCommand(sql, con);
-            cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();*/
             sql = "INSERT INTO `StoreRoleDictionary`(`storeId`, `userName`, `storeRole`, `addedBy`, `timeAdded`) VALUES( 5 , 'admin' , 'Owner' , 'admin' , '" + DateTime.Now.ToString() + "' )";
             cmd = new MySqlCommand(sql, con);
             cmd.ExecuteNonQuery();
