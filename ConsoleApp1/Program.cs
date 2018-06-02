@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using WebServices.DAL;
 
 namespace ConsoleApp1
 {
@@ -14,6 +15,9 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
+            CleanDB cDB = new CleanDB();
+            cDB.insertData();
+            /*
             string sql = " SELECT * FROM Users  ";
             MySqlConnection con = new MySqlConnection(Production_DB);
             MySqlCommand cmd = new MySqlCommand(sql, con);
@@ -26,7 +30,7 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(reader.GetString("Username"));
             }
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
     }
 }

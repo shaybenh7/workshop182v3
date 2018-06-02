@@ -33,11 +33,11 @@ namespace Acceptance_Tests.UserTests
             us = userServices.getInstance();
             ss = storeServices.getInstance();
             admin = us.startSession();
-            //us.register(admin, "admin", "123456");
+            us.register(admin, "admin", "123456");
             us.login(admin, "admin", "123456");
 
             admin1 = us.startSession();
-            //us.register(admin1, "admin1", "123456");
+            us.register(admin1, "admin1", "123456");
             
             zahi = us.startSession();
             us.register(zahi, "zahi", "123456");
@@ -99,7 +99,7 @@ namespace Acceptance_Tests.UserTests
             Assert.IsTrue(admin.removeUser("admin1") >= 0);
             Assert.IsFalse(admin1.login("admin1", "123456") >= 0);
         }
-        [TestMethod]
+        /*[TestMethod]
         public void AdminRemoveAdminThatTryToRemoveUser()
         {
             us.login(admin1, "admin1", "123456");
@@ -108,7 +108,7 @@ namespace Acceptance_Tests.UserTests
             Assert.IsTrue(us.login(zahi,"zahi", "123456") >= 0);
             User setion = us.startSession();
             Assert.IsFalse(us.login(setion,"admin1", "123456") >= 0);
-        }
+        }*/
         [TestMethod]
         public void RemoveUserTwice()
         {

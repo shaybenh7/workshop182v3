@@ -53,7 +53,7 @@ namespace Acceptance_Tests.UserTests
             storeServices ss = storeServices.getInstance();
             ss.createStore("abowim", session);
             ss.createStore("abowim2", session);
-            ss.createStore("bro's", aviad);
+            ss.createStore("bros", aviad);
             LinkedList<Store> Lstore = us.viewStores();
             Assert.AreEqual(Lstore.Count, 3);
         }

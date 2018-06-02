@@ -91,7 +91,7 @@ namespace Acceptance_Tests.UserTests
             us.login(aviad, "aviad", "123456");
             storeServices ss = storeServices.getInstance();
             int id1=ss.createStore("abowim", session);
-            int id2= ss.createStore("bro's", aviad);
+            int id2= ss.createStore("bros", aviad);
             ss.addProductInStore("cola", 3.2, 10, session, id1, "drinks");
             ss.addProductInStore("sprite", 3.2, 10, session, id1, "drinks");
             ss.addProductInStore("milk", 3.2, 10, aviad, id2, "milk");
