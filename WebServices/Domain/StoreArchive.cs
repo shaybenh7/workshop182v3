@@ -166,6 +166,14 @@ namespace wsep182.Domain
             return archive[store.getStoreId()][user.getUserName()];
         }
 
+        public StoreRole getStoreRoleByNameAndStore(int storeId,String username)
+        {
+            if (archive.ContainsKey(storeId))
+                if (archive[storeId].ContainsKey(username))
+                    return archive[storeId][username];
+            return null;
+        }
+
         public LinkedList<Tuple<int, String, String, String, String>> getStoreRolesStats(int storeId)
         {
             if (getStore(storeId)==null)
