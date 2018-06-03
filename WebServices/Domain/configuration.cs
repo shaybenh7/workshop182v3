@@ -7,6 +7,6 @@ namespace WebServices.Domain
 {
     public class configuration
     {
-        public static string DB_MODE = "Production";
+        public static string DB_MODE = "Testing";
     }
 }
